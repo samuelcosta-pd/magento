@@ -1,0 +1,6 @@
+src/
+compose.versions.yaml
+
+# Segredos — nunca versionar arquivos de ambiente com credenciais reais.
+# Copie os arquivos .example correspondentes e preencha com seus valores locais.
+env/*.env
