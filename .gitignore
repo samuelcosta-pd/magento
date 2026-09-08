@@ -5,6 +5,7 @@
 !/.magento
 !/.magento/**
 /.magento/local
+!/src
 !/src/app
 !/src/app/*/
 !/src/app/code/**
