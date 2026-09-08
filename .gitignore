@@ -1,6 +1,26 @@
-src/
-compose.versions.yaml
-
-# Segredos — nunca versionar arquivos de ambiente com credenciais reais.
-# Copie os arquivos .example correspondentes e preencha com seus valores locais.
-env/*.env
+*
+!/.gitignore
+!/.magento.app.yaml
+!/.magento.env.yaml*
+!/.magento
+!/.magento/**
+/.magento/local
+!/app
+!/app/*/
+!/app/code/**
+!/app/design/**
+!/app/etc/config.php
+!/app/i18n/**
+!/auth.json
+!/build_options.ini
+!/composer.json
+composer.lock
+!/magento-vars.php
+!/m2-hotfixes
+!/m2-hotfixes/**
+!/php.ini
+!/update
+!/update/.htaccess
+!/README.md
+!/op-exclude.txt
+auth.json
