@@ -1,0 +1,9 @@
+<?php
+/** @var \Webjump\Samuel\Block\HomeBlock $block */
+
+$viewModel = $block->getData('view_model');
+?>
+
+<div class="webjump-samuel-home-block">
+    <h2><?= $escaper->escapeHtml($viewModel->getMessage()) ?></h2>
+</div>
