@@ -93,7 +93,7 @@ A partir do Magento 2.2+, a Adobe recomenda o **ViewModel Pattern**:
 | **Bloco aparece na home da loja** | Concluído | Injetado no handle `cms_index_index` no container `content`. |
 | **Lógica no ViewModel, não no template nem no Block** | Concluído | [`Home.php`](ViewModel/Home.php) executa a filtragem de estoque e formata dados; [`HomeBlock.php`](Block/HomeBlock.php) e [`home.phtml`](view/frontend/templates/home.phtml) contêm apenas renderização. |
 | **Toda saída passa por `escapeHtml()` ou equivalente** | Concluído | `$escaper->escapeHtml()`, `$escaper->escapeUrl()` e `$escaper->escapeHtmlAttr()` cobrem todos os campos dinâmicos. |
-| **CSS próprio em `view/frontend/web/` aplicado ao bloco** | Concluído | [`_module.less`](view/frontend/web/css/source/_module.less) implementa cards responsivos, badges com indicador pulsante e transições suaves. |
+| **CSS próprio em `view/frontend/web/` aplicado ao bloco** | Concluído | [`_module.less`](view/frontend/web/css/source/_module.less) implementa cards responsivos, badges de urgência e transições suaves. |
 | **README explica a estrutura de pastas criada** | Concluído | Documento atual descrevendo arquitetura, arquivos e diretórios. |
 
 ---
@@ -115,4 +115,4 @@ Abra o navegador em:
 * [https://magento.test/](https://magento.test/)
 
 **Resultado Esperado:**
-* Uma seção intitulada **"Últimas Unidades em Estoque"** no topo da página inicial, exibindo cards com fotos dos produtos, badge de estoque crítico (ex: *"Restam apenas 2 unidades!"*), barra de disponibilidade proporcional, preço formatado e botão com link direto para a página do produto (PDP).
+* Uma seção intitulada **"Últimas Unidades em Estoque"** no topo da página inicial, exibindo cards com fotos dos produtos, badge de estoque crítico (ex: *"Restam 2 unidades!"*), barra de disponibilidade proporcional, preço formatado e botão com link direto para a página do produto (PDP).

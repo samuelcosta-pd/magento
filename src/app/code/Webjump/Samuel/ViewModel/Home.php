@@ -81,7 +81,7 @@ class Home implements ArgumentInterface
                 'image_url'  => $this->imageHelper->init($product, 'category_page_grid')->getUrl(),
                 'badge_text' => $qty === 1
                     ? 'Apenas 1 unidade restante!'
-                    : sprintf('Restam apenas %d unidades!', $qty)
+                    : sprintf('Restam %d unidades!', $qty)
             ];
         }
 
@@ -116,7 +116,7 @@ class Home implements ArgumentInterface
      */
     public function getSectionSubtitle(): string
     {
-        return 'Produtos com estoque crítico. Aproveite as ofertas antes que esgotem!';
+        return 'Produtos esgotando. Aproveite as ofertas antes que zerem os estoques!';
     }
 
     /**
