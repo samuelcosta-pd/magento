@@ -157,8 +157,7 @@ Abaixo estão relacionadas as comprovações de atendimento para cada um dos cri
   Webjump_Samuel : Module is enabled
   ```
 * **Comprovação Visual:**
-  <!-- Inserir print do terminal com a execução do comando module:status -->
-  ![Evidência 1 - Módulo Ativo](docs/images/01-module-status.png)
+ > <img width="1733" height="324" alt="image" src="https://github.com/user-attachments/assets/8ab1ca01-5d36-4a72-980f-36d54263a43a"/>
 
 ---
 
@@ -177,8 +176,13 @@ Abaixo estão relacionadas as comprovações de atendimento para cada um dos cri
   </section>
   ```
 * **Comprovação Visual:**
-  <!-- Inserir print da página inicial (https://magento.test/) exibindo o bloco no topo -->
-  ![Evidência 2 - Bloco na Home](docs/images/02-block-on-home.png)
+ 
+> <img width="1234" height="440" alt="image" src="https://github.com/user-attachments/assets/f4f09401-1b34-41e4-81da-e2a0c772cd86" />
+> <img width="1294" height="849" alt="image" src="https://github.com/user-attachments/assets/9bb064b3-5551-4fe8-837c-d0e2377a527c" />
+
+* **Ao alterar a quantidade de itens no admin, a mudança é refletida no módulo.**
+> <img width="2609" height="2309" alt="image" src="https://github.com/user-attachments/assets/2336ae48-54ba-410a-a491-5e173de42445" />
+<img width="2563" height="2162" alt="image" src="https://github.com/user-attachments/assets/fe9ddd3d-15b3-49fa-b724-69b8135a5f56" />
 
 ---
 
@@ -188,8 +192,8 @@ Abaixo estão relacionadas as comprovações de atendimento para cada um dos cri
   * [`Home.php`](ViewModel/Home.php): Implementa `ArgumentInterface` e encapsula a consulta via `ProductCollectionFactory`, filtrando produtos com estoque salável $\le 5$, formatando preços e URLs.
   * [`home.phtml`](view/frontend/templates/home.phtml): Contém apenas estruturas de repetição e renderização da apresentação.
 * **Comprovação Visual:**
-  <!-- Inserir print do código do ViewModel e do Bloco evidenciando a separação de responsabilidades -->
-  ![Evidência 3 - ViewModel e Block](docs/images/03-viewmodel-separation.png)
+> <img width="1075" height="681" alt="image" src="https://github.com/user-attachments/assets/9b61c886-df67-499b-88b2-1dbf8c13179a" />
+> <img width="1079" height="658" alt="image" src="https://github.com/user-attachments/assets/4127c8e5-9c8c-4c2a-9c51-d4a2ac89b22a" />
 
 ---
 
@@ -199,8 +203,7 @@ Abaixo estão relacionadas as comprovações de atendimento para cada um dos cri
   * `$escaper->escapeUrl()` em links de imagem e páginas de detalhe (PDP).
   * `$escaper->escapeHtmlAttr()` em atributos HTML (`alt`, `title`, `style`).
 * **Comprovação Visual:**
-  <!-- Inserir print do template home.phtml destacando as chamadas ao $escaper -->
-  ![Evidência 4 - Escapamento de Saída](docs/images/04-escaper-usage.png)
+> <img width="1131" height="1091" alt="image" src="https://github.com/user-attachments/assets/bdb8c21e-1ae9-41df-a23f-6ec80a691af1" />
 
 ---
 
@@ -210,14 +213,13 @@ Abaixo estão relacionadas as comprovações de atendimento para cada um dos cri
   * Cards com elevação e efeito hover (`transform: translateY(-4px)`).
   * Badges de urgência em vermelho e barra de disponibilidade.
 * **Comprovação Visual:**
-  <!-- Inserir print do DevTools mostrando as classes CSS aplicadas ao bloco -->
-  ![Evidência 5 - CSS Aplicado ao Bloco](docs/images/05-css-styling.png)
+> <img width="1129" height="645" alt="image" src="https://github.com/user-attachments/assets/e59c11e7-9c3a-4bcc-8575-282c25933f4e" />
 
 ---
 
-### [x] 6. README explica a estrutura de pastas criada
-* **Validação:** A Seção 2 deste documento detalha integralmente cada diretório e arquivo criado (`Block`, `ViewModel`, `etc`, `layout`, `templates`, `web/css/source`) e suas respectivas responsabilidades no ciclo de vida do Magento.
+### [x] 6. Responsividade
+* **Validação:** Não foi um critério mas subtende-se como um. A folha de estilo também foi implementada para que o módulo se adapte a diferentes telas.
 * **Comprovação Visual:**
-  <!-- Inserir print desta seção do README documentando a árvore de arquivos -->
-  ![Evidência 6 - README com Estrutura de Pastas](docs/images/06-readme-structure.png)
+> <img width="1113" height="1752" alt="image" src="https://github.com/user-attachments/assets/c0f61a56-370e-4a15-a0f5-e11e1f2614f7" />
+
 
