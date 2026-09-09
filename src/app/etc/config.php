@@ -384,6 +384,7 @@ return [
         'PayPal_BraintreeGiftWrapping' => 1,
         'PayPal_BraintreeGraphQl' => 1,
         'PayPal_BraintreeReward' => 1,
+        'Webjump_CatalogBehavior' => 1,
         'Webjump_HelloWorld' => 1
     ]
 ];
