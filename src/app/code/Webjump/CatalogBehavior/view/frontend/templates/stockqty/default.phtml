@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ *
+ * Template customizado para exibição de estoque baixo.
+ *
+ * @var $block \Magento\CatalogInventory\Block\Stockqty\DefaultStockqty
+ */
+?>
+<?php if ($block->isMsgVisible()) : ?>
+    <div class="availability only webjump-stock-alert"
+         title="<?= $block->escapeHtmlAttr(__('Últimas unidades!')) ?>">
+        <span>&#9888; <?= $block->escapeHtml(__('Últimas unidades!')) ?></span>
+    </div>
+<?php endif ?>

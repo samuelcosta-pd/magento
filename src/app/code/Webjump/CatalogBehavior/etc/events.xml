@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ *
+ * events.xml — registra observers para eventos da plataforma.
+ * Escopo global para capturar salvamentos de produto via admin e API.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+    <event name="catalog_product_save_after">
+        <observer name="webjump_catalog_behavior_product_save_after"
+                  instance="Webjump\CatalogBehavior\Observer\ProductSaveAfter"/>
+    </event>
+
+</config>
