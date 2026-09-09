@@ -23,6 +23,10 @@ Webjump/CatalogBehavior/
 │   └── events.xml
 ├── Plugin/
 │   └── Block/
+│       ├── Product/
+│       │   └── View/
+│       │       └── Type/
+│       │           └── SimpleProductViewPlugin.php
 │       └── Stockqty/
 │           └── AbstractStockqtyPlugin.php
 ├── Observer/
@@ -48,7 +52,7 @@ Webjump/CatalogBehavior/
 
 | Mecanismo | Quando usar | Por que foi usado nesta tarefa |
 | :--- | :--- | :--- |
-| **Plugin (`Interceptor`)** | Quando precisamos **modificar o comportamento, os parâmetros ou o resultado** de um método público específico de uma classe do núcleo. | **Parte 1**: Precisávamos interceptar a chamada do método público `isMsgVisible()` do bloco `AbstractStockqty` para retornar `true` sob nossa regra de negócio (1 a 3 unidades), forçando a exibição visual da mensagem. |
+| **Plugin (`Interceptor`)** | Quando precisamos **modificar o comportamento, os parâmetros ou o resultado** de um método público específico de uma classe do núcleo. | **Parte 1**: Interceptamos o método público `toHtml()` de `Magento\Catalog\Block\Product\View\Type\Simple` para substituir diretamente o texto nativo *"In stock"* por *"⚠️ Últimas unidades!"* quando o estoque estiver entre 1 e 3 unidades. |
 | **Observer (`Eventos`)** | Quando precisamos **reagir a um evento de ciclo de vida da plataforma** de forma desacoplada, sem alterar o fluxo nem o retorno do método que disparou o evento. | **Parte 2**: Precisávamos registrar no log que um produto foi salvo, reagindo ao evento nativo `catalog_product_save_after` sem acoplar nossa regra à persistência ou repositório de produto. |
 
 ---
@@ -56,17 +60,17 @@ Webjump/CatalogBehavior/
 ## Parte 1 — Plugin `after`
 
 ### Comportamento
-* **1 a 3 unidades disponíveis**: Exibe o aviso visual **“⚠️ Últimas unidades!”** logo abaixo da disponibilidade e acima do SKU.
-* **Mais de 3 unidades (estoque normal)**: Mantém o comportamento original do Magento (apenas *"In stock"*).
-* **0 unidades (sem estoque)**: Mantém o comportamento original do Magento (*"Out of stock"*).
+* **1 a 3 unidades disponíveis**: Substitui diretamente o texto nativo de disponibilidade (*"IN STOCK"*) por **“⚠️ ÚLTIMAS UNIDADES!”** em destaque visual, exatamente no mesmo elemento de disponibilidade e acima do SKU.
+* **Mais de 3 unidades (estoque normal)**: Mantém o comportamento original do Magento (*"IN STOCK"*).
+* **0 unidades (sem estoque)**: Mantém o comportamento original do Magento (*"OUT OF STOCK"*).
 
 ### Implementação Técnica
-* **Classe Alvo**: `Magento\CatalogInventory\Block\Stockqty\AbstractStockqty`
-* **Método Interceptado**: `isMsgVisible()`
-* **Tipo**: `after` (`afterIsMsgVisible`) com `sortOrder="-10"`
-* **Template Customizado**: `Webjump_CatalogBehavior::stockqty/default.phtml` referenciado no layout `catalog_product_view_type_simple.xml`.
-* **Estilização**: `_module.less` adicionando classe `.webjump-stock-alert` com tom de alerta (`#d9534f`) e alinhamento visual.
-
+* **Classe Alvo**: `Magento\Catalog\Block\Product\View\Type\Simple`
+* **Método Interceptado**: `toHtml()`
+* **Tipo**: `after` (`afterToHtml`)
+* **Classe do Plugin**: `Webjump\CatalogBehavior\Plugin\Block\Product\View\Type\SimpleProductViewPlugin`
+* **Estilização**: Aplica a cor de alerta vermelho oficial do Magento (`#e02b27`) em negrito com ícone `⚠️`, via CSS e inline no elemento para garantir renderização imediata sem dependência de cache de assets estáticos.
+* **Layout**: `catalog_product_view_type_simple.xml` remove o bloco secundário de threshold para manter uma linha única e limpa de disponibilidade.
 ### O que NÃO é alterado
 * Quantidade real de estoque em banco.
 * Salabilidade do produto (`isSalable()`).

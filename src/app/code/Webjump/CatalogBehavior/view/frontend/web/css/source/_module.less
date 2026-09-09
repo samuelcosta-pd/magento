@@ -3,8 +3,20 @@
  */
 
 .product-info-stock-sku {
+    .stock.available {
+        &.low-stock,
+        .webjump-low-stock {
+            color: #e02b27 !important;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    }
+
     .webjump-stock-alert {
-        color: #d9534f;
+        color: #e02b27;
         font-weight: 600;
         margin: 4px 0;
         display: block;
