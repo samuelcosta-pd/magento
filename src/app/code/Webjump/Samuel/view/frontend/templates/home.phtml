@@ -1,9 +1,83 @@
 <?php
-/** @var \Webjump\Samuel\Block\HomeBlock $block */
+/**
+ * Copyright © Webjump. All rights reserved.
+ *
+ * Template para exibição da vitrine de Últimas Unidades na Home.
+ *
+ * @var \Webjump\Samuel\Block\HomeBlock $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
 
+/** @var \Webjump\Samuel\ViewModel\Home|null $viewModel */
 $viewModel = $block->getData('view_model');
+if (!$viewModel instanceof \Webjump\Samuel\ViewModel\Home) {
+    return;
+}
+
+$lowStockProducts = $viewModel->getLowStockProducts(5, 4);
+if (empty($lowStockProducts)) {
+    return;
+}
 ?>
 
-<div class="webjump-samuel-home-block">
-    <h2><?= $escaper->escapeHtml($viewModel->getMessage()) ?></h2>
-</div>
+<section class="webjump-samuel-home-block" aria-labelledby="low-stock-title">
+    <div class="block-header">
+        <div class="badge-tag">
+            <span class="pulse-indicator"></span>
+            <?= $escaper->escapeHtml(__('Oportunidade Imperdível')) ?>
+        </div>
+        <h2 id="low-stock-title" class="block-title">
+            <?= $escaper->escapeHtml($viewModel->getSectionTitle()) ?>
+        </h2>
+        <p class="block-subtitle">
+            <?= $escaper->escapeHtml($viewModel->getSectionSubtitle()) ?>
+        </p>
+    </div>
+
+    <div class="products-grid">
+        <?php foreach ($lowStockProducts as $product): ?>
+            <article class="product-card">
+                <div class="card-media">
+                    <span class="stock-badge">
+                        <span class="stock-badge-icon" aria-hidden="true">&#9888;</span>
+                        <?= $escaper->escapeHtml($product['badge_text']) ?>
+                    </span>
+
+                    <a href="<?= $escaper->escapeUrl($product['url']) ?>"
+                       class="product-image-link"
+                       tabindex="-1">
+                        <img src="<?= $escaper->escapeUrl($product['image_url']) ?>"
+                             alt="<?= $escaper->escapeHtmlAttr($product['name']) ?>"
+                             class="product-image"
+                             loading="lazy" />
+                    </a>
+                </div>
+
+                <div class="card-content">
+                    <span class="product-sku">SKU: <?= $escaper->escapeHtml($product['sku']) ?></span>
+
+                    <h3 class="product-name">
+                        <a href="<?= $escaper->escapeUrl($product['url']) ?>">
+                            <?= $escaper->escapeHtml($product['name']) ?>
+                        </a>
+                    </h3>
+
+                    <div class="product-price">
+                        <span class="price"><?= $escaper->escapeHtml($product['price']) ?></span>
+                    </div>
+
+                    <div class="stock-meter" title="<?= $escaper->escapeHtmlAttr(sprintf('Restam %d unidades', $product['qty'])) ?>">
+                        <div class="stock-bar" style="width: <?= $escaper->escapeHtmlAttr(min(100, max(15, ($product['qty'] / 5) * 100))) ?>%;"></div>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="<?= $escaper->escapeUrl($product['url']) ?>"
+                           class="action primary btn-view-product">
+                            <span><?= $escaper->escapeHtml(__('Ver Detalhes')) ?></span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        <?php endforeach; ?>
+    </div>
+</section>

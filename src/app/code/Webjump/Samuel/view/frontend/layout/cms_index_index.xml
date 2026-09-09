@@ -7,11 +7,10 @@
             <block
                 class="Webjump\Samuel\Block\HomeBlock"
                 name="webjump.samuel.home.block"
-                template="Webjump_Samuel::home.phtml">
+                template="Webjump_Samuel::home.phtml"
+                before="-">
                 <arguments>
-                    <argument name="view_model" xsi:type="object">
-                        Webjump\Samuel\ViewModel\Home
-                    </argument>
+                    <argument name="view_model" xsi:type="object">Webjump\Samuel\ViewModel\Home</argument>
                 </arguments>
             </block>
         </referenceContainer>
