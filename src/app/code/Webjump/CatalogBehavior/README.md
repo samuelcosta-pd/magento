@@ -1,22 +1,25 @@
 # Webjump_CatalogBehavior
 
-Módulo de extensão do comportamento do catálogo — Desafio 13.2 (Magento Open Source 2.4.8-p1)
+Módulo de extensão do comportamento do catálogo - Desafio 13.2
 
 ---
 
-## Objetivo do Módulo
+## 1. Visão Geral do Desafio 13.2
 
-Estender o comportamento do catálogo do Magento **sem alterar nenhum arquivo dentro de `vendor/`**, cumprindo os dois requisitos do desafio:
+Este módulo foi desenvolvido para atender aos requisitos da atividade **13.2 Estendendo o comportamento do catálogo**:
 
-1. **Parte 1 — Plugin `after`**: Modificar a apresentação visual da página do produto (PDP) para indicar **“⚠️ Últimas unidades!”** quando o produto estiver com estoque baixo (1 a 3 unidades), sem interferir na lógica de estoque real, salabilidade, carrinho ou checkout.
-2. **Parte 2 — Observer**: Reagir ao evento da plataforma `catalog_product_save_after`, registrando no log do sistema uma mensagem detalhada sempre que um produto for salvo (via Admin, API ou CLI).
+### Solução Entregue
+
+1. **Parte 1 - Plugin `after`**: Modifica a apresentação visual na PDP (Product Detail Page) para exibir em destaque o alerta **“⚠️ ÚLTIMAS UNIDADES!”** quando o produto estiver com estoque crítico (1 a 3 unidades), sem alterar regras de negócio, estoque real, salabilidade ou fluxo de compra.
+2. **Parte 2 - Observer**: Escuta o evento de ciclo de vida `catalog_product_save_after` e registra em `var/log/system.log` uma mensagem detalhada com ID, SKU, Nome e Status do produto sempre que ele for salvo.
+3. **Integridade do Core**: implementado em `app/code/Webjump/CatalogBehavior/`, sem modificação no diretório `vendor/`.
 
 ---
 
-## Estrutura de Arquivos do Módulo
+## 2. Estrutura de Arquivos do Módulo
 
 ```text
-Webjump/CatalogBehavior/
+app/code/Webjump/CatalogBehavior/
 ├── etc/
 │   ├── module.xml
 │   ├── di.xml
@@ -46,175 +49,138 @@ Webjump/CatalogBehavior/
 └── README.md
 ```
 
+### Detalhamento dos Componentes
+
+| Arquivo | Responsabilidade |
+| :--- | :--- |
+| [`registration.php`](registration.php) | Registra o módulo `Webjump_CatalogBehavior` no Magento. |
+| [`etc/module.xml`](etc/module.xml) | Declara o módulo e dependências (`Magento_Catalog`, `Magento_CatalogInventory`). |
+| [`etc/di.xml`](etc/di.xml) | Declara os plugins interceptors para modificação da visualização na PDP. |
+| [`etc/events.xml`](etc/events.xml) | Registra o observer para o evento `catalog_product_save_after` em escopo global. |
+| [`Plugin/Block/Product/View/Type/SimpleProductViewPlugin.php`](Plugin/Block/Product/View/Type/SimpleProductViewPlugin.php) | Plugin `after` que intercepta `toHtml()` de `Simple` para substituir *"IN STOCK"* por *"⚠️ ÚLTIMAS UNIDADES!"*. |
+| [`Plugin/Block/Stockqty/AbstractStockqtyPlugin.php`](Plugin/Block/Stockqty/AbstractStockqtyPlugin.php) | Plugin `after` que força `isMsgVisible()` como `true` para estoque de 1 a 3 unidades. |
+| [`Observer/ProductSaveAfter.php`](Observer/ProductSaveAfter.php) | Implementa `ObserverInterface` para gravar log informativo ao salvar produto. |
+| [`view/frontend/web/css/source/_module.less`](view/frontend/web/css/source/_module.less) | Estilos do badge de urgência e alerta visual no tema Luma. |
+
 ---
 
-## Fundamentação Conceitual: Plugin vs Observer
+## 3. Por que usei Plugin em um caso e Observer no outro?
 
-| Mecanismo | Quando usar | Por que foi usado nesta tarefa |
-| :--- | :--- | :--- |
-| **Plugin (`Interceptor`)** | Quando precisamos **modificar o comportamento, os parâmetros ou o resultado** de um método público específico de uma classe do núcleo. | **Parte 1**: Interceptamos o método público `toHtml()` de `Magento\Catalog\Block\Product\View\Type\Simple` para substituir diretamente o texto nativo *"In stock"* por *"⚠️ Últimas unidades!"* quando o estoque estiver entre 1 e 3 unidades. |
-| **Observer (`Eventos`)** | Quando precisamos **reagir a um evento de ciclo de vida da plataforma** de forma desacoplada, sem alterar o fluxo nem o retorno do método que disparou o evento. | **Parte 2**: Precisávamos registrar no log que um produto foi salvo, reagindo ao evento nativo `catalog_product_save_after` sem acoplar nossa regra à persistência ou repositório de produto. |
+A escolha entre Plugin e Observer se baseia no objetivo de cada parte do desafio:
+
+* **Plugin (na Parte 1 - alteração visual do produto):**
+  O desafio pedia para **modificar algo visível do produto**. Para isso, o mecanismo correto é o **Plugin do tipo `after`**, pois ele permite interceptar a execução de um método público da classe responsável pela exibição (`toHtml()`), receber o HTML pronto e alterar o texto de *"In stock"* para *"⚠️ ÚLTIMAS UNIDADES!"* antes que ele chegue à tela do usuário. O plugin é a ferramenta indicada sempre que precisamos **intervir no fluxo ou alterar o resultado** de uma função do Magento sem reescrever a classe original.
+
+* **Observer (na Parte 2 - registro em log):**
+  O desafio pedia para **reagir ao salvamento de um produto e gravar no log**. Nesse caso, o mecanismo correto é o **Observer**, pois ele simplesmente "escuta" um evento de ciclo de vida que a plataforma já dispara nativamente (`catalog_product_save_after`). O observer não precisa alterar o comportamento do Magento nem mexer nos dados do produto; ele apenas executa uma tarefa secundária (registrar uma linha no arquivo de log) de forma totalmente desacoplada.
+
+**Regra prática:**
+* Usamos **Plugin** quando precisamos **mudar o comportamento, os parâmetros ou o retorno** de uma ação específica.
+* Usamos **Observer** quando precisamos apenas **ser avisados de que algo aconteceu** no sistema para executar uma rotina complementar, sem interferir no processo principal.
 
 ---
 
-## Parte 1 — Plugin `after`
+## 4. Implementação Técnica
 
-### Comportamento
-* **1 a 3 unidades disponíveis**: Substitui diretamente o texto nativo de disponibilidade (*"IN STOCK"*) por **“⚠️ ÚLTIMAS UNIDADES!”** em destaque visual, exatamente no mesmo elemento de disponibilidade e acima do SKU.
-* **Mais de 3 unidades (estoque normal)**: Mantém o comportamento original do Magento (*"IN STOCK"*).
-* **0 unidades (sem estoque)**: Mantém o comportamento original do Magento (*"OUT OF STOCK"*).
+### Parte 1 - Plugin `after` (`SimpleProductViewPlugin`)
 
-### Implementação Técnica
-* **Classe Alvo**: `Magento\Catalog\Block\Product\View\Type\Simple`
+#### Como encontramos a classe correta para interceptar?
+Para identificar com precisão a classe responsável pela renderização da disponibilidade na página do produto (PDP):
+1. **Inspeção do elemento visual**: Ao inspecionar o bloco de estoque no navegador (*"IN STOCK"*), identificamos a estrutura `<div class="stock available"><span>In stock</span></div>`, localizada junto ao SKU.
+2. **Rastreamento via Layout XML**: As páginas de produto utilizam o handle `catalog_product_view.xml`. Para produtos simples, o Magento estende esse layout através de `catalog_product_view_type_simple.xml`, que define o bloco `product.info.simple`.
+3. **Localização da classe no Core**: Verificando a declaração desse bloco no módulo nativo `Magento_Catalog`, localizamos a classe PHP associada: `Magento\Catalog\Block\Product\View\Type\Simple`.
+4. **Escolha do método público (`toHtml`)**: Todo bloco visual no Magento herda de `AbstractBlock`, cujo método responsável por gerar e retornar a string HTML final para o navegador é o `toHtml()`. Interceptar esse método com um plugin `after` (`afterToHtml`) nos permite manipular a string gerada e substituir o texto nativo com total segurança, sem depender de layouts complexos ou afetar regras fiscais e de estoque.
+
+#### Detalhes Técnicos da Implementação
+* **Classe Interceptada**: `Magento\Catalog\Block\Product\View\Type\Simple`
 * **Método Interceptado**: `toHtml()`
 * **Tipo**: `after` (`afterToHtml`)
-* **Classe do Plugin**: `Webjump\CatalogBehavior\Plugin\Block\Product\View\Type\SimpleProductViewPlugin`
-* **Estilização**: Aplica a cor de alerta vermelho oficial do Magento (`#e02b27`) em negrito com ícone `⚠️`, via CSS e inline no elemento para garantir renderização imediata sem dependência de cache de assets estáticos.
-* **Layout**: `catalog_product_view_type_simple.xml` remove o bloco secundário de threshold para manter uma linha única e limpa de disponibilidade.
-### O que NÃO é alterado
-* Quantidade real de estoque em banco.
-* Salabilidade do produto (`isSalable()`).
-* Quantidade salável do MSI (`getSalableQty()`).
-* Regras de carrinho, minicart ou checkout.
-* Nenhum arquivo em `vendor/`.
+* **Regra de Apresentação**:
+  * **1 a 3 unidades em estoque**: Substitui a disponibilidade nativa (*"IN STOCK"*) pelo alerta **“⚠️ ÚLTIMAS UNIDADES!”** com destaque visual em vermelho (`#e02b27`).
+  * **$> 3$ unidades**: Mantém a renderização original do Magento (*"IN STOCK"*).
+  * **0 unidades (esgotado)**: Mantém a renderização original do Magento (*"OUT OF STOCK"*).
+* **Garantias**: Nenhuma alteração de salabilidade (`isSalable()`), estoque real em banco, regras de carrinho ou checkout.
+
+### Parte 2 - Observer (`ProductSaveAfter`)
+
+* **Evento Escutado**: `catalog_product_save_after` (escopo global em `etc/events.xml`).
+* **Implementação**: Classe implementando `Magento\Framework\Event\ObserverInterface`.
+* **Serviço de Log**: Injeção de dependência PSR-3 `Psr\Log\LoggerInterface`.
+* **Padrão de Mensagem**:
+  ```text
+  [Webjump_CatalogBehavior] Produto salvo — ID: {id} | SKU: {sku} | Nome: {nome} | Status: {status}
+  ```
 
 ---
 
-## Parte 2 — Observer
+## 5. Critérios de Aceite Atendidos
 
-### Comportamento
-Escuta o evento `catalog_product_save_after` e gera no log (`var/log/system.log`) uma linha informativa com os dados do produto salvo:
-
-```text
-[Webjump_CatalogBehavior] Produto salvo — ID: 1 | SKU: 24-MB01 | Nome: Joust Duffle Bag | Status: Habilitado
-```
-
-### Implementação Técnica
-* **Evento**: `catalog_product_save_after` declarado em `etc/events.xml`.
-* **Classe**: `Webjump\CatalogBehavior\Observer\ProductSaveAfter` implementando `Magento\Framework\Event\ObserverInterface`.
-* **Logger**: Injeção de dependência via PSR-3 `Psr\Log\LoggerInterface`.
+| Critério de Aceite | Status | Onde e Como foi Atendido |
+| :--- | :---: | :--- |
+| **O plugin está declarado no di.xml e funciona na loja** | [x] Atendido | Declarado em [`etc/di.xml`](etc/di.xml) e ativo na PDP substituindo o texto de estoque para 1 a 3 unidades. |
+| **O observer está declarado em events.xml e dispara ao salvar um produto** | [x] Atendido | Declarado em [`etc/events.xml`](etc/events.xml) para o evento `catalog_product_save_after`, acionado via Admin e CLI. |
+| **A mensagem aparece no log (print em evidências de sucesso)** | [x] Atendido | Mensagem registrada em `var/log/system.log` com prefixo `[Webjump_CatalogBehavior]`. |
+| **Nenhum arquivo dentro de vendor/ foi modificado** | [x] Atendido | Validado via `git status vendor/` e `git diff vendor/`, comprovando integridade total do core. |
+| **README responde: por que usei plugin em um caso e observer no outro?** | [x] Atendido | Respondido na [Seção 3](#3-por-que-usei-plugin-em-um-caso-e-observer-no-outro). |
 
 ---
 
-## Resumo dos Problemas e Soluções Encontrados
+## 6. Procedimentos de Validação e Teste
 
-Durante toda a concepção, desenvolvimento e depuração deste módulo, passamos pelas seguintes situações, análises e soluções definitivas:
+### 1. Testar o Alerta Visual na Loja (Plugin `after`)
 
-| Problema / Situação | Análise / Investigação | Solução Definitiva | Status |
-| :--- | :--- | :--- | :--- |
-| **Alteração sem modificar o `vendor/`** | O Magento 2 proíbe edição no core para preservar atualizações e modularidade. | Módulo customizado `Webjump_CatalogBehavior` criado em `app/code/`. | **Concluído** |
-| **Implementação de plugin `after`** | A tarefa 13.2 exige especificamente um plugin do tipo `after` para a primeira etapa. | Criado `AbstractStockqtyPlugin.php` com o método `afterIsMsgVisible()` e registrado no `etc/di.xml`. | **Concluído** |
-| **Escolha do método `isMsgVisible()` como ponto de extensão** | Era preciso uma alteração estritamente de apresentação. | `isMsgVisible()` controla unicamente a renderização do bloco de mensagem sem afetar estoque, salabilidade, carrinho ou checkout. | **Concluído** |
-| **Confirmação de registro do plugin no DI** | Necessidade de verificar se o Magento reconheceu o plugin. | Validação via `bin/magento dev:di:info 'Magento\CatalogInventory\Block\Stockqty\DefaultStockqty'`, confirmando o interceptor ativo. | **Concluído** |
-| **Garantia de tipo `after`** | O plugin precisa rodar após a execução do método original. | Confirmado via `dev:di:info`: `Webjump\CatalogBehavior\Plugin\Block\Stockqty\AbstractStockqtyPlugin \| isMsgVisible \| after`. | **Concluído** |
-| **Validação de sintaxe PHP** | Evitar erros de compilação ou parse durante o deploy. | Executado `php -l` em todos os arquivos PHP do módulo com retorno: *“No syntax errors detected”*. | **Concluído** |
-| **Mensagem não aparecia no produto de teste** | Ao abrir a PDP de `24-MB01`, nenhum aviso aparecia na tela. | Investigamos o bloco `DefaultStockqty`, seu container pai no layout e o template PHTML correspondente. | **Concluído** |
-| **Descoberta da funcionalidade nativa de estoque baixo** | O Magento já possui nativamente o `Only X left Threshold` que exibe a mensagem *“Only X left”*. | Confirmamos que o bloco já existia, mas sua exibição estava condicionada ao threshold das configurações gerais. | **Concluído** |
-| **`afterIsMsgVisible()` sozinho não mudava o texto exibido** | Mesmo que `isMsgVisible()` retornasse `true`, o texto exibido nativamente seria *"Only %1 left"*, e não *"Últimas unidades!"*. | Criamos o template `view/frontend/templates/stockqty/default.phtml` e o layout XML para substituir o template nativo. | **Concluído** |
-| **Configuração `Only X left Threshold` em `0`** | O threshold global do Magento estava zerado, fazendo a verificação nativa sempre retornar `false`. | Nosso plugin `after` independe dessa configuração: ele injeta sua própria regra de negócio (1 a 3 unidades). | **Concluído** |
-| **Produto de teste com estoque alto (100)** | O produto `24-MB01` estava com estoque abundante. | Quantidade ajustada para `2` para simular o cenário real de estoque baixo. | **Concluído** |
-| **Configurações específicas de inventário do produto** | Validar se parâmetros de catálogo impediam a renderização. | Confirmados `Out-of-Stock Threshold = 0`, `Backorders = No Backorders`, `Stock Status = In Stock`, quantidade mínima 1. | **Concluído** |
-| **Confusão entre `Notify for Quantity Below` e `Only X left Threshold`** | Suspeita de que o aviso de estoque dependia de `Notify for Quantity Below`. | Esclarecido: `Notify for Quantity Below` é um alerta administrativo interno; `Only X left Threshold` controla a mensagem da loja. | **Concluído** |
-| **Requisito visual específico: “Últimas unidades!”** | O cliente não queria o texto nativo em inglês *"Only X left"*. | Template PHTML customizado para imprimir com segurança `<span>&#9888; <?= __('Últimas unidades!') ?></span>`. | **Concluído** |
-| **Risco de escolher métodos de negócio (`isSalable`, `isAvailable`)** | Alterar esses métodos poderia impedir a compra ou afetar regras fiscais/estoque. | Esses métodos foram intencionalmente **descartados**, mantendo o foco estrito na camada de apresentação (View). | **Concluído** |
-| **Inspeção sem edição de arquivos em `vendor/`** | Foi necessário inspecionar os blocos e templates do módulo `Magento_CatalogInventory`. | Arquivos do core foram apenas lidos para engenharia reversa; nenhuma linha do `vendor/` foi tocada. | **Concluído** |
-| **Identificação do container e bloco no Layout XML** | Saber onde o bloco é injetado na árvore do Magento. | Rastreamento feito: `product.info.type` → container `product.info.simple.extra` → bloco `product.info.simple.extra.catalog_inventory_stockqty_default`. | **Concluído** |
-| **Inconsistência de código compilado entre Host e Container Docker** | Alterações no host não refletiam no PHP em execução no container. | Execução obrigatória de `bin/magento setup:di:compile` e `cache:flush` diretamente dentro do container `magento-phpfpm-1`. | **Concluído** |
-| **Conflito com o Plugin `around` do MSI (`aroundIsMsgVisible`)** | O MSI possui um plugin `around` com `sortOrder="0"` que **não chama `$proceed()`**, abortando plugins subsequentes da cadeia. | Configuramos `sortOrder="-10"` no nosso `etc/di.xml`. Nosso plugin passa a envelopar o MSI por fora e recebe o resultado normalmente. | **Concluído** |
-| **Instanciação isolada do bloco vs template em testes PHP CLI** | Testes diretos via ObjectManager retornavam HTML vazio mesmo com `isMsgVisible() === true`. | Constatado que o layout XML injeta o template. No CLI, a validação exige `$block->setTemplate(...)`; no browser funciona automaticamente via layout. | **Concluído** |
-| **Isolamento de regras (0 unidades vs 1–3 vs > 3)** | Garantir que produtos sem estoque ou com estoque alto não mostrem a mensagem. | Regra estrita no plugin: `$stockQtyLeft > 0 && $stockQtyLeft <= 3`. Validado com sucesso via requisições HTTP para os 3 cenários. | **Concluído** |
-| **Estilização e destaque visual no tema Luma** | O texto precisava de destaque com ícone e cor de alerta sem quebrar o layout de SKU e preço. | Criado `view/frontend/web/css/source/_module.less` com a classe `.webjump-stock-alert` (`#d9534f`, semibold, flex alignment). | **Concluído** |
-| **Segunda parte da tarefa: Observer para `catalog_product_save_after`** | Reagir ao salvamento de produto sem acoplamento. | Criado `etc/events.xml` e `Observer/ProductSaveAfter.php` com injeção do `LoggerInterface`. | **Concluído** |
-| **Gravação e validação do log do Observer** | Comprovar que o log é disparado em ações reais de salvamento. | Validado via CLI e painel Admin; log gravado com sucesso em `var/log/system.log`. | **Concluído** |
-| **Documentação conceitual Plugin x Observer no README** | Explicar as diferenças conceituais e a razão da escolha de cada mecanismo. | Seção dedicada incluída no README detalhando as responsabilidades de cada padrão no Magento 2. | **Concluído** |
+Acesse no navegador as seguintes URLs:
 
----
-
-## Detalhe Arquitetural Crítico: O Enigma do `sortOrder="-10"` e o MSI
-
-Um dos pontos mais avançados e ricos desta implementação foi a descoberta do comportamento da cadeia de interceptação do Magento 2 em conjunto com o Multi-Source Inventory (MSI):
-
-1. **O Cenário**: O módulo core `Magento_InventorySalesFrontendUi` possui um plugin `around` sobre `AbstractStockqty::isMsgVisible()` (`sortOrder="0"`).
-2. **O Problema do `$proceed()`**: O código do MSI calcula o estoque salável e retorna um booleano diretamente, **sem chamar `$proceed()`**:
-   ```php
-   public function aroundIsMsgVisible(AbstractStockqty $subject, callable $proceed): bool
-   {
-       // ... lógica do MSI ...
-       return $this->qtyLeftChecker->execute($productSalableQty); // NÃO invoca $proceed()
-   }
-   ```
-3. **Mecanismo de Interceptação (`___callPlugins`)**: No Magento 2, os plugins com `sortOrder` maior que o do `around` ficam encapsulados dentro da closure `$next` passada como `$proceed`. Como o MSI não invoca `$proceed`, a closure interna **nunca é executada**. Portanto, nosso plugin `after` original (com `sortOrder="100"`) era sumariamente ignorado.
-4. **A Solução Elegante**: Ao declarar `sortOrder="-10"` no nosso plugin, nosso interceptor passa a ocupar a **camada mais externa**:
-   * O `around` do MSI executa internamente e retorna `false`.
-   * Esse retorno é recebido como argumento `$result` pelo nosso método `afterIsMsgVisible($subject, $result)`.
-   * Nosso plugin avalia se o estoque está entre 1 e 3 unidades e retorna `true`, forçando a exibição da mensagem de alerta com total compatibilidade com o MSI!
-
----
-
-## Procedimentos de Teste e Validação
-
-### 1. Testar o Alerta Visual (Plugin `after`)
-
-1. Acesse o produto de teste com estoque baixo (2 unidades):
+1. **Produto com estoque baixo (2 unidades)**:
    * URL: [https://magento.test/joust-duffle-bag.html](https://magento.test/joust-duffle-bag.html)
-   * **Resultado esperado**: Exibição em destaque de:
-     ```html
-     <div class="availability only webjump-stock-alert" title="Últimas unidades!">
-         <span>⚠️ Últimas unidades!</span>
-     </div>
-     ```
-2. Acesse um produto com estoque alto (ex: 100 unidades em [https://magento.test/fusion-backpack.html](https://magento.test/fusion-backpack.html)):
-   * **Resultado esperado**: Alerta **não** é exibido.
-3. Acesse um produto sem estoque (ex: 0 unidades em [https://magento.test/sprite-yoga-companion-kit.html](https://magento.test/sprite-yoga-companion-kit.html)):
-   * **Resultado esperado**: Alerta **não** é exibido (mantém *"Out of stock"* nativo).
+   * **Resultado**: Exibe o badge em vermelho **“⚠️ ÚLTIMAS UNIDADES!”** no lugar de *"IN STOCK"*.
+2. **Produto com estoque alto (100 unidades)**:
+   * URL: [https://magento.test/fusion-backpack.html](https://magento.test/fusion-backpack.html)
+   * **Resultado**: Exibe normalmente o padrão *"IN STOCK"*.
+3. **Produto sem estoque (0 unidades)**:
+   * URL: [https://magento.test/sprite-yoga-companion-kit.html](https://magento.test/sprite-yoga-companion-kit.html)
+   * **Resultado**: Exibe normalmente o padrão *"OUT OF STOCK"*.
 
----
+### 2. Testar o Observer de Salvamento de Produto
 
-### 2. Testar o Registro de Log (Observer)
+* **Pelo Painel Admin**:
+  1. Acesse [https://magento.test/admin](https://magento.test/admin) > **Catalog > Products**.
+  2. Edite qualquer produto e clique no botão **Save**.
+* **Pela Linha de Comando (CLI)**:
+  ```bash
+  docker exec magento-phpfpm-1 php -r "
+  require '/var/www/html/app/bootstrap.php';
+  \$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, \$_SERVER);
+  \$om = \$bootstrap->getObjectManager();
+  \$repo = \$om->get(\Magento\Catalog\Api\ProductRepositoryInterface::class);
+  \$product = \$repo->get('24-MB01');
+  \$repo->save(\$product);
+  echo 'Produto salvo via CLI.' . PHP_EOL;
+  "
+  ```
 
-#### Pelo Painel Administrativo:
-1. Acesse o Admin: [https://magento.test/admin](https://magento.test/admin).
-2. Vá em **Catalog > Products**, abra qualquer produto e clique em **Save**.
+### 3. Verificar o Registro no Log
 
-#### Pela Linha de Comando (CLI):
 ```bash
-docker exec magento-phpfpm-1 php -r "
-require '/var/www/html/app/bootstrap.php';
-\$bootstrap = \Magento\Framework\App\Bootstrap::create(BP, \$_SERVER);
-\$om = \$bootstrap->getObjectManager();
-\$state = \$om->get(\Magento\Framework\App\State::class);
-try {
-    \$state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
-} catch (\Exception \$e) {}
-
-\$productRepo = \$om->get(\Magento\Catalog\Api\ProductRepositoryInterface::class);
-\$product = \$productRepo->get('24-MB01');
-\$productRepo->save(\$product);
-echo 'Produto salvo via script.' . PHP_EOL;
-"
-```
-
-#### Comandos para Verificar o Log:
-```bash
-# Ver as últimas linhas registradas:
-docker exec magento-phpfpm-1 grep "Webjump_CatalogBehavior" /var/www/html/var/log/system.log
-
-# Acompanhar em tempo real:
 docker exec -it magento-phpfpm-1 tail -f /var/www/html/var/log/system.log | grep --line-buffered "Webjump_CatalogBehavior"
-```
+---
+
+## 7. Desafios Enfrentados e Decisões Técnicas
+
+Durante o desenvolvimento do módulo, foram tomadas decisões arquiteturais importantes para contornar peculiaridades do Magento:
+
+1. **O Conflito com o Plugin `around` do MSI (`Magento_InventorySalesFrontendUi`)**:
+   * *Desafio*: Na tentativa inicial de estender `AbstractStockqty::isMsgVisible()`, o módulo core do MSI implementa um plugin `around` com `sortOrder="0"` que calcula o estoque e **não chama `$proceed()`**, interrompendo a cadeia de plugins subsequentes.
+   * *Solução*: Configuramos `sortOrder="-10"` em `di.xml` para envelopar o plugin do MSI e, como garantia definitiva de apresentação na loja, implementamos o plugin `SimpleProductViewPlugin` interceptando diretamente o `toHtml()` do bloco de visualização simples (`Simple`), garantindo que o alerta seja renderizado na PDP sem depender de chamadas internas da cadeia de inventory.
+
+2. **Isolamento da Apresentação**:
+   * *Decisão*: Evitamos intencionalmente métodos de regra de negócio como `isSalable()` ou `isAvailable()`. Alterar esses métodos poderia impedir a compra ou afetar a integração com meios de pagamento/carrinho. A interceptação focou na saída HTML (`toHtml`).
+
+3. **Prevenção de Edição do Core (`vendor/`)**:
+   * *Decisão*: Toda a engenharia reversa foi feita por inspeção de código. Nenhuma classe do core foi editada, mantendo o Magento preparado para futuras atualizações sem quebra de compatibilidade.
 
 ---
 
-## Estado Atual do Desafio 13.2
+## 8. Evidências de Sucesso e Critérios de Aceite
+---
 
-**100% Concluído e Validado em Ambiente Real:**
-
-- [x] Módulo `Webjump_CatalogBehavior` criado e ativo.
-- [x] Plugin `after` implementado em `AbstractStockqty::isMsgVisible()` com `sortOrder="-10"`.
-- [x] Regra de apresentação visual ativa: 1 a 3 unidades exibe **“⚠️ Últimas unidades!”**; 0 ou > 3 unidades mantém o padrão.
-- [x] Template e layout customizados sem alterar nenhum arquivo dentro de `vendor/`.
-- [x] Estilização LESS criada para o alerta.
-- [x] Observer registrado para o evento `catalog_product_save_after` em escopo global.
-- [x] Registro estruturado em log testado e validado em `var/log/system.log`.
-- [x] Nenhuma alteração em estoque real, salabilidade, carrinho ou checkout.
-- [x] Documentação técnica completa e detalhada consolidada neste README.
