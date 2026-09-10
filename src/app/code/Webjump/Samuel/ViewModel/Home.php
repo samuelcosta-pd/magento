@@ -12,6 +12,7 @@ use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 use Magento\Framework\Pricing\PriceCurrencyInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class Home implements ArgumentInterface
@@ -24,7 +25,8 @@ class Home implements ArgumentInterface
     public function __construct(
         private readonly ProductCollectionFactory $productCollectionFactory,
         private readonly ImageHelper $imageHelper,
-        private readonly PriceCurrencyInterface $priceCurrency
+        private readonly PriceCurrencyInterface $priceCurrency,
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
 
@@ -106,7 +108,11 @@ class Home implements ArgumentInterface
      */
     public function getSectionTitle(): string
     {
-        return 'Últimas Unidades em Estoque';
+        $value = $this->scopeConfig->getValue(
+            'webjump_samuel/general/block_text'
+        );
+
+        return trim((string) $value) ?: 'Últimas Unidades em Estoque';
     }
 
     /**
@@ -117,6 +123,20 @@ class Home implements ArgumentInterface
     public function getSectionSubtitle(): string
     {
         return 'Produtos esgotando. Aproveite as ofertas antes que zerem os estoques!';
+    }
+
+        /**
+     * Retorna o texto configurado no admin.
+     *
+     * @return string
+     */
+    public function getConfiguredText(): string
+    {
+        $value = $this->scopeConfig->getValue(
+            'webjump_samuel/general/block_text'
+        );
+
+        return trim((string) $value);
     }
 
     /**
