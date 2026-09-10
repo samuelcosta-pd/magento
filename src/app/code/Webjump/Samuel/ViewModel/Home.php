@@ -17,10 +17,20 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class Home implements ArgumentInterface
 {
+    private const CONFIG_BLOCK_TEXT     = 'webjump_samuel/general/block_text';
+    private const CONFIG_BLOCK_SUBTITLE = 'webjump_samuel/general/block_subtitle';
+    private const CONFIG_PRODUCT_LIMIT  = 'webjump_samuel/general/product_limit';
+    private const CONFIG_FEATURED_SKUS  = 'webjump_samuel/general/featured_skus';
+
+    private const DEFAULT_TITLE    = 'Últimas Unidades em Estoque';
+    private const DEFAULT_SUBTITLE = 'Produtos esgotando. Aproveite as ofertas antes que zerem os estoques!';
+    private const DEFAULT_LIMIT    = 4;
+
     /**
      * @param ProductCollectionFactory $productCollectionFactory
      * @param ImageHelper $imageHelper
      * @param PriceCurrencyInterface $priceCurrency
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
         private readonly ProductCollectionFactory $productCollectionFactory,
@@ -32,13 +42,16 @@ class Home implements ArgumentInterface
 
     /**
      * Retorna a lista de produtos com estoque baixo formatados para exibição.
+     * Produtos com SKU em destaque aparecem primeiro; o restante mantém a ordem por qty ASC.
      *
      * @param int $threshold Quantidade máxima de estoque considerada "baixa"
-     * @param int $limit Quantidade máxima de produtos a retornar
+     * @param int|null $limit Quantidade máxima de produtos a retornar (null = usa config do Admin)
      * @return array<int, array{id: int, name: string, sku: string, url: string, price: string, qty: int, image_url: string, badge_text: string}>
      */
-    public function getLowStockProducts(int $threshold = 5, int $limit = 4): array
+    public function getLowStockProducts(int $threshold = 5, ?int $limit = null): array
     {
+        $limit = $limit ?? $this->getProductLimit();
+
         $collection = $this->productCollectionFactory->create();
         $collection->addAttributeToSelect(['name', 'price', 'small_image', 'thumbnail', 'status', 'visibility']);
         $collection->addAttributeToFilter('status', Status::STATUS_ENABLED);
@@ -87,7 +100,7 @@ class Home implements ArgumentInterface
             ];
         }
 
-        return $items;
+        return $this->prioritizeFeaturedSkus($items);
     }
 
     /**
@@ -102,41 +115,92 @@ class Home implements ArgumentInterface
     }
 
     /**
-     * Título da seção.
+     * Título da seção (configurável pelo Admin).
      *
      * @return string
      */
     public function getSectionTitle(): string
     {
-        $value = $this->scopeConfig->getValue(
-            'webjump_samuel/general/block_text'
-        );
+        $value = $this->scopeConfig->getValue(self::CONFIG_BLOCK_TEXT);
 
-        return trim((string) $value) ?: 'Últimas Unidades em Estoque';
+        return trim((string) $value) ?: self::DEFAULT_TITLE;
     }
 
     /**
-     * Subtítulo explicativo com call-to-action de urgência.
+     * Subtítulo da seção (configurável pelo Admin).
      *
      * @return string
      */
     public function getSectionSubtitle(): string
     {
-        return 'Produtos esgotando. Aproveite as ofertas antes que zerem os estoques!';
+        $value = $this->scopeConfig->getValue(self::CONFIG_BLOCK_SUBTITLE);
+
+        return trim((string) $value) ?: self::DEFAULT_SUBTITLE;
     }
 
-        /**
-     * Retorna o texto configurado no admin.
+    /**
+     * Quantidade de produtos configurada no Admin.
+     * Retorna o valor do select (2, 4, 6, 8 ou 10).
+     * Usa DEFAULT_LIMIT como fallback caso o valor seja inválido ou ausente.
      *
-     * @return string
+     * @return int
      */
-    public function getConfiguredText(): string
+    public function getProductLimit(): int
     {
-        $value = $this->scopeConfig->getValue(
-            'webjump_samuel/general/block_text'
-        );
+        $value = (int) $this->scopeConfig->getValue(self::CONFIG_PRODUCT_LIMIT);
 
-        return trim((string) $value);
+        return $value > 0 ? $value : self::DEFAULT_LIMIT;
+    }
+
+    /**
+     * Retorna o array de SKUs configurados como destaque no Admin.
+     * SKUs vazios ou apenas com espaços são descartados.
+     *
+     * @return string[]
+     */
+    public function getFeaturedSkus(): array
+    {
+        $raw = $this->scopeConfig->getValue(self::CONFIG_FEATURED_SKUS);
+        if (empty($raw)) {
+            return [];
+        }
+
+        return array_values(array_filter(
+            array_map('trim', explode(',', (string) $raw))
+        ));
+    }
+
+    /**
+     * Reordena a lista de produtos colocando os SKUs em destaque primeiro.
+     * Preserva a ordem interna de cada grupo (destaque e restante).
+     *
+     * @param array<int, array{sku: string}> $items
+     * @return array<int, array{sku: string}>
+     */
+    private function prioritizeFeaturedSkus(array $items): array
+    {
+        $featuredSkus = $this->getFeaturedSkus();
+        if (empty($featuredSkus)) {
+            return $items;
+        }
+
+        $featured = [];
+        $rest     = [];
+
+        foreach ($items as $item) {
+            if (in_array($item['sku'], $featuredSkus, true)) {
+                $featured[] = $item;
+            } else {
+                $rest[] = $item;
+            }
+        }
+
+        // Reordena os destacados conforme a ordem definida no Admin
+        usort($featured, static function (array $a, array $b) use ($featuredSkus): int {
+            return array_search($a['sku'], $featuredSkus, true) <=> array_search($b['sku'], $featuredSkus, true);
+        });
+
+        return array_merge($featured, $rest);
     }
 
     /**

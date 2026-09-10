@@ -21,15 +21,61 @@
                    showInStore="1">
                 <label>Configuração do Bloco</label>
 
+                <!-- Título do bloco (field id mantido para não quebrar ViewModel) -->
                 <field id="block_text"
-                       translate="label"
+                       translate="label comment"
                        type="text"
                        sortOrder="10"
                        showInDefault="1"
                        showInWebsite="1"
                        showInStore="1">
-                    <label>Texto do bloco</label>
+                    <label>Título do bloco</label>
+                    <comment>Deixe vazio para usar o padrão: "Últimas Unidades em Estoque"</comment>
                 </field>
+
+                <!-- Subtítulo do bloco -->
+                <field id="block_subtitle"
+                       translate="label comment"
+                       type="text"
+                       sortOrder="20"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Subtítulo do bloco</label>
+                    <comment>Deixe vazio para usar o padrão: "Produtos esgotando. Aproveite as ofertas antes que zerem os estoques!"</comment>
+                </field>
+
+                <!-- Quantidade de produtos (select para garantir apenas valores pares válidos) -->
+                <field id="product_limit"
+                       translate="label comment"
+                       type="select"
+                       sortOrder="30"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Quantidade de produtos</label>
+                    <comment>Número de produtos com baixo estoque exibidos no bloco. Valores maiores que 4 ativam o carrossel.</comment>
+                    <options>
+                        <option label="2">2</option>
+                        <option label="4">4</option>
+                        <option label="6">6</option>
+                        <option label="8">8</option>
+                        <option label="10">10</option>
+                    </options>
+                </field>
+
+                <!-- SKUs em destaque -->
+                <field id="featured_skus"
+                       translate="label comment"
+                       type="text"
+                       sortOrder="40"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>SKUs em destaque</label>
+                    <comment>SKUs separados por vírgula. Esses produtos aparecem primeiro no bloco (ex: MH01, WB04). Ignorado se o SKU não existir ou não tiver estoque baixo.</comment>
+                </field>
+
             </group>
         </section>
     </system>

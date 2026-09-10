@@ -14,10 +14,15 @@ if (!$viewModel instanceof \Webjump\Samuel\ViewModel\Home) {
     return;
 }
 
-$lowStockProducts = $viewModel->getLowStockProducts(5, 4);
+$productLimit    = $viewModel->getProductLimit();
+$lowStockProducts = $viewModel->getLowStockProducts(5, $productLimit);
 if (empty($lowStockProducts)) {
     return;
 }
+
+$totalProducts  = count($lowStockProducts);
+$hasCarousel    = $totalProducts > 4;
+$blockId        = 'webjump-samuel-carousel-' . uniqid();
 ?>
 
 <section class="webjump-samuel-home-block" aria-labelledby="low-stock-title">
@@ -29,6 +34,86 @@ if (empty($lowStockProducts)) {
             <?= $escaper->escapeHtml($viewModel->getSectionSubtitle()) ?>
         </p>
     </div>
+
+    <?php if ($hasCarousel): ?>
+    <div class="carousel-wrapper"
+         id="<?= $escaper->escapeHtmlAttr($blockId) ?>"
+         data-carousel="true"
+         data-total="<?= $escaper->escapeHtmlAttr($totalProducts) ?>">
+
+        <button class="carousel-btn carousel-prev hidden"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Produtos anteriores')) ?>"
+                type="button">
+            &#8249;
+        </button>
+
+        <div class="carousel-track-wrapper">
+            <div class="carousel-track">
+                <?php foreach ($lowStockProducts as $product): ?>
+                    <article class="product-card">
+                        <div class="card-media">
+                            <span class="stock-badge">
+                                <span class="stock-badge-icon" aria-hidden="true">&#9888;</span>
+                                <?= $escaper->escapeHtml($product['badge_text']) ?>
+                            </span>
+
+                            <a href="<?= $escaper->escapeUrl($product['url']) ?>"
+                               class="product-image-link"
+                               tabindex="-1">
+                                <img src="<?= $escaper->escapeUrl($product['image_url']) ?>"
+                                     alt="<?= $escaper->escapeHtmlAttr($product['name']) ?>"
+                                     class="product-image"
+                                     loading="lazy" />
+                            </a>
+                        </div>
+
+                        <div class="card-content">
+                            <span class="product-sku">SKU: <?= $escaper->escapeHtml($product['sku']) ?></span>
+
+                            <h3 class="product-name">
+                                <a href="<?= $escaper->escapeUrl($product['url']) ?>">
+                                    <?= $escaper->escapeHtml($product['name']) ?>
+                                </a>
+                            </h3>
+
+                            <div class="product-price">
+                                <span class="price"><?= $escaper->escapeHtml($product['price']) ?></span>
+                            </div>
+
+                            <div class="stock-meter" title="<?= $escaper->escapeHtmlAttr(sprintf('Restam %d unidades', $product['qty'])) ?>">
+                                <div class="stock-bar" style="width: <?= $escaper->escapeHtmlAttr(min(100, max(15, ($product['qty'] / 5) * 100))) ?>%;"></div>
+                            </div>
+
+                            <div class="card-actions">
+                                <a href="<?= $escaper->escapeUrl($product['url']) ?>"
+                                   class="action primary btn-view-product">
+                                    <span><?= $escaper->escapeHtml(__('Ver Detalhes')) ?></span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <button class="carousel-btn carousel-next"
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Próximos produtos')) ?>"
+                type="button">
+            &#8250;
+        </button>
+    </div>
+
+    <script type="text/x-magento-init">
+    {
+        "#<?= $escaper->escapeJs($blockId) ?>": {
+            "Webjump_Samuel/js/webjump-samuel-carousel": {
+                "visibleCount": 4
+            }
+        }
+    }
+    </script>
+
+    <?php else: ?>
 
     <div class="products-grid">
         <?php foreach ($lowStockProducts as $product): ?>
@@ -76,4 +161,6 @@ if (empty($lowStockProducts)) {
             </article>
         <?php endforeach; ?>
     </div>
+
+    <?php endif; ?>
 </section>
