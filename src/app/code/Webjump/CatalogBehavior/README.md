@@ -69,12 +69,12 @@ app/code/Webjump/CatalogBehavior/
 A escolha entre Plugin e Observer se baseia no objetivo de cada parte do desafio:
 
 * **Plugin (na Parte 1 - alteração visual do produto):**
-  O desafio pedia para **modificar algo visível do produto**. Para isso, o mecanismo correto é o **Plugin do tipo `after`**, pois ele permite interceptar a execução de um método público da classe responsável pela exibição (`toHtml()`), receber o HTML pronto e alterar o texto de *"In stock"* para *"⚠️ ÚLTIMAS UNIDADES!"* antes que ele chegue à tela do usuário. O plugin é a ferramenta indicada sempre que precisamos **intervir no fluxo ou alterar o resultado** de uma função do Magento sem reescrever a classe original.
+  Como o desafio pedia para **modificar algo visível do produto** o mecanismo correto é o **Plugin do tipo `after`**, pois ele permite interceptar a execução de um método público da classe responsável pela exibição (`toHtml()`), receber o HTML pronto e alterar o texto de *"In stock"* para *"⚠️ ÚLTIMAS UNIDADES!"* antes que ele chegue à tela do usuário. O plugin é a ferramenta indicada sempre que precisamos **intervir no fluxo ou alterar o resultado** de uma função do Magento sem reescrever a classe original.
 
 * **Observer (na Parte 2 - registro em log):**
-  O desafio pedia para **reagir ao salvamento de um produto e gravar no log**. Nesse caso, o mecanismo correto é o **Observer**, pois ele simplesmente "escuta" um evento de ciclo de vida que a plataforma já dispara nativamente (`catalog_product_save_after`). O observer não precisa alterar o comportamento do Magento nem mexer nos dados do produto; ele apenas executa uma tarefa secundária (registrar uma linha no arquivo de log) de forma totalmente desacoplada.
+  Como o desafio pedia para **reagir ao salvamento de um produto e gravar no log** o correto a se usar é o **Observer**, pois ele "escuta" um evento de ciclo de vida que a plataforma já dispara (`catalog_product_save_after`). O observer não precisa alterar o comportamento do Magento nem mexer nos dados do produto; ele apenas executa uma tarefa secundária (registrar uma linha no arquivo de log) de forma totalmente desacoplada.
 
-**Regra prática:**
+**Em poucas palavras:**
 * Usamos **Plugin** quando precisamos **mudar o comportamento, os parâmetros ou o retorno** de uma ação específica.
 * Usamos **Observer** quando precisamos apenas **ser avisados de que algo aconteceu** no sistema para executar uma rotina complementar, sem interferir no processo principal.
 
@@ -99,13 +99,12 @@ Para identificar com precisão a classe responsável pela renderização da disp
   * **1 a 3 unidades em estoque**: Substitui a disponibilidade nativa (*"IN STOCK"*) pelo alerta **“⚠️ ÚLTIMAS UNIDADES!”** com destaque visual em vermelho (`#e02b27`).
   * **$> 3$ unidades**: Mantém a renderização original do Magento (*"IN STOCK"*).
   * **0 unidades (esgotado)**: Mantém a renderização original do Magento (*"OUT OF STOCK"*).
-* **Garantias**: Nenhuma alteração de salabilidade (`isSalable()`), estoque real em banco, regras de carrinho ou checkout.
 
 ### Parte 2 - Observer (`ProductSaveAfter`)
 
 * **Evento Escutado**: `catalog_product_save_after` (escopo global em `etc/events.xml`).
 * **Implementação**: Classe implementando `Magento\Framework\Event\ObserverInterface`.
-* **Serviço de Log**: Injeção de dependência PSR-3 `Psr\Log\LoggerInterface`.
+* **Serviço de Log**: Injeção de dependência `Psr\Log\LoggerInterface`.
 * **Padrão de Mensagem**:
   ```text
   [Webjump_CatalogBehavior] Produto salvo — ID: {id} | SKU: {sku} | Nome: {nome} | Status: {status}
@@ -163,6 +162,7 @@ Acesse no navegador as seguintes URLs:
 
 ```bash
 docker exec -it magento-phpfpm-1 tail -f /var/www/html/var/log/system.log | grep --line-buffered "Webjump_CatalogBehavior"
+```
 ---
 
 ## 7. Desafios Enfrentados e Decisões Técnicas
@@ -183,4 +183,29 @@ Durante o desenvolvimento do módulo, foram tomadas decisões arquiteturais impo
 
 ## 8. Evidências de Sucesso e Critérios de Aceite
 ---
+
+### 1. O plugin está declarado no di.xml e funciona na loja
+
+* **Os prints comprovam:**
+  1. O plugin está configurado no arquivo `etc/di.xml`.
+  2. O alerta visual é renderizado na página do produto na loja quando o estoque está baixo.
+
+> <img width="1465" height="886" alt="image" src="https://github.com/user-attachments/assets/dcc3ecd8-91f7-4985-b158-f30f0a61b7ca" />
+> <img width="1707" height="1231" alt="image" src="https://github.com/user-attachments/assets/63777faf-9101-4455-91db-9ae58ce5a56f" />
+
+---
+
+### 2. O observer está declarado em events.xml e dispara ao salvar um produto
+
+* **Os prints comprovam:**
+  1. O observer está registrado no arquivo `etc/events.xml` para o evento `catalog_product_save_after`.
+  2. A rotina é executada ao salvar um produto no Magento.
+
+> <img width="1516" height="579" alt="image" src="https://github.com/user-attachments/assets/793f6444-c268-45d9-9020-11c861016013" />
+> <img width="1644" height="1182" alt="image" src="https://github.com/user-attachments/assets/8947f121-c949-4cae-adea-c826a1876964" />
+> <img width="2167" height="1124" alt="image" src="https://github.com/user-attachments/assets/ea8bb10a-7b5e-4d92-84c6-c05093555a30" />
+
+---
+
+
 
