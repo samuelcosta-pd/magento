@@ -2,16 +2,22 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
+        <tab id="webjump_samuel"
+             translate="label"
+             sortOrder="250">
+            <label>Webjump Samuel</label>
+        </tab>
+
         <section id="webjump_samuel"
                  translate="label"
-                 sortOrder="100"
+                 sortOrder="10"
                  showInDefault="1"
                  showInWebsite="1"
                  showInStore="1">
-            <label>Webjump Samuel</label>
+            <label>Configurações do Bloco</label>
 
             <resource>Magento_Backend::config</resource>
-            <tab>general</tab>
+            <tab>webjump_samuel</tab>
 
             <group id="general"
                    translate="label"
@@ -19,7 +25,7 @@
                    showInDefault="1"
                    showInWebsite="1"
                    showInStore="1">
-                <label>Configuração do Bloco</label>
+                <label>Configurações Gerais</label>
 
                 <!-- Título do bloco (field id mantido para não quebrar ViewModel) -->
                 <field id="block_text"

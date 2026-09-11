@@ -51,7 +51,7 @@ app/code/Webjump/Samuel/
 
 | Diretório / Arquivo | Responsabilidade na Versão Reformulada |
 | :--- | :--- |
-| [`etc/adminhtml/system.xml`](etc/adminhtml/system.xml) | Adiciona a seção `webjump_samuel` e o grupo `general` em *Stores > Configuration > General > Webjump Samuel*. Configura os campos de Título, Subtítulo, Quantidade de Produtos (select: 2, 4, 6, 8, 10) e SKUs em destaque. |
+| [`etc/adminhtml/system.xml`](etc/adminhtml/system.xml) | Cria a aba própria no menu lateral (*Stores > Configuration > Webjump Samuel > Configurações do Bloco*), com os campos de texto, a lista de quantidade (select: 2, 4, 6, 8, 10) e o campo de SKUs em destaque. |
 | [`ViewModel/Home.php`](ViewModel/Home.php) | Injeta `ScopeConfigInterface` para recuperar as configurações do Admin. Expõe os métodos `getSectionTitle()`, `getSectionSubtitle()`, `getProductLimit()`, `getFeaturedSkus()` e gerencia a ordenação prioritária em `prioritizeFeaturedSkus()`. |
 | [`view/frontend/templates/home.phtml`](view/frontend/templates/home.phtml) | Avalia a quantidade de produtos retornados (`$hasCarousel = $totalProducts > 4`). Renderiza a estrutura de trilha e botões do carrossel inicializados via `x-magento-init`, ou fallback para grid simples. |
 | [`view/frontend/web/js/webjump-samuel-carousel.js`](view/frontend/web/js/webjump-samuel-carousel.js) | Componente RequireJS que calcula e seta a largura de cada card em pixels baseando-se no `offsetWidth` do container visível, controla a visibilidade das setas e recalcula dimensões dinamicamente no redimensionamento da tela. |
@@ -110,7 +110,7 @@ bin/magento cache:flush
 
 ### 2. Configurar o Bloco pelo Painel Administrativo
 1. Acesse o Admin do Magento: `https://magento.test/admin`
-2. Navegue até: **Stores > Configuration > General > Webjump Samuel**
+2. Navegue até: **Stores > Configuration > Webjump Samuel > Configurações do Bloco**
 3. Altere os campos:
    * **Título do bloco**: Ex: *"Ofertas Relâmpago de Fim de Estoque"*
    * **Subtítulo do bloco**: Ex: *"Aproveite os últimos itens disponíveis no depósito!"*
