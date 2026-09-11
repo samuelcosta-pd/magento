@@ -129,4 +129,58 @@ bin/magento cache:flush
 
 ## 6. Evidências de Sucesso e Critérios de Aceite
 
+### [x] 1. Existe uma seção nova em Stores > Configuration com os campos customizados
+* **Validação:** Arquivo [`system.xml`](etc/adminhtml/system.xml) registrado na aba `general` com o id `webjump_samuel`. Os campos de título, subtítulo, seletor de limite de produtos e SKUs destacados aparecem disponíveis para o lojista.
+* **O que comprovo no print:**
+  * Tela do Admin do Magento no menu lateral **Stores > Configuration > General > Webjump Samuel**.
+  * Exibição clara dos 4 campos: *Título do bloco*, *Subtítulo do bloco*, *Quantidade de produtos* e *SKUs em destaque*.
+* **Comprovação Visual:**
+> <img width="1496" height="866" alt="image" src="https://github.com/user-attachments/assets/804892c9-43b3-4dfe-b40b-f2d0bdb91810" />
+
+### [x] 2. Alteração de valores no Admin altera os textos e limites na loja
+* **Validação:** Ao preencher valores customizados no Admin e salvar a configuração, o ViewModel lê os dados via `ScopeConfigInterface` e renderiza no template da Home Page após a limpeza de cache.
+* **O que comprovo no print:**
+  * **Print A (Admin):** Formulário preenchido com títulos e subtítulos personalizados e a mensagem de sucesso verde *"You saved the configuration."*
+  * **Print B (Frontend):** Home Page exibindo o bloco com os textos customizados preenchidos no Admin, comprovando o dinamismo.
+* **Comprovação Visual:**
+> <img width="3339" height="1531" alt="image" src="https://github.com/user-attachments/assets/7b73fb9c-b452-47a3-aa67-b62a291c9c12" />
+
+
+### [x] 3. O valor tem padrão definido e o bloco não quebra se o campo estiver vazio
+* **Validação:** Métodos `getSectionTitle()`, `getSectionSubtitle()` e `getProductLimit()` implementados no [`Home.php`](ViewModel/Home.php) com operadores ternários e constantes de fallback:
+  ```php
+  return trim((string) $value) ?: self::DEFAULT_TITLE;
+  ```
+* **O que comprovo no print:**
+  * Bloco renderizando normalmente com o título *"Últimas Unidades em Estoque"* e subtítulo padrão mesmo com os campos do Admin salvos em branco.
+* **Comprovação Visual:**
+> <img width="3339" height="1531" alt="image" src="https://github.com/user-attachments/assets/96f14390-8112-4d83-ac42-4ce0b097466c" />
+
+### [x] 4. Carrossel ativo e funcional para mais de 4 produtos (sem quebra de linha)
+* **Validação:** Quando o limite de produtos configurado no Admin for superior a 4 (ex: 6 ou 8 itens), a vitrine é envelopada na estrutura `.carousel-wrapper`. O 5º item em diante permanece na mesma linha horizontal contínua e só é exibido ao navegar.
+* **O que comprovo no print:**
+  * **Print A (Sem carrossel):** Visualização inicial com os 4 produtos. As setas devem estar ocultas/inativas.
+  * **Print B (Página 1 e 2 do Carrossel):** Após clicar na seta direita, os produtos seguintes (5º, 6º, etc.) aparecem perfeitamente alinhados na mesma linha horizontal. A seta esquerda agora deve estar visível.
+* **Comprovação Visual:**
+> **Print A**
+> <img width="3150" height="792" alt="image" src="https://github.com/user-attachments/assets/f63c2362-6f8e-4f4c-85b1-355e1c93d40f" />
+>
+> **Print B**
+> <img width="3122" height="1530" alt="image" src="https://github.com/user-attachments/assets/3b239ebd-6247-4c69-b51a-3896b4f33edf" />
+
+### [x] 5. Priorização de SKUs configurados em destaque
+* **Validação:** Ao cadastrar um ou mais SKUs no campo *SKUs em destaque*, o método `prioritizeFeaturedSkus()` do ViewModel reorganiza a lista para que esses itens apareçam nas primeiras posições da vitrine.
+* **O que comprovo no print:**
+  * O produto correspondente ao SKU informado no Admin posicionado como o primeiro card da esquerda no bloco da Home.
+* **Comprovação Visual:**
+> <img width="2914" height="669" alt="image" src="https://github.com/user-attachments/assets/cc75e62c-5718-4a23-b000-7ab5466082fb" />
+> <img width="2843" height="668" alt="image" src="https://github.com/user-attachments/assets/94cd6a0a-8160-4e7a-a0ae-69e29a41c07a" />
+
+### [x] 6. Responsividade e adaptação do Carrossel em telas menores
+* **Validação:** Media queries no `_module.less` e tratamento dinâmico no `webjump-samuel-carousel.js` adaptam a quantidade de cards visíveis por página (1 ou 2 cards) e reduzem dimensões de botões e espaçamentos em resoluções mobile e tablet.
+* **O que comprovo no print:**
+  * Exibição do bloco emulando dispositivo móvel ou tela estreita (ex: DevTools em largura $\le 768px$), demonstrando cards proporcionais e botões perfeitamente operáveis.
+* **Comprovação Visual:**
+> <img width="1590" height="1535" alt="image" src="https://github.com/user-attachments/assets/45bd0456-a9e0-469f-b14b-5a2ed02731de" />
+
 ---
