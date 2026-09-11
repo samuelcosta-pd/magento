@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <!-- Substitui diretamente o texto "In stock" por "Últimas unidades" no bloco de disponibilidade -->
+    <type name="Magento\Catalog\Block\Product\View\Type\Simple">
+        <plugin
+            name="webjump_catalog_behavior_simple_view_stock_text"
+            type="Webjump\CatalogBehavior\Plugin\Block\Product\View\Type\SimpleProductViewPlugin"
+            sortOrder="10"
+        />
+    </type>
+
+    <!-- Mantém compatibilidade com o bloco nativo de threshold de estoque -->
+    <type name="Magento\CatalogInventory\Block\Stockqty\AbstractStockqty">
+        <plugin
+            name="webjump_catalog_behavior_stock_qty_msg"
+            type="Webjump\CatalogBehavior\Plugin\Block\Stockqty\AbstractStockqtyPlugin"
+            sortOrder="-10"
+        />
+    </type>
+
+</config>
