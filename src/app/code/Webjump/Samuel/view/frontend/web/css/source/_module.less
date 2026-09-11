@@ -232,3 +232,99 @@
         }
     }
 }
+
+// ─── Carrossel ────────────────────────────────────────────────────────────────
+// Estilos mínimos para o carrossel de produtos.
+// As larguras dos cards são definidas em JavaScript (webjump-samuel-carousel.js).
+// ──────────────────────────────────────────────────────────────────────────────
+
+.webjump-samuel-home-block {
+
+    .carousel-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .carousel-track-wrapper {
+        flex: 1;
+        overflow: hidden;
+        min-width: 0;
+    }
+
+    // Flex nowrap mantém todos os cards em uma única linha.
+    // Largura dos cards definida via JS; transição via transform.
+    .carousel-track {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        width: max-content;
+        gap: 20px;
+        transition: transform 0.35s ease;
+        will-change: transform;
+        margin: 0;
+        padding: 0;
+
+        .product-card {
+            flex-shrink: 0 !important;
+        }
+    }
+
+    // Setas do carrossel
+    .carousel-btn {
+        flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 50%;
+        font-size: 22px;
+        line-height: 1;
+        color: #1e293b;
+        cursor: pointer;
+        transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+        padding: 0;
+
+        &:hover {
+            background: #1e293b;
+            border-color: #1e293b;
+            color: #ffffff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #006bb4;
+            outline-offset: 2px;
+        }
+
+        // Estado oculto — controlado pelo JS
+        &.hidden {
+            visibility: hidden;
+            pointer-events: none;
+        }
+    }
+
+    .carousel-prev { margin-right: 12px; }
+    .carousel-next { margin-left: 12px; }
+}
+
+// Responsividade do carrossel em telas menores
+@media (max-width: 768px) {
+    .webjump-samuel-home-block {
+
+        .carousel-track {
+            gap: 12px;
+        }
+
+        .carousel-btn {
+            width: 32px;
+            height: 32px;
+            font-size: 18px;
+        }
+
+        .carousel-prev { margin-right: 8px; }
+        .carousel-next { margin-left: 8px; }
+    }
+}
