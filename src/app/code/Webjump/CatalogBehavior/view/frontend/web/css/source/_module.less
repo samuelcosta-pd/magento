@@ -1,17 +1,27 @@
 /**
  * Copyright © Webjump. All rights reserved.
+ * Estilização do alerta de estoque baixo na página de produto (PDP).
  */
 
 .product-info-stock-sku {
     .stock.available {
-        &.low-stock,
-        .webjump-low-stock {
-            color: #e02b27 !important;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
+        &.low-stock {
+            color: #e02b27;
             font-weight: 700;
-            text-transform: uppercase;
+
+            .webjump-low-stock {
+                color: #e02b27;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-weight: 700;
+                text-transform: uppercase;
+
+                .stock-alert-icon {
+                    font-size: 14px;
+                    line-height: 1;
+                }
+            }
         }
     }
 

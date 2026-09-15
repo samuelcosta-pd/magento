@@ -7,6 +7,13 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <!-- Override de template para exibir disponibilidade e alerta de estoque baixo via ViewModel -->
+        <referenceBlock name="product.info.simple" template="Webjump_CatalogBehavior::product/view/type/default.phtml">
+            <arguments>
+                <argument name="stock_view_model" xsi:type="object">Webjump\CatalogBehavior\ViewModel\StockStatus</argument>
+            </arguments>
+        </referenceBlock>
+
         <!-- Remove o bloco secundário de threshold para não duplicar a mensagem com a disponibilidade principal -->
         <referenceBlock name="product.info.simple.extra.catalog_inventory_stockqty_default" remove="true"/>
     </body>
