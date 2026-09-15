@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Override do template nativo de disponibilidade de estoque (PDP).
+ *
+ * @var \Magento\Catalog\Block\Product\View\AbstractView $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+$_product = $block->getProduct();
+/** @var \Webjump\CatalogBehavior\ViewModel\StockStatus|null $stockViewModel */
+$stockViewModel = $block->getData('stock_view_model');
+$isLowStock = $stockViewModel instanceof \Webjump\CatalogBehavior\ViewModel\StockStatus
+    && $stockViewModel->isLowStock($_product);
+?>
+
+<?php if ($block->displayProductStockStatus()) : ?>
+    <?php if ($_product->isAvailable()) : ?>
+        <div class="stock available<?= $isLowStock ? ' low-stock' : '' ?>"
+             title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
+            <?php if ($isLowStock) : ?>
+                <span class="webjump-low-stock">
+                    <span class="stock-alert-icon" aria-hidden="true">&#9888;</span>
+                    <?= $escaper->escapeHtml($stockViewModel->getLowStockMessage()) ?>
+                </span>
+            <?php else : ?>
+                <span><?= $escaper->escapeHtml(__('In stock')) ?></span>
+            <?php endif; ?>
+        </div>
+    <?php else : ?>
+        <div class="stock unavailable"
+             title="<?= $escaper->escapeHtmlAttr(__('Availability')) ?>">
+            <span><?= $escaper->escapeHtml(__('Out of stock')) ?></span>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
