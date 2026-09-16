@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="webjump_product_review" resource="default" engine="innodb" comment="Webjump Product Reviews">
+        <column xsi:type="int" name="review_id" unsigned="true" nullable="false" identity="true"
+                comment="Review ID"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false"
+                comment="Catalog Product Entity ID"/>
+        <column xsi:type="varchar" name="author_name" length="255" nullable="false"
+                comment="Author Name"/>
+        <column xsi:type="text" name="comment" nullable="false"
+                comment="Review Comment"/>
+        <column xsi:type="smallint" name="rating" unsigned="true" nullable="false"
+                comment="Rating Score from 1 to 5"/>
+        <column xsi:type="boolean" name="is_approved" nullable="false" default="0"
+                comment="Review Approval Status (0=Pending, 1=Approved)"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Review Creation Timestamp"/>
+        <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false"
+                default="CURRENT_TIMESTAMP" comment="Review Last Modification Timestamp"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="review_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign" referenceId="WEBJUMP_PRODUCT_REVIEW_PRODUCT_ID_CATALOG_PRODUCT_ENTITY_ENTITY_ID"
+                    table="webjump_product_review" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+
+        <index referenceId="WEBJUMP_PRODUCT_REVIEW_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <index referenceId="WEBJUMP_PRODUCT_REVIEW_IS_APPROVED" indexType="btree">
+            <column name="is_approved"/>
+        </index>
+    </table>
+</schema>
