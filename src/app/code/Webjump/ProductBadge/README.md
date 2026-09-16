@@ -19,7 +19,7 @@ Permitir que a loja destaque produtos com selos visuais (por exemplo, **"Sustent
 
 ## 2. Decisões Arquiteturais e Justificativas
 
-### 2.1. Por que escolhemos o Escopo `STORE` (`ScopedAttributeInterface::SCOPE_STORE`)?
+### 2.1. Por que escolher o Escopo `STORE` (`ScopedAttributeInterface::SCOPE_STORE`)?
 
 O Magento suporta três níveis de escopo para atributos de catálogo (`catalog_eav_attribute.is_global`):
 - `SCOPE_GLOBAL` (Global / 1)
@@ -159,215 +159,60 @@ SELECT patch_id, patch_name FROM patch_list WHERE patch_name LIKE '%ProductBadge
 
 ## 6. Evidências de Sucesso
 
-Esta seção consolida as evidências técnicas e funcionais de homologação do módulo **Webjump_ProductBadge**, divididas entre **código-fonte** (arquitetura e boas práticas no Magento 2) e **comportamento funcional** (terminal, painel administrativo, banco de dados e storefront).
+Esta seção consolida as evidências técnicas e funcionais do módulo **Webjump_ProductBadge**, divididas entre **código-fonte** e **comportamento funcional** (terminal, painel administrativo, banco de dados e storefront).
 
 ---
 
-### 6.1. PARTE 1: Evidências no Código-Fonte (Arquitetura e Implementação)
-
-#### Print C1: Data Patch – Declaração e Configurações do Atributo
+#### Data Patch – Declaração e Configurações do Atributo
 * **O que comprova:**
   - Criação 100% via código implementando `DataPatchInterface` e `PatchRevertableInterface`.
   - Tipo de entrada (`select`), rótulo em português (`'Selo do Produto'`), grupo (`'Product Details'`), escopo Store View (`SCOPE_STORE`), uso na listagem (`used_in_product_listing = true`) e opções curadas de selos.
-* **Arquivo:** [`Setup/Patch/Data/AddProductBadgeAttribute.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/Setup/Patch/Data/AddProductBadgeAttribute.php#L45-L78)
-* **Trecho a destacar no editor:**
-  ```php
-  $eavSetup->addAttribute(
-      Product::ENTITY,
-      self::ATTRIBUTE_CODE,
-      [
-          'type' => 'int',
-          'label' => 'Selo do Produto',
-          'input' => 'select',
-          'source' => Table::class,
-          'required' => false,
-          'sort_order' => 150,
-          'global' => ScopedAttributeInterface::SCOPE_STORE,
-          'group' => 'Product Details',
-          'used_in_product_listing' => true,
-          'visible_on_front' => true,
-          'user_defined' => true,
-          'searchable' => false,
-          'filterable' => true,
-          'comparable' => false,
-          'visible_in_advanced_search' => false,
-          'unique' => false,
-          'apply_to' => '',
-          'is_used_in_grid' => true,
-          'is_visible_in_grid' => true,
-          'is_filterable_in_grid' => true,
-          'option' => [
-              'values' => [
-                  'Sustentável',
-                  'Eco-Friendly',
-                  'Vegano',
-                  'Artesanal'
-              ]
-          ]
-      ]
-  );
-  ```
-* **Evidência Visual:**
-  ![Print C1: Data Patch – Declaração e Configurações do Atributo](docs/images/print-c1-data-patch.png)
+* **Evidências:**
+<img width="1464" height="747" alt="image" src="https://github.com/user-attachments/assets/2142d384-3b29-4a97-8937-6c0aa9ec0816" />
+> Módulo habilitado:
+<img width="1454" height="201" alt="image" src="https://github.com/user-attachments/assets/9652dd6a-798f-4a8d-a82f-b7173f2834da" />
+<img width="1477" height="156" alt="image" src="https://github.com/user-attachments/assets/9f528461-6f06-45f6-afd1-103202068fbf" />
 
 ---
 
-#### Print C2: Layout XML – Injeção Limpa e ViewModel
+#### Layout XML – Injeção e ViewModel
 * **O que comprova:**
   - Posicionamento correto na PDP (`product.info.main`, antes de `page.main.title`).
   - Padrão arquitetural moderno do Magento 2: injeção via `ViewModel` sem necessidade de criar `Block` classes legadas.
-* **Arquivo:** [`view/frontend/layout/catalog_product_view.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/view/frontend/layout/catalog_product_view.xml#L10-L19)
-* **Trecho a destacar no editor:**
-  ```xml
-  <referenceContainer name="product.info.main">
-      <block class="Magento\Catalog\Block\Product\View"
-             name="product.info.badge"
-             template="Webjump_ProductBadge::product/view/badge.phtml"
-             before="page.main.title">
-          <arguments>
-              <argument name="badge_view_model" xsi:type="object">Webjump\ProductBadge\ViewModel\Badge</argument>
-          </arguments>
-      </block>
-  </referenceContainer>
-  ```
-* **Evidência Visual:**
-  ![Print C2: Layout XML – Injeção Limpa e ViewModel](docs/images/print-c2-layout-xml.png)
+* **Evidências:**
+<img width="1385" height="996" alt="image" src="https://github.com/user-attachments/assets/f22b5a3a-4072-440c-aa73-86f914a69a48" />
+> Captura em Stores > Attributes > Product, filtrando por "product_badge" mostrando na grade o Attribute Code, Label e Escopo Store View
+<img width="1427" height="1230" alt="image" src="https://github.com/user-attachments/assets/b2f5fb7a-27ec-4141-b9bb-3eb0b40b0e8b" />
+> Injeção via `ViewModel` sem necessidade de criar `Block` classes legadas.
+<img width="1302" height="456" alt="image" src="https://github.com/user-attachments/assets/1ac2c99c-d4b0-408a-8218-d0e5064ae105" />
 
 ---
 
-#### Print C3: Template PHTML – Early Return e Segurança
+#### Template PHTML – Early Return e Segurança
 * **O que comprova:**
   - Atendimento ao requisito: *"respeitando o caso de o produto não ter o atributo preenchido"* através do `early return` (`return;`), garantindo que **nenhum HTML vazio ou quebrado seja renderizado**.
   - Boas práticas de segurança contra XSS (`$escaper->escapeHtml()` e `$escaper->escapeHtmlAttr()`).
-* **Arquivo:** [`view/frontend/templates/product/view/badge.phtml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/view/frontend/templates/product/view/badge.phtml#L9-L23)
-* **Trecho a destacar no editor:**
-  ```php
-  $_product = $block->getProduct();
-  /** @var \Webjump\ProductBadge\ViewModel\Badge|null $badgeViewModel */
-  $badgeViewModel = $block->getData('badge_view_model');
-
-  if (!$badgeViewModel instanceof \Webjump\ProductBadge\ViewModel\Badge || !$badgeViewModel->hasBadge($_product)) {
-      return;
-  }
-
-  $badgeLabel = $badgeViewModel->getBadgeLabel($_product);
-  $badgeClass = $badgeViewModel->getBadgeCssClass($_product);
-  ```
-* **Evidência Visual:**
-  ![Print C3: Template PHTML – Early Return e Segurança](docs/images/print-c3-template-phtml.png)
+* **Evidências:**
+<img width="1424" height="349" alt="image" src="https://github.com/user-attachments/assets/ce103a3c-b213-4b92-821b-92303d7c2296" />
+> O patch está registrado na tabela `patch_list`
+<img width="1454" height="250" alt="image" src="https://github.com/user-attachments/assets/941f492f-8c33-44ba-a802-9ffb6346060b" />
 
 ---
 
-#### Print C4: ViewModel – Resiliência e Sanitização
+#### ViewModel – Resiliência e Sanitização
 * **O que comprova:**
   - Leitura segura com `getAttributeText()`, tratamento com `try/catch` para evitar falhas silenciosas que quebrem a página e geração de classe CSS dinâmica e sanitizada (`product-badge--sustentavel`).
-* **Arquivo:** [`ViewModel/Badge.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/ViewModel/Badge.php#L23-L66)
-* **Trecho a destacar no editor:**
-  ```php
-  public function getBadgeLabel(?Product $product): ?string
-  {
-      if (!$product) {
-          return null;
-      }
-
-      $attributeCode = AddProductBadgeAttribute::ATTRIBUTE_CODE;
-
-      try {
-          $label = $product->getAttributeText($attributeCode);
-
-          if ($label instanceof Phrase) {
-              $label = (string) $label;
-          } elseif (is_array($label)) {
-              $label = implode(', ', $label);
-          }
-
-          if (is_string($label) && trim($label) !== '') {
-              return trim($label);
-          }
-
-          // Fallback caso o dado tenha sido atribuído diretamente como texto ou booleano
-          $rawVal = $product->getData($attributeCode);
-          if (is_string($rawVal) && trim($rawVal) !== '' && !is_numeric($rawVal)) {
-              return trim($rawVal);
-          }
-      } catch (\Throwable $e) {
-          // Em caso de erro na resolução de fonte do atributo, falha silenciosa para não quebrar a PDP
-          return null;
-      }
-
-      return null;
-  }
-
-  public function hasBadge(?Product $product): bool
-  {
-      return $this->getBadgeLabel($product) !== null;
-  }
-  ```
-* **Evidência Visual:**
-  ![Print C4: ViewModel – Resiliência e Sanitização](docs/images/print-c4-viewmodel.png)
+* **Evidências:**
+<img width="1431" height="512" alt="image" src="https://github.com/user-attachments/assets/c503cf84-fe3c-4295-abd1-d8ab8bce5041" />
+> Evitando que falhas silenciosas que quebrem a página.
+<img width="1454" height="651" alt="image" src="https://github.com/user-attachments/assets/d0dc63c3-acb4-4ab9-9fc8-910417aa883e" />
+<img width="1450" height="232" alt="image" src="https://github.com/user-attachments/assets/f07f3036-9193-42d0-b36b-38dc557ae5cb" />
 
 ---
 
-### 6.2. PARTE 2: Evidências Funcionais (Terminal, Banco, Admin e Loja)
-
-#### Print F1: Terminal – Execução do `setup:upgrade`
-* **Critério atendido:** *"O atributo é criado ao rodar `setup:upgrade` em uma base limpa"*
-* **Onde capturar:** No Terminal / Console.
-* **Comando:**
-  ```bash
-  bin/magento setup:upgrade
-  ```
-* **O que deve aparecer no print:**
-  - O comando concluindo com sucesso até o final sem erros, evidenciando o processamento dos Data Patches.
-* **Evidência Visual:**
-  ![Print F1: Terminal – Execução do setup:upgrade](docs/images/print-f1-terminal-setup-upgrade.png)
-
----
-
-#### Print F2: Admin – Formulário de Edição do Produto
-* **Critério atendido:** *"Aparece no admin, no grupo correto, com o rótulo em português"*
-* **Onde capturar:** Painel Administrativo do Magento.
-* **Caminho:** **Catalog** > **Products** > Editar produto (ex: `Camiseta Básica Algodão` - SKU `CAM-BAS-001`).
-* **O que deve aparecer no print:**
-  - Seção **Product Details** aberta.
-  - O campo visível com o rótulo em português: **"Selo do Produto"**.
-  - Dropdown aberto exibindo as opções cadastradas (*Sustentável*, *Eco-Friendly*, *Vegano*, *Artesanal*).
-* **Evidência Visual:**
-  ![Print F2: Admin – Formulário de Edição do Produto](docs/images/print-f2-admin-product-edit.png)
-
----
-
-#### Print F3: Banco de Dados – Registro na tabela `patch_list`
-* **Critério atendido:** *"O patch está registrado na tabela `patch_list`"*
-* **Onde capturar:** Terminal (CLI MySQL) ou **phpMyAdmin** (`http://localhost:8080`).
-* **Consulta SQL:**
-  ```sql
-  SELECT patch_id, patch_name FROM patch_list WHERE patch_name LIKE '%ProductBadge%';
-  ```
-* **O que deve aparecer no print:**
-  - O registro retornado com `patch_id: 204` e `patch_name: Webjump\ProductBadge\Setup\Patch\Data\AddProductBadgeAttribute`.
-* **Evidência Visual:**
-  ![Print F3: Banco de Dados – Registro na tabela patch_list](docs/images/print-f3-database-patch-list.png)
-
----
-
-#### Print F4: Frontend – Produto com Selo Ativo
-* **Critério atendido:** *"O selo aparece na página do produto quando marcado (...)"*
-* **Onde capturar:** Navegador (Storefront / PDP).
-* **URL:** `https://magento.test/camisa-basica-de-algod-o.html`
-* **O que deve aparecer no print:**
-  - A página do produto com o selo verde em pílula e ícone SVG posicionado acima do título do produto (`page-title`).
-* **Evidência Visual:**
-  ![Print F4: Frontend – Produto com Selo Ativo](docs/images/print-f4-frontend-badge-active.png)
-
----
-
-#### Print F5: Frontend – Produto sem Selo (Cenário Vazio)
+#### Frontend – Produto sem Selo (Cenário Vazio)
 * **Critério atendido:** *"(...) e nada quebra quando não está"*
-* **Onde capturar:** Navegador (Storefront / PDP).
-* **URL:** `https://magento.test/joust-duffle-bag.html`
-* **O que deve aparecer no print:**
-  - A mesma região da PDP mostrando que a página carrega 100% íntegra, sem espaços brancos vazios, sem quebras de layout e com o título do produto posicionado normalmente.
-* **Evidência Visual:**
-  ![Print F5: Frontend – Produto sem Selo (Cenário Vazio)](docs/images/print-f5-frontend-badge-empty.png)
+* **Evidências:**
+<img width="1535" height="706" alt="image" src="https://github.com/user-attachments/assets/1fcd96d8-050c-449c-8ed8-44cccec73b22" />
+
 
