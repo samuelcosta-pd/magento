@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Webjump\ProductReview\Api\Data\ReviewInterface"
+                type="Webjump\ProductReview\Model\Review"/>
+    <preference for="Webjump\ProductReview\Api\Data\ReviewSearchResultsInterface"
+                type="Webjump\ProductReview\Model\ReviewSearchResults"/>
+    <preference for="Webjump\ProductReview\Api\ReviewRepositoryInterface"
+                type="Webjump\ProductReview\Model\ReviewRepository"/>
+</config>
