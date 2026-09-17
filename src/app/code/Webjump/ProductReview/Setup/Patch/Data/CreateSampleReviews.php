@@ -11,6 +11,7 @@ use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductColl
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Framework\Setup\Patch\PatchRevertableInterface;
+use Psr\Log\LoggerInterface;
 use Webjump\ProductReview\Api\Data\ReviewInterface;
 use Webjump\ProductReview\Api\Data\ReviewInterfaceFactory;
 use Webjump\ProductReview\Api\ReviewRepositoryInterface;
@@ -34,12 +35,14 @@ class CreateSampleReviews implements DataPatchInterface, PatchRevertableInterfac
      * @param ReviewRepositoryInterface $reviewRepository
      * @param ReviewInterfaceFactory $reviewFactory
      * @param ProductCollectionFactory $productCollectionFactory
+     * @param LoggerInterface $logger
      */
     public function __construct(
         private readonly ModuleDataSetupInterface $moduleDataSetup,
         private readonly ReviewRepositoryInterface $reviewRepository,
         private readonly ReviewInterfaceFactory $reviewFactory,
-        private readonly ProductCollectionFactory $productCollectionFactory
+        private readonly ProductCollectionFactory $productCollectionFactory,
+        private readonly LoggerInterface $logger
     ) {
     }
 
@@ -56,9 +59,14 @@ class CreateSampleReviews implements DataPatchInterface, PatchRevertableInterfac
         $productCollection->setPageSize(5);
         $productIds = $productCollection->getAllIds();
 
-        // Fallback default IDs in case catalog is empty
         if (empty($productIds)) {
-            $productIds = [1, 2, 3, 4, 5];
+            $this->logger->warning(
+                'Webjump_ProductReview: No products found in catalog. '
+                . 'Sample reviews were NOT inserted. '
+                . 'Run bin/magento setup:upgrade again after importing products.'
+            );
+            $this->moduleDataSetup->getConnection()->endSetup();
+            return;
         }
 
         $sampleData = [
