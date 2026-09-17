@@ -1,6 +1,4 @@
-# Módulo Webjump_ProductBadge
-
-Desafio **14.1 - Atributo de produto por código**.
+# Desafio **14.1 - Atributo de produto por código**.
 ---
 
 ## 1. Visão Geral do Desafio
@@ -22,9 +20,9 @@ Permitir que a loja destaque produtos com selos visuais (por exemplo, **"Sustent
 ### 2.1. Por que escolher o Escopo `STORE` (`ScopedAttributeInterface::SCOPE_STORE`)?
 
 O Magento suporta três níveis de escopo para atributos de catálogo (`catalog_eav_attribute.is_global`):
-- `SCOPE_GLOBAL` (Global / 1)
-- `SCOPE_WEBSITE` (Website / 2)
-- `SCOPE_STORE` (Store View / 0)
+- `SCOPE_GLOBAL` (Global)
+- `SCOPE_WEBSITE` (Website)
+- `SCOPE_STORE` (Store View)
 
 #### Análise das Alternativas:
 * **Global (`SCOPE_GLOBAL`)**: O valor definido seria idêntico em todas as lojas, websites e visões de loja. Esse escopo é indicado para propriedades físicas intrínsecas e universais do produto (como peso, dimensões ou código de barras EAN). Para um selo de produto, o escopo Global é excessivamente engessado: caso a empresa opere em múltiplos países ou idiomas, uma loja no Brasil precisa exibir "Sustentável" enquanto uma visão em inglês precisa exibir "Sustainable", ou uma certificação ecológica pode ser válida apenas em determinado mercado/país.
@@ -38,14 +36,14 @@ O Magento suporta três níveis de escopo para atributos de catálogo (`catalog_
 
 ### 2.2. Por que escolhemos o Tipo de Entrada `select` (Dropdown)?
 
-O enunciado instruiu a *"escolher com cuidado o tipo de entrada"* para marcar produtos com um selo *(por exemplo, "Sustentável")*.
+Dado o enunciado: *"escolher com cuidado o tipo de entrada"* para marcar produtos com um selo *(por exemplo, "Sustentável")*.
 
 #### Comparação de Tipos:
 1. **Texto Livre (`text` / `varchar`)**:
-   - *Desvantagem*: Abre margem para erros humanos e inconsistências graves no catálogo (ex: um operador digita *"sustentavel"*, outro *"Sustentável"*, outro *"Sustentavel"* e outro *"Eco"*). Isso quebra o design do selo no frontend, impede filtros padronizados na vitrine e dificulta relatórios.
+   - *Desvantagem*: Abre margem para erros humanos e inconsistências graves no catálogo (ex: um operador digita *"sustentavel"*, outro *"Sustentável"*, outro *"Sustentavel"*...). Isso quebra o design do selo no frontend, impede filtros padronizados na vitrine e dificulta relatórios.
 2. **Booleano (`boolean` / Sim-Não)**:
    - *Desvantagem*: Atende apenas a uma flag binária fixa (ex: apenas "Sustentável"). Se amanhã o lojista desejar criar produtos com selo *"Vegano"* ou *"Artesanal"*, seria necessário criar uma nova coluna/atributo para cada selo (`is_vegan`, `is_artisan`, etc.), gerando proliferação desnecessária de atributos no banco EAV.
-3. **Seleção (`select` / Dropdown com `Table` Source) — Escolha Adotada**:
+3. **Seleção (`select` / Dropdown com `Table` Source) - Escolha Adotada**:
    - **Extensibilidade**: Permite selecionar dentre um rol curado de selos (ex: *"Sustentável"*, *"Eco-Friendly"*, *"Vegano"*, *"Artesanal"*), com suporte a novos selos sem necessidade de migrações estruturais.
    - **Controle de Integridade**: Garante que o lojista selecione apenas opções homologadas.
    - **Caso Não Preenchido**: Por padrão, o dropdown permite o valor vazio (`-- Selecione --`), atendendo perfeitamente ao requisito *"respeitando o caso de o produto não ter o atributo preenchido"*.
@@ -159,7 +157,7 @@ SELECT patch_id, patch_name FROM patch_list WHERE patch_name LIKE '%ProductBadge
 
 ## 6. Evidências de Sucesso
 
-Esta seção consolida as evidências técnicas e funcionais do módulo **Webjump_ProductBadge**, divididas entre **código-fonte** e **comportamento funcional** (terminal, painel administrativo, banco de dados e storefront).
+Esta seção consolida as evidências técnicas e funcionais do módulo **Webjump_ProductBadge**.
 
 ---
 
