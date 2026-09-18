@@ -104,26 +104,29 @@ Esta seção busca comprovar através de prints o atendimento de todos os crité
 #### Objetivo
 Comprovar que a tabela `webjump_product_review` foi definida via Declarative Schema e criada de forma autônoma pelo instalador do Magento.
 
-#### Prints Recomendados
-
-#### Print 1.1 — Código (IDE)
+#### Evidência 1.1 - Código (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/etc/db_schema.xml`
-- **O que mostrar/destacar:**
+- **Mostrando:**
   - A tag `<table name="webjump_product_review" ...>`
   - As colunas mínimas exigidas: `review_id`, `product_id`, `author_name`, `comment`, `rating`, `is_approved`, `created_at` e `updated_at`.
   - A constraint de chave estrangeira com `referenceTable="catalog_product_entity"` e `onDelete="CASCADE"`.
+ > <img width="1454" height="779" alt="image" src="https://github.com/user-attachments/assets/859e6c17-07a6-4121-a210-4db7ad110958" />
 
-#### Print 1.2 — Execução no Terminal (CLI)
+
+#### Evidência 1.2 - Execução no Terminal (CLI)
 - **Comando:**
   ```bash
   bin/magento setup:upgrade
   ```
-- **O que mostrar/destacar:** A saída do comando passando pelo módulo `Webjump_ProductReview` e atualizando o schema sem erros.
+- **Mostrando:** A saída do comando passando pelo módulo `Webjump_ProductReview` e atualizando o schema sem erros.
+> <img width="1473" height="923" alt="image" src="https://github.com/user-attachments/assets/e5c801d9-8f68-4283-a028-d637e50aaacb" />
 
-#### Print 1.3 — Banco / Interface Visual (phpMyAdmin)
-- **Onde acessar:** `http://localhost:8080` (banco `magento`)
-- **Tela:** Selecionar a tabela `webjump_product_review` e clicar na aba **Estrutura** (ou rodar `DESCRIBE webjump_product_review;` no terminal).
-- **O que mostrar/destacar:** Todas as 8 colunas criadas, tipos de dados, chave primária (`review_id` com auto_increment) e índices.
+
+#### Evidência 1.3 - Banco
+- Rodar `DESCRIBE webjump_product_review;` no terminal.
+- **Mostrando:** Todas as 8 colunas criadas, tipos de dados, chave primária (`review_id` com auto_increment) e índices.
+> <img width="1469" height="590" alt="image" src="https://github.com/user-attachments/assets/9c72027e-5547-4bef-ac25-704533a9a13a" />
+
 
 ---
 
@@ -132,18 +135,19 @@ Comprovar que a tabela `webjump_product_review` foi definida via Declarative Sch
 ### Objetivo
 Comprovar que o arquivo `db_schema_whitelist.json` foi gerado via CLI do Magento e faz parte do controle de versão Git.
 
-### Prints Recomendados
-
-#### Print 2.1 — Código (IDE)
+#### Evidência 2.1 - Código (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/etc/db_schema_whitelist.json`
-- **O que mostrar/destacar:** O JSON contendo o bloco `"webjump_product_review"`, com o dicionário de todas as colunas mapeadas com `: true`, os índices e a constraint `WEBJUMP_PRD_REVIEW_PRD_ID_CAT_PRD_ENTT_ENTT_ID`.
+- **Mostrando:** O JSON contendo o bloco `"webjump_product_review"`, com o dicionário de todas as colunas mapeadas com `: true`, os índices e a constraint `WEBJUMP_PRD_REVIEW_PRD_ID_CAT_PRD_ENTT_ENTT_ID`.
+> <img width="1433" height="512" alt="image" src="https://github.com/user-attachments/assets/7e1ae7f3-7e50-4c36-bccf-348c118c73d3" />
 
-#### Print 2.2 — Controle de Versão no Terminal (Git)
+
+#### Evidência 2.2 - Controle de Versão no Terminal (Git)
 - **Comando:**
   ```bash
   git status
   ```
-- **O que mostrar/destacar:** O arquivo `src/app/code/Webjump/ProductReview/etc/db_schema_whitelist.json` presente e rastreado no repositório Git, pronto ou já adicionado à submissão.
+- **Mostrando:** O arquivo `src/app/code/Webjump/ProductReview/etc/db_schema_whitelist.json` presente e rastreado no repositório Git, pronto ou já adicionado à submissão.
+> <img width="1466" height="225" alt="image" src="https://github.com/user-attachments/assets/ccfcf010-239a-40c3-a283-c0fd467088d6" />
 
 ---
 
@@ -152,20 +156,19 @@ Comprovar que o arquivo `db_schema_whitelist.json` foi gerado via CLI do Magento
 ### Objetivo
 Comprovar a existência dos Service Contracts e a correta amarração de injeção de dependência via `di.xml`.
 
-### Prints Recomendados
-
-#### Print 3.1 — Interface em `Api/` (IDE)
+#### Evidência 3.1 - Interface em `Api/` (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/Api/ReviewRepositoryInterface.php`
-- **O que mostrar/destacar:** O namespace `Webjump\ProductReview\Api`, a declaração da interface `ReviewRepositoryInterface` e as assinaturas dos métodos públicos.
+- **Mostrando:** O namespace `Webjump\ProductReview\Api`, a declaração da interface `ReviewRepositoryInterface` e as assinaturas dos métodos públicos.
+> <img width="1776" height="389" alt="image" src="https://github.com/user-attachments/assets/2347973e-94f9-4f00-a2c9-9319e0f4df96" />
+> <img width="1776" height="389" alt="image" src="https://github.com/user-attachments/assets/75d835f4-92f9-4e13-95cc-4ff4eea9f921" />
+> <img width="1789" height="1094" alt="image" src="https://github.com/user-attachments/assets/2999dd9d-c5c2-4407-ae88-16b20182ee4d" />
 
-#### Print 3.2 — Preference no `di.xml` (IDE)
+
+
+#### Evidência 3.2 - Preference no `di.xml` (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/etc/di.xml`
-- **O que mostrar/destacar:** O nó:
-  ```xml
-  <preference for="Webjump\ProductReview\Api\ReviewRepositoryInterface"
-              type="Webjump\ProductReview\Model\ReviewRepository"/>
-  ```
-  *(pode incluir também as preferências de `ReviewInterface` e `ReviewSearchResultsInterface`)*.
+> <img width="1805" height="503" alt="image" src="https://github.com/user-attachments/assets/9a8fa8b2-0e79-46dc-be13-ecc042875dff" />
+
 
 ---
 
@@ -174,21 +177,20 @@ Comprovar a existência dos Service Contracts e a correta amarração de injeç�
 ### Objetivo
 Comprovar que a classe concreta do repositório implementa todas as operações CRUD e de busca.
 
-### Prints Recomendados
-
-#### Print 4.1 — Métodos do Repositório no Código (IDE)
+#### Evidência 4.1 - Métodos do Repositório no Código (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/Model/ReviewRepository.php`
-- **O que mostrar/destacar:**
-  - Método `save(ReviewInterface $review)`
-  - Método `getById(int $reviewId)`
-  - Método `getList(SearchCriteriaInterface $searchCriteria)`
-  - Método `delete(ReviewInterface $review)` e `deleteById(int $reviewId)`
+- **Mostrando:** Os métodos `save`, `getById`, `delete`, `getList` e `deleteById`.
+> Método `save(ReviewInterface $review)`
+> <img width="1454" height="343" alt="image" src="https://github.com/user-attachments/assets/ef2c00c2-d749-4824-9fe2-82653b301b61" />
 
-#### Print 4.2 — Validação no Frontend / Navegador
-- **Onde acessar:** `https://magento.test/product_review/test`
-- **O que mostrar/destacar:**
-  - Seção **1. Teste: getById(1)** com o badge verde `✔ Avaliação recuperada com sucesso!`, exibindo autor, nota e comentário.
-  - Seção **3. Teste Dinâmico: save() e deleteById()** exibindo os checks de `save()` executado, `deleteById()` executado e `NoSuchEntityException confirmada` após a deleção.
+> Método `getById(int $reviewId)`
+> <img width="1455" height="329" alt="image" src="https://github.com/user-attachments/assets/8642fc5d-cf97-4698-bfc9-90101564c0d5" />
+
+> Método `getList(SearchCriteriaInterface $searchCriteria)`
+> <img width="1423" height="341" alt="image" src="https://github.com/user-attachments/assets/ac386ca6-6e9a-4292-bfa7-c22efcd4ff68" />
+
+> Método `delete(ReviewInterface $review)` e `deleteById(int $reviewId)`
+> <img width="1441" height="619" alt="image" src="https://github.com/user-attachments/assets/e60880f3-e38b-4f35-9af1-847945133f79" />
 
 ---
 
@@ -197,18 +199,10 @@ Comprovar que a classe concreta do repositório implementa todas as operações 
 ### Objetivo
 Comprovar que o repositório filtra e pagina os resultados corretamente através do `SearchCriteria` e `CollectionProcessor`.
 
-### Prints Recomendados
-
-#### Print 5.1 — Código (IDE)
+#### Evidência 5.1 - Código (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/Model/ReviewRepository.php` (método `getList`)
-- **O que mostrar/destacar:** A linha `$this->collectionProcessor->process($searchCriteria, $collection);` aplicando os filtros e limites na coleção antes de retornar o `SearchResults`.
-
-#### Print 5.2 — Validação Visual no Frontend (Navegador)
-- **Onde acessar:** `https://magento.test/product_review/test`
-- **O que mostrar/destacar:**
-  - Seção **2. Teste: getList() com SearchCriteria (Filtro: is_approved = 1, Limite: 2)**.
-  - O texto: *"Total no banco: 4 | Itens retornados: 2"*.
-  - A tabela renderizando exatamente 2 avaliações aprovadas (respeitando o filtro e o limite configurados via `SearchCriteria`).
+- **Mostrando:** A linha `$this->collectionProcessor->process($searchCriteria, $collection);` aplicando os filtros e limites na coleção antes de retornar o `SearchResults`.
+> <img width="1423" height="341" alt="image" src="https://github.com/user-attachments/assets/5344129b-beb2-42a7-9561-980591f1b1a1" />
 
 ---
 
@@ -217,31 +211,26 @@ Comprovar que o repositório filtra e pagina os resultados corretamente através
 ### Objetivo
 Comprovar a execução do Data Patch e a presença dos 5 registros reais associados a produtos do catálogo no banco.
 
-### Prints Recomendados
-
-#### Print 6.1 — Código do Patch (IDE)
+#### Evidência 6.1 - Código do Patch (IDE)
 - **Arquivo:** `src/app/code/Webjump/ProductReview/Setup/Patch/Data/CreateSampleReviews.php`
-- **O que mostrar/destacar:** A implementação de `DataPatchInterface`, o array com os 5 autores/comentários e o loop chamando `$this->reviewRepository->save($review)`.
+- **Mostrando:** A implementação de `DataPatchInterface`, o array com os 5 autores e o loop chamando `$this->reviewRepository->save($review)`.
+> <img width="1454" height="409" alt="image" src="https://github.com/user-attachments/assets/9efed37b-34d9-4762-ab3f-d9011a33a8fb" />
+> <img width="1451" height="1042" alt="image" src="https://github.com/user-attachments/assets/385ae78b-c52e-4052-884d-290594cc05e1" />
 
-#### Print 6.2 — Banco de Dados / phpMyAdmin
+
+#### Evidência 6.2 - Banco de Dados / phpMyAdmin
 - **Onde acessar:** `http://localhost:8080` (tabela `webjump_product_review`, aba **Visualizar**)
-- **O que mostrar/destacar:** As 5 linhas salvas com IDs de 1 a 5, com autores:
-  1. *Mariana Silva* (Produto ID 2041, Nota 5, Aprovado 1)
-  2. *Carlos Eduardo* (Produto ID 47, Nota 4, Aprovado 1)
-  3. *Beatriz Souza* (Produto ID 48, Nota 5, Aprovado 1)
-  4. *Rodrigo Mendes* (Produto ID 49, Nota 3, Aprovado 0)
-  5. *Juliana Ferreira* (Produto ID 50, Nota 5, Aprovado 1)
+- **Mostrando:** As 5 linhas salvas com IDs de 1 a 5, com autores:
+> <img width="1454" height="567" alt="image" src="https://github.com/user-attachments/assets/1285d95b-e6d0-4983-a78f-89af0f847f37" />
 
-#### Print 6.3 — Registro na tabela `patch_list` (Terminal ou phpMyAdmin)
+
+#### Evidência 6.3 - Registro na tabela `patch_list` (Terminal)
 - **Comando:**
   ```bash
   bin/mysql -e "SELECT patch_id, patch_name FROM patch_list WHERE patch_name LIKE '%CreateSampleReviews%';"
   ```
-- **O que mostrar/destacar:** A linha comprovando que o patch foi registrado com sucesso (`patch_id = 205`).
-
-#### Print 6.4 — Admin Magento (`Catalog > Products`)
-- **Onde acessar:** `https://magento.test/admin/catalog/product/`
-- **O que mostrar/destacar:** A grade de produtos filtrando por ID (ex: 2041, 47, 48), mostrando que os produtos aos quais as avaliações foram associadas existem e estão ativos no catálogo da loja.
+- **Mostrando:** A linha comprovando que o patch foi registrado com sucesso (`patch_id = 205`).
+> <img width="1445" height="221" alt="image" src="https://github.com/user-attachments/assets/f1bc9e48-8ad7-4fd9-9789-b92db1a788dd" />
 
 ---
 
