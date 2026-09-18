@@ -1,0 +1,97 @@
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+
+@product-badge-bg-color: #f0fdf4;
+@product-badge-text-color: #166534;
+@product-badge-border-color: #bbf7d0;
+
+@product-badge-sustentavel-start: #ecfdf5;
+@product-badge-sustentavel-end: #d1fae5;
+@product-badge-sustentavel-text: #065f46;
+@product-badge-sustentavel-border: #a7f3d0;
+
+@product-badge-eco-start: #f0fdf4;
+@product-badge-eco-end: #dcfce7;
+@product-badge-eco-text: #15803d;
+@product-badge-eco-border: #86efac;
+
+@product-badge-vegano-start: #fefce8;
+@product-badge-vegano-end: #fef9c3;
+@product-badge-vegano-text: #854d0e;
+@product-badge-vegano-border: #fde047;
+
+@product-badge-artesanal-start: #fff7ed;
+@product-badge-artesanal-end: #ffedd5;
+@product-badge-artesanal-text: #9a3412;
+@product-badge-artesanal-border: #fed7aa;
+
+.product-badge-wrapper {
+    align-items: center;
+    display: flex;
+    margin-bottom: 12px;
+
+    .product-badge {
+        align-items: center;
+        background: @product-badge-bg-color;
+        border: 1px solid @product-badge-border-color;
+        border-radius: 9999px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+        color: @product-badge-text-color;
+        display: inline-flex;
+        font-size: 1.2rem;
+        font-weight: 700;
+        gap: 6px;
+        letter-spacing: .03em;
+        padding: 5px 12px;
+        text-transform: uppercase;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, .08);
+            transform: translateY(-1px);
+        }
+
+        .product-badge-icon {
+            align-items: center;
+            display: inline-flex;
+            justify-content: center;
+
+            svg {
+                display: block;
+            }
+        }
+
+        .product-badge-text {
+            line-height: 1;
+        }
+
+        //  Variacao Sustentavel
+        &.product-badge--sustentavel {
+            background: linear-gradient(135deg, @product-badge-sustentavel-start 0%, @product-badge-sustentavel-end 100%);
+            border-color: @product-badge-sustentavel-border;
+            color: @product-badge-sustentavel-text;
+        }
+
+        //  Variacao Eco-Friendly
+        &.product-badge--eco-friendly {
+            background: linear-gradient(135deg, @product-badge-eco-start 0%, @product-badge-eco-end 100%);
+            border-color: @product-badge-eco-border;
+            color: @product-badge-eco-text;
+        }
+
+        //  Variacao Vegano
+        &.product-badge--vegano {
+            background: linear-gradient(135deg, @product-badge-vegano-start 0%, @product-badge-vegano-end 100%);
+            border-color: @product-badge-vegano-border;
+            color: @product-badge-vegano-text;
+        }
+
+        //  Variacao Artesanal
+        &.product-badge--artesanal {
+            background: linear-gradient(135deg, @product-badge-artesanal-start 0%, @product-badge-artesanal-end 100%);
+            border-color: @product-badge-artesanal-border;
+            color: @product-badge-artesanal-text;
+        }
+    }
+}
