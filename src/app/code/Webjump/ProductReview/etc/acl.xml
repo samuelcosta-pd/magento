@@ -22,6 +22,9 @@
                                   title="Exportar Avaliações"
                                   sortOrder="20"/>
                     </resource>
+                    <resource id="Webjump_ProductReview::config"
+                              title="Configurações de Avaliações"
+                              sortOrder="30"/>
                 </resource>
             </resource>
         </resources>

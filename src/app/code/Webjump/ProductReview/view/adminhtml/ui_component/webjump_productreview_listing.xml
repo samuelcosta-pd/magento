@@ -12,6 +12,13 @@
         </item>
     </argument>
     <settings>
+        <buttons>
+            <button name="add">
+                <url path="*/*/new"/>
+                <class>primary</class>
+                <label translate="true">Nova Avaliação</label>
+            </button>
+        </buttons>
         <spinner>webjump_productreview_columns</spinner>
         <deps>
             <dep>webjump_productreview_listing.webjump_productreview_listing_data_source</dep>
@@ -133,5 +140,12 @@
                 <label translate="true">Atualizado em</label>
             </settings>
         </column>
+        <actionsColumn name="actions" class="Webjump\ProductReview\Ui\Component\Listing\Column\ReviewActions">
+            <settings>
+                <indexField>review_id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>120</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
     </columns>
 </listing>

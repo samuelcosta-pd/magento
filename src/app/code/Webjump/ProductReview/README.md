@@ -249,3 +249,28 @@ Comprovar a execução do Data Patch e a presença dos 5 registros reais associa
     - **Reprovar / Pendente** (`massDisapprove`): altera status para Pendente via `ReviewRepositoryInterface`.
     - **Excluir** (`massDelete`): remove os registros via `ReviewRepositoryInterface` com modal de confirmação destrutiva.
 
+---
+
+## 8. Desafio 15.2: Formulário, Configuração e Exportação
+
+### 8.1. Componentes Desenvolvidos
+- **Formulário UI Component (`webjump_productreview_form.xml`):**
+  - DataProvider estendendo `ModifierPoolDataProvider` com integração a `DataPersistorInterface` para retenção de dados após erros de submissão.
+  - Botões de formulário: `SaveButton`, `SaveAndContinueButton`, `DeleteButton` (com confirmação) e `BackButton`.
+  - Campos com validação frontend e backend: `product_id` (numérico positivo obrigatório), `author_name` (obrigatório), `rating` (select 1 a 5 estrelas via `RatingOptions`), `is_approved` (select via `ApprovalStatus`) e `comment` (textarea obrigatório).
+- **Controllers CRUD com Service Contracts:**
+  - `NewAction`: forward para edição em branco.
+  - `Edit`: carregamento via `ReviewRepositoryInterface::getById` e títulos dinâmicos.
+  - `Save`: validação de campos obrigatórios, captura de exceções e persistência exclusiva via `ReviewRepositoryInterface::save`.
+  - `Delete`: exclusão atômica via `ReviewRepositoryInterface::deleteById`.
+- **Configurações no Painel Admin (`system.xml` e `config.xml`):**
+  - Aba `Webjump` > seção `Avaliações de Produtos`.
+  - Campos: Habilitar Avaliações na Loja (`enabled`), Nota Mínima para Exibição (`min_rating`) e Exigir Moderação (`require_approval`).
+  - Valores padrão e serviço `Model/Config.php` para leitura tipada de configurações.
+- **Integração na Loja (PDP):**
+  - Bloco em `catalog_product_view.xml` e template `reviews.phtml` associados ao `ViewModel/ProductReviews.php`.
+  - Exibição estritamente condicional: se desabilitado na configuração, as avaliações são completamente ocultadas na loja.
+- **Exportação do Grid:**
+  - Botão de exportação nativo no grid (`<exportButton>`) com suporte a CSV e Excel XML respeitando rigorosamente os filtros ativos da listagem.
+
+
