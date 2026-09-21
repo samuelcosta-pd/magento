@@ -385,8 +385,8 @@ return [
         'PayPal_BraintreeGraphQl' => 1,
         'PayPal_BraintreeReward' => 1,
         'Webjump_CatalogBehavior' => 1,
-        'Webjump_ProductReview' => 1,
         'Webjump_ProductBadge' => 1,
+        'Webjump_ProductReview' => 1,
         'Webjump_Samuel' => 1
     ]
 ];

@@ -234,3 +234,18 @@ Comprovar a execução do Data Patch e a presença dos 5 registros reais associa
 
 ---
 
+## 7. Desafio 15.1: Grid de Administração Completo
+
+### 7.1. Componentes Desenvolvidos
+- **Rota e Controller Admin:** Rota `webjump_productreview` declarada em `etc/adminhtml/routes.xml`. Controller `Controller/Adminhtml/Review/Index.php` com constante de proteção `public const ADMIN_RESOURCE = 'Webjump_ProductReview::reviews'`.
+- **Árvore ACL Granular:** Declarada em `etc/acl.xml`, com o recurso `Webjump_ProductReview::reviews` e separação estrita para `Webjump_ProductReview::reviews_export` (exportação) e `Webjump_ProductReview::reviews_actions` (ações em massa).
+- **Menu do Admin:** Menu pai `Webjump` e item `Avaliações de Produtos` declarados em `etc/adminhtml/menu.xml`.
+- **Grid com UI Component (`webjump_productreview_listing.xml`):**
+  - DataProvider vinculado à Grid Collection via `virtualType` de `SearchResult` em `etc/di.xml`.
+  - Filtros: texto (`author_name`, `comment`), faixa numérica (`review_id`, `product_id`, `rating`), data (`created_at`, `updated_at`) e status de aprovação (`is_approved`) com `ApprovalStatus` OptionSource.
+  - Ordenação e paginação nativas.
+  - Ações em massa:
+    - **Aprovar** (`massApprove`): altera status para Aprovado via `ReviewRepositoryInterface`.
+    - **Reprovar / Pendente** (`massDisapprove`): altera status para Pendente via `ReviewRepositoryInterface`.
+    - **Excluir** (`massDelete`): remove os registros via `ReviewRepositoryInterface` com modal de confirmação destrutiva.
+
