@@ -249,3 +249,67 @@ Comprovar a execução do Data Patch e a presença dos 5 registros reais associa
     - **Reprovar / Pendente** (`massDisapprove`): altera status para Pendente via `ReviewRepositoryInterface`.
     - **Excluir** (`massDelete`): remove os registros via `ReviewRepositoryInterface` com modal de confirmação destrutiva.
 
+---
+
+### 7.2. Evidências de Sucesso
+
+Documentação comprobatória completa também disponível em [`README-15-1.md`](file:///home/samuel/Sites/magento/README-15-1.md).
+
+#### Critério 1: Menu, Rota e Controller com `ADMIN_RESOURCE`
+- **Print 1.1 — No Painel Admin (Menu Webjump e Acesso ao Grid):**
+> <!-- Cole aqui o Print 1.1 -->
+
+- **Print 1.2 — No Código / IDE (Controller e `routes.xml`):**
+> <!-- Cole aqui o Print 1.2 -->
+
+#### Critério 2: Grid Listando Dados da Collection, com Ordenação e Paginação
+- **Print 2.1 — No Painel Admin (Grid com Todas as Avaliações e Colunas):**
+> <!-- Cole aqui o Print 2.1 -->
+
+- **Print 2.2 — No Painel Admin (Ordenação e Paginação):**
+> <!-- Cole aqui o Print 2.2 -->
+
+- **Print 2.3 — No Código / IDE (Configuração do DataProvider e VirtualType):**
+> <!-- Cole aqui o Print 2.3 -->
+
+#### Critério 3: Filtros por Texto, Faixa Numérica, Data e Status Funcionando
+- **Print 3.1 — No Painel Admin (Filtro por Texto):**
+> <!-- Cole aqui o Print 3.1 -->
+
+- **Print 3.2 — No Painel Admin (Filtro por Faixa Numérica):**
+> <!-- Cole aqui o Print 3.2 -->
+
+- **Print 3.3 — No Painel Admin (Filtro por Status de Seleção):**
+> <!-- Cole aqui o Print 3.3 -->
+
+- **Print 3.4 — No Código / IDE (Declaração dos Filtros no XML):**
+> <!-- Cole aqui o Print 3.4 -->
+
+#### Critério 4: Ações em Massa (Mass Actions) com Confirmação Destrutiva
+- **Print 4.1 — No Painel Admin (Aprovação em Massa):**
+> <!-- Cole aqui o Print 4.1 -->
+
+- **Print 4.2 — No Painel Admin (Modal de Confirmação na Exclusão):**
+> <!-- Cole aqui o Print 4.2 -->
+
+- **Print 4.3 — No Código / IDE (Configuração do MassAction com `<confirm>` e Controller):**
+> <!-- Cole aqui o Print 4.3 -->
+
+#### Critério 5: Bloqueio de Acesso com Perfil Restrito (ACL)
+- **Print 5.1 — No Painel Admin (Menu Oculto para Perfil Restrito):**
+> <!-- Cole aqui o Print 5.1 -->
+
+- **Print 5.2 — No Painel Admin (Tentativa de Bypass via URL Bloqueada):**
+> <!-- Cole aqui o Print 5.2 -->
+
+- **Print 5.3 — No Código / IDE (Interceptação e Proteção no Controller):**
+> <!-- Cole aqui o Print 5.3 -->
+
+#### Critério 6: ACL com Permissão Separada para Exportação
+- **Print 6.1 — No Painel Admin (Árvore de Permissões em User Roles):**
+> <!-- Cole aqui o Print 6.1 -->
+
+- **Print 6.2 — No Código / IDE (Árvore de Recursos no `acl.xml`):**
+> <!-- Cole aqui o Print 6.2 -->
+
+
