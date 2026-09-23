@@ -74,8 +74,14 @@
                         <item name="validate" xsi:type="boolean">true</item>
                         <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
                     </rule>
+                    <rule name="validate-digits" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">
+                            Por favor, insira um número válido neste campo.
+                        </item>
+                    </rule>
                 </validation>
-                <dataType>text</dataType>
+                <dataType>number</dataType>
                 <label translate="true">ID do Produto</label>
                 <dataScope>product_id</dataScope>
                 <notice translate="true">ID numérico do produto no catálogo associado a esta avaliação.</notice>
