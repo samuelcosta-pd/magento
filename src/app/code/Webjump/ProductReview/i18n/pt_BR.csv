@@ -62,3 +62,8 @@
 "O campo ""ID do Produto"" deve ser um número inteiro positivo (ex: 2041).","O campo ""ID do Produto"" deve ser um número inteiro positivo (ex: 2041)."
 "Ex: 2041","Ex: 2041"
 "Informe o ID numérico do produto no catálogo (apenas números inteiros positivos, ex: 2041).","Informe o ID numérico do produto no catálogo (apenas números inteiros positivos, ex: 2041)."
+"Nome do Produto","Nome do Produto"
+"Sim","Sim"
+"Não","Não"
+"Produto não encontrado (ID: %1)","Produto não encontrado (ID: %1)"
+
