@@ -64,7 +64,7 @@ class Save extends Action implements HttpPostActionInterface
                 try {
                     $review = $this->reviewRepository->getById($id);
                 } catch (NoSuchEntityException $e) {
-                    throw new LocalizedException(__('Esta avaliação não existe mais para edição.'));
+                    throw new LocalizedException(__('Esta avaliação não existe mais.'));
                 }
             } else {
                 $review = $this->reviewFactory->create();

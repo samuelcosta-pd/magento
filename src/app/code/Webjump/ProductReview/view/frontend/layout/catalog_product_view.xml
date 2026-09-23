@@ -7,17 +7,34 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <!-- Suporte a temas com abas (Luma/Blank padrao) -->
         <referenceBlock name="product.info.details">
             <block class="Magento\Catalog\Block\Product\View"
                    name="product.info.webjump_reviews"
+                   as="webjump_reviews"
                    template="Webjump_ProductReview::product/view/reviews.phtml"
                    group="detailed_info">
                 <arguments>
-                    <argument name="title" translate="true" xsi:type="string">Avaliações Customizadas</argument>
+                    <argument name="title" translate="true" xsi:type="string">Avaliações de Clientes</argument>
+                    <argument name="sort_order" xsi:type="string">40</argument>
                     <argument name="reviews_view_model"
                               xsi:type="object">Webjump\ProductReview\ViewModel\ProductReviews</argument>
                 </arguments>
             </block>
         </referenceBlock>
+
+        <!-- Suporte a layout PageBuilder full-width (secoes empilhadas) -->
+        <referenceContainer name="product.info.details.after.wrapper.main">
+            <block class="Magento\Catalog\Block\Product\View"
+                   name="product.info.webjump_reviews.fullwidth"
+                   template="Webjump_ProductReview::product/view/reviews.phtml"
+                   after="product.attributes.wrapper"
+                   before="product.reviews.wrapper">
+                <arguments>
+                    <argument name="reviews_view_model"
+                              xsi:type="object">Webjump\ProductReview\ViewModel\ProductReviews</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
     </body>
 </page>
