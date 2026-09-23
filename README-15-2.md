@@ -230,28 +230,30 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 #### Evidência 1.1 — Declaração de Validações no Form UI Component (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_form.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_form.xml)
 - **Comprovação:** Regras de validação client-side configuradas com mensagens em português (`required-entry` e `validate-digits`) nos campos obrigatórios (`product_id`, `author_name`, `rating` e `comment`), assegurando integridade na entrada de dados.
-> _[Inserir print aqui]_
+> <img width="1625" height="840" alt="image" src="https://github.com/user-attachments/assets/3aee34ac-5ccc-454d-946a-a0e82fa9801f" />
+> <img width="1618" height="850" alt="image" src="https://github.com/user-attachments/assets/e547de57-7ab5-4e3b-89fc-2e33ec96309e" />
+> <img width="1617" height="661" alt="image" src="https://github.com/user-attachments/assets/f154e582-b8ab-4dff-a722-9d4ac652702c" />
 
 ---
 
 #### Evidência 1.2 — Validação de Campos Obrigatórios no Formulário (Admin)
 - **Tela:** Admin > **Webjump > Avaliações de Produtos > Nova Avaliação**
 - **Comprovação:** Ao submeter o formulário sem preencher os campos, o validador client-side bloqueia o envio e exibe as mensagens de erro em português (*"Este campo é obrigatório."*) imediatamente abaixo dos campos **ID do Produto**, **Nome do Autor**, **Nota** e **Comentário**.
-> _[Inserir print aqui]_
+> <img width="1675" height="804" alt="image" src="https://github.com/user-attachments/assets/a282f2e6-62d2-4b04-b774-594c6608d941" />
 
 ---
 
 #### Evidência 1.3 — Criação de Nova Avaliação com Sucesso (Admin)
 - **Tela:** Admin > **Webjump > Avaliações de Produtos**
 - **Comprovação:** Cadastro concluído de uma nova avaliação para o produto 2041 (Camisa Básica de Algodão), redirecionamento automático para a listagem com mensagem de sucesso (*"A avaliação foi salva com sucesso."*) e o novo registro exibido no topo do Grid.
-> _[Inserir print aqui]_
+> <img width="1696" height="1215" alt="image" src="https://github.com/user-attachments/assets/1c56f790-0439-4b1f-adf4-5bef3f409dd8" />
 
 ---
 
 #### Evidência 1.4 — Edição de Avaliação Existente (Admin)
 - **Tela:** Admin > **Webjump > Avaliações de Produtos > Editar Avaliação**
 - **Comprovação:** Formulário de edição carregando os dados do registro existente com título dinâmico (*"Editar Avaliação de '[Autor]'"*), atualização da nota e do comentário, e retorno ao Grid com a mensagem de confirmação e os dados devidamente atualizados.
-> _[Inserir print aqui]_
+> <img width="1701" height="1628" alt="image" src="https://github.com/user-attachments/assets/16a7672d-9537-4429-b670-116b77a6874d" />
 
 ---
 
@@ -260,7 +262,9 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 #### Evidência 2.1 — Controller `Save.php` Integrado ao Repository e com Tratamento de Erros (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Save.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Save.php)
 - **Comprovação:** O controller utiliza exclusivamente o `ReviewRepositoryInterface` para persistência, executa validação de regras de negócio em backend (`validateData`), captura exceções em bloco `try ... catch` exibindo mensagens amigáveis via `messageManager` e preserva os inputs do usuário em sessão através do `DataPersistorInterface`.
-> _[Inserir print aqui]_
+> <img width="1623" height="283" alt="image" src="https://github.com/user-attachments/assets/f7107f1e-87d8-4f2e-9932-6c24abfbe376" />
+> <img width="1621" height="495" alt="image" src="https://github.com/user-attachments/assets/d5594c37-94b1-4793-bf8b-81acec80e9aa" />
+> <img width="1624" height="738" alt="image" src="https://github.com/user-attachments/assets/60732642-e4b5-4be5-b83d-d90fc9f26b55" />
 
 ---
 
@@ -276,7 +280,8 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 #### Evidência 3.1 — Declaração em `system.xml` e Valores Padrão em `config.xml` (IDE)
 - **Arquivos:** [`src/app/code/Webjump/ProductReview/etc/adminhtml/system.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/adminhtml/system.xml) e [`src/app/code/Webjump/ProductReview/etc/config.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/config.xml)
 - **Comprovação:** Seção de configuração registrada na aba `webjump` com os campos `enabled`, `min_rating` e `require_approval` contendo `canRestore="1"`, combinados aos valores padrão pré-definidos (`1`, `1`, `1`) no XML de configuração padrão do módulo.
-> _[Inserir print aqui]_
+> <img width="1618" height="729" alt="image" src="https://github.com/user-attachments/assets/cb681fba-9cbc-4eed-9500-ac6258065192" />
+> <img width="1621" height="540" alt="image" src="https://github.com/user-attachments/assets/e63ef3e6-72de-43e4-b268-06b6182ab2c4" />
 
 ---
 
@@ -286,7 +291,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
   - **Habilitar Avaliações na Loja:** `Sim` `[✔] Use system value`
   - **Nota Mínima para Exibição:** `1` `[✔] Use system value`
   - **Exigir Moderação / Aprovação:** `Sim` `[✔] Use system value`
-> _[Inserir print aqui]_
+> <img width="1564" height="703" alt="image" src="https://github.com/user-attachments/assets/e4223a58-8662-4004-8a9a-99d9edb4341b" />
 
 ---
 
@@ -295,21 +300,21 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 #### Evidência 4.1 — Lógica Condicional no ViewModel e Template (IDE)
 - **Arquivos:** [`src/app/code/Webjump/ProductReview/ViewModel/ProductReviews.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/ViewModel/ProductReviews.php) e [`src/app/code/Webjump/ProductReview/view/frontend/templates/product/view/reviews.phtml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/frontend/templates/product/view/reviews.phtml)
 - **Comprovação:** Método `getReviews()` consultando o status de habilitação do módulo via `Config::isEnabled()` e cláusula guarda no template `reviews.phtml`, assegurando que nada é consultado ou renderizado caso o recurso esteja desativado.
-> _[Inserir print aqui]_
+> <img width="1623" height="1162" alt="image" src="https://github.com/user-attachments/assets/05d10acd-9dcc-4b70-bd43-d4162233d9aa" />
 
 ---
 
 #### Evidência 4.2 — Seção de Avaliações Renderizada na PDP com Módulo Habilitado (Loja)
 - **URL da Loja:** [`https://magento.test/catalog/product/view/id/2041`](https://magento.test/catalog/product/view/id/2041) (Camisa Básica de Algodão)
 - **Comprovação:** Com a configuração ativa, a seção **Avaliações de Clientes** é renderizada perfeitamente na página do produto, exibindo a listagem com estrelas amarelas (`★★★★☆`), autor, data e comentário.
-> _[Inserir print aqui]_
+> <img width="1603" height="789" alt="image" src="https://github.com/user-attachments/assets/e3b31ce0-ac6a-48a4-b0e3-26aed7ce23ff" />
 
 ---
 
 #### Evidência 4.3 — Seção de Avaliações Oculta na PDP com Módulo Desabilitado (Loja)
 - **URL da Loja:** [`https://magento.test/catalog/product/view/id/2041`](https://magento.test/catalog/product/view/id/2041) (Camisa Básica de Algodão)
 - **Comprovação:** Com o módulo desabilitado na configuração do sistema (*Habilitar Avaliações na Loja = Não*), a seção de avaliações customizadas é completamente suprimida da página do produto no frontend, confirmando o respeito integral à configuração da loja.
-> _[Inserir print aqui]_
+> <img width="1396" height="900" alt="image" src="https://github.com/user-attachments/assets/64f35287-e50c-4c8a-9d72-7f5ca29d3bc8" />
 
 ---
 
@@ -318,7 +323,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 #### Evidência 5.1 — Botão de Exportação no Listing UI Component (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml)
 - **Comprovação:** Componente `<exportButton name="export_button">` declarado no `<listingToolbar>` (linhas 80 a 86) integrado ao provedor de seleções `ids` do grid.
-> _[Inserir print aqui]_
+> <img width="1592" height="426" alt="image" src="https://github.com/user-attachments/assets/8e996986-5c8a-4d9d-897d-7007f8960887" />
 
 ---
 
@@ -327,12 +332,13 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 - **Comprovação:**
   - **Grid no Admin:** Listagem filtrada exibindo apenas avaliações com nota máxima (5) e download do arquivo CSV realizado com sucesso.
   - **Arquivo CSV:** Arquivo gerado aberto em planilha/editor confirmando que **todas as linhas exportadas possuem Nota = 5**, comprovando que os filtros aplicados na interface foram integralmente repassados ao exportador.
-> _[Inserir print aqui]_
+> <img width="1647" height="1009" alt="image" src="https://github.com/user-attachments/assets/d1580817-11df-454a-937d-33c4d09fb41c" />
 
 ---
 
 #### Evidência 5.3 — Exportação Excel XML Respeitando Filtros (Admin & Arquivo XML)
 - **Tela & Arquivo:** Grid filtrado e arquivo `.xml` exportado
 - **Comprovação:** Arquivo no formato Excel XML baixado via barra de ferramentas e aberto em editor, comprovando a estrutura XML bem formada e a restrição dos registros conforme os filtros aplicados no grid administrativo.
-> _[Inserir print aqui]_
+> <img width="1425" height="1043" alt="image" src="https://github.com/user-attachments/assets/3235a5f5-1fb5-4c5c-bfa9-9be5b97fae26" />
+
 
