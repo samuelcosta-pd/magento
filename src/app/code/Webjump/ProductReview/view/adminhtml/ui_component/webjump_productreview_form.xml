@@ -66,6 +66,8 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">review</item>
+                    <item name="elementTmpl" xsi:type="string">Webjump_ProductReview/form/element/number</item>
+                    <item name="placeholder" xsi:type="string" translate="true">Ex: 2041</item>
                 </item>
             </argument>
             <settings>
@@ -77,14 +79,16 @@
                     <rule name="validate-digits" xsi:type="array">
                         <item name="validate" xsi:type="boolean">true</item>
                         <item name="message" xsi:type="string" translate="true">
-                            Por favor, insira um número válido neste campo.
+                            O campo "ID do Produto" deve ser um número inteiro positivo (ex: 2041).
                         </item>
                     </rule>
                 </validation>
                 <dataType>number</dataType>
                 <label translate="true">ID do Produto</label>
                 <dataScope>product_id</dataScope>
-                <notice translate="true">ID numérico do produto no catálogo associado a esta avaliação.</notice>
+                <notice translate="true">
+                    Informe o ID numérico do produto no catálogo (apenas números inteiros positivos, ex: 2041).
+                </notice>
             </settings>
         </field>
         <field name="author_name" sortOrder="20" formElement="input">
