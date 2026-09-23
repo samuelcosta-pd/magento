@@ -8,7 +8,9 @@
          xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">webjump_productreview_listing.webjump_productreview_listing_data_source</item>
+            <item name="provider" xsi:type="string">
+                webjump_productreview_listing.webjump_productreview_listing_data_source
+            </item>
         </item>
     </argument>
     <settings>
@@ -77,7 +79,9 @@
         <paging name="listing_paging"/>
         <exportButton name="export_button">
             <settings>
-                <selectProvider>webjump_productreview_listing.webjump_productreview_listing.webjump_productreview_columns.ids</selectProvider>
+                <selectProvider>
+                    webjump_productreview_listing.webjump_productreview_listing.webjump_productreview_columns.ids
+                </selectProvider>
             </settings>
         </exportButton>
     </listingToolbar>
@@ -126,21 +130,26 @@
                 <label translate="true">Status de Aprovação</label>
             </settings>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+        <column name="created_at"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Criado em</label>
             </settings>
         </column>
-        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+        <column name="updated_at"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
             <settings>
                 <filter>dateRange</filter>
                 <dataType>date</dataType>
                 <label translate="true">Atualizado em</label>
             </settings>
         </column>
-        <actionsColumn name="actions" class="Webjump\ProductReview\Ui\Component\Listing\Column\ReviewActions">
+        <actionsColumn name="actions"
+                       class="Webjump\ProductReview\Ui\Component\Listing\Column\ReviewActions">
             <settings>
                 <indexField>review_id</indexField>
                 <resizeEnabled>false</resizeEnabled>

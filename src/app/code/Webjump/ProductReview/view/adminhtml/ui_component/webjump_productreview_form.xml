@@ -8,7 +8,9 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">webjump_productreview_form.webjump_productreview_form_data_source</item>
+            <item name="provider" xsi:type="string">
+                webjump_productreview_form.webjump_productreview_form_data_source
+            </item>
         </item>
         <item name="label" xsi:type="string" translate="true">Informações da Avaliação</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
@@ -16,7 +18,8 @@
     <settings>
         <buttons>
             <button name="save" class="Webjump\ProductReview\Block\Adminhtml\Review\Edit\SaveButton"/>
-            <button name="save_and_continue" class="Webjump\ProductReview\Block\Adminhtml\Review\Edit\SaveAndContinueButton"/>
+            <button name="save_and_continue"
+                    class="Webjump\ProductReview\Block\Adminhtml\Review\Edit\SaveAndContinueButton"/>
             <button name="delete" class="Webjump\ProductReview\Block\Adminhtml\Review\Edit\DeleteButton"/>
             <button name="back" class="Webjump\ProductReview\Block\Adminhtml\Review\Edit\BackButton"/>
         </buttons>
@@ -35,7 +38,8 @@
         <settings>
             <submitUrl path="webjump_productreview/review/save"/>
         </settings>
-        <dataProvider class="Webjump\ProductReview\Model\Review\DataProvider" name="webjump_productreview_form_data_source">
+        <dataProvider class="Webjump\ProductReview\Model\Review\DataProvider"
+                      name="webjump_productreview_form_data_source">
             <settings>
                 <requestFieldName>review_id</requestFieldName>
                 <primaryFieldName>review_id</primaryFieldName>
@@ -66,9 +70,16 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
-                    <rule name="validate-digits" xsi:type="boolean">true</rule>
-                    <rule name="validate-greater-than-zero" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
+                    </rule>
+                    <rule name="validate-digits" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">
+                            Por favor, insira um número válido neste campo.
+                        </item>
+                    </rule>
                 </validation>
                 <dataType>number</dataType>
                 <label translate="true">ID do Produto</label>
@@ -84,7 +95,10 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
+                    </rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Nome do Autor</label>
@@ -99,7 +113,10 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
+                    </rule>
                 </validation>
                 <dataType>number</dataType>
                 <label translate="true">Nota</label>
@@ -121,7 +138,10 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
+                    </rule>
                 </validation>
                 <dataType>number</dataType>
                 <label translate="true">Status de Aprovação</label>
@@ -143,7 +163,10 @@
             </argument>
             <settings>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="array">
+                        <item name="validate" xsi:type="boolean">true</item>
+                        <item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item>
+                    </rule>
                 </validation>
                 <dataType>text</dataType>
                 <label translate="true">Comentário</label>
