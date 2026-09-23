@@ -270,7 +270,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.2**,
 
 #### Evidência 2.2 — Feedback Visual de Erro com Tratamento Amigável (Admin)
 - **Tela:** Admin > **Webjump > Avaliações de Produtos**
-- **Comprovação:** Tratamento de exceção de backend em ação: ao tentar salvar um registro com ID de produto inválido (`0`) ou acessar uma URL de edição com ID inexistente, a falha é interceptada de forma graciosa e exibida no banner de alerta do Magento (*"O campo 'ID do Produto' deve ser um número inteiro maior que zero."* / *"Esta avaliação não existe mais para edição."*), sem gerar erro 500 ou quebrar a aplicação.
+- **Comprovação:** O campo **ID do Produto** é pré-configurado nativamente como numérico (`type="number"` com `min="1"` e `step="1"`), restringindo a entrada exclusivamente a números inteiros positivos para evitar erros por parte do usuário. Caso ocorra uma tentativa de submissão com valor inválido (`0`) ou acesso direto via URL de edição com um ID inexistente no repositório, a falha é interceptada de forma graciosa pelo controller e exibida no banner de alerta do Magento (*"O campo 'ID do Produto' deve ser um número inteiro maior que zero."* / *"Esta avaliação não existe mais."*), comprovando o tratamento seguro e amigável de exceções de backend sem quebras no sistema.
 > _[Inserir print aqui]_
 
 ---
