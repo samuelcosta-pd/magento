@@ -216,3 +216,227 @@ ID,"ID do Produto",Autor,Comentário,Nota,"Status de Aprovação","Criado em","A
   `0 errors, 0 warnings` em todo o código desenvolvido no módulo `src/app/code/Webjump/ProductReview/`.
 - **Integridade do diretório `vendor/`:**
   Verificado via script `.agents/skills/magento-engineer/scripts/check-vendor-changes.sh`: `OK: no changes under vendor/.`
+
+---
+
+## 5. Evidências de Sucesso
+
+Guia estruturado de comprovação de cada critério de aceite do **Desafio 15.2**, indicando o local exato no código e no painel administrativo, as ações a realizar e os prints correspondentes.
+
+### URLs de Acesso Rápido
+- **Painel Admin:** [`https://magento.test/admin/`](https://magento.test/admin/)
+- **Grid de Avaliações:** Menu lateral **Webjump > Avaliações de Produtos**
+- **Configurações:** Menu lateral **Stores > Configuration > Webjump > Avaliações de Produtos**
+- **PDP de Exemplo (Loja):** [`https://magento.test/catalog/product/view/id/2041`](https://magento.test/catalog/product/view/id/2041) (ou [`https://magento.test/camisa-basica-de-algod-o.html`](https://magento.test/camisa-basica-de-algod-o.html))
+
+---
+
+### 5.1. Critério 1: Criar e editar pelo admin funciona, com validação de campo obrigatório
+
+#### Evidência 1.1 — Código (IDE): Validação de Campos Obrigatórios no Form UI Component
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_form.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_form.xml)
+- **O que mostrar no print:**
+  - As tags `<validation>` contendo `<rule name="required-entry" xsi:type="array"><item name="validate" xsi:type="boolean">true</item><item name="message" xsi:type="string" translate="true">Este campo é obrigatório.</item></rule>` nos campos:
+    - `product_id` (linhas ~69 a 82)
+    - `author_name` (linhas ~90 a 97)
+    - `rating` (linhas ~105 a 112)
+    - `comment` (linhas ~135 a 142)
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 1.2 — Admin: Validação de Campos Obrigatórios na Interface
+- **Onde ir no Admin:**
+  1. Acesse o menu lateral esquerdo: **Webjump > Avaliações de Produtos**.
+  2. No canto superior direito do Grid, clique no botão laranja **Nova Avaliação**.
+  3. **Ação:** Sem preencher nenhum campo, clique diretamente no botão laranja **Salvar Avaliação** no topo da página.
+- **O que printar:**
+  - O formulário com as mensagens de erro em vermelho logo abaixo de cada campo obrigatório:
+    - *"Este campo é obrigatório."* sob os campos **ID do Produto**, **Nome do Autor**, **Nota** e **Comentário**.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 1.3 — Admin: Criação de Nova Avaliação com Sucesso
+- **Onde ir no Admin:**
+  1. Na mesma tela de **Nova Avaliação** (ou clique novamente em **Nova Avaliação**).
+  2. **Ação:** Preencha os campos com dados válidos:
+     - **ID do Produto:** `2041`
+     - **Nome do Autor:** `Samuel Costa (Teste 15.2)`
+     - **Nota:** `5 Estrelas`
+     - **Status de Aprovação:** `Aprovado`
+     - **Comentário:** `Excelente acabamento e caimento. Teste de criação via Admin no desafio 15.2.`
+  3. Clique em **Salvar Avaliação**.
+- **O que printar:**
+  - O Grid de listagem exibindo a mensagem verde de sucesso no topo:
+    > *"A avaliação foi salva com sucesso."*
+  - A nova linha criada aparecendo no grid com ID, Autor, Produto 2041, Nota 5 e Status Aprovado.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 1.4 — Admin: Edição de Avaliação Existente
+- **Onde ir no Admin:**
+  1. No Grid de avaliações, localize a linha recém-criada (ou qualquer linha existente).
+  2. Na coluna **Ações** (última coluna à direita), clique em **Editar** (ou clique na própria linha).
+  3. **Ação:**
+     - Observe que o título da página agora é dinâmico: *"Editar Avaliação de '[Nome do Autor]'"*.
+     - Altere o campo **Nota** de `5 Estrelas` para `4 Estrelas`.
+     - Altere o texto do **Comentário** (ex: adicione `"[Editado via Admin]"` no início).
+     - Clique em **Salvar Avaliação**.
+- **O que printar:**
+  - O Grid de listagem com a mensagem verde de sucesso e a linha refletindo a nova nota (`4`) e o comentário atualizado.
+> _[Inserir print aqui]_
+
+---
+
+### 5.2. Critério 2: O Save usa o repository e trata erro devolvendo mensagem ao usuário
+
+#### Evidência 2.1 — Código (IDE): Controller `Save.php` Usando Repository e Tratando Erros
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Save.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Save.php)
+- **O que mostrar no print:**
+  - O construtor injetando `ReviewRepositoryInterface $reviewRepository` (linhas 35 a 45).
+  - O método `validateData()` validando campos e disparando `LocalizedException` em português (linhas 100 a 125).
+  - O bloco `try ... catch (LocalizedException $e)` chamando `$this->reviewRepository->save($review);` e registrando o erro com `$this->messageManager->addErrorMessage($e->getMessage());` (linhas 60 a 90).
+  - A retenção dos dados preenchidos no formulário via `$this->dataPersistor->set('webjump_productreview_review', $data);`.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 2.2 — Admin: Tratamento de Erro no Save Devolvendo Mensagem ao Usuário
+- **Onde ir no Admin:**
+  1. Clique em **Nova Avaliação**.
+  2. **Ação:** Preencha os campos obrigatórios:
+     - **ID do Produto:** digite `0` (zero)
+     - **Nome do Autor:** `Samuel`
+     - **Nota:** `5 Estrelas`
+     - **Status de Aprovação:** `Aprovado`
+     - **Comentário:** `Teste de validação de backend`
+  3. Clique em **Salvar Avaliação**.
+  > *Alternativa:* Na URL de edição de uma avaliação no navegador, passe um ID inexistente (ex: `https://magento.test/admin/webjump_productreview/review/edit/review_id/99999/`).
+- **O que printar:**
+  - A tela exibindo o banner vermelho de erro no topo:
+    > ⛔ *"O campo 'ID do Produto' deve ser um número inteiro maior que zero."* (ou *"Esta avaliação não existe mais para edição."*)
+  - Comprovando que a exceção foi capturada pelo controller e exibida amigavelmente ao usuário sem quebrar o sistema.
+> _[Inserir print aqui]_
+
+---
+
+### 5.3. Critério 3: Existe seção em *Stores > Configuration*, com valores padrão funcionando
+
+#### Evidência 3.1 — Código (IDE): Declaração em `system.xml` e Valores Padrão em `config.xml`
+- **Arquivo 1:** [`src/app/code/Webjump/ProductReview/etc/adminhtml/system.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/adminhtml/system.xml)
+  - Mostrar a aba `webjump`, section `webjump_productreview`, group `general` e os campos `enabled`, `min_rating` e `require_approval` com `canRestore="1"`.
+- **Arquivo 2:** [`src/app/code/Webjump/ProductReview/etc/config.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/config.xml)
+  - Mostrar a tag `<default><webjump_productreview><general><enabled>1</enabled><min_rating>1</min_rating><require_approval>1</require_approval></general></webjump_productreview></default>`.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 3.2 — Admin: Seção de Configuração com Valores Padrão Ativos e Checkboxes
+- **Onde ir no Admin:**
+  1. Acesse o menu lateral esquerdo: **Stores > Configuration** (Lojas > Configuração).
+  2. No menu vertical de abas à esquerda, localize a aba **Webjump** e clique em **Avaliações de Produtos**.
+- **O que printar:**
+  - A tela aberta na seção **Configurações Gerais** mostrando:
+    - O título da seção **Avaliações de Produtos**.
+    - O campo **Habilitar Avaliações na Loja** com valor `Sim` e checkbox marcado `[✔] Use system value`.
+    - O campo **Nota Mínima para Exibição** com valor `1` e checkbox marcado `[✔] Use system value`.
+    - O campo **Exigir Moderação / Aprovação** com valor `Sim` e checkbox marcado `[✔] Use system value`.
+> _[Inserir print aqui]_
+
+---
+
+### 5.4. Critério 4: O módulo respeita a configuração (se desabilitado, não exibe na loja)
+
+#### Evidência 4.1 — Código (IDE): Lógica Condicional no ViewModel e Template
+- **Arquivo 1:** [`src/app/code/Webjump/ProductReview/ViewModel/ProductReviews.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/ViewModel/ProductReviews.php)
+  - Mostrar o método `getReviews()` contendo:
+    ```php
+    if (!$this->isEnabled() || !$product || !$product->getId()) {
+        return [];
+    }
+    ```
+- **Arquivo 2:** [`src/app/code/Webjump/ProductReview/view/frontend/templates/product/view/reviews.phtml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/frontend/templates/product/view/reviews.phtml)
+  - Mostrar as linhas de verificação inicial:
+    ```php
+    if (!$viewModel || !$viewModel->isEnabled()) {
+        return;
+    }
+    ```
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 4.2 — Loja (PDP): Módulo HABILITADO na Configuração
+- **Onde ir:**
+  1. No Admin, certifique-se de que a configuração **Habilitar Avaliações na Loja** está como `Sim` (padrão).
+  2. No navegador, acesse a URL da PDP do produto 2041:
+     [`https://magento.test/catalog/product/view/id/2041`](https://magento.test/catalog/product/view/id/2041) (ou [`https://magento.test/camisa-basica-de-algod-o.html`](https://magento.test/camisa-basica-de-algod-o.html)).
+  3. Role a página até a seção de detalhes/informações adicionais do produto.
+- **O que printar:**
+  - A página do produto no frontend exibindo a seção **Avaliações de Clientes** com as estrelas amarelas (`★★★★☆`), autor, data e comentário visíveis.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 4.3 — Loja (PDP): Módulo DESABILITADO na Configuração
+- **Onde ir:**
+  1. No Admin, acerte **Stores > Configuration > Webjump > Avaliações de Produtos**.
+  2. Desmarque a caixinha `[ ] Use system value` ao lado de **Habilitar Avaliações na Loja**, mude o valor para **Não** e clique no botão laranja **Save Config**.
+  3. No terminal, execute a limpeza de cache:
+     ```bash
+     bin/magento cache:clean config block_html full_page
+     ```
+  4. No navegador, recarregue a mesma PDP:
+     [`https://magento.test/catalog/product/view/id/2041`](https://magento.test/catalog/product/view/id/2041).
+- **O que printar:**
+  - A mesma página do produto mostrando que a seção de avaliações customizadas **sumiu completamente** da tela, comprovando que o módulo respeita rigorosamente a configuração da loja.
+> _[Inserir print aqui]_
+
+> 💡 *Dica:* Após capturar o print, volte a opção para **Sim** (ou marque novamente *"Use system value"*), clique em **Save Config** e limpe o cache com `bin/magento cache:clean config block_html full_page`.
+
+---
+
+### 5.5. Critérios 5 e 6: A exportação em CSV e Excel XML funciona e respeita os filtros aplicados no grid
+
+#### Evidência 5.1 — Código (IDE): Botão de Exportação no Listing XML
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml)
+- **O que mostrar no print:**
+  - O bloco `<exportButton name="export_button">` dentro do `<listingToolbar>` (linhas 80 a 86) apontando para o provider de seleções `ids`:
+    ```xml
+    <exportButton name="export_button">
+        <settings>
+            <selectProvider>
+                webjump_productreview_listing.webjump_productreview_listing.webjump_productreview_columns.ids
+            </selectProvider>
+        </settings>
+    </exportButton>
+    ```
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 5.2 — Admin & Arquivo: Exportação CSV Respeitando Filtro de Nota
+- **Onde ir no Admin:**
+  1. Acesse **Webjump > Avaliações de Produtos**.
+  2. Clique no botão **Filters** (Filtros).
+  3. No campo de faixa de **Nota**, preencha de `5` até `5`.
+  4. Clique no botão azul **Apply Filters** (Aplicar Filtros).
+  5. O Grid exibirá apenas as linhas correspondentes ao filtro aplicado (avaliações com nota 5).
+  6. No menu suspenso de exportação (ao lado de Filters), selecione **CSV** e clique em **Export**.
+- **O que printar:**
+  - **Print 5.2.A (Admin):** O grid filtrado por Nota 5 com o download do arquivo CSV concluído no navegador.
+  - **Print 5.2.B (Arquivo CSV):** O arquivo `.csv` baixado aberto no Excel / VS Code / LibreOffice, comprovando que **todas as linhas exportadas possuem Nota = 5**, respeitando o filtro aplicado no grid.
+> _[Inserir print aqui]_
+
+---
+
+#### Evidência 5.3 — Admin & Arquivo: Exportação Excel XML Respeitando Filtros
+- **Onde ir no Admin:**
+  1. No mesmo Grid filtrado (ou aplicando filtro por autor, ex: `Mariana`).
+  2. No menu suspenso de exportação, selecione a opção **Excel XML** e clique em **Export**.
+- **O que printar:**
+  - O arquivo `.xml` baixado aberto no editor de texto ou Excel, mostrando as tags `<item>` contendo apenas as avaliações que atendem ao filtro do grid.
+> _[Inserir print aqui]_
+
