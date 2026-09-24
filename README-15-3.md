@@ -1,6 +1,6 @@
 # Desafio 15.3: A Exportação que o Cliente Realmente Queria
 
-Documentação técnica, justificativa arquitetural, estratégia de Pull Request e evidências de implementação do **Desafio 15.3** (Desafio Extra da Sprint 7 — Admin, CRUD e Exportação) no módulo [`Webjump_ProductReview`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview).
+Documentação técnica, justificativa arquitetural, estratégia de Pull Request e evidências de implementação do **Desafio 15.3** (Desafio Extra da Sprint 7 - Admin, CRUD e Exportação) no módulo [`Webjump_ProductReview`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview).
 
 ---
 
@@ -46,7 +46,7 @@ Magento\Ui\Controller\Adminhtml\Export\GridToCsv           Webjump\ProductReview
   (Formatos originais do core intactos)                      (Sim/Não, Data BR d/m/Y H:i:s, Nome do Produto)
 ```
 
-| Dimensão de Análise | Estratégia A (Plugin/Preference Defensivo no Core) | Estratégia B (Controller e Formato Próprios — ESCOLHIDA) |
+| Dimensão de Análise | Estratégia A (Plugin/Preference Defensivo no Core) | Estratégia B (Controller e Formato Próprios - ESCOLHIDA) |
 |---|---|---|
 | **Blast Radius (Raio de Impacto)** | **Médio / Alto:** `MetadataProvider` é um serviço singleton/compartilhado que atende a todos os grids do Magento Admin. Qualquer exceção não capturada ou falha de tipagem no plugin quebra grids vitais da loja, como Vendas e Clientes. | **Zero:** As classes e rotas nativas do core não foram alteradas nem estendidas globalmente. Grids do núcleo permanecem fisicamente isolados da lógica de avaliações. |
 | **Segurança e ACL** | A rota nativa `mui/export/*` tenta inspecionar a árvore ACL do componente via convenção de dataProvider. Se ausente, pode recorrer a fallbacks genéricos. | Os novos controllers declaram explicitamente `public const ADMIN_RESOURCE = 'Webjump_ProductReview::reviews_export';`, aplicando o princípio do menor privilégio. |
@@ -294,14 +294,14 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ### 5.1. Critério 1: Na planilha, o campo aprovado sai como Sim ou Não
 
-#### Evidência 1.1 — Implementação da Conversão Booleana para Sim/Não (IDE)
+#### Evidência 1.1 - Implementação da Conversão Booleana para Sim/Não (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L80-L93)
 - **Comprovação:** Método `getRowData()` mapeando a propriedade booleana `is_approved` da entidade: caso o valor seja `1`, converte para a string traduzida `Sim`; caso seja `0`, converte para `Não`, eliminando os valores numéricos brutos reclamados pelo atendimento.
 > <img width="1732" height="373" alt="image" src="https://github.com/user-attachments/assets/1008ff6b-3c84-4a3f-9c36-3f03e48c996e" />
 
 ---
 
-#### Evidência 1.2 — Planilha Exportada Exibindo Status "Sim" e "Não" (Planilha / Editor)
+#### Evidência 1.2 - Planilha Exportada Exibindo Status "Sim" e "Não" (Planilha / Editor)
 - **Tela & Arquivo:** Arquivo `avaliacoes_produtos.csv` ou `.xml` baixado via **Webjump > Avaliações de Produtos > Exportar**
 - **Comprovação:** A coluna **Status de Aprovação** na planilha aberta exibe expressamente **"Sim"** para os registros aprovados e **"Não"** para o registro reprovado/pendente (ex: ID 19), comprovando a semântica amigável solicitada pelo suporte.
 > <img width="1457" height="1046" alt="image" src="https://github.com/user-attachments/assets/62607649-da54-4eee-bbc5-a2dbe7330c02" />
@@ -310,14 +310,14 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ### 5.2. Critério 2: A data sai em formato brasileiro
 
-#### Evidência 2.1 — Conversão de Fuso Horário e Formatação Brasileira `d/m/Y H:i:s` (IDE)
+#### Evidência 2.1 - Conversão de Fuso Horário e Formatação Brasileira `d/m/Y H:i:s` (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L140-L157)
 - **Comprovação:** Método privado `formatDate()` utilizando o serviço `TimezoneInterface` do Magento para converter o timestamp UTC persistido no banco para o fuso horário configurado no ambiente, aplicando a formatação brasileira `d/m/Y H:i:s`.
 > <img width="1706" height="394" alt="image" src="https://github.com/user-attachments/assets/efb2c83c-6e42-4c4a-aaec-5f2944da3d42" />
 
 ---
 
-#### Evidência 2.2 — Colunas de Data no Formato Brasileiro na Planilha (Planilha / Editor)
+#### Evidência 2.2 - Colunas de Data no Formato Brasileiro na Planilha (Planilha / Editor)
 - **Tela & Arquivo:** Arquivo `avaliacoes_produtos.csv` aberto em planilha ou editor de texto
 - **Comprovação:** As colunas **"Criado em"** e **"Atualizado em"** exibem as datas no padrão brasileiro `DD/MM/AAAA HH:MM:SS` (ex: `16/09/2026 07:13:27` e `23/09/2026 09:28:16`), eliminando a notação americana (`MM/DD/YYYY` ou `Sep 16, 2026`).
 > <img width="1695" height="480" alt="image" src="https://github.com/user-attachments/assets/98726d70-ac0c-4a7f-9ee4-197941cf9912" />
@@ -326,14 +326,14 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ### 5.3. Critério 3: A coluna com o nome do produto aparece no arquivo
 
-#### Evidência 3.1 — Injeção do Cabeçalho e Resolução via `ProductRepositoryInterface` com Cache (IDE)
+#### Evidência 3.1 - Injeção do Cabeçalho e Resolução via `ProductRepositoryInterface` com Cache (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L50-L65) e [`ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L115-L135)
 - **Comprovação:** Inclusão da coluna `__('Nome do Produto')` no método `getHeaders()` e implementação do método `getProductName()`, que consulta o catálogo via `ProductRepositoryInterface` com cache em memória por ID e fallback defensivo contra `NoSuchEntityException`.
 > <img width="1399" height="678" alt="image" src="https://github.com/user-attachments/assets/5806752c-07a1-4944-9885-6e6adfdeb5c9" />
 
 ---
 
-#### Evidência 3.2 — Contraste Visual: Grid no Admin sem Nome vs Planilha Exportada com o Nome do Produto (Admin & Planilha)
+#### Evidência 3.2 - Contraste Visual: Grid no Admin sem Nome vs Planilha Exportada com o Nome do Produto (Admin & Planilha)
 - **Tela 1 (Admin):** Admin > **Webjump > Avaliações de Produtos**
   - **Comprovação:** O grid administrativo visual exibe apenas a coluna **ID do Produto** (o nome do produto não está presente no grid, exatamente conforme mencionado pelo atendimento).
 - **Tela 2 (Planilha):** Arquivo `avaliacoes_produtos.csv` aberto
@@ -345,21 +345,21 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ### 5.4. Critério 4: A exportação de pedidos e de clientes continua funcionando normalmente
 
-#### Evidência 4.1 — Exportação Nativa do Grid de Pedidos no Admin (Admin & Planilha)
+#### Evidência 4.1 - Exportação Nativa do Grid de Pedidos no Admin (Admin & Planilha)
 - **Tela:** Admin > **Sales > Orders** (Vendas > Pedidos)
 - **Comprovação:** O botão **Export** do grid nativo de pedidos permanece funcionando sem erros, gerando o arquivo CSV de pedidos através da rota nativa `mui/export/gridToCsv` com todos os cabeçalhos padrão do Magento intactos (`ID`, `Purchase Point`, `Grand Total`, `Status`).
 > <img width="1392" height="786" alt="image" src="https://github.com/user-attachments/assets/3990408d-8a6d-4ea1-81c4-602ebb6ad2ee" />
 
 ---
 
-#### Evidência 4.2 — Exportação Nativa do Grid de Clientes no Admin (Admin & Planilha)
+#### Evidência 4.2 - Exportação Nativa do Grid de Clientes no Admin (Admin & Planilha)
 - **Tela:** Admin > **Customers > All Customers** (Clientes > Todos os Clientes)
 - **Comprovação:** O botão **Export** do grid nativo de clientes funciona normalmente, permitindo o download do arquivo CSV através da rota nativa do Magento com as colunas nativas (`ID`, `Name`, `Email`, `Group`, `ZIP`).
 > <img width="1385" height="695" alt="image" src="https://github.com/user-attachments/assets/9eb8ba6b-dee6-43b2-9553-52d24658c5d3" />
 
 ---
 
-#### Evidência 4.3 — Isolamento Arquitetural das Rotas no UI Component Listing (IDE)
+#### Evidência 4.3 - Isolamento Arquitetural das Rotas no UI Component Listing (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml#L80-L95)
 - **Comprovação:** O `<exportButton>` foi configurado exclusivamente no XML do grid de avaliações apontando para as actions dedicadas `webjump_productreview/export/gridToCsv` e `gridToXml`. Nenhuma rota, classe ou template nativo do Magento foi interceptado, garantindo **Blast Radius Zero**.
 > <img width="1389" height="281" alt="image" src="https://github.com/user-attachments/assets/4fdde8df-da89-4a84-9cc4-bb6826331bf5" />
