@@ -111,7 +111,7 @@ O Desafio 15.3 depende diretamente dos componentes criados no Desafio 15.2 (grid
 
 ---
 
-## 5. Evidências de Validação e Testes
+## 5. Evidências de Validação e Testes Automatizados (CLI)
 
 ### 5.1. Teste Unitário do Processador de Dados (`ReviewExportDataProcessor`)
 Execução do processador isolado validando cabeçalhos, resolução de catálogo e formatação:
@@ -314,3 +314,94 @@ Todos os testes finalizados com êxito!
 - **Integridade do diretório `vendor/`:**
   Verificado via script `.agents/skills/magento-engineer/scripts/check-vendor-changes.sh`:
   `OK: no changes under vendor/.`
+
+---
+
+## 6. Evidências de Sucesso
+
+Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**, demonstrando o funcionamento da exportação customizada no painel administrativo, a formatação das colunas na planilha e a não-interferência nos grids nativos do núcleo.
+
+---
+
+### 6.1. Critério 1: Na planilha, o campo aprovado sai como Sim ou Não
+
+#### Evidência 1.1 — Implementação da Conversão Booleana para Sim/Não (IDE)
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L80-L93)
+- **Comprovação:** Método `getRowData()` mapeando a propriedade booleana `is_approved` da entidade: caso o valor seja `1`, converte para a string traduzida `Sim`; caso seja `0`, converte para `Não`, eliminando os valores numéricos brutos reclamados pelo atendimento.
+> <!-- Inserir print da IDE: ReviewExportDataProcessor.php destacando o operador ternário $isApproved === 1 ? 'Sim' : 'Não' -->
+
+---
+
+#### Evidência 1.2 — Planilha Exportada Exibindo Status "Sim" e "Não" (Planilha / Editor)
+- **Tela & Arquivo:** Arquivo `avaliacoes_produtos.csv` ou `.xml` baixado via **Webjump > Avaliações de Produtos > Exportar**
+- **Comprovação:** A coluna **Status de Aprovação** na planilha aberta exibe expressamente **"Sim"** para os registros aprovados e **"Não"** para o registro reprovado/pendente (ex: ID 19), comprovando a semântica amigável solicitada pelo suporte.
+> <!-- Inserir print da planilha/arquivo: Coluna "Status de Aprovação" contendo as células "Sim" e "Não" -->
+
+---
+
+### 6.2. Critério 2: A data sai em formato brasileiro
+
+#### Evidência 2.1 — Conversão de Fuso Horário e Formatação Brasileira `d/m/Y H:i:s` (IDE)
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L140-L157)
+- **Comprovação:** Método privado `formatDate()` utilizando o serviço `TimezoneInterface` do Magento para converter o timestamp UTC persistido no banco para o fuso horário configurado no ambiente, aplicando a formatação brasileira `d/m/Y H:i:s`.
+> <!-- Inserir print da IDE: ReviewExportDataProcessor.php destacando o método formatDate() com o formato 'd/m/Y H:i:s' -->
+
+---
+
+#### Evidência 2.2 — Colunas de Data no Formato Brasileiro na Planilha (Planilha / Editor)
+- **Tela & Arquivo:** Arquivo `avaliacoes_produtos.csv` aberto em planilha ou editor de texto
+- **Comprovação:** As colunas **"Criado em"** e **"Atualizado em"** exibem as datas no padrão brasileiro `DD/MM/AAAA HH:MM:SS` (ex: `16/09/2026 07:13:27` e `23/09/2026 09:28:16`), eliminando a notação americana (`MM/DD/YYYY` ou `Sep 16, 2026`).
+> <!-- Inserir print da planilha/arquivo: Colunas "Criado em" e "Atualizado em" com valores no formato DD/MM/AAAA HH:MM:SS -->
+
+---
+
+### 6.3. Critério 3: A coluna com o nome do produto aparece no arquivo
+
+#### Evidência 3.1 — Injeção do Cabeçalho e Resolução via `ProductRepositoryInterface` com Cache (IDE)
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L50-L65) e [`ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L115-L135)
+- **Comprovação:** Inclusão da coluna `__('Nome do Produto')` no método `getHeaders()` e implementação do método `getProductName()`, que consulta o catálogo via `ProductRepositoryInterface` com cache em memória por ID e fallback defensivo contra `NoSuchEntityException`.
+> <!-- Inserir print da IDE: ReviewExportDataProcessor.php destacando getHeaders() e getProductName() com cache -->
+
+---
+
+#### Evidência 3.2 — Contraste Visual: Grid no Admin sem Nome vs Planilha Exportada com o Nome do Produto (Admin & Planilha)
+- **Tela 1 (Admin):** Admin > **Webjump > Avaliações de Produtos**
+  - **Comprovação:** O grid administrativo visual exibe apenas a coluna **ID do Produto** (o nome do produto não está presente no grid, exatamente conforme mencionado pelo atendimento).
+- **Tela 2 (Planilha):** Arquivo `avaliacoes_produtos.csv` aberto
+  - **Comprovação:** A planilha exportada contém a coluna **"Nome do Produto"** posicionada entre "ID do Produto" e "Autor", exibindo os nomes reais cadastrados no catálogo (ex: *"Camisa Básica de Algodão"*, *"Chaz Kangeroo Hoodie"*).
+> <!-- Inserir print 1 (Admin): Grid com as colunas ID, ID do Produto, Autor... sem o Nome do Produto -->
+> <!-- Inserir print 2 (Planilha): Planilha exibindo a coluna "Nome do Produto" devidamente preenchida -->
+
+---
+
+### 6.4. Critério 4: A exportação de pedidos e de clientes continua funcionando normalmente
+
+#### Evidência 4.1 — Exportação Nativa do Grid de Pedidos no Admin (Admin & Planilha)
+- **Tela:** Admin > **Sales > Orders** (Vendas > Pedidos)
+- **Comprovação:** O botão **Export** do grid nativo de pedidos permanece funcionando sem erros, gerando o arquivo CSV de pedidos através da rota nativa `mui/export/gridToCsv` com todos os cabeçalhos padrão do Magento intactos (`ID`, `Purchase Point`, `Grand Total`, `Status`).
+> <!-- Inserir print 1 (Admin): Tela Sales > Orders acionando a exportação -->
+> <!-- Inserir print 2 (Planilha): Arquivo CSV de Pedidos aberto confirmando integridade dos dados -->
+
+---
+
+#### Evidência 4.2 — Exportação Nativa do Grid de Clientes no Admin (Admin & Planilha)
+- **Tela:** Admin > **Customers > All Customers** (Clientes > Todos os Clientes)
+- **Comprovação:** O botão **Export** do grid nativo de clientes funciona normalmente, permitindo o download do arquivo CSV através da rota nativa do Magento com as colunas nativas (`ID`, `Name`, `Email`, `Group`, `ZIP`).
+> <!-- Inserir print 1 (Admin): Tela Customers > All Customers acionando a exportação -->
+> <!-- Inserir print 2 (Planilha): Arquivo CSV de Clientes aberto confirmando integridade dos dados -->
+
+---
+
+#### Evidência 4.3 — Isolamento Arquitetural das Rotas no UI Component Listing (IDE)
+- **Arquivo:** [`src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml#L80-L95)
+- **Comprovação:** O `<exportButton>` foi configurado exclusivamente no XML do grid de avaliações apontando para as actions dedicadas `webjump_productreview/export/gridToCsv` e `gridToXml`. Nenhuma rota, classe ou template nativo do Magento foi interceptado, garantindo **Blast Radius Zero**.
+> <!-- Inserir print da IDE: webjump_productreview_listing.xml destacando a tag exportButton com as URLs dedicadas -->
+
+---
+
+### 6.5. Critério 5: README explica a estratégia escolhida e por que ela é segura
+
+#### Evidência 5.1 — Documentação Técnica com Comparativo e Análise de Segurança no README (IDE / Markdown)
+- **Arquivo:** [`README-15-3.md`](file:///home/samuel/Sites/magento/README-15-3.md#L19-L57)
+- **Comprovação:** Seção 2 documentando em detalhes o comparativo entre a **Estratégia A** (Plugin/Preference defensivo) e a **Estratégia B** (Controller e formato próprios), acompanhada do diagrama de fluxo de requisição, análise de segurança e justificativa de escolha baseada em isolamento de falhas e princípios SOLID.
+> <!-- Inserir print do README-15-3.md: Seção 2 exibindo o diagrama de fluxo e a tabela comparativa de segurança -->
