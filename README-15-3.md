@@ -80,40 +80,9 @@ src/app/code/Webjump/ProductReview/
 
 ---
 
-## 4. Estratégia de Branches e Pull Request (Solução do Impedimento)
+## 4. Evidências de Validação e Testes Automatizados (CLI)
 
-### 4.1. O Desafio das Branches Empilhadas (*Stacked Branches*)
-O Desafio 15.3 depende diretamente dos componentes criados no Desafio 15.2 (grid administrativo com `exportButton`, repositório e configurações). Como a branch `exercicio/15.2-FormularioConfiguracaoExportacao` ainda está sob revisão e não foi mergeada na `main`, criar uma PR tradicional diretamente contra a `main` faria o GitHub exibir todos os arquivos da 15.2 duplicados na PR da 15.3.
-
-### 4.2. Fluxo de Trabalho Adotado
-
-1. **Branching a partir da 15.2:**
-   A branch de trabalho foi criada com base na 15.2:
-   ```bash
-   git checkout -b exercicio/15.3-ExportacaoCustomizada exercicio/15.2-FormularioConfiguracaoExportacao
-   ```
-2. **Isolamento de Commits:**
-   Apenas os arquivos estritamente novos do Desafio 15.3 foram commitados nesta branch.
-3. **Abertura do Pull Request no GitHub:**
-   - **Enquanto a 15.2 não for mergeada na `main`:**
-     Ao abrir o PR no GitHub, define-se:
-     - **Base branch:** `exercicio/15.2-FormularioConfiguracaoExportacao`
-     - **Compare branch:** `exercicio/15.3-ExportacaoCustomizada`
-     *Resultado:* O GitHub calcula o diff relativo exclusivamente à branch 15.2. O PR exibirá **apenas os arquivos novos da 15.3**, sem duplicar nada da 15.2!
-   - **Quando a 15.2 for mergeada na `main`:**
-     - Se o merge da 15.2 for realizado via *Merge Commit* (padrão utilizado neste repositório nos PRs anteriores #7 e #8), o histórico é preservado. O GitHub permite alterar a Base branch da PR 15.3 diretamente para `main` (ou o faz automaticamente se a branch 15.2 for deletada após o merge), mantendo o diff limpo.
-     - Se o merge for realizado com *Squash* na `main`, basta executar um rebase local de um comando para alinhar com a nova `main`:
-       ```bash
-       git checkout exercicio/15.3-ExportacaoCustomizada
-       git rebase --onto main exercicio/15.2-FormularioConfiguracaoExportacao
-       git push origin exercicio/15.3-ExportacaoCustomizada --force-with-lease
-       ```
-
----
-
-## 5. Evidências de Validação e Testes Automatizados (CLI)
-
-### 5.1. Teste Unitário do Processador de Dados (`ReviewExportDataProcessor`)
+### 4.1. Teste Unitário do Processador de Dados (`ReviewExportDataProcessor`)
 Execução do processador isolado validando cabeçalhos, resolução de catálogo e formatação:
 
 ```text
@@ -169,7 +138,7 @@ Array
 
 ---
 
-### 5.2. Teste da Exportação CSV Completa com Registros Reais do Banco
+### 4.2. Teste da Exportação CSV Completa com Registros Reais do Banco
 Extração real do arquivo CSV gerado pelo conversor a partir dos dados do banco, comprovando o status Sim/Não, as datas no padrão brasileiro e a presença da coluna com o Nome do Produto:
 
 ```text
@@ -196,7 +165,7 @@ ID,"ID do Produto","Nome do Produto",Autor,Comentário,Nota,"Status de Aprovaç�
 
 ---
 
-### 5.3. Teste da Exportação Excel XML Completa
+### 4.3. Teste da Exportação Excel XML Completa
 Fragmento do XML gerado pelo `ConvertToXml`:
 
 ```xml
@@ -252,7 +221,7 @@ Fragmento do XML gerado pelo `ConvertToXml`:
 
 ---
 
-### 5.4. Respeito Rigoroso a Filtros e Seleções do Grid
+### 4.4. Respeito Rigoroso a Filtros e Seleções do Grid
 
 #### A) Filtro por Intervalo de Nota (`rating = 5`)
 Ao aplicar filtro por nota 5, o conversor exporta exclusivamente os registros com nota máxima, incluindo o nome do produto e data brasileira:
@@ -283,7 +252,7 @@ ID,"ID do Produto","Nome do Produto",Autor,Comentário,Nota,"Status de Aprovaç�
 
 ---
 
-### 5.5. Prova de Não-Regressão nos Grids Nativos (Pedidos e Clientes)
+### 4.5. Prova de Não-Regressão nos Grids Nativos (Pedidos e Clientes)
 Execução direta do exportador nativo do Magento (`\Magento\Ui\Model\Export\ConvertToCsv`) nos componentes `sales_order_grid` e `customer_listing`:
 
 ```text
@@ -307,7 +276,7 @@ Todos os testes finalizados com êxito!
 
 ---
 
-### 5.6. Qualidade de Código (PHPCS) e Integridade do Core
+### 4.6. Qualidade de Código (PHPCS) e Integridade do Core
 
 - **PHP CodeSniffer (`phpcs --standard=Magento2 app/code/Webjump/ProductReview`):**
   `0 errors, 0 warnings` em todos os novos controllers e models criados.
@@ -317,13 +286,13 @@ Todos os testes finalizados com êxito!
 
 ---
 
-## 6. Evidências de Sucesso
+## 5. Evidências de Sucesso
 
 Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**, demonstrando o funcionamento da exportação customizada no painel administrativo, a formatação das colunas na planilha e a não-interferência nos grids nativos do núcleo.
 
 ---
 
-### 6.1. Critério 1: Na planilha, o campo aprovado sai como Sim ou Não
+### 5.1. Critério 1: Na planilha, o campo aprovado sai como Sim ou Não
 
 #### Evidência 1.1 — Implementação da Conversão Booleana para Sim/Não (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L80-L93)
@@ -339,7 +308,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ---
 
-### 6.2. Critério 2: A data sai em formato brasileiro
+### 5.2. Critério 2: A data sai em formato brasileiro
 
 #### Evidência 2.1 — Conversão de Fuso Horário e Formatação Brasileira `d/m/Y H:i:s` (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L140-L157)
@@ -355,7 +324,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ---
 
-### 6.3. Critério 3: A coluna com o nome do produto aparece no arquivo
+### 5.3. Critério 3: A coluna com o nome do produto aparece no arquivo
 
 #### Evidência 3.1 — Injeção do Cabeçalho e Resolução via `ProductRepositoryInterface` com Cache (IDE)
 - **Arquivo:** [`src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L50-L65) e [`ReviewExportDataProcessor.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Model/Export/ReviewExportDataProcessor.php#L115-L135)
@@ -374,7 +343,7 @@ Registro e comprovação visual de cada critério de aceite do **Desafio 15.3**,
 
 ---
 
-### 6.4. Critério 4: A exportação de pedidos e de clientes continua funcionando normalmente
+### 5.4. Critério 4: A exportação de pedidos e de clientes continua funcionando normalmente
 
 #### Evidência 4.1 — Exportação Nativa do Grid de Pedidos no Admin (Admin & Planilha)
 - **Tela:** Admin > **Sales > Orders** (Vendas > Pedidos)
