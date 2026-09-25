@@ -79,6 +79,18 @@
         <paging name="listing_paging"/>
         <exportButton name="export_button">
             <settings>
+                <options>
+                    <option name="csv" xsi:type="array">
+                        <item name="value" xsi:type="string">csv</item>
+                        <item name="label" xsi:type="string" translate="true">CSV</item>
+                        <item name="url" xsi:type="string">webjump_productreview/export/gridToCsv</item>
+                    </option>
+                    <option name="xml" xsi:type="array">
+                        <item name="value" xsi:type="string">xml</item>
+                        <item name="label" xsi:type="string" translate="true">Excel XML</item>
+                        <item name="url" xsi:type="string">webjump_productreview/export/gridToXml</item>
+                    </option>
+                </options>
                 <selectProvider>
                     webjump_productreview_listing.webjump_productreview_listing.webjump_productreview_columns.ids
                 </selectProvider>
