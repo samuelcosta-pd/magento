@@ -1,9 +1,4 @@
 # Desafio 15.1: Grid de Administração Completo
-
-Documentação e comprovação da implementação do desafio **15.1 - Grid de administração completo** no Magento 2.4.8-p1.
-
-O módulo completo foi implementado e estendido em [Webjump_ProductReview](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview).
-
 ---
 
 ## 1. Visão Geral do Desafio
@@ -162,3 +157,128 @@ Após MassDisapprove - Status: Pendente
 ### 4.4. Qualidade de Código (PHPCS) e Integridade do Core
 - **Padrão Magento 2 (`vendor/bin/phpcs --standard=Magento2`):** 0 erros e 0 warnings nos arquivos desenvolvidos.
 - **Integridade do diretório `vendor/`:** Verificado via `git status`, confirmando que nenhum arquivo do core ou de terceiros foi alterado.
+
+---
+
+## 5. Evidências de Sucesso
+
+Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **15.1 - Grid de administração completo**.
+
+---
+
+### 5.1. Critério 1: Menu, Rota e Controller com `ADMIN_RESOURCE`
+
+#### Print 1.1 — No Painel Admin (Menu Webjump e Acesso ao Grid)
+- **O que comprova:** Menu **Webjump** presente na barra lateral esquerda, submenu **Avaliações de Produtos** e o carregamento correto da página com o título *Avaliações de Produtos*.
+
+> <img width="1823" height="681" alt="image" src="https://github.com/user-attachments/assets/8002bb4c-627e-48aa-8dd6-b845bc30909e" />
+
+#### Print 1.2 — No Código / IDE (Controller e `routes.xml`)
+- **Arquivos:** [`Controller/Adminhtml/Review/Index.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Index.php) e [`etc/adminhtml/routes.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/adminhtml/routes.xml)
+- **O que comprova:** A rota administrativa `webjump_productreview` e a constante `public const ADMIN_RESOURCE = 'Webjump_ProductReview::reviews'`.
+
+> <img width="1828" height="1183" alt="image" src="https://github.com/user-attachments/assets/9d584f31-560f-4c3a-a590-d914d4fab166" />
+> <img width="1823" height="951" alt="image" src="https://github.com/user-attachments/assets/ffcfc49f-9367-46ba-a906-dc8348fd1648" />
+
+---
+
+### 5.2. Critério 2: Grid Listando Dados da Collection, com Ordenação e Paginação
+
+#### Print 2.1 — No Painel Admin (Grid com Todas as Avaliações e Colunas)
+- **O que comprova:** Grid renderizado com os 10 registros da collection, colunas (*ID, ID do Produto, Autor, Comentário, Nota, Status de Aprovação, Criado em, Atualizado em*) e contador de registros (*10 records found*).
+
+> <img width="1808" height="891" alt="image" src="https://github.com/user-attachments/assets/90937967-70ad-4eec-b3f6-102451a948e2" />
+
+#### Print 2.2 — No Painel Admin (Ordenação e Paginação)
+- **O que comprova:** Ordenação por coluna com seta de ordenação visível e paginação (ex: 5 por página, exibindo controles de página 1 de 2).
+
+> <img width="1775" height="1738" alt="image" src="https://github.com/user-attachments/assets/6a074934-5523-4361-8204-9a1d59c49c86" />
+
+#### Print 2.3 — No Código / IDE (Configuração do DataProvider e VirtualType)
+- **Arquivo:** [`etc/di.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/di.xml)
+- **O que comprova:** `virtualType` da Grid Collection herdando de `SearchResult`, vinculação da tabela `webjump_product_review` com `identifierName = review_id` e injeção no pool do `CollectionFactory`.
+
+> <img width="1786" height="801" alt="image" src="https://github.com/user-attachments/assets/e9748ff7-e7b4-49b5-af84-b4a0bbb14fe9" />
+
+---
+
+### 5.3. Critério 3: Filtros por Texto, Faixa Numérica, Data e Status Funcionando
+
+#### Print 3.1 — No Painel Admin (Filtro por Texto)
+- **O que comprova:** Painel de filtros com busca textual no campo **Autor** (ex: *Mariana*) com tag ativa e listagem filtrada.
+
+> <img width="1778" height="1639" alt="image" src="https://github.com/user-attachments/assets/136833a4-a33d-4efc-9969-be169f7c37f8" />
+
+#### Print 3.2 — No Painel Admin (Filtro por Faixa Numérica)
+- **O que comprova:** Filtro por faixa numérica no campo **Nota** (ex: De *4* Até *5*) ou **ID do Produto**, com tag ativa e resultados filtrados.
+
+> <img width="1746" height="1386" alt="image" src="https://github.com/user-attachments/assets/54657c44-30b3-4f0a-b881-4a2abd0b557d" />
+
+#### Print 3.3 — No Painel Admin (Filtro por Status de Seleção)
+- **O que comprova:** Filtro por dropdown no campo **Status de Aprovação** selecionando *Pendente*, exibindo apenas as avaliações que aguardam moderação.
+
+> <img width="1724" height="902" alt="image" src="https://github.com/user-attachments/assets/0d90dd00-c599-4080-8302-840812b200c0" />
+
+#### Print 3.4 — No Código / IDE (Declaração dos Filtros no XML)
+- **Arquivo:** [`view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml)
+- **O que comprova:** Tags `<filter>text</filter>`, `<filter>textRange</filter>`, `<filter>dateRange</filter>` e `<filter>select</filter>` com `ApprovalStatus`.
+
+> <img width="1719" height="1449" alt="image" src="https://github.com/user-attachments/assets/f63e6cc2-87c4-449e-a10f-f4712c3d68aa" />
+
+---
+
+### 5.4. Critério 4: Ações em Massa (Mass Actions) com Confirmação Destrutiva
+
+#### Print 4.1 — No Painel Admin (Aprovação em Massa)
+- **O que comprova:** Execução da ação em lote **Aprovar**, exibindo o banner de sucesso: *"Um total de X avaliação(ões) foi aprovada(s) com sucesso."* e a atualização imediata do status.
+
+> <img width="1756" height="1710" alt="image" src="https://github.com/user-attachments/assets/34827ba5-d121-403f-b846-c76e75819e15" />
+
+#### Print 4.2 — No Painel Admin (Modal de Confirmação na Exclusão)
+- **O que comprova:** Modal nativo do Magento centralizado na tela com o título *"Excluir Avaliações"* e mensagem *"Tem certeza que deseja excluir as avaliações selecionadas?"*, garantindo proteção contra exclusões acidentais.
+
+> <img width="1735" height="1711" alt="image" src="https://github.com/user-attachments/assets/f9826a91-6e48-4104-92ec-634a9eeaad15" />
+
+#### Print 4.3 — No Código / IDE (Configuração do MassAction com `<confirm>` e Controller)
+- **Arquivos:** [`view/adminhtml/ui_component/webjump_productreview_listing.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/view/adminhtml/ui_component/webjump_productreview_listing.xml) e [`Controller/Adminhtml/Review/MassDelete.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/MassDelete.php)
+- **O que comprova:** Configuração da tag `<confirm>` na ação `delete` e exclusão das entidades através do `ReviewRepositoryInterface`.
+
+> <img width="1743" height="1589" alt="image" src="https://github.com/user-attachments/assets/b55530d9-19b8-4927-9f20-bea26397101a" />
+
+---
+
+### 5.5. Critério 5: Bloqueio de Acesso com Perfil Restrito (ACL)
+
+#### Print 5.1 — No Painel Admin (Menu Oculto para Perfil Restrito)
+- **O que comprova:** Usuário `atendente.restrito` logado no topo direito, com barra lateral de navegação comprovando que o menu **Webjump não existe** para seu perfil de permissões.
+
+> <img width="1786" height="728" alt="image" src="https://github.com/user-attachments/assets/672aa396-68f4-4c53-a655-e2a88ffba0fb" />
+
+#### Print 5.2 — No Painel Admin (Tentativa de Bypass via URL Bloqueada)
+- **O que comprova:** Tentativa direta de acesso à URL `/admin/webjump_productreview/review/index/` bloqueada pela segurança da aplicação, redirecionando ao Dashboard e exibindo o banner vermelho de erro: *"Você não possui permissão para acessar as Avaliações de Produtos."*.
+
+> <img width="1797" height="1186" alt="image" src="https://github.com/user-attachments/assets/cc699ad4-bac1-4311-9ec9-69870d00648f" />
+
+#### Print 5.3 — No Código / IDE (Interceptação e Proteção no Controller)
+- **Arquivo:** [`Controller/Adminhtml/Review/Index.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/Controller/Adminhtml/Review/Index.php)
+- **O que comprova:** Implementação de `_processUrlKeys()` e `_isAllowed()` com `ADMIN_RESOURCE`, protegendo o controller contra acessos diretos via URL e despachando a mensagem explicativa antes do redirecionamento ao Dashboard.
+
+> <img width="1792" height="498" alt="image" src="https://github.com/user-attachments/assets/7d8986ed-d2f7-4088-8954-3afb3da46c51" />
+
+---
+
+### 5.6. Critério 6: ACL com Permissão Separada para Exportação
+
+#### Print 6.1 — No Painel Admin (Árvore de Permissões em User Roles)
+- **Onde acessar:** **System > Permissions > User Roles**
+- **O que comprova:** Árvore de recursos exibindo o recurso `Exportar Avaliações` desacoplado de `Avaliações de Produtos`, permitindo controle granular por perfil.
+
+> <img width="1706" height="861" alt="image" src="https://github.com/user-attachments/assets/d2cd6b7e-f3e6-4938-a9b7-30449d58caf0" />
+
+#### Print 6.2 — No Código / IDE (Árvore de Recursos no `acl.xml`)
+- **Arquivo:** [`etc/acl.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductReview/etc/acl.xml)
+- **O que comprova:** Declaração dos recursos `Webjump_ProductReview::reviews`, `reviews_actions` e o recurso isolado `Webjump_ProductReview::reviews_export`.
+
+> <img width="1717" height="702" alt="image" src="https://github.com/user-attachments/assets/e55a5e84-111c-4b2b-add3-d839b0bd3964" />
+
+

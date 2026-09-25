@@ -46,6 +46,23 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
+     * Valida chaves de URL e intercepta tentativas de acesso não autorizadas exibindo mensagem amigável.
+     *
+     * @return bool
+     */
+    public function _processUrlKeys()
+    {
+        if (!$this->_isAllowed()) {
+            $this->_actionFlag->set('', self::FLAG_NO_DISPATCH, true);
+            $this->_actionFlag->set('', self::FLAG_NO_POST_DISPATCH, true);
+            $this->_redirect('admin/dashboard/index');
+            return false;
+        }
+
+        return parent::_processUrlKeys();
+    }
+
+    /**
      * Verifica permissão de acesso e adiciona mensagem explicativa se negado.
      *
      * @return bool
