@@ -234,3 +234,82 @@ Comprovar a execução do Data Patch e a presença dos 5 registros reais associa
 
 ---
 
+## 7. Desafio 15.1: Grid de Administração Completo
+
+### 7.1. Componentes Desenvolvidos
+- **Rota e Controller Admin:** Rota `webjump_productreview` declarada em `etc/adminhtml/routes.xml`. Controller `Controller/Adminhtml/Review/Index.php` com constante de proteção `public const ADMIN_RESOURCE = 'Webjump_ProductReview::reviews'`.
+- **Árvore ACL Granular:** Declarada em `etc/acl.xml`, com o recurso `Webjump_ProductReview::reviews` e separação estrita para `Webjump_ProductReview::reviews_export` (exportação) e `Webjump_ProductReview::reviews_actions` (ações em massa).
+- **Menu do Admin:** Menu pai `Webjump` e item `Avaliações de Produtos` declarados em `etc/adminhtml/menu.xml`.
+- **Grid com UI Component (`webjump_productreview_listing.xml`):**
+  - DataProvider vinculado à Grid Collection via `virtualType` de `SearchResult` em `etc/di.xml`.
+  - Filtros: texto (`author_name`, `comment`), faixa numérica (`review_id`, `product_id`, `rating`), data (`created_at`, `updated_at`) e status de aprovação (`is_approved`) com `ApprovalStatus` OptionSource.
+  - Ordenação e paginação nativas.
+  - Ações em massa:
+    - **Aprovar** (`massApprove`): altera status para Aprovado via `ReviewRepositoryInterface`.
+    - **Reprovar / Pendente** (`massDisapprove`): altera status para Pendente via `ReviewRepositoryInterface`.
+    - **Excluir** (`massDelete`): remove os registros via `ReviewRepositoryInterface` com modal de confirmação destrutiva.
+
+---
+
+### 7.2. Evidências de Sucesso
+
+Documentação comprobatória completa também disponível em [`README-15-1.md`](file:///home/samuel/Sites/magento/README-15-1.md).
+
+#### Critério 1: Menu, Rota e Controller com `ADMIN_RESOURCE`
+- **Print 1.1 — No Painel Admin (Menu Webjump e Acesso ao Grid):**
+> <!-- Cole aqui o Print 1.1 -->
+
+- **Print 1.2 — No Código / IDE (Controller e `routes.xml`):**
+> <!-- Cole aqui o Print 1.2 -->
+
+#### Critério 2: Grid Listando Dados da Collection, com Ordenação e Paginação
+- **Print 2.1 — No Painel Admin (Grid com Todas as Avaliações e Colunas):**
+> <!-- Cole aqui o Print 2.1 -->
+
+- **Print 2.2 — No Painel Admin (Ordenação e Paginação):**
+> <!-- Cole aqui o Print 2.2 -->
+
+- **Print 2.3 — No Código / IDE (Configuração do DataProvider e VirtualType):**
+> <!-- Cole aqui o Print 2.3 -->
+
+#### Critério 3: Filtros por Texto, Faixa Numérica, Data e Status Funcionando
+- **Print 3.1 — No Painel Admin (Filtro por Texto):**
+> <!-- Cole aqui o Print 3.1 -->
+
+- **Print 3.2 — No Painel Admin (Filtro por Faixa Numérica):**
+> <!-- Cole aqui o Print 3.2 -->
+
+- **Print 3.3 — No Painel Admin (Filtro por Status de Seleção):**
+> <!-- Cole aqui o Print 3.3 -->
+
+- **Print 3.4 — No Código / IDE (Declaração dos Filtros no XML):**
+> <!-- Cole aqui o Print 3.4 -->
+
+#### Critério 4: Ações em Massa (Mass Actions) com Confirmação Destrutiva
+- **Print 4.1 — No Painel Admin (Aprovação em Massa):**
+> <!-- Cole aqui o Print 4.1 -->
+
+- **Print 4.2 — No Painel Admin (Modal de Confirmação na Exclusão):**
+> <!-- Cole aqui o Print 4.2 -->
+
+- **Print 4.3 — No Código / IDE (Configuração do MassAction com `<confirm>` e Controller):**
+> <!-- Cole aqui o Print 4.3 -->
+
+#### Critério 5: Bloqueio de Acesso com Perfil Restrito (ACL)
+- **Print 5.1 — No Painel Admin (Menu Oculto para Perfil Restrito):**
+> <!-- Cole aqui o Print 5.1 -->
+
+- **Print 5.2 — No Painel Admin (Tentativa de Bypass via URL Bloqueada):**
+> <!-- Cole aqui o Print 5.2 -->
+
+- **Print 5.3 — No Código / IDE (Interceptação e Proteção no Controller):**
+> <!-- Cole aqui o Print 5.3 -->
+
+#### Critério 6: ACL com Permissão Separada para Exportação
+- **Print 6.1 — No Painel Admin (Árvore de Permissões em User Roles):**
+> <!-- Cole aqui o Print 6.1 -->
+
+- **Print 6.2 — No Código / IDE (Árvore de Recursos no `acl.xml`):**
+> <!-- Cole aqui o Print 6.2 -->
+
+

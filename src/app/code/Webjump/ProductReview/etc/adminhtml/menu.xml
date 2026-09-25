@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webjump_ProductReview::webjump"
+             title="Webjump"
+             module="Webjump_ProductReview"
+             sortOrder="100"
+             resource="Webjump_ProductReview::webjump"/>
+
+        <add id="Webjump_ProductReview::reviews"
+             title="Avaliações de Produtos"
+             module="Webjump_ProductReview"
+             sortOrder="10"
+             parent="Webjump_ProductReview::webjump"
+             action="webjump_productreview/review/index"
+             resource="Webjump_ProductReview::reviews"/>
+    </menu>
+</config>

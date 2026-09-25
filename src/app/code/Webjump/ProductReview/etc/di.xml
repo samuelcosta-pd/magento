@@ -12,4 +12,22 @@
                 type="Webjump\ProductReview\Model\ReviewSearchResults"/>
     <preference for="Webjump\ProductReview\Api\ReviewRepositoryInterface"
                 type="Webjump\ProductReview\Model\ReviewRepository"/>
+
+    <!-- Grid Collection Provider via SearchResult -->
+    <virtualType name="Webjump\ProductReview\Model\ResourceModel\Review\Grid\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">webjump_product_review</argument>
+            <argument name="resourceModel" xsi:type="string">Webjump\ProductReview\Model\ResourceModel\Review</argument>
+            <argument name="identifierName" xsi:type="string">review_id</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="webjump_productreview_listing_data_source" xsi:type="string">Webjump\ProductReview\Model\ResourceModel\Review\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
