@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="webjump" translate="label" sortOrder="200">
+            <label>Webjump</label>
+        </tab>
+        <section id="webjump_productreview" translate="label" sortOrder="10"
+                 showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Avaliações de Produtos</label>
+            <tab>webjump</tab>
+            <resource>Webjump_ProductReview::config</resource>
+            <group id="general" translate="label" sortOrder="10"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurações Gerais</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Habilitar Avaliações na Loja</label>
+                    <comment>Se desabilitado, as avaliações de produtos não serão exibidas na loja.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="min_rating" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Nota Mínima para Exibição</label>
+                    <comment>
+                        Apenas avaliações aprovadas com nota igual ou superior a esta
+                        serão exibidas no frontend (1 a 5).
+                    </comment>
+                    <validate>validate-digits range-1-5</validate>
+                </field>
+                <field id="require_approval" translate="label comment" type="select" sortOrder="30"
+                       showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Exigir Moderação / Aprovação</label>
+                    <comment>
+                        Se habilitado, novas avaliações exigem aprovação pelo admin antes de serem exibidas na loja.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

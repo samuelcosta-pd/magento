@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+
+declare(strict_types=1);
+
+use Magento\Catalog\Block\Product\View;
+use Magento\Framework\Escaper;
+use Webjump\ProductReview\ViewModel\ProductReviews;
+
+/** @var View $block */
+/** @var Escaper $escaper */
+/** @var ProductReviews|null $viewModel */
+$viewModel = $block->getData('reviews_view_model');
+
+if (!$viewModel || !$viewModel->isEnabled()) {
+    return;
+}
+
+$product = $block->getProduct();
+$reviews = $viewModel->getReviews($product);
+?>
+<div class="webjump-product-reviews"
+     id="webjump-product-reviews"
+     style="margin-top: 35px; margin-bottom: 45px;">
+    <div class="webjump-product-reviews__header"
+         style="border-bottom: 2px solid #e1e1e1; padding-bottom: 10px; margin-bottom: 20px;">
+        <h3 style="font-size: 22px; font-weight: 600; margin: 0;">
+            <?= $escaper->escapeHtml(__('Avaliações de Clientes')) ?>
+        </h3>
+    </div>
+
+    <?php if (empty($reviews)): ?>
+        <p class="webjump-product-reviews__empty">
+            <?= $escaper->escapeHtml(__('Nenhuma avaliação disponível para este produto no momento.')) ?>
+        </p>
+    <?php else: ?>
+        <div class="webjump-product-reviews__list">
+            <?php foreach ($reviews as $review): ?>
+                <?php
+                    $ratingVal = (int) $review->getRating();
+                    $stars = str_repeat('★', $ratingVal) . str_repeat('☆', 5 - $ratingVal);
+                    $dateStr = $review->getCreatedAt() ? date('d/m/Y', strtotime($review->getCreatedAt())) : '';
+                ?>
+                <div class="webjump-product-reviews__item" style="border-bottom: 1px solid #e1e1e1; padding: 15px 0;">
+                    <div class="webjump-product-reviews__item-meta" style="margin-bottom: 5px;">
+                        <strong class="webjump-product-reviews__author">
+                            <?= $escaper->escapeHtml($review->getAuthorName()) ?>
+                        </strong>
+                        <span class="webjump-product-reviews__rating" style="color: #ff9800; margin-left: 10px;">
+                            <?= $escaper->escapeHtml($stars) ?>
+                            (<?= (int) $ratingVal ?>/5)
+                        </span>
+                        <?php if ($dateStr): ?>
+                            <span class="webjump-product-reviews__date"
+                                  style="color: #888; font-size: 0.9em; margin-left: 10px;">
+                                <?= $escaper->escapeHtml($dateStr) ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="webjump-product-reviews__comment">
+                        <p><?= /* @noEscape */ nl2br($escaper->escapeHtml($review->getComment())) ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+</div>

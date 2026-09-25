@@ -251,65 +251,26 @@ Comprovar a execução do Data Patch e a presença dos 5 registros reais associa
 
 ---
 
-### 7.2. Evidências de Sucesso
+## 8. Desafio 15.2: Formulário, Configuração e Exportação
 
-Documentação comprobatória completa também disponível em [`README-15-1.md`](file:///home/samuel/Sites/magento/README-15-1.md).
-
-#### Critério 1: Menu, Rota e Controller com `ADMIN_RESOURCE`
-- **Print 1.1 — No Painel Admin (Menu Webjump e Acesso ao Grid):**
-> <!-- Cole aqui o Print 1.1 -->
-
-- **Print 1.2 — No Código / IDE (Controller e `routes.xml`):**
-> <!-- Cole aqui o Print 1.2 -->
-
-#### Critério 2: Grid Listando Dados da Collection, com Ordenação e Paginação
-- **Print 2.1 — No Painel Admin (Grid com Todas as Avaliações e Colunas):**
-> <!-- Cole aqui o Print 2.1 -->
-
-- **Print 2.2 — No Painel Admin (Ordenação e Paginação):**
-> <!-- Cole aqui o Print 2.2 -->
-
-- **Print 2.3 — No Código / IDE (Configuração do DataProvider e VirtualType):**
-> <!-- Cole aqui o Print 2.3 -->
-
-#### Critério 3: Filtros por Texto, Faixa Numérica, Data e Status Funcionando
-- **Print 3.1 — No Painel Admin (Filtro por Texto):**
-> <!-- Cole aqui o Print 3.1 -->
-
-- **Print 3.2 — No Painel Admin (Filtro por Faixa Numérica):**
-> <!-- Cole aqui o Print 3.2 -->
-
-- **Print 3.3 — No Painel Admin (Filtro por Status de Seleção):**
-> <!-- Cole aqui o Print 3.3 -->
-
-- **Print 3.4 — No Código / IDE (Declaração dos Filtros no XML):**
-> <!-- Cole aqui o Print 3.4 -->
-
-#### Critério 4: Ações em Massa (Mass Actions) com Confirmação Destrutiva
-- **Print 4.1 — No Painel Admin (Aprovação em Massa):**
-> <!-- Cole aqui o Print 4.1 -->
-
-- **Print 4.2 — No Painel Admin (Modal de Confirmação na Exclusão):**
-> <!-- Cole aqui o Print 4.2 -->
-
-- **Print 4.3 — No Código / IDE (Configuração do MassAction com `<confirm>` e Controller):**
-> <!-- Cole aqui o Print 4.3 -->
-
-#### Critério 5: Bloqueio de Acesso com Perfil Restrito (ACL)
-- **Print 5.1 — No Painel Admin (Menu Oculto para Perfil Restrito):**
-> <!-- Cole aqui o Print 5.1 -->
-
-- **Print 5.2 — No Painel Admin (Tentativa de Bypass via URL Bloqueada):**
-> <!-- Cole aqui o Print 5.2 -->
-
-- **Print 5.3 — No Código / IDE (Interceptação e Proteção no Controller):**
-> <!-- Cole aqui o Print 5.3 -->
-
-#### Critério 6: ACL com Permissão Separada para Exportação
-- **Print 6.1 — No Painel Admin (Árvore de Permissões em User Roles):**
-> <!-- Cole aqui o Print 6.1 -->
-
-- **Print 6.2 — No Código / IDE (Árvore de Recursos no `acl.xml`):**
-> <!-- Cole aqui o Print 6.2 -->
+### 8.1. Componentes Desenvolvidos
+- **Formulário UI Component (`webjump_productreview_form.xml`):**
+  - DataProvider estendendo `ModifierPoolDataProvider` com integração a `DataPersistorInterface` para retenção de dados após erros de submissão.
+  - Botões de formulário: `SaveButton`, `SaveAndContinueButton`, `DeleteButton` (com confirmação) e `BackButton`.
+  - Campos com validação frontend e backend: `product_id` (numérico positivo obrigatório), `author_name` (obrigatório), `rating` (select 1 a 5 estrelas via `RatingOptions`), `is_approved` (select via `ApprovalStatus`) e `comment` (textarea obrigatório).
+- **Controllers CRUD com Service Contracts:**
+  - `NewAction`: forward para edição em branco.
+  - `Edit`: carregamento via `ReviewRepositoryInterface::getById` e títulos dinâmicos.
+  - `Save`: validação de campos obrigatórios, captura de exceções e persistência exclusiva via `ReviewRepositoryInterface::save`.
+  - `Delete`: exclusão atômica via `ReviewRepositoryInterface::deleteById`.
+- **Configurações no Painel Admin (`system.xml` e `config.xml`):**
+  - Aba `Webjump` > seção `Avaliações de Produtos`.
+  - Campos: Habilitar Avaliações na Loja (`enabled`), Nota Mínima para Exibição (`min_rating`) e Exigir Moderação (`require_approval`).
+  - Valores padrão e serviço `Model/Config.php` para leitura tipada de configurações.
+- **Integração na Loja (PDP):**
+  - Bloco em `catalog_product_view.xml` e template `reviews.phtml` associados ao `ViewModel/ProductReviews.php`.
+  - Exibição estritamente condicional: se desabilitado na configuração, as avaliações são completamente ocultadas na loja.
+- **Exportação do Grid:**
+  - Botão de exportação nativo no grid (`<exportButton>`) com suporte a CSV e Excel XML respeitando rigorosamente os filtros ativos da listagem.
 
 
