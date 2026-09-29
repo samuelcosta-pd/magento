@@ -34,6 +34,10 @@ body {
     color: @color-texto-claro;
 }
 
+.column.main {
+    background-color: transparent;
+}
+
 //
 //  3. Tipografia Temática (Halloween)
 //  --------------------------------------------------------------------------
@@ -198,24 +202,38 @@ button.action.secondary {
 }
 
 //
-//  7. Listagem de Produtos (Catalog Grid Cards)
+//  7. Listagem de Produtos (Catalog Grid Cards & Hover Actions)
 //  --------------------------------------------------------------------------
 .products-grid {
     .product-item {
         .product-item-info {
-            background-color: @color-roxo-card;
-            border: 1px solid @color-roxo-borda;
+            background-color: @color-roxo-card !important;
+            border: 1px solid @color-roxo-borda !important;
             border-radius: 12px;
             padding: 16px;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
 
             &:hover,
             &.active {
-                border-color: @color-dourado;
-                box-shadow: 0 10px 28px rgba(255, 107, 26, 0.3);
+                border-color: @color-dourado !important;
+                box-shadow: 0 12px 32px rgba(255, 107, 26, 0.35) !important;
                 transform: translateY(-4px);
-                background-color: lighten(@color-roxo-card, 3%);
+                background-color: @color-roxo-card !important;
+            }
+
+            .product-item-inner {
+                background-color: @color-roxo-card !important;
+                border: 1px solid @color-roxo-borda;
+                border-top: none;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+
+                &:before {
+                    background-color: @color-roxo-card !important;
+                    border: none !important;
+                }
             }
 
             .product-image-container {
@@ -256,12 +274,133 @@ button.action.secondary {
 
             .product-item-actions {
                 margin-top: 14px;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 10px !important;
 
-                .action.tocart {
-                    width: 100%;
+                .actions-primary {
+                    flex: 1 1 auto !important;
+
+                    .action.tocart {
+                        width: 100% !important;
+                        height: 42px !important;
+                        border-radius: 25px !important;
+                        font-size: 1.3rem !important;
+                        font-weight: 700 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                }
+
+                // Botões Secundários de Ação (Wishlist e Compare) com alta visibilidade
+                .actions-secondary {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    flex-shrink: 0 !important;
+
+                    > .action {
+                        width: 42px !important;
+                        height: 42px !important;
+                        line-height: 40px !important;
+                        border-radius: 50% !important;
+                        background-color: lighten(@color-roxo-card, 8%) !important;
+                        border: 1px solid @color-roxo-borda !important;
+                        color: @color-dourado !important;
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-size: 18px !important;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+                        transition: all 0.25s ease !important;
+                        padding: 0 !important;
+
+                        &:before {
+                            font-size: 18px !important;
+                            color: @color-dourado !important;
+                            line-height: 1 !important;
+                            margin: 0 !important;
+                        }
+
+                        &:hover {
+                            background-color: @color-abobora !important;
+                            border-color: @color-abobora !important;
+                            transform: scale(1.12) !important;
+                            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+
+                            &:before {
+                                color: #FFFFFF !important;
+                            }
+                        }
+                    }
                 }
             }
         }
+    }
+}
+
+.page-products .products-grid .product-item-inner {
+    background-color: @color-roxo-card !important;
+    &:before {
+        background: @color-roxo-card !important;
+    }
+}
+
+.product-item-actions .actions-primary + .actions-secondary,
+.products-grid .product-item-actions .actions-secondary {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+
+    > .action {
+        width: 42px !important;
+        height: 42px !important;
+        line-height: 40px !important;
+        border-radius: 50% !important;
+        background-color: lighten(@color-roxo-card, 8%) !important;
+        border: 1px solid @color-roxo-borda !important;
+        color: @color-dourado !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.25s ease !important;
+        padding: 0 !important;
+
+        &:before {
+            font-size: 18px !important;
+            color: @color-dourado !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+        }
+
+        &:hover {
+            background-color: @color-abobora !important;
+            border-color: @color-abobora !important;
+            transform: scale(1.12) !important;
+            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+
+            &:before {
+                color: #FFFFFF !important;
+            }
+        }
+    }
+}
+
+.products-grid .product-item-inner,
+.page-products .products-grid .product-item-inner,
+.block.widget .products-grid .product-item-inner {
+    background-color: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    border-top: none !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+
+    &:before {
+        background-color: @color-roxo-card !important;
+        border: none !important;
     }
 }
 
@@ -273,7 +412,7 @@ button.action.secondary {
 }
 
 //
-//  8. Página de Produto (PDP)
+//  8. Página de Produto (PDP) & Qty Stepper Interativo (+ e -)
 //  --------------------------------------------------------------------------
 .catalog-product-view {
     .product-info-main {
@@ -313,14 +452,85 @@ button.action.secondary {
         .box-tocart {
             margin-top: 25px;
 
-            .input-text.qty {
-                background-color: @color-roxo-card;
-                color: @color-texto-claro;
-                border: 1px solid @color-roxo-borda;
-                border-radius: 8px;
-                text-align: center;
-                height: 48px;
-                font-size: 1.6rem;
+            .field.qty {
+                margin-bottom: 20px;
+
+                .label {
+                    color: @color-texto-claro;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    display: block;
+                }
+
+                // Controle do Stepper com botões + e -
+                .qty-stepper-control {
+                    display: inline-flex;
+                    align-items: center;
+                    background: @color-roxo-card;
+                    border: 1px solid @color-roxo-borda;
+                    border-radius: 10px;
+                    padding: 3px;
+                    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+
+                    .action-qty {
+                        width: 44px;
+                        height: 44px;
+                        background-color: transparent;
+                        border: none;
+                        color: @color-dourado;
+                        font-size: 24px;
+                        font-weight: 700;
+                        line-height: 44px;
+                        text-align: center;
+                        cursor: pointer;
+                        border-radius: 8px;
+                        transition: all 0.2s ease;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0;
+
+                        &:hover {
+                            background-color: @color-abobora;
+                            color: #FFFFFF;
+                            box-shadow: 0 0 12px rgba(255, 107, 26, 0.5);
+                        }
+
+                        &:active {
+                            transform: scale(0.92);
+                        }
+                    }
+
+                    .input-text.qty {
+                        width: 60px;
+                        height: 44px;
+                        background: transparent;
+                        border: none;
+                        border-left: 1px solid @color-roxo-borda;
+                        border-right: 1px solid @color-roxo-borda;
+                        border-radius: 0;
+                        color: @color-texto-claro;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        text-align: center;
+                        margin: 0;
+                        padding: 0;
+                        box-shadow: none;
+
+                        -moz-appearance: textfield;
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+
+                        &:focus {
+                            outline: none;
+                            box-shadow: none;
+                            color: @color-dourado;
+                        }
+                    }
+                }
             }
 
             .action.tocart {
@@ -450,5 +660,105 @@ button.action.secondary {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+}
+
+//
+//  11. Vitrine da Home (Webjump_Samuel) - Adaptação ao Tema Noite Assombrada
+//  --------------------------------------------------------------------------
+.webjump-samuel-home-block {
+    background: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 16px !important;
+
+    .block-header {
+        .block-title {
+            font-family: 'Creepster', cursive, sans-serif !important;
+            color: @color-dourado !important;
+            font-size: 3.4rem !important;
+            letter-spacing: 0.05em !important;
+            text-shadow: 0 2px 10px rgba(255, 107, 26, 0.35) !important;
+        }
+
+        .block-subtitle {
+            color: @color-cinza-neblina !important;
+            font-size: 1.5rem !important;
+        }
+    }
+
+    .product-card {
+        background: darken(@color-roxo-card, 3%) !important;
+        border: 1px solid @color-roxo-borda !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+
+        &:hover {
+            border-color: @color-dourado !important;
+            box-shadow: 0 8px 25px rgba(255, 107, 26, 0.3) !important;
+            transform: translateY(-4px) !important;
+        }
+
+        .card-media {
+            background: darken(@color-roxo-card, 6%) !important;
+        }
+
+        .card-content {
+            .product-sku {
+                color: @color-cinza-neblina !important;
+            }
+
+            .product-name a {
+                color: @color-texto-claro !important;
+
+                &:hover {
+                    color: @color-dourado !important;
+                }
+            }
+
+            .product-price .price {
+                color: @color-dourado !important;
+                font-weight: 700 !important;
+                font-size: 2rem !important;
+            }
+
+            .stock-meter {
+                background: rgba(255, 255, 255, 0.1) !important;
+
+                .stock-bar {
+                    background: linear-gradient(90deg, @color-abobora 0%, @color-dourado 100%) !important;
+                }
+            }
+
+            .card-actions .btn-view-product {
+                background: @color-dourado !important;
+                border-color: @color-dourado !important;
+                color: @color-roxo-dark !important;
+                border-radius: 25px !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.05em !important;
+                box-shadow: 0 3px 12px rgba(255, 107, 26, 0.3) !important;
+
+                &:hover {
+                    background: @color-abobora !important;
+                    border-color: @color-abobora !important;
+                    color: #FFFFFF !important;
+                    box-shadow: 0 5px 18px rgba(124, 255, 107, 0.35) !important;
+                }
+            }
+        }
+    }
+
+    .carousel-btn {
+        background: @color-roxo-card !important;
+        border: 1px solid @color-roxo-borda !important;
+        color: @color-dourado !important;
+
+        &:hover {
+            background: @color-abobora !important;
+            border-color: @color-abobora !important;
+            color: #FFFFFF !important;
+        }
     }
 }

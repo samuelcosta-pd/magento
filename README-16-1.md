@@ -9,7 +9,7 @@ Documentação técnica, justificativa arquitetural, mapeamento de variáveis LE
 | Critério de Aceite | Status | Detalhamento da Implementação |
 |---|:---:|---|
 | **O tema aparece no admin com preview e está aplicado na store view** | [x] Atendido | Tema registrado com [`registration.php`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/registration.php) e [`theme.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/theme.xml) herdando de `Magento/luma`. Miniatura gerada em [`media/preview.jpg`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/media/preview.jpg) visível no Admin em *Content > Design > Themes*. Aplicado na Store View principal (`design/theme/theme_id = 4`). |
-| **A paleta e a tipografia mudaram em toda a loja, não só na home** | [x] Atendido | Redefinição global de variáveis em [`_theme.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_theme.less) e regras customizadas em [`_extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less) aplicando o visual escuro de Halloween no header, menu de navegação, cards de catálogo, página de produto (PDP), botões de ação, links e rodapé. |
+| **A paleta e a tipografia mudaram em toda a loja, não só na home** | [x] Atendido | Redefinição global de variáveis em [`_theme.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_theme.less) e regras customizadas em [`_extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less). **Home:** Cabeçalho, menu e vitrine (`.webjump-samuel-home-block`) integrados ao fundo roxo escuro `#21103A` com títulos em Creepster e botões pílula. **Catálogo:** Cards de produto com fundo escuro contínuo no hover, eliminando barras brancas, e botões de ação secundária ampliados (42px) com ícones dourados nítidos. **PDP:** Página de produto com seletor interativo de Qty contendo botões funcionais de `+` e `-`. |
 | **Nenhum arquivo em `vendor/` ou no tema Luma foi alterado** | [x] Atendido | Toda a implementação foi feita exclusivamente sob `app/design/frontend/Webjump/noite-assombrada/`. O script oficial [`check-vendor-changes.sh`](file:///home/samuel/Sites/magento/.agents/skills/magento-engineer/scripts/check-vendor-changes.sh) foi executado com validação estrita (`--working`) retornando `OK: no changes under vendor/.`. |
 | **A fonte própria carrega pelo caminho do tema, e o corpo do texto continua legível** | [x] Atendido | Fonte decorativa `Creepster` carregada via `@font-face` utilizando o caminho relativo oficial `@{baseDir}fonts/Creepster/creepster-regular.woff2` (com status HTTP 200). Restrita aos títulos e chamadas (`h1` a `h6`, logo, títulos de bloco), enquanto o corpo do texto corrido permanece em `Open Sans` em tom lavanda suave (`#EDE7F6`), assegurando contraste WCAG e conforto de leitura. |
 | **README explica quais variáveis da biblioteca foram sobrescritas e por quê** | [x] Atendido | Seção 3 traz a matriz completa com todas as variáveis da biblioteca UI do Magento sobrescritas em `_theme.less`, seus valores e a justificativa arquitetural de cada redefinição. A Seção 5 apresenta o guia exato de prints para a seção de evidências. |
@@ -28,9 +28,10 @@ O tema foi estruturado com base na identidade visual fornecida na referência gr
 ### 2.2. A Mecânica do Fallback e Extensibilidade Limpa
 No Magento 2, o frontend opera por **camadas de herança**. Ao declarar `<parent>Magento/luma</parent>` em `theme.xml`:
 1. Todos os templates (`.phtml`), layouts XML, JavaScripts e estilos do Luma são herdados sem duplicação de arquivos.
-2. Apenas os arquivos estritamente necessários para modificar a camada visual foram criados:
-   * `_theme.less`: processado antes dos componentes da biblioteca UI do Magento, permitindo a substituição de valores de variáveis nativas sem gerar seletores duplicados no CSS compilado.
-   * `_extend.less`: processado após toda a biblioteca, utilizado para introduzir a regra `@font-face`, estilizações de refinamento dos componentes (cards arredondados, botões pílula, sombras de elevação) e mixins responsivos `.media-width`.
+2. Apenas os arquivos estritamente necessários para modificar a camada visual e comportamental foram criados:
+   * `_theme.less`: processado antes dos componentes da biblioteca UI do Magento, permitindo a substituição de valores de variáveis nativas (cores, tipografia, `@product-item__hover__background-color`) sem gerar seletores duplicados no CSS compilado.
+   * `_extend.less`: processado após toda a biblioteca, utilizado para introduzir a regra `@font-face`, estilizações de refinamento dos componentes (cards arredondados, botões pílula, botões secundários ampliados, estilização da vitrine da home e do stepper de quantidade) e mixins responsivos `.media-width`.
+   * `Magento_Catalog/templates/product/view/addtocart.phtml`: sobrescrita limpa do template nativo de adicionar ao carrinho para injetar os botões de controle de quantidade `+` e `-`, com script jQuery não obstrusivo e validações seguras.
 
 ---
 
@@ -62,6 +63,7 @@ Em conformidade estrita com o Critério de Aceite 5, a tabela abaixo detalha tod
 | `@footer__background-color` | `#120722` (Roxo Escuro) | Rodapé noturno fechado com separação visual nítida da área de conteúdo. |
 | `@copyright__background-color` | `#0E0518` (Profundo) | Faixa inferior de direitos reservados. |
 | `@price-color` | `#FFD369` (Dourado) | Destaca os valores monetários em dourado âmbar brilhante, idêntico à seção de preços da referência. |
+| `@product-item__hover__background-color` | `#21103A` (Roxo Card) | Elimina a caixa branca nativa do Luma que aparecia no container inferior do card ao passar o mouse. |
 | `@form-element-input__background` | `#1B0B2E` (Escuro) | Campos de formulário com fundo escuro, eliminando caixas brancas ofuscantes. |
 | `@form-element-input__color` | `#EDE7F6` (Claro) | Texto digitado pelo cliente com alto contraste e nitidez. |
 | `@form-element-input__border-color` | `#3D1C68` (Borda) | Contorno sutil que se ilumina com foco dourado via `_extend.less`. |
@@ -78,6 +80,11 @@ src/app/design/frontend/Webjump/noite-assombrada/
 │   └── view.xml                  # Configurações de proporção e renderização de imagens de catálogo
 ├── media/
 │   └── preview.jpg               # Miniatura (800x600) extraída e composta a partir da referência visual
+├── Magento_Catalog/
+│   └── templates/
+│       └── product/
+│           └── view/
+│               └── addtocart.phtml # Template customizado da PDP com botões funcionais de + e -
 └── web/
     ├── fonts/
     │   └── Creepster/
@@ -87,7 +94,7 @@ src/app/design/frontend/Webjump/noite-assombrada/
     └── css/
         └── source/
             ├── _theme.less       # Sobrescrita das variáveis canônicas da biblioteca UI
-            └── _extend.less      # @font-face, botões pílula, catalog cards, PDP e mixins .media-width
+            └── _extend.less      # @font-face, botões pílula, botões secundários, stepper PDP e vitrine Home
 ```
 
 ---
@@ -112,32 +119,34 @@ Esta seção lista os prints necessários para comprovar cada critério de aceit
 * **O que enquadrar:** Clicar na ação **Edit** na linha correspondente à *Default Store View* (ou *Main Website*). Capturar o campo **Applied Theme (Tema Aplicado)** exibindo o valor selecionado **"Noite Assombrada"** e o botão **Save Configuration**.
 * **Critério comprovado:** *Critério 1 (Parte 2: Ativação do tema na store view)*.
 
-### Print 3 — Identidade Visual na Home Page (Header, Destaque e Rodapé)
+### Print 3 — Identidade Visual na Home Page (Header, Vitrine e Rodapé)
 * **Onde acessar:** Navegador na URL raiz da loja: `https://magento.test/`.
 * **O que enquadrar:** A página inicial completa demonstrando:
   - Cabeçalho escuro (`#120722`) com menu de navegação em violeta;
-  - Título de boas-vindas / banners renderizados com a tipografia temática `Creepster` em dourado;
-  - Botões de ação com formato pílula arredondado (`border-radius: 25px`);
+  - A vitrine de produtos da Home (`.webjump-samuel-home-block`) com container escuro `#21103A` e bordas `#3D1C68` (sem nenhuma caixa branca);
+  - Título "ÚLTIMAS UNIDADES EM ESTOQUE" na fonte temática `Creepster` em dourado;
+  - Cards de produto em roxo fechado, preços em dourado e botões "VER DETALHES" em formato pílula;
   - Rodapé escuro com campo de newsletter estilizado e barra de copyright.
 * **Critério comprovado:** *Critério 2 (Parte 1: Aplicação da paleta e tipografia na Home)*.
 
-### Print 4 — Identidade Visual na Listagem de Produtos (Catalog Grid)
-* **Onde acessar:** Navegador em qualquer categoria do catálogo (ex: `https://magento.test/gear/bags.html` ou `women/tops-women.html`).
-* **O que enquadrar:** A grade de produtos comprovando que a identidade alcançou o catálogo:
+### Print 4 — Identidade Visual e Hover no Catálogo (Botões Secundários Ampliados)
+* **Onde acessar:** Navegador na listagem de produtos (ex: `https://magento.test/gear/bags.html`).
+* **O que enquadrar:** Posicionar o cursor do mouse sobre um card de produto (ex: `Joust Duffle Bag`):
   - Fundo geral da página no tom noturno `#1A0B2E`;
-  - Cards de produto em containers violeta escuro (`#21103A`) com cantos arredondados e borda suave;
-  - Preços em dourado âmbar brilhante (`#FFD369`);
-  - Botão de compra / Adicionar ao Caldeirão com formato pílula e transição ao passar o mouse.
-* **Critério comprovado:** *Critério 2 (Parte 2: Identidade visual na listagem de produtos)*.
+  - Card expandido com fundo escuro contínuo `#21103A`, sem qualquer retângulo branco no rodapé;
+  - Botão principal "ADD TO CART" em formato pílula dourado;
+  - Botões secundários (Wishlist e Compare) destacados com formato circular (42px x 42px), ícones dourados ampliados (18px) sobre fundo `#33195A` e hover laranja abóbora com efeito glow.
+* **Critério comprovado:** *Critério 2 (Parte 2: Identidade no catálogo e botões do card visíveis)*.
 
-### Print 5 — Identidade Visual na Página de Produto (PDP)
+### Print 5 — Identidade Visual na Página de Produto (PDP) com Stepper de Quantidade
 * **Onde acessar:** Navegador na tela de detalhe de qualquer produto (ex: `https://magento.test/joust-duffle-bag.html`).
-* **O que enquadrar:** A área principal de compra da PDP, demonstrando:
+* **O que enquadrar:** A área de compra da PDP, demonstrando:
   - Nome do produto no título `h1` estilizado com a fonte temática `Creepster` em dourado;
   - Bloco de preço em container escuro contrastante;
+  - Seletor de Quantidade (`Qty`) estilizado com botões funcionais de `-` e `+` envolvendo o campo numérico centralizado, operando perfeitamente (incrementa a partir de 0 para 1, decrementa com bloqueio em 0);
   - Botão principal "Add to Cart" em formato pílula com contraste máximo;
   - Abas de descrição e avaliações com fundo roxo card e texto corrido nítido em lavanda suave.
-* **Critério comprovado:** *Critério 2 (Parte 3: Identidade visual na página de produto)*.
+* **Critério comprovado:** *Critério 2 (Parte 3: Identidade visual na PDP e stepper de Qty)*.
 
 ### Print 6 — Integridade do Core (`vendor/` intocado)
 * **Onde acessar:** No terminal da máquina / container, na raiz do repositório.
