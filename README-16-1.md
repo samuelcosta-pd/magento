@@ -60,6 +60,11 @@ Em conformidade estrita com o Critério de Aceite 5, a tabela abaixo detalha tod
 | `@header__background-color` | `#120722` (Roxo Escuro) | Define o topo da página com o tom mais fechado da noite, delimitando a área de navegação. |
 | `@header-panel__background-color` | `#0E0518` (Profundo) | Barra superior de login e boas-vindas com tonalidade escura contrastante. |
 | `@navigation__background` | `#21103A` (Violeta Card) | Barra de navegação horizontal com cor própria para destacar as categorias do catálogo. |
+| `@submenu-desktop__background` | `#21103A` (Roxo Card) | Fundo do menu dropdown e submenus em roxo escuro, integrando à identidade noturna. |
+| `@submenu-desktop__border-color` | `#3D1C68` (Roxo Borda) | Contorno dos submenus com a borda temática luminosa. |
+| `@submenu-desktop-item__color` | `#EDE7F6` (Lavanda Claro) | Cor dos links dos submenus com alto contraste sobre o fundo roxo escuro (elimina textos escuros ilegíveis). |
+| `@submenu-desktop-item__hover__background` | `#381b62` (Roxo Destaque) | Fundo do item do submenu ao passar o mouse, eliminando o retângulo cinza/branco nativo do Luma. |
+| `@submenu-desktop-item__hover__color` | `#FFD369` (Dourado) | Texto do item do submenu iluminado em dourado ao passar o cursor ou ganhar foco via teclado. |
 | `@footer__background-color` | `#120722` (Roxo Escuro) | Rodapé noturno fechado com separação visual nítida da área de conteúdo. |
 | `@copyright__background-color` | `#0E0518` (Profundo) | Faixa inferior de direitos reservados. |
 | `@price-color` | `#FFD369` (Dourado) | Destaca os valores monetários em dourado âmbar brilhante, idêntico à seção de preços da referência. |
@@ -119,34 +124,41 @@ Esta seção lista os prints necessários para comprovar cada critério de aceit
 * **O que enquadrar:** Clicar na ação **Edit** na linha correspondente à *Default Store View* (ou *Main Website*). Capturar o campo **Applied Theme (Tema Aplicado)** exibindo o valor selecionado **"Noite Assombrada"** e o botão **Save Configuration**.
 * **Critério comprovado:** *Critério 1 (Parte 2: Ativação do tema na store view)*.
 
-### Print 3 — Identidade Visual na Home Page (Header, Vitrine e Rodapé)
+### Print 3 — Identidade Visual na Home Page (Header, Submenus com Alto Contraste, Vitrine e Rodapé)
 * **Onde acessar:** Navegador na URL raiz da loja: `https://magento.test/`.
 * **O que enquadrar:** A página inicial completa demonstrando:
   - Cabeçalho escuro (`#120722`) com menu de navegação em violeta;
+  - **Submenus Dropdown Abertos:** Posicionar o cursor sobre uma categoria com submenus (ex: `Women` $\rightarrow$ `Tops` / `Bottoms` e subitens `Jackets`, `Tees`), demonstrando:
+    - Fundo escuro uniforme `#21103A` com borda roxa `#3D1C68`;
+    - Texto dos itens em repouso com excelente contraste e legibilidade em lavanda claro `#EDE7F6` (sem textos escuros ilegíveis);
+    - Item sob hover destacado em fundo `#381b62` com texto dourado `#FFD369` e setas indicadoras douradas (sem retângulos brancos ou cinzas);
   - A vitrine de produtos da Home (`.webjump-samuel-home-block`) com container escuro `#21103A` e bordas `#3D1C68` (sem nenhuma caixa branca);
+  - Imagens dos produtos nos cards com proporção ampla e centralizada (sem miniaturas reduzidas);
   - Título "ÚLTIMAS UNIDADES EM ESTOQUE" na fonte temática `Creepster` em dourado;
   - Cards de produto em roxo fechado, preços em dourado e botões "VER DETALHES" em formato pílula;
   - Rodapé escuro com campo de newsletter estilizado e barra de copyright.
 * **Critério comprovado:** *Critério 2 (Parte 1: Aplicação da paleta e tipografia na Home)*.
 
-### Print 4 — Identidade Visual e Hover no Catálogo (Botões Secundários Ampliados)
-* **Onde acessar:** Navegador na listagem de produtos (ex: `https://magento.test/gear/bags.html`).
-* **O que enquadrar:** Posicionar o cursor do mouse sobre um card de produto (ex: `Joust Duffle Bag`):
+### Print 4 — Identidade Visual e Hover no Catálogo (Imagens Ampliadas e Botões Secundários)
+* **Onde acessar:** Navegador na listagem de produtos (ex: `https://magento.test/gear/bags.html` ou `https://magento.test/men/tops-men.html`).
+* **O que enquadrar:** A grade de produtos com o cursor do mouse sobre um card:
   - Fundo geral da página no tom noturno `#1A0B2E`;
+  - Imagens dos produtos nos cards ampliadas ocupando a área útil do card com proporção 1:1 e `object-fit: contain` elegante (sem aspecto miniaturizado);
   - Card expandido com fundo escuro contínuo `#21103A`, sem qualquer retângulo branco no rodapé;
   - Botão principal "ADD TO CART" em formato pílula dourado;
   - Botões secundários (Wishlist e Compare) destacados com formato circular (42px x 42px), ícones dourados ampliados (18px) sobre fundo `#33195A` e hover laranja abóbora com efeito glow.
-* **Critério comprovado:** *Critério 2 (Parte 2: Identidade no catálogo e botões do card visíveis)*.
+* **Critério comprovado:** *Critério 2 (Parte 2: Identidade no catálogo, dimensões dos cards e botões visíveis)*.
 
-### Print 5 — Identidade Visual na Página de Produto (PDP) com Stepper de Quantidade
-* **Onde acessar:** Navegador na tela de detalhe de qualquer produto (ex: `https://magento.test/joust-duffle-bag.html`).
-* **O que enquadrar:** A área de compra da PDP, demonstrando:
+### Print 5 — Identidade Visual na Página de Produto (PDP) com Imagem Ampla e Stepper de Quantidade
+* **Onde acessar:** Navegador na tela de detalhe de qualquer produto (ex: `https://magento.test/joust-duffle-bag.html` ou `https://magento.test/camisa-basica-de-algod-o.html`).
+* **O que enquadrar:** A área completa da PDP demonstrando:
+  - **Galeria de Imagem Ampla e Destaque:** Container da galeria escuro `#180c2a` com borda e sombra suaves, com a imagem principal preenchendo a área visual com dimensões ampliadas (80% a 90% do palco, eliminando o aspecto de ícone pequeno ou placeholder reduzido);
   - Nome do produto no título `h1` estilizado com a fonte temática `Creepster` em dourado;
   - Bloco de preço em container escuro contrastante;
   - Seletor de Quantidade (`Qty`) estilizado com botões funcionais de `-` e `+` envolvendo o campo numérico centralizado, operando perfeitamente (incrementa a partir de 0 para 1, decrementa com bloqueio em 0);
   - Botão principal "Add to Cart" em formato pílula com contraste máximo;
   - Abas de descrição e avaliações com fundo roxo card e texto corrido nítido em lavanda suave.
-* **Critério comprovado:** *Critério 2 (Parte 3: Identidade visual na PDP e stepper de Qty)*.
+* **Critério comprovado:** *Critério 2 (Parte 3: Identidade visual na PDP, galeria de imagem e stepper de Qty)*.
 
 ### Print 6 — Integridade do Core (`vendor/` intocado)
 * **Onde acessar:** No terminal da máquina / container, na raiz do repositório.

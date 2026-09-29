@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6,
 }
 
 //
-//  5. Menu de Navegação Horizontal
+//  5. Menu de Navegação Horizontal & Submenus (Destaque e Contraste)
 //  --------------------------------------------------------------------------
 .nav-sections {
     background-color: @color-roxo-card;
@@ -165,6 +165,95 @@ h1, h2, h3, h4, h5, h6,
                 color: @color-abobora;
                 border-bottom: 3px solid @color-abobora;
             }
+        }
+    }
+
+    // Submenus Dropdown (Level 1, Level 2, Flyouts)
+    .submenu,
+    ul.submenu,
+    ul ul {
+        background-color: @color-roxo-card !important;
+        border: 1px solid @color-roxo-borda !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75) !important;
+        border-radius: 8px !important;
+        padding: 6px 0 !important;
+
+        li {
+            background-color: transparent !important;
+
+            a {
+                color: @color-texto-claro !important;
+                background-color: transparent !important;
+                font-size: 1.4rem !important;
+                font-weight: 600 !important;
+                padding: 10px 20px !important;
+                display: block !important;
+                transition: all 0.2s ease !important;
+
+                span {
+                    color: inherit !important;
+                }
+
+                &:hover,
+                &.ui-state-focus,
+                &.ui-state-active {
+                    color: @color-dourado !important;
+                    background-color: lighten(@color-roxo-card, 10%) !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+            }
+
+            // Ao passar o mouse no item do submenu
+            &:hover,
+            &.ui-state-focus,
+            &.active,
+            &.has-active {
+                background-color: lighten(@color-roxo-card, 10%) !important;
+
+                > a {
+                    color: @color-dourado !important;
+                    background-color: transparent !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+            }
+        }
+    }
+
+    // Submenu links em repouso e hover
+    .level0 {
+        .submenu a {
+            color: @color-texto-claro !important;
+            background: transparent !important;
+
+            span {
+                color: inherit !important;
+            }
+
+            &:hover,
+            &.ui-state-focus,
+            &.ui-state-active {
+                color: @color-dourado !important;
+                background-color: lighten(@color-roxo-card, 10%) !important;
+
+                span {
+                    color: @color-dourado !important;
+                }
+            }
+        }
+    }
+
+    // Cor da seta indicadora de submenu
+    .ui-menu-icon {
+        &:after {
+            color: @color-dourado !important;
         }
     }
 }
@@ -236,13 +325,49 @@ button.action.secondary {
                 }
             }
 
-            .product-image-container {
+            // Imagens do Card com dimensões ampliadas e proporção elegante
+            .product-image-container,
+            [class*="product-image-container"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                display: block !important;
                 border-radius: 8px;
                 overflow: hidden;
+                background: darken(@color-roxo-card, 4%);
+                margin: 0 auto 12px auto !important;
+            }
+
+            .product-image-wrapper {
+                display: block !important;
+                width: 100% !important;
+                height: 0 !important;
+                padding-bottom: 100% !important;
+                position: relative !important;
+            }
+
+            .product-image-photo {
+                width: 100% !important;
+                height: 100% !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+                object-fit: contain !important;
+                padding: 6px !important;
+                box-sizing: border-box !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                position: absolute !important;
+                bottom: auto !important;
+                right: auto !important;
+                transition: transform 0.3s ease;
+            }
+
+            &:hover .product-image-photo {
+                transform: translate(-50%, -50%) scale(1.06);
             }
 
             .product-item-name {
-                margin-top: 12px;
+                margin-top: 14px;
 
                 a {
                     color: @color-texto-claro;
@@ -415,6 +540,62 @@ button.action.secondary {
 //  8. Página de Produto (PDP) & Qty Stepper Interativo (+ e -)
 //  --------------------------------------------------------------------------
 .catalog-product-view {
+    .product.media {
+        .gallery-placeholder {
+            background-color: darken(@color-roxo-card, 4%) !important;
+            border: 1px solid @color-roxo-borda !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+            min-height: 520px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+        }
+
+        .gallery-placeholder__image {
+            width: 90% !important;
+            height: auto !important;
+            max-width: 580px !important;
+            max-height: 580px !important;
+            object-fit: contain !important;
+            display: block !important;
+            margin: auto !important;
+        }
+
+        .fotorama__stage {
+            background-color: darken(@color-roxo-card, 4%) !important;
+            border: 1px solid @color-roxo-borda !important;
+            border-radius: 12px !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+            min-height: 520px !important;
+            max-width: 100% !important;
+        }
+
+        .fotorama__stage__frame {
+            .fotorama__img {
+                width: 90% !important;
+                height: 90% !important;
+                min-width: 80% !important;
+                min-height: 80% !important;
+                max-width: 95% !important;
+                max-height: 95% !important;
+                object-fit: contain !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                bottom: auto !important;
+                right: auto !important;
+                box-sizing: border-box !important;
+            }
+        }
+
+        .fotorama__thumb-border {
+            border-color: @color-dourado !important;
+        }
+    }
+
     .product-info-main {
         .page-title-wrapper .page-title {
             font-size: 3.6rem;
@@ -701,6 +882,19 @@ button.action.secondary {
 
         .card-media {
             background: darken(@color-roxo-card, 6%) !important;
+            height: 240px !important;
+            padding: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            .product-image {
+                width: 85% !important;
+                height: 85% !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+                object-fit: contain !important;
+            }
         }
 
         .card-content {
@@ -762,3 +956,71 @@ button.action.secondary {
         }
     }
 }
+
+//
+//  12. Media Queries de Desktop (@screen__m = 768px)
+//  --------------------------------------------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .navigation {
+        .level0 {
+            .submenu {
+                background-color: @color-roxo-card !important;
+                border: 1px solid @color-roxo-borda !important;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75) !important;
+
+                a {
+                    color: @color-texto-claro !important;
+                    background: transparent !important;
+
+                    span {
+                        color: @color-texto-claro !important;
+                    }
+
+                    &:hover,
+                    &.ui-state-focus,
+                    &.ui-state-active {
+                        color: @color-dourado !important;
+                        background-color: lighten(@color-roxo-card, 10%) !important;
+                        text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                        span {
+                            color: @color-dourado !important;
+                        }
+                    }
+                }
+
+                li:hover > a,
+                li.ui-state-focus > a,
+                li.active > a,
+                li.has-active > a {
+                    color: @color-dourado !important;
+                    background-color: lighten(@color-roxo-card, 10%) !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+
+                // Submenus aninhados (flyouts nível 2, nível 3)
+                .submenu {
+                    background-color: @color-roxo-card !important;
+                    border: 1px solid @color-roxo-borda !important;
+                }
+            }
+        }
+    }
+
+    .catalog-product-view {
+        .product.media {
+            .gallery-placeholder {
+                min-height: 520px !important;
+            }
+
+            .fotorama__stage {
+                min-height: 520px !important;
+            }
+        }
+    }
+}
+
