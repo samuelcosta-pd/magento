@@ -1,0 +1,119 @@
+// /**
+//  * Copyright © Webjump. All rights reserved.
+//  */
+
+//
+//  Paleta da Campanha Noite Assombrada (Inspirada em inspiracao-1.jpeg)
+//  --------------------------------------------------------------------------
+@color-abobora:         #FF6B1A;
+@color-abobora-vivid:   #FF7A00;
+@color-roxo-noite:      #1A0B2E;
+@color-roxo-card:       #21103A;
+@color-roxo-dark:       #120722;
+@color-roxo-panel:      #0E0518;
+@color-roxo-borda:      #3D1C68;
+@color-dourado:         #FFD369;
+@color-dourado-alt:     #FFC107;
+@color-verde-bruxa:     #7CFF6B;
+@color-cinza-neblina:   #B8B8C4;
+@color-texto-claro:     #EDE7F6;
+@color-branco-gelo:     #F3E5F5;
+
+//
+//  Tipografia & Fontes
+//  --------------------------------------------------------------------------
+@font-family__base:                 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@heading__font-family__base:        'Creepster', cursive, 'Helvetica Neue', Arial, sans-serif;
+@heading__color__base:              @color-dourado;
+@heading__font-weight__base:        normal;
+
+// Títulos individuais herdando a tipografia temática
+@h1__font-family:                   @heading__font-family__base;
+@h1__font-color:                    @color-dourado;
+@h2__font-family:                   @heading__font-family__base;
+@h2__font-color:                    @color-dourado;
+@h3__font-family:                   @heading__font-family__base;
+@h3__font-color:                    @color-dourado;
+@h4__font-family:                   @heading__font-family__base;
+@h4__font-color:                    @color-dourado;
+
+//
+//  Cores Globais & Layout
+//  --------------------------------------------------------------------------
+@primary__color:                    @color-abobora;
+@page__background-color:            @color-roxo-noite;
+@text__color:                       @color-texto-claro;
+@text__color__muted:                @color-cinza-neblina;
+
+@link__color:                       @color-abobora-vivid;
+@link__visited__color:              @color-abobora-vivid;
+@link__hover__color:                @color-verde-bruxa;
+@link__active__color:               @color-dourado;
+
+@border-color__base:                @color-roxo-borda;
+
+//
+//  Botões Primários (Dourado de Ação como nos botões da inspiração)
+//  --------------------------------------------------------------------------
+@button-primary__background:        @color-dourado;
+@button-primary__color:             @color-roxo-dark;
+@button-primary__border:            1px solid @color-dourado;
+@button-primary__hover__background: @color-abobora;
+@button-primary__hover__color:      #FFFFFF;
+@button-primary__hover__border:     1px solid @color-abobora;
+@button-primary__active__background:@color-abobora-vivid;
+@button-primary__active__color:     #FFFFFF;
+@button-primary__active__border:    1px solid @color-abobora-vivid;
+
+//
+//  Botões Secundários / Padrão
+//  --------------------------------------------------------------------------
+@button__background:                @color-roxo-card;
+@button__color:                     @color-texto-claro;
+@button__border:                    1px solid @color-roxo-borda;
+@button__hover__background:         lighten(@color-roxo-card, 8%);
+@button__hover__color:              @color-dourado;
+@button__hover__border:             1px solid @color-abobora;
+
+//
+//  Cabeçalho & Painel Superior
+//  --------------------------------------------------------------------------
+@header__background-color:          @color-roxo-dark;
+@header-panel__background-color:    @color-roxo-panel;
+@header-panel__text-color:          @color-cinza-neblina;
+
+//
+//  Navegação / Menu Horizontal
+//  --------------------------------------------------------------------------
+@navigation__background:            @color-roxo-card;
+@navigation-level0-item__color:      @color-texto-claro;
+@navigation-level0-item__hover__color: @color-dourado;
+@navigation-level0-item__active__color: @color-abobora;
+
+//
+//  Preço & Produtos
+//  --------------------------------------------------------------------------
+@price-color:                       @color-dourado;
+@price-old-color:                   @color-cinza-neblina;
+
+//
+//  Rodapé & Copyright
+//  --------------------------------------------------------------------------
+@footer__background-color:          @color-roxo-dark;
+@copyright__background-color:       @color-roxo-panel;
+
+//
+//  Formulários & Inputs
+//  --------------------------------------------------------------------------
+@form-element-input__background:    darken(@color-roxo-card, 4%);
+@form-element-input__color:         @color-texto-claro;
+@form-element-input__border-color:  @color-roxo-borda;
+@form-element-input-placeholder__color: @color-cinza-neblina;
+
+//
+//  Sidebar & Breadcrumbs
+//  --------------------------------------------------------------------------
+@sidebar__background-color:         @color-roxo-card;
+@breadcrumbs-current__color:        @color-dourado;
+@breadcrumbs-link__color:           @color-cinza-neblina;
+@breadcrumbs-link__hover__color:    @color-verde-bruxa;
