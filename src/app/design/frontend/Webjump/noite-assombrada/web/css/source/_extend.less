@@ -1249,3 +1249,171 @@ select,
     }
 }
 
+//
+//  13. Desafio 16.2: Faixa de Campanha no Topo, Badge Temático e Layout XML
+//  --------------------------------------------------------------------------
+
+.halloween-top-banner {
+    background: linear-gradient(90deg, #0e0518 0%, #21103a 25%, #2a0845 50%, #21103a 75%, #0e0518 100%);
+    border-bottom: 2px solid @color-abobora;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    position: relative;
+    z-index: 100;
+    text-align: center;
+
+    &__container {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 1280px;
+    }
+
+    &__icon {
+        font-size: 1.8rem;
+        line-height: 1;
+        animation: pulseSpooky 2s infinite ease-in-out;
+    }
+
+    &__content {
+        align-items: center;
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 1.35rem;
+    }
+
+    &__highlight {
+        color: @color-dourado;
+        font-family: @heading__font-family__base;
+        font-size: 1.7rem;
+        letter-spacing: 0.05em;
+        text-shadow: 0 0 8px rgba(255, 211, 105, 0.5);
+    }
+
+    &__message {
+        color: @color-texto-claro;
+        font-weight: 500;
+    }
+
+    &__coupon {
+        background-color: @color-abobora;
+        border-radius: 4px;
+        color: #ffffff;
+        font-family: monospace;
+        font-size: 1.3rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        padding: 2px 8px;
+        box-shadow: 0 0 6px rgba(255, 107, 26, 0.6);
+    }
+
+    &__deadline {
+        color: @color-verde-bruxa;
+        font-weight: 600;
+    }
+
+    &__cta {
+        background: linear-gradient(135deg, @color-dourado 0%, @color-abobora 100%) !important;
+        border: none !important;
+        border-radius: 20px !important;
+        color: #120722 !important;
+        display: inline-block !important;
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.05em !important;
+        padding: 5px 16px !important;
+        text-transform: uppercase !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 8px rgba(255, 107, 26, 0.4) !important;
+
+        span {
+            color: #120722 !important;
+        }
+
+        &:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 14px rgba(255, 211, 105, 0.6) !important;
+            color: #120722 !important;
+        }
+    }
+}
+
+@keyframes pulseSpooky {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15) rotate(-5deg);
+    }
+}
+
+// Logo Wrapper e Badge Temático (Sobrescrita do Template Logo)
+.logo-wrapper {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .halloween-logo-badge {
+        background-color: fade(@color-roxo-card, 80%);
+        border: 1px solid @color-abobora;
+        border-radius: 12px;
+        color: @color-dourado;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 4px 10px;
+        text-transform: uppercase;
+        box-shadow: 0 0 8px rgba(255, 107, 26, 0.3);
+    }
+}
+
+// Estilização da Busca Global Movida para header.panel
+.panel.header {
+    .block-search {
+        margin: 4px 0 4px auto;
+        max-width: 280px;
+
+        .control {
+            border: 1px solid @color-roxo-borda;
+            border-radius: 20px;
+            background-color: @color-roxo-card;
+            overflow: hidden;
+
+            input {
+                background: transparent;
+                border: none;
+                color: @color-texto-claro;
+                font-size: 1.3rem;
+                height: 32px;
+                padding: 0 36px 0 14px;
+
+                &::placeholder {
+                    color: @color-cinza-neblina;
+                    font-style: italic;
+                }
+
+                &:focus {
+                    box-shadow: 0 0 10px rgba(255, 211, 105, 0.4);
+                }
+            }
+        }
+
+        .action.search {
+            height: 32px;
+            width: 32px;
+            line-height: 32px;
+
+            &:before {
+                color: @color-dourado;
+                font-size: 1.6rem;
+            }
+        }
+    }
+}
+
+
