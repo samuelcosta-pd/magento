@@ -118,73 +118,100 @@ README-16-2.md                             # Documentação técnica e guia de e
 
 ---
 
-## 5. Evidências de Sucesso (Guia Exato de Prints)
+## 5. Evidências de Sucesso
 
-Esta seção lista os prints necessários para comprovar cada critério de aceite do **Desafio 16.2**. Salve as capturas na pasta de documentação e anexe ao Pull Request.
+Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **16.2 - Estrutura, textos e e-mail**.
 
-### Print 1 — Faixa de Campanha no Topo de Todas as Páginas (Home e PDP)
-* **Onde acessar:** Navegador na Home (`https://magento.test/`) e em uma PDP (ex: `https://magento.test/joust-duffle-bag.html`).
-* **O que enquadrar:**
-  - O topo absoluto da página exibindo a faixa temática: ícone de abóbora animado (`🎃`), título *"Noite Assombrada:"*, mensagem com cupom em destaque *"ASSOMBRADO10"* e botão em formato pílula *"Ver Ofertas"*.
-  - Mostrar que a faixa se mantém consistente tanto na página inicial quanto na página interna de produto.
-* **Critério comprovado:** *Critério 1 (Parte 1: A faixa aparece em todas as páginas)*.
+---
 
-### Print 2 — Faixa Declarada no Layout XML (Origem em XML, Não em CSS)
-* **Onde acessar:** No editor de código ou GitHub, abrindo [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml).
-* **O que enquadrar:** O bloco `<referenceContainer name="page.top">` contendo `<block class="Magento\Framework\View\Element\Template" name="halloween.faixa" before="-" template="Magento_Theme::html/faixa-halloween.phtml"/>`.
-* **Critério comprovado:** *Critério 1 (Parte 2: Faixa injetada via Layout XML)*.
+### 5.1. Critério 1: A faixa aparece em todas as páginas e veio do layout, não de CSS
 
-### Print 3 — Bloco Removido e Bloco Movido pelo Layout XML
-* **Onde acessar:** No código em [`default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml) e no navegador em `https://magento.test/`.
-* **O que enquadrar:**
-  1. **No código:** As diretivas:
-     - `<move element="top.search" destination="header.panel" after="-"/>`
-     - `<referenceBlock name="catalog.compare.sidebar" remove="true"/>`
-  2. **No navegador:** O cabeçalho da loja mostrando o campo de busca posicionado dentro de `header.panel` (painel superior escuro) e a ausência do bloco de comparação na barra lateral do catálogo.
-* **Critério comprovado:** *Critério 2 (Um bloco removido e outro movido de lugar)*.
+#### Print 1.1 — Na Loja / Storefront (Faixa de Campanha na Home e PDP)
+- **O que comprova:** Faixa promocional temática visível no topo absoluto de todas as páginas da loja (Home e PDP), contendo ícone animado 🎃, título *"Noite Assombrada:"*, cupom em destaque *"ASSOMBRADO10"* e botão de ação *"Ver Ofertas"*.
 
-### Print 4 — Template Sobrescrito Copiado Integralmente no Caminho Correto
-* **Onde acessar:** No editor de código, abrindo [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml).
-* **O que enquadrar:**
-  - O caminho completo do arquivo na árvore de pastas (`Magento_Theme/templates/html/header/logo.phtml`).
-  - O código completo demonstrando que toda a lógica original do bloco (resolução de dimensões, links acessíveis) foi preservada, com a inserção da tag `<span class="halloween-logo-badge">`.
-* **Critério comprovado:** *Critério 3 (Template sobrescrito no caminho correto e copiado inteiro)*.
+> 
 
-### Print 5 — Termos Traduzidos Visíveis na Loja
-* **Onde acessar:** No navegador na Home (`https://magento.test/`) e no Catálogo (`https://magento.test/gear/bags.html`).
-* **O que enquadrar:** Elementos da interface exibindo as traduções ativas do vocabulário assombrado:
-  - Botão de compra: *"Colocar no caldeirão"* (antigo *Add to Cart*);
-  - Campo de busca com placeholder: *"Procure algo assombroso..."*;
-  - Link do cabeçalho: *"Entrar no covil"* (antigo *Sign In*);
-  - Link de lista de desejos: *"Meus Feitiços"* (antigo *My Wish List*).
-* **Critério comprovado:** *Critério 4 (Termos traduzidos aparecem na loja)*.
+#### Print 1.2 — No Código / IDE (Declaração no `default.xml`)
+- **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml)
+- **O que comprova:** Injeção do bloco `halloween.faixa` com `before="-"` dentro do container `page.top`, comprovando que a renderização é originada pela árvore de layout XML e não por estilização CSS.
 
-### Print 6 — E-mail de Novo Pedido no Mailcatcher com Identidade da Campanha
-* **Onde acessar:** No navegador em `http://localhost:1080/` (interface web do Mailcatcher).
-* **O que enquadrar:**
-  - A mensagem de confirmação de pedido na lista do Mailcatcher com o assunto *"Confirmação do seu pedido assombroso em Main Website Store"*;
-  - O corpo do e-mail aberto na aba HTML exibindo:
-    - Cabeçalho noturno com fundo `#120722` e borda inferior abóbora `#FF6B1A`;
-    - Saudação dourada: *"Olá, [Nome]!"*;
-    - Caixa temática destacada: *"🎃 Pedido Confirmado no Covil da Noite Assombrada! Nossas criaturas já estão separando suas poções e feitiços sob a luz da lua cheia..."*;
-    - Tabela de itens e botões estilizados conforme `_email-extend.less`.
-* **Critério comprovado:** *Critério 5 (E-mail de novo pedido com identidade da campanha no Mailcatcher)*.
+> 
 
-### Print 7 — Escaping Rigoroso e Internacionalização nos Templates
-* **Onde acessar:** No editor de código, abrindo [`faixa-halloween.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/faixa-halloween.phtml).
-* **O que enquadrar:**
-  - Todas as chamadas de saída utilizando `$block->escapeHtml(__('...'))` para strings de texto e `$block->escapeUrl(...)` para links de redirecionamento.
-* **Critério comprovado:** *Critério 6 (Tudo escapado e dentro de __() nos templates customizados)*.
+---
 
-### Print 8 — Integridade do Core (`vendor/` intocado)
-* **Onde acessar:** No terminal da máquina, na raiz do projeto Magento.
-* **O que enquadrar:** A execução dos comandos:
-  ```bash
-  ./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working
-  git status
-  ```
-  Exibindo com nitidez a mensagem de sucesso `"OK: no changes under vendor/."` e o status limpo da branch `exercicio/16-2-estrutura-textos-email`.
-* **Critério comprovado:** *Regra de Ouro do Magento Engineer (Zero alterações em vendor/ e no tema Luma)*.
+### 5.2. Critério 2: Um bloco foi removido pelo layout e outro foi movido de lugar
+
+#### Print 2.1 — Na Loja / Storefront (Busca no Painel Superior e Ausência da Barra de Comparação)
+- **O que comprova:** Barra de busca global reposicionada dentro da barra superior (`header.panel`), liberando espaço no cabeçalho, e ausência da barra lateral de comparação de produtos na listagem de catálogo.
+
+> 
+
+#### Print 2.2 — No Código / IDE (Instruções `<move>` e `<referenceBlock remove="true"/>`)
+- **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml)
+- **O que comprova:** Declaração das instruções `<move element="top.search" destination="header.panel" after="-"/>` e `<referenceBlock name="catalog.compare.sidebar" remove="true"/>`.
+
+> 
+
+---
+
+### 5.3. Critério 3: O template sobrescrito está no caminho correto do tema e foi copiado inteiro
+
+#### Print 3.1 — No Código / IDE (Cópia Integral com Selo Temático no Caminho do Tema)
+- **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml)
+- **O que comprova:** Estrutura correta sob `Magento_Theme/templates/html/header/` no tema, preservação integral de toda a lógica original do core (`LogoSizeResolver`, `$storeName`, atributos acessíveis e tags `<img>`), com a inserção do selo temático `<span class="halloween-logo-badge">`.
+
+> 
+
+---
+
+### 5.4. Critério 4: Os termos traduzidos aparecem na loja
+
+#### Print 4.1 — Na Loja / Storefront (Vocabulário da Campanha na Interface)
+- **O que comprova:** Elementos da interface exibindo as traduções ativas do vocabulário assombrado: botões de compra com *"Colocar no caldeirão"*, input de busca com *"Procure algo assombroso..."* e cabeçalho com *"Entrar no covil"*.
+
+> 
+
+#### Print 4.2 — No Código / IDE (Dicionário de Tradução `pt_BR.csv`)
+- **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv)
+- **O que comprova:** Dicionário CSV sem cabeçalho e em UTF-8 com mais de 6 pares de termos temáticos substituídos para a campanha.
+
+> 
+
+---
+
+### 5.5. Critério 5: O e-mail de novo pedido chega com a identidade da campanha (print do Mailcatcher)
+
+#### Print 5.1 — No Mailcatcher (E-mail de Confirmação com Identidade Temática)
+- **Onde acessar:** `http://localhost:1080/` (interface web do Mailcatcher)
+- **O que comprova:** Mensagem de confirmação de pedido na lista do Mailcatcher com o assunto *"Confirmação do seu pedido assombroso em..."*, corpo do e-mail com cabeçalho noturno `#120722`, borda abóbora `#FF6B1A`, saudação dourada `#FFD369` e o banner *"🎃 Pedido Confirmado no Covil da Noite Assombrada!"*.
+
+> 
+
+#### Print 5.2 — No Código / IDE (Template `order_new.html` e Estilos `_email-extend.less`)
+- **Arquivos:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Sales/email/order_new.html`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Sales/email/order_new.html) e [`src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_email-extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_email-extend.less)
+- **O que comprova:** Sobrescrita completa do template de e-mail do `Magento_Sales` com variáveis `{{trans}}` e regras LESS dedicadas processadas pelo Emogrifier para injeção de CSS inline.
+
+> 
+
+---
+
+### 5.6. Critério 6: Tudo escapado e dentro de `__()` nos templates que eu escrevi
+
+#### Print 6.1 — No Código / IDE (Escaping Rigoroso e Internacionalização)
+- **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/faixa-halloween.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/faixa-halloween.phtml)
+- **O que comprova:** Todas as saídas de texto utilizando `$block->escapeHtml(__('...'))` e links de redirecionamento utilizando `$block->escapeUrl(...)`.
+
+> 
+
+---
+
+### 5.7. Critério 7: Integridade do Core (`vendor/` intocado)
+
+#### Print 7.1 — No Terminal (Script de Verificação de Vendor e Git Status)
+- **Comandos:** `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working` e `git status`
+- **O que comprova:** Terminal exibindo a mensagem `"OK: no changes under vendor/."` e árvore limpa na branch `exercicio/16-2-estrutura-textos-email`.
+
+> 
 
 ---
 
