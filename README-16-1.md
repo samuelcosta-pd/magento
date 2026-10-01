@@ -104,92 +104,76 @@ src/app/design/frontend/Webjump/noite-assombrada/
 
 ---
 
-## 5. Evidências de Sucesso (Guia Exato de Prints)
+## 5. Evidências de Sucesso
 
-Esta seção lista os prints necessários para comprovar cada critério de aceite do **Desafio 16.1**. As capturas devem ser salvas na pasta de documentação e anexadas ao Pull Request.
+Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **16.1 - O tema Noite Assombrada**.
 
-### Print 1 — Tema Cadastrado no Admin com Preview
-* **Onde acessar:** No Magento Admin, acessar o menu lateral:  
-  **Content (Conteúdo)** $\rightarrow$ **Design** $\rightarrow$ **Themes (Temas)**.
-* **O que enquadrar:** A linha da listagem contendo o tema **"Noite Assombrada"**, evidenciando:
-  - Título do Tema: `Noite Assombrada`
-  - Tema Pai (*Parent Theme*): `Magento Luma`
-  - Caminho no Sistema de Arquivos (*Theme Path*): `frontend/Webjump/noite-assombrada`
-  - A imagem miniatura de preview (castelo assombrado e lua cheia) renderizada na coluna de visualização.
-* **Critério comprovado:** *Critério 1 (Parte 1: Registro do tema e preview no Admin)*.
+---
 
-### Print 2 — Tema Aplicado na Store View
-* **Onde acessar:** No Magento Admin, acessar o menu lateral:  
-  **Content (Conteúdo)** $\rightarrow$ **Design** $\rightarrow$ **Configuration (Configuração)**.
-* **O que enquadrar:** Clicar na ação **Edit** na linha correspondente à *Default Store View* (ou *Main Website*). Capturar o campo **Applied Theme (Tema Aplicado)** exibindo o valor selecionado **"Noite Assombrada"** e o botão **Save Configuration**.
-* **Critério comprovado:** *Critério 1 (Parte 2: Ativação do tema na store view)*.
+### 5.1. Critério 1: Tema Cadastrado no Admin com Preview e Aplicado na Store View
 
-### Print 3 — Identidade Visual na Home Page (Header, Submenus com Alto Contraste, Vitrine e Rodapé)
-* **Onde acessar:** Navegador na URL raiz da loja: `https://magento.test/`.
-* **O que enquadrar:** A página inicial completa demonstrando:
-  - Cabeçalho escuro (`#120722`) com menu de navegação em violeta;
-  - **Submenus Dropdown Abertos:** Posicionar o cursor sobre uma categoria com submenus (ex: `Women` $\rightarrow$ `Tops` / `Bottoms` e subitens `Jackets`, `Tees`), demonstrando:
-    - Fundo escuro uniforme `#21103A` com borda roxa `#3D1C68`;
-    - Texto dos itens em repouso com excelente contraste e legibilidade em lavanda claro `#EDE7F6` (sem textos escuros ilegíveis);
-    - Item sob hover destacado em fundo `#381b62` com texto dourado `#FFD369` e setas indicadoras douradas (sem retângulos brancos ou cinzas);
-  - A vitrine de produtos da Home (`.webjump-samuel-home-block`) com container escuro `#21103A` e bordas `#3D1C68` (sem nenhuma caixa branca);
-  - Imagens dos produtos nos cards com proporção ampla e centralizada (sem miniaturas reduzidas);
-  - Título "ÚLTIMAS UNIDADES EM ESTOQUE" na fonte temática `Creepster` em dourado;
-  - Cards de produto em roxo fechado, preços em dourado e botões "VER DETALHES" em formato pílula;
-  - Rodapé escuro com campo de newsletter estilizado e barra de copyright.
-* **Critério comprovado:** *Critério 2 (Parte 1: Aplicação da paleta e tipografia na Home)*.
+#### Print 1.1 — No Painel Admin (Tema Registrado com Preview em Content > Design > Themes)
+- **O que comprova:** Tema **Noite Assombrada** listado com sucesso, indicando o tema pai `Magento Luma`, caminho de arquivos `frontend/Webjump/noite-assombrada` e a miniatura de preview (castelo assombrado e lua cheia).
 
-### Print 4 — Identidade Visual e Hover no Catálogo (Imagens Ampliadas e Botões Secundários)
-* **Onde acessar:** Navegador na listagem de produtos (ex: `https://magento.test/gear/bags.html` ou `https://magento.test/men/tops-men.html`).
-* **O que enquadrar:** A grade de produtos com o cursor do mouse sobre um card:
-  - Fundo geral da página no tom noturno `#1A0B2E`;
-  - Imagens dos produtos nos cards ampliadas ocupando a área útil do card com proporção 1:1 e `object-fit: contain` elegante (sem aspecto miniaturizado);
-  - Card expandido com fundo escuro contínuo `#21103A`, sem qualquer retângulo branco no rodapé;
-  - Botão principal "ADD TO CART" em formato pílula dourado;
-  - Botões secundários (Wishlist e Compare) destacados com formato circular (42px x 42px), ícones dourados ampliados (18px) sobre fundo `#33195A` e hover laranja abóbora com efeito glow.
-* **Critério comprovado:** *Critério 2 (Parte 2: Identidade no catálogo, dimensões dos cards e botões visíveis)*.
+> <img width="1800" height="700" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
 
-### Print 5 — Identidade Visual na Página de Produto (PDP) com Imagem Ampla e Stepper de Quantidade
-* **Onde acessar:** Navegador na tela de detalhe de qualquer produto (ex: `https://magento.test/joust-duffle-bag.html` ou `https://magento.test/camisa-basica-de-algod-o.html`).
-* **O que enquadrar:** A área completa da PDP demonstrando:
-  - **Galeria de Imagem Ampla e Destaque:** Container da galeria escuro `#180c2a` com borda e sombra suaves, com a imagem principal preenchendo a área visual com dimensões ampliadas (80% a 90% do palco, eliminando o aspecto de ícone pequeno ou placeholder reduzido);
-  - Nome do produto no título `h1` estilizado com a fonte temática `Creepster` em dourado;
-  - Bloco de preço em container escuro contrastante;
-  - Seletor de Quantidade (`Qty`) estilizado com botões funcionais de `-` e `+` envolvendo o campo numérico centralizado, operando perfeitamente (incrementa a partir de 0 para 1, decrementa com bloqueio em 0);
-  - Botão principal "Add to Cart" em formato pílula com contraste máximo;
-  - Abas de descrição e avaliações com fundo roxo card e texto corrido nítido em lavanda suave.
-* **Critério comprovado:** *Critério 2 (Parte 3: Identidade visual na PDP, galeria de imagem e stepper de Qty)*.
+#### Print 1.2 — No Painel Admin (Tema Ativo na Store View em Content > Design > Configuration)
+- **O que comprova:** Configuração da *Default Store View* com o campo **Applied Theme** selecionado como **Noite Assombrada** e status de configuração salvo.
 
-### Print 6 — Integridade do Core (`vendor/` intocado)
-* **Onde acessar:** No terminal da máquina / container, na raiz do repositório.
-* **O que enquadrar:** A execução combinada dos comandos:
-  ```bash
-  ./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working
-  git status
-  ```
-  O terminal deve exibir com clareza a mensagem `"OK: no changes under vendor/."` e o `git status` apontando alterações apenas nos arquivos sob `src/app/design/frontend/Webjump/noite-assombrada/` e `README-16-1.md`.
-* **Critério comprovado:** *Critério 3 (Zero alterações no vendor/ e no tema Luma)*.
+> <img width="1800" height="700" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
 
-### Print 7 — Carregamento da Fonte Temática via Caminho do Tema
-* **Onde acessar:** No navegador (Google Chrome ou Firefox), com a loja aberta (`https://magento.test/`):  
-  Pressionar `F12` $\rightarrow$ Aba **Network (Rede)** $\rightarrow$ Filtrar pela aba **Font**.
-* **O que enquadrar:** Recarregar a página (`Ctrl+F5`) e selecionar a linha da requisição da fonte `creepster-regular.woff2`, demonstrando:
-  - Código de Status HTTP: `200 OK`
-  - URL da Requisição contendo o caminho do tema: `.../pub/static/frontend/Webjump/noite-assombrada/.../fonts/Creepster/creepster-regular.woff2`
-* **Critério comprovado:** *Critério 4 (Parte 1: Fonte própria carregando pelo caminho do tema)*.
+---
 
-### Print 8 — Legibilidade do Corpo do Texto (Amostra de Texto Corrido)
-* **Onde acessar:** Na PDP (aba "Details" / "More Information") ou em uma página institucional CMS.
-* **O que enquadrar:** Detalhe / zoom de parágrafos de texto corrido, evidenciando:
-  - Uso da tipografia sem serifa legível (`Open Sans`);
-  - Tom lavanda suave (`#EDE7F6`) sobre o fundo escuro `#21103A`;
-  - Entrelinha e espaçamento confortáveis, comprovando que a fonte temático-decorativa ficou estritamente restrita a títulos.
-* **Critério comprovado:** *Critério 4 (Parte 2: Preservação da legibilidade do texto corrido)*.
+### 5.2. Critério 2: Paleta e Tipografia Aplicadas Globalmente (Home, Catálogo e PDP)
 
-### Print 9 — Documentação das Variáveis no README-16-1.md
-* **Onde acessar:** No editor de código ou no GitHub/GitLab.
-* **O que enquadrar:** A Seção 3 deste `README-16-1.md`, comprovando a tabela descritiva completa com todas as variáveis da biblioteca Magento sobrescritas e as justificativas técnicas documentadas.
-* **Critério comprovado:** *Critério 5 (README explicativo das variáveis da biblioteca)*.
+#### Print 2.1 — No Frontend (Home Page: Paleta Noturna, Submenus e Vitrine)
+- **O que comprova:** Página inicial com fundo noturno `#1A0B2E`, topo escuro `#120722`, submenus suspensos abertos com texto em lavanda `#EDE7F6` de alto contraste e hover dourado `#FFD369`, vitrine de produtos integrada ao layout e botões em formato pílula sem caixas brancas.
+
+> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+#### Print 2.2 — No Frontend (Catálogo: Cards Proporcionais e Botões Secundários Ampliados)
+- **O que comprova:** Grade de produtos da categoria com cards proporcionais (aspect ratio 1:1, sem espaços vazios sob a imagem), botão principal pílula e botões secundários de Wishlist e Compare circulares (42px) com ícones visíveis e fundo escuro contínuo.
+
+> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+#### Print 2.3 — No Frontend (Página de Produto / PDP: Galeria Centralizada e Stepper de Quantidade)
+- **O que comprova:** Página do produto com galeria de imagem centralizada e ampla (sem miniaturas sobrepostas ou duplicadas), título em `Creepster` dourado e o seletor de quantidade com botões interativos de `+` e `-`.
+
+> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+---
+
+### 5.3. Critério 3: Regra de Ouro — Integridade do Core (`vendor/` e Luma Intocados)
+
+#### Print 3.1 — No Terminal (Script de Validação do Core e Git Status)
+- **Arquivo:** [`check-vendor-changes.sh`](file:///home/samuel/Sites/magento/.agents/skills/magento-engineer/scripts/check-vendor-changes.sh)
+- **O que comprova:** Execução de `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working` exibindo `OK: no changes under vendor/.` e `git status` comprovando modificações restritas exclusivamente ao diretório do tema `app/design/frontend/Webjump/noite-assombrada/` e documentação.
+
+> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+---
+
+### 5.4. Critério 4: Fonte Própria Carregando pelo Tema e Legibilidade Preservada
+
+#### Print 4.1 — No Navegador / DevTools (Aba Network: Carregamento HTTP 200 da Fonte `Creepster`)
+- **O que comprova:** Requisição HTTP com status `200 OK` para o arquivo de fonte `creepster-regular.woff2` originada a partir do caminho estático do tema (`pub/static/frontend/Webjump/noite-assombrada/...`).
+
+> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+#### Print 4.2 — No Frontend (Legibilidade do Texto Corrido e Hierarquia Tipográfica)
+- **O que comprova:** Corpo do texto corrido (abas de detalhes/descrição) renderizado em `Open Sans` lavanda claro (`#EDE7F6`) sobre fundo escuro com alto conforto visual e contraste WCAG, evidenciando que a fonte decorativa `Creepster` ficou estritamente restrita a títulos.
+
+> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+
+---
+
+### 5.5. Critério 5: Justificativa Técnica das Variáveis Sobrescritas
+
+#### Print 5.1 — No Código / Documentação (Matriz de Variáveis no README e `_theme.less`)
+- **Arquivos:** [`README-16-1.md`](file:///home/samuel/Sites/magento/README-16-1.md) e [`web/css/source/_theme.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_theme.less)
+- **O que comprova:** Seção 3 do `README-16-1.md` apresentando a matriz completa das variáveis nativas da biblioteca UI do Magento/Luma redefinidas no tema, detalhando o valor aplicado e a justificativa arquitetural de cada alteração.
+
+> <img width="1800" height="800" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
 
 ---
 
