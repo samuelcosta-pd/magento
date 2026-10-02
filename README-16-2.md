@@ -129,13 +129,13 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 1.1 — Na Loja / Storefront (Faixa de Campanha na Home e PDP)
 - **O que comprova:** Faixa promocional temática visível no topo absoluto de todas as páginas da loja (Home e PDP), contendo ícone animado 🎃, título *"Noite Assombrada:"*, cupom em destaque *"ASSOMBRADO10"* e botão de ação *"Ver Ofertas"*.
 
-> 
+> <img width="1637" height="290" alt="image" src="https://github.com/user-attachments/assets/4fd8bab8-5b1d-45a3-92f2-eea5c3da60f9" />
 
 #### Print 1.2 — No Código / IDE (Declaração no `default.xml`)
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml)
 - **O que comprova:** Injeção do bloco `halloween.faixa` com `before="-"` dentro do container `page.top`, comprovando que a renderização é originada pela árvore de layout XML e não por estilização CSS.
 
-> 
+> <img width="1637" height="632" alt="image" src="https://github.com/user-attachments/assets/500583e5-3a30-4217-af32-49fcd5f8f5bc" />
 
 ---
 
@@ -150,7 +150,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml)
 - **O que comprova:** Declaração das instruções `<move element="top.search" destination="header.panel" after="-"/>` e `<referenceBlock name="catalog.compare.sidebar" remove="true"/>`.
 
-> 
+> <img width="1637" height="439" alt="image" src="https://github.com/user-attachments/assets/e8929e0b-7e7f-424c-b4a2-7519e702a5f0" />
 
 ---
 
@@ -160,7 +160,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/header/logo.phtml)
 - **O que comprova:** Estrutura correta sob `Magento_Theme/templates/html/header/` no tema, preservação integral de toda a lógica original do core (`LogoSizeResolver`, `$storeName`, atributos acessíveis e tags `<img>`), com a inserção do selo temático `<span class="halloween-logo-badge">`.
 
-> 
+> <img width="1327" height="554" alt="image" src="https://github.com/user-attachments/assets/947df40c-0d61-4eb3-8687-54f0614780f3" />
 
 ---
 
@@ -175,7 +175,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv)
 - **O que comprova:** Dicionário CSV sem cabeçalho e em UTF-8 com mais de 6 pares de termos temáticos substituídos para a campanha.
 
-> 
+> <img width="1799" height="923" alt="image" src="https://github.com/user-attachments/assets/48e37160-14d9-46e7-98ca-fa8d74d4d4df" />
 
 ---
 
@@ -185,13 +185,13 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** `http://localhost:1080/` (interface web do Mailcatcher)
 - **O que comprova:** Mensagem de confirmação de pedido na lista do Mailcatcher com o assunto *"Confirmação do seu pedido assombroso em..."*, corpo do e-mail com cabeçalho noturno `#120722`, borda abóbora `#FF6B1A`, saudação dourada `#FFD369` e o banner *"🎃 Pedido Confirmado no Covil da Noite Assombrada!"*.
 
-> 
+> <img width="1283" height="1216" alt="image" src="https://github.com/user-attachments/assets/e65e6f81-355c-4129-8cc0-836e5bcf01cc" />
 
 #### Print 5.2 — No Código / IDE (Template `order_new.html` e Estilos `_email-extend.less`)
 - **Arquivos:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Sales/email/order_new.html`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Sales/email/order_new.html) e [`src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_email-extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_email-extend.less)
 - **O que comprova:** Sobrescrita completa do template de e-mail do `Magento_Sales` com variáveis `{{trans}}` e regras LESS dedicadas processadas pelo Emogrifier para injeção de CSS inline.
 
-> 
+> <img width="1426" height="1088" alt="image" src="https://github.com/user-attachments/assets/59fd2e31-ceb5-4c2f-8782-2af9544e0840" />
 
 ---
 
@@ -201,7 +201,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/faixa-halloween.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/faixa-halloween.phtml)
 - **O que comprova:** Todas as saídas de texto utilizando `$block->escapeHtml(__('...'))` e links de redirecionamento utilizando `$block->escapeUrl(...)`.
 
-> 
+> <img width="1446" height="746" alt="image" src="https://github.com/user-attachments/assets/a2227fd5-67e2-4aca-b998-c986771e07a5" />
 
 ---
 
