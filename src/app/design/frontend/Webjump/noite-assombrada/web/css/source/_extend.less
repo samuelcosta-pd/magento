@@ -64,14 +64,51 @@ h1, h2, h3, h4, h5, h6,
 
     .header.panel {
         color: @color-cinza-neblina;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 24px !important;
+        padding-top: 6px !important;
+        padding-bottom: 6px !important;
 
-        a {
-            color: @color-cinza-neblina;
-            transition: color 0.2s ease-in-out;
+        .header.links {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+            float: none !important;
 
-            &:hover {
-                color: @color-dourado;
-                text-decoration: none;
+            li {
+                margin: 0 !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                font-size: 1.25rem !important;
+
+                &.greet.welcome {
+                    color: @color-texto-claro !important;
+                    font-weight: 600;
+                    margin-right: 4px !important;
+                }
+            }
+
+            .authorization-link:after {
+                content: attr(data-label) !important;
+                display: inline-block !important;
+                margin: 0 8px !important;
+                color: @color-cinza-neblina !important;
+                font-weight: normal !important;
+            }
+
+            a {
+                color: @color-cinza-neblina;
+                transition: color 0.2s ease-in-out;
+
+                &:hover {
+                    color: @color-dourado;
+                    text-decoration: none;
+                }
             }
         }
     }
@@ -123,6 +160,25 @@ h1, h2, h3, h4, h5, h6,
     align-items: center !important;
     justify-content: space-between !important;
     position: relative;
+
+    .logo-wrapper {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 14px !important;
+        margin: 0 !important;
+
+        .logo {
+            float: none !important;
+            margin: 0 !important;
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+
+        .halloween-logo-badge {
+            margin: 0 !important;
+            vertical-align: middle !important;
+        }
+    }
 }
 
 .minicart-wrapper {
@@ -373,6 +429,11 @@ button.action.secondary {
                 box-shadow: 0 12px 32px rgba(255, 107, 26, 0.35) !important;
                 transform: translateY(-4px);
                 background-color: @color-roxo-card !important;
+
+                .product-item-inner {
+                    border-color: @color-dourado !important;
+                    box-shadow: 0 16px 32px rgba(255, 107, 26, 0.35) !important;
+                }
             }
 
             .product-item-inner {
@@ -381,6 +442,7 @@ button.action.secondary {
                 border-top: none;
                 border-radius: 0 0 12px 12px;
                 box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
                 &:before {
                     background-color: @color-roxo-card !important;
@@ -460,36 +522,60 @@ button.action.secondary {
             .product-item-actions {
                 margin-top: 14px;
                 display: flex !important;
-                align-items: center !important;
-                justify-content: space-between !important;
+                flex-direction: column !important;
                 gap: 10px !important;
 
                 .actions-primary {
-                    flex: 1 1 auto !important;
+                    width: 100% !important;
 
                     .action.tocart {
                         width: 100% !important;
                         height: 42px !important;
                         border-radius: 25px !important;
+                        background-color: @color-dourado !important;
+                        border: 1px solid @color-dourado !important;
+                        color: @color-roxo-dark !important;
                         font-size: 1.3rem !important;
                         font-weight: 700 !important;
-                        display: flex !important;
+                        letter-spacing: 0.04em !important;
+                        white-space: nowrap !important;
+                        display: inline-flex !important;
                         align-items: center !important;
                         justify-content: center !important;
+                        padding: 0 20px !important;
+                        box-shadow: 0 4px 12px rgba(255, 211, 105, 0.3) !important;
+                        transition: all 0.25s ease-in-out !important;
+
+                        span {
+                            color: @color-roxo-dark !important;
+                            font-weight: 700 !important;
+                        }
+
+                        &:hover {
+                            background-color: @color-abobora !important;
+                            border-color: @color-abobora !important;
+                            transform: translateY(-2px);
+                            box-shadow: 0 6px 18px rgba(255, 107, 26, 0.5) !important;
+
+                            span {
+                                color: #FFFFFF !important;
+                            }
+                        }
                     }
                 }
 
-                // Botões Secundários de Ação (Wishlist e Compare) com alta visibilidade
+                // Botões Secundários de Ação (Wishlist e Compare) centralizados e simétricos
                 .actions-secondary {
                     display: flex !important;
                     align-items: center !important;
-                    gap: 8px !important;
-                    flex-shrink: 0 !important;
+                    justify-content: center !important;
+                    gap: 16px !important;
+                    width: 100% !important;
 
                     > .action {
-                        width: 42px !important;
-                        height: 42px !important;
-                        line-height: 40px !important;
+                        width: 38px !important;
+                        height: 38px !important;
+                        line-height: 36px !important;
                         border-radius: 50% !important;
                         background-color: lighten(@color-roxo-card, 8%) !important;
                         border: 1px solid @color-roxo-borda !important;
@@ -497,23 +583,24 @@ button.action.secondary {
                         display: inline-flex !important;
                         align-items: center !important;
                         justify-content: center !important;
-                        font-size: 18px !important;
-                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+                        font-size: 16px !important;
+                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
                         transition: all 0.25s ease !important;
                         padding: 0 !important;
 
                         &:before {
-                            font-size: 18px !important;
+                            font-size: 16px !important;
                             color: @color-dourado !important;
                             line-height: 1 !important;
                             margin: 0 !important;
+                            transition: color 0.2s ease;
                         }
 
                         &:hover {
                             background-color: @color-abobora !important;
                             border-color: @color-abobora !important;
-                            transform: scale(1.12) !important;
-                            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+                            transform: scale(1.1) !important;
+                            box-shadow: 0 0 12px rgba(255, 107, 26, 0.5) !important;
 
                             &:before {
                                 color: #FFFFFF !important;
@@ -537,42 +624,9 @@ button.action.secondary {
 .products-grid .product-item-actions .actions-secondary {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 8px !important;
-
-    > .action {
-        width: 42px !important;
-        height: 42px !important;
-        line-height: 40px !important;
-        border-radius: 50% !important;
-        background-color: lighten(@color-roxo-card, 8%) !important;
-        border: 1px solid @color-roxo-borda !important;
-        color: @color-dourado !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 18px !important;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
-        transition: all 0.25s ease !important;
-        padding: 0 !important;
-
-        &:before {
-            font-size: 18px !important;
-            color: @color-dourado !important;
-            line-height: 1 !important;
-            margin: 0 !important;
-        }
-
-        &:hover {
-            background-color: @color-abobora !important;
-            border-color: @color-abobora !important;
-            transform: scale(1.12) !important;
-            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
-
-            &:before {
-                color: #FFFFFF !important;
-            }
-        }
-    }
+    justify-content: center !important;
+    gap: 16px !important;
+    width: 100% !important;
 }
 
 .products-grid .product-item-inner,
@@ -1425,30 +1479,43 @@ select,
 
 // Logo Wrapper e Badge Temático (Sobrescrita do Template Logo)
 .logo-wrapper {
-    align-items: center;
-    display: inline-flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    align-items: center !important;
+    display: inline-flex !important;
+    gap: 14px !important;
+    margin: 0 !important;
+    vertical-align: middle !important;
+
+    .logo {
+        float: none !important;
+        margin: 0 !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+    }
 
     .halloween-logo-badge {
-        background-color: fade(@color-roxo-card, 80%);
+        background-color: fade(@color-roxo-card, 85%);
         border: 1px solid @color-abobora;
         border-radius: 12px;
         color: @color-dourado;
         font-size: 1.1rem;
         font-weight: 700;
         letter-spacing: 0.06em;
-        padding: 4px 10px;
+        padding: 4px 12px;
         text-transform: uppercase;
-        box-shadow: 0 0 8px rgba(255, 107, 26, 0.3);
+        box-shadow: 0 0 8px rgba(255, 107, 26, 0.35);
+        white-space: nowrap !important;
+        display: inline-block !important;
+        vertical-align: middle !important;
+        margin: 0 !important;
     }
 }
 
 // Estilização da Busca Global Movida para header.panel
 .panel.header {
     .block-search {
-        margin: 4px 0 4px auto;
-        max-width: 280px;
+        margin: 0 !important;
+        min-width: 280px !important;
+        max-width: 320px !important;
 
         .control {
             border: 1px solid @color-roxo-borda;
@@ -1461,11 +1528,13 @@ select,
                 border: none;
                 color: @color-texto-claro;
                 font-size: 1.3rem;
-                height: 32px;
-                padding: 0 36px 0 14px;
+                height: 34px;
+                padding: 0 40px 0 16px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
 
                 &::placeholder {
-                    color: @color-cinza-neblina;
+                    color: lighten(@color-cinza-neblina, 12%) !important;
                     font-style: italic;
                 }
 
@@ -1476,13 +1545,17 @@ select,
         }
 
         .action.search {
-            height: 32px;
-            width: 32px;
-            line-height: 32px;
+            height: 34px;
+            width: 34px;
+            line-height: 34px;
 
             &:before {
                 color: @color-dourado;
                 font-size: 1.6rem;
+            }
+
+            &:hover:before {
+                color: @color-abobora;
             }
         }
     }
