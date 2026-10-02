@@ -1,0 +1,1251 @@
+// /**
+//  * Copyright © Webjump. All rights reserved.
+//  */
+
+//
+//  1. Carregamento da Fonte Própria (Creepster)
+//  --------------------------------------------------------------------------
+@font-face {
+    font-family: 'Creepster';
+    src: url('@{baseDir}fonts/Creepster/creepster-regular.woff2') format('woff2'),
+         url('@{baseDir}fonts/Creepster/creepster-regular.woff') format('woff'),
+         url('@{baseDir}fonts/Creepster/creepster-regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+//
+//  2. Estrutura Global & Contraste
+//  --------------------------------------------------------------------------
+body {
+    background-color: @color-roxo-noite;
+    color: @color-texto-claro;
+    font-family: @font-family__base;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-wrapper {
+    background-color: @color-roxo-noite;
+}
+
+.page-main {
+    background-color: transparent;
+    color: @color-texto-claro;
+}
+
+.column.main {
+    background-color: transparent;
+}
+
+//
+//  3. Tipografia Temática (Halloween)
+//  --------------------------------------------------------------------------
+h1, h2, h3, h4, h5, h6,
+.page-title,
+.block-title strong,
+.title strong {
+    font-family: 'Creepster', cursive, sans-serif;
+    letter-spacing: 0.05em;
+    font-weight: normal;
+}
+
+.page-title-wrapper .page-title {
+    color: @color-dourado;
+    text-shadow: 0 2px 12px rgba(255, 107, 26, 0.35);
+}
+
+//
+//  4. Cabeçalho & Barra Superior
+//  --------------------------------------------------------------------------
+.panel.wrapper {
+    background-color: @color-roxo-panel;
+    border-bottom: 1px solid @color-roxo-borda;
+
+    .header.panel {
+        color: @color-cinza-neblina;
+
+        a {
+            color: @color-cinza-neblina;
+            transition: color 0.2s ease-in-out;
+
+            &:hover {
+                color: @color-dourado;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.page-header {
+    background-color: @color-roxo-dark;
+    border-bottom: 1px solid @color-roxo-borda;
+
+    .header.content {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+}
+
+// Campo de Busca com Estilo Pílula Noturno
+.block-search {
+    .input-text {
+        background-color: @color-roxo-card;
+        color: @color-texto-claro;
+        border: 1px solid @color-roxo-borda;
+        border-radius: 20px;
+        padding-left: 18px;
+        padding-right: 40px;
+        transition: all 0.3s ease;
+
+        &:focus {
+            border-color: @color-dourado;
+            box-shadow: 0 0 10px rgba(255, 211, 105, 0.4);
+        }
+    }
+
+    .action.search {
+        opacity: 0.85;
+
+        &:before {
+            color: @color-dourado;
+        }
+
+        &:hover:before {
+            color: @color-abobora;
+        }
+    }
+}
+
+// Minicart
+.minicart-wrapper {
+    .action.showcart {
+        &:before {
+            color: @color-dourado;
+        }
+
+        .counter.qty {
+            background: @color-abobora;
+            color: #FFFFFF;
+            font-weight: bold;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+
+//
+//  4.1. Breadcrumbs (Migalhas de Pão com Alto Contraste)
+//  --------------------------------------------------------------------------
+.breadcrumbs {
+    margin-bottom: 20px;
+
+    .items {
+        .item {
+            font-size: 1.3rem;
+
+            &:not(:last-child):after {
+                color: @color-abobora;
+                font-size: 1.2rem;
+                margin: 0 8px;
+            }
+
+            a {
+                color: @color-cinza-neblina;
+
+                &:hover {
+                    color: @color-dourado;
+                }
+            }
+
+            strong {
+                color: @color-dourado;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+//
+//  5. Menu de Navegação Horizontal & Submenus (Destaque e Contraste)
+//  --------------------------------------------------------------------------
+.nav-sections {
+    background-color: @color-roxo-card;
+    border-bottom: 2px solid @color-abobora;
+}
+
+.navigation {
+    background: transparent;
+
+    ul {
+        li.level0 {
+            > .level-top {
+                color: @color-texto-claro;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                transition: color 0.2s ease;
+
+                &:hover,
+                &.ui-state-focus {
+                    color: @color-dourado;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4);
+                }
+            }
+
+            &.active > .level-top {
+                color: @color-abobora;
+                border-bottom: 3px solid @color-abobora;
+            }
+        }
+    }
+
+    // Submenus Dropdown (Level 1, Level 2, Flyouts)
+    .submenu,
+    ul.submenu,
+    ul ul {
+        background-color: @color-roxo-card !important;
+        border: 1px solid @color-roxo-borda !important;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75) !important;
+        border-radius: 8px !important;
+        padding: 6px 0 !important;
+
+        li {
+            background-color: transparent !important;
+
+            a {
+                color: @color-texto-claro !important;
+                background-color: transparent !important;
+                font-size: 1.4rem !important;
+                font-weight: 600 !important;
+                padding: 10px 20px !important;
+                display: block !important;
+                transition: all 0.2s ease !important;
+
+                span {
+                    color: inherit !important;
+                }
+
+                &:hover,
+                &.ui-state-focus,
+                &.ui-state-active {
+                    color: @color-dourado !important;
+                    background-color: lighten(@color-roxo-card, 10%) !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+            }
+
+            // Ao passar o mouse no item do submenu
+            &:hover,
+            &.ui-state-focus,
+            &.active,
+            &.has-active {
+                background-color: lighten(@color-roxo-card, 10%) !important;
+
+                > a {
+                    color: @color-dourado !important;
+                    background-color: transparent !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+            }
+        }
+    }
+
+    // Submenu links em repouso e hover
+    .level0 {
+        .submenu a {
+            color: @color-texto-claro !important;
+            background: transparent !important;
+
+            span {
+                color: inherit !important;
+            }
+
+            &:hover,
+            &.ui-state-focus,
+            &.ui-state-active {
+                color: @color-dourado !important;
+                background-color: lighten(@color-roxo-card, 10%) !important;
+
+                span {
+                    color: @color-dourado !important;
+                }
+            }
+        }
+    }
+
+    // Cor da seta indicadora de submenu
+    .ui-menu-icon {
+        &:after {
+            color: @color-dourado !important;
+        }
+    }
+}
+
+//
+//  6. Botões Estilo Pílula (Inspirados em inspiracao-1.jpeg)
+//  --------------------------------------------------------------------------
+.action.primary,
+.action.tocart,
+.action-primary,
+button.action.primary {
+    border-radius: 25px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 28px;
+    box-shadow: 0 4px 14px rgba(255, 107, 26, 0.3);
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(124, 255, 107, 0.35);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+.action.secondary,
+button.action.secondary {
+    border-radius: 25px;
+    padding: 10px 22px;
+    transition: all 0.25s ease;
+}
+
+//
+//  7. Listagem de Produtos (Catalog Grid Cards & Hover Actions)
+//  --------------------------------------------------------------------------
+.products-grid {
+    .product-item {
+        .product-item-info {
+            background-color: @color-roxo-card !important;
+            border: 1px solid @color-roxo-borda !important;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+
+            &:hover,
+            &.active {
+                border-color: @color-dourado !important;
+                box-shadow: 0 12px 32px rgba(255, 107, 26, 0.35) !important;
+                transform: translateY(-4px);
+                background-color: @color-roxo-card !important;
+            }
+
+            .product-item-inner {
+                background-color: @color-roxo-card !important;
+                border: 1px solid @color-roxo-borda;
+                border-top: none;
+                border-radius: 0 0 12px 12px;
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+
+                &:before {
+                    background-color: @color-roxo-card !important;
+                    border: none !important;
+                }
+            }
+
+            // Imagens do Card com proporção quadrada perfeita (1:1 sem sobras ou espaços vazios)
+            .product-image-container,
+            [class*="product-image-container"] {
+                width: 100% !important;
+                max-width: 100% !important;
+                aspect-ratio: 1 / 1 !important;
+                height: auto !important;
+                display: block !important;
+                border-radius: 8px;
+                overflow: hidden;
+                background: darken(@color-roxo-card, 4%);
+                margin: 0 auto 12px auto !important;
+            }
+
+            .product-image-wrapper {
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+                position: relative !important;
+                padding-bottom: 0 !important;
+            }
+
+            .product-image-photo {
+                width: 100% !important;
+                height: 100% !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+                object-fit: contain !important;
+                display: block !important;
+                position: static !important;
+                transform: none !important;
+                transition: transform 0.3s ease;
+            }
+
+            &:hover .product-image-photo {
+                transform: scale(1.05) !important;
+            }
+
+            .product-item-name {
+                margin-top: 14px;
+
+                a {
+                    color: @color-texto-claro;
+                    font-size: 1.6rem;
+                    font-weight: 600;
+
+                    &:hover {
+                        color: @color-dourado;
+                        text-decoration: none;
+                    }
+                }
+            }
+
+            .price-box {
+                margin: 10px 0;
+
+                .price {
+                    color: @color-dourado;
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                    text-shadow: 0 1px 8px rgba(255, 211, 105, 0.3);
+                }
+
+                .old-price .price {
+                    color: @color-cinza-neblina;
+                    font-size: 1.5rem;
+                }
+            }
+
+            .product-item-actions {
+                margin-top: 14px;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 10px !important;
+
+                .actions-primary {
+                    flex: 1 1 auto !important;
+
+                    .action.tocart {
+                        width: 100% !important;
+                        height: 42px !important;
+                        border-radius: 25px !important;
+                        font-size: 1.3rem !important;
+                        font-weight: 700 !important;
+                        display: flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                    }
+                }
+
+                // Botões Secundários de Ação (Wishlist e Compare) com alta visibilidade
+                .actions-secondary {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 8px !important;
+                    flex-shrink: 0 !important;
+
+                    > .action {
+                        width: 42px !important;
+                        height: 42px !important;
+                        line-height: 40px !important;
+                        border-radius: 50% !important;
+                        background-color: lighten(@color-roxo-card, 8%) !important;
+                        border: 1px solid @color-roxo-borda !important;
+                        color: @color-dourado !important;
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;
+                        font-size: 18px !important;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+                        transition: all 0.25s ease !important;
+                        padding: 0 !important;
+
+                        &:before {
+                            font-size: 18px !important;
+                            color: @color-dourado !important;
+                            line-height: 1 !important;
+                            margin: 0 !important;
+                        }
+
+                        &:hover {
+                            background-color: @color-abobora !important;
+                            border-color: @color-abobora !important;
+                            transform: scale(1.12) !important;
+                            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+
+                            &:before {
+                                color: #FFFFFF !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.page-products .products-grid .product-item-inner {
+    background-color: @color-roxo-card !important;
+    &:before {
+        background: @color-roxo-card !important;
+    }
+}
+
+.product-item-actions .actions-primary + .actions-secondary,
+.products-grid .product-item-actions .actions-secondary {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+
+    > .action {
+        width: 42px !important;
+        height: 42px !important;
+        line-height: 40px !important;
+        border-radius: 50% !important;
+        background-color: lighten(@color-roxo-card, 8%) !important;
+        border: 1px solid @color-roxo-borda !important;
+        color: @color-dourado !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.25s ease !important;
+        padding: 0 !important;
+
+        &:before {
+            font-size: 18px !important;
+            color: @color-dourado !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+        }
+
+        &:hover {
+            background-color: @color-abobora !important;
+            border-color: @color-abobora !important;
+            transform: scale(1.12) !important;
+            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+
+            &:before {
+                color: #FFFFFF !important;
+            }
+        }
+    }
+}
+
+.products-grid .product-item-inner,
+.page-products .products-grid .product-item-inner,
+.block.widget .products-grid .product-item-inner {
+    background-color: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    border-top: none !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+
+    &:before {
+        background-color: @color-roxo-card !important;
+        border: none !important;
+    }
+}
+
+// Avaliações / Estrelas no Grid
+.rating-summary {
+    .rating-result > span:before {
+        color: @color-dourado;
+    }
+}
+
+//
+//  8. Página de Produto (PDP) & Qty Stepper Interativo (+ e -)
+//  --------------------------------------------------------------------------
+.catalog-product-view {
+    .product.media {
+        .gallery-placeholder {
+            background-color: darken(@color-roxo-card, 4%);
+            border: 1px solid @color-roxo-borda;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+
+            // Só estiliza a imagem estática de placeholder ENQUANTO o bloco está carregando
+            &._block-content-loading {
+                .gallery-placeholder__image {
+                    display: block;
+                    margin: 0 auto;
+                    max-width: 100%;
+                    height: auto;
+                }
+            }
+        }
+
+        .fotorama__stage {
+            background-color: darken(@color-roxo-card, 4%);
+            border: 1px solid @color-roxo-borda;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            margin-bottom: 12px;
+            max-width: 100%;
+        }
+
+        .fotorama__stage__frame {
+            .fotorama__img {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+        }
+
+        .fotorama__thumb-border {
+            border-color: @color-dourado !important;
+        }
+
+        .fotorama__thumb {
+            background-color: darken(@color-roxo-card, 4%);
+            border-radius: 4px;
+        }
+
+        .fotorama__arr--prev .fotorama__arr__arr {
+            border-color: @color-dourado;
+        }
+
+        .fotorama__arr--next .fotorama__arr__arr {
+            border-color: @color-dourado;
+        }
+    }
+
+    .product-info-main {
+        .page-title-wrapper .page-title {
+            font-size: 3.6rem;
+            margin-bottom: 12px;
+        }
+
+        .product-info-price {
+            background-color: rgba(33, 16, 58, 0.85);
+            border: 1px solid @color-roxo-borda;
+            border-radius: 10px;
+            padding: 16px 22px;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+
+            .price-box .price {
+                font-size: 3.2rem;
+                color: @color-dourado;
+                font-weight: 700;
+            }
+        }
+
+        .product-info-stock-sku {
+            color: @color-cinza-neblina;
+
+            .stock.available {
+                color: @color-verde-bruxa;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+        }
+
+        .box-tocart {
+            margin-top: 25px;
+
+            .field.qty {
+                margin-bottom: 20px;
+
+                .label {
+                    color: @color-texto-claro;
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                    display: block;
+                }
+
+                // Controle do Stepper com botões + e -
+                .qty-stepper-control {
+                    display: inline-flex;
+                    align-items: center;
+                    background: @color-roxo-card;
+                    border: 1px solid @color-roxo-borda;
+                    border-radius: 10px;
+                    padding: 3px;
+                    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+
+                    .action-qty {
+                        width: 44px;
+                        height: 44px;
+                        background-color: transparent;
+                        border: none;
+                        color: @color-dourado;
+                        font-size: 24px;
+                        font-weight: 700;
+                        line-height: 44px;
+                        text-align: center;
+                        cursor: pointer;
+                        border-radius: 8px;
+                        transition: all 0.2s ease;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 0;
+
+                        &:hover {
+                            background-color: @color-abobora;
+                            color: #FFFFFF;
+                            box-shadow: 0 0 12px rgba(255, 107, 26, 0.5);
+                        }
+
+                        &:active {
+                            transform: scale(0.92);
+                        }
+                    }
+
+                    .input-text.qty {
+                        width: 60px;
+                        height: 44px;
+                        background: transparent;
+                        border: none;
+                        border-left: 1px solid @color-roxo-borda;
+                        border-right: 1px solid @color-roxo-borda;
+                        border-radius: 0;
+                        color: @color-texto-claro;
+                        font-size: 2rem;
+                        font-weight: 700;
+                        text-align: center;
+                        margin: 0;
+                        padding: 0;
+                        box-shadow: none;
+
+                        -moz-appearance: textfield;
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+
+                        &:focus {
+                            outline: none;
+                            box-shadow: none;
+                            color: @color-dourado;
+                        }
+                    }
+                }
+            }
+
+            .action.tocart {
+                height: 48px;
+                font-size: 1.6rem;
+            }
+        }
+    }
+
+    // Abas de Detalhes / Descrição / Reviews com fundo contrastante e texto legível
+    .product.data.items {
+        > .item.title {
+            > .switch {
+                background-color: @color-roxo-card;
+                color: @color-texto-claro;
+                border: 1px solid @color-roxo-borda;
+                border-radius: 8px 8px 0 0;
+                font-weight: 600;
+
+                &:hover {
+                    color: @color-dourado;
+                }
+            }
+
+            &.active > .switch {
+                background-color: @color-roxo-noite;
+                border-bottom-color: @color-roxo-noite;
+                color: @color-dourado;
+            }
+        }
+
+        > .item.content {
+            background-color: @color-roxo-card;
+            border: 1px solid @color-roxo-borda;
+            border-radius: 0 0 10px 10px;
+            padding: 24px;
+            color: @color-texto-claro;
+            line-height: 1.7;
+        }
+    }
+}
+
+//
+//  9. Rodapé & Seção Newsletter (Inspirado no Signup da Referência)
+//  --------------------------------------------------------------------------
+.page-footer {
+    background-color: @color-roxo-dark;
+    border-top: 2px solid @color-abobora;
+    color: @color-texto-claro;
+    padding-top: 35px;
+
+    .footer.content {
+        .block.newsletter {
+            max-width: 520px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+
+            .title strong {
+                font-size: 2.6rem;
+                color: @color-dourado;
+            }
+
+            .form.subscribe {
+                margin-top: 15px;
+
+                .control {
+                    input[type="email"] {
+                        background-color: @color-roxo-card;
+                        border: 1px solid @color-roxo-borda;
+                        color: @color-texto-claro;
+                        border-radius: 25px;
+                        padding-left: 20px;
+                        height: 45px;
+
+                        &:focus {
+                            border-color: @color-dourado;
+                            box-shadow: 0 0 10px rgba(255, 211, 105, 0.3);
+                        }
+                    }
+                }
+
+                .action.subscribe {
+                    border-radius: 25px;
+                    height: 45px;
+                    padding: 0 25px;
+                }
+            }
+        }
+
+        ul.footer.links {
+            li {
+                a {
+                    color: @color-cinza-neblina;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: @color-dourado;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.copyright {
+    background-color: @color-roxo-panel;
+    border-top: 1px solid lighten(@color-roxo-panel, 8%);
+    color: @color-cinza-neblina;
+    padding: 15px 0;
+    text-align: center;
+}
+
+//
+//  10. Responsividade com Mixin do Magento
+//  --------------------------------------------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .page-title-wrapper .page-title {
+        font-size: 4.6rem;
+    }
+
+    .products-grid .product-item {
+        margin-bottom: 25px;
+    }
+
+    .header.content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+//
+//  11. Vitrine da Home (Webjump_Samuel) - Adaptação ao Tema Noite Assombrada
+//  --------------------------------------------------------------------------
+.webjump-samuel-home-block {
+    background: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+    border-radius: 16px !important;
+
+    .block-header {
+        .block-title {
+            font-family: 'Creepster', cursive, sans-serif !important;
+            color: @color-dourado !important;
+            font-size: 3.4rem !important;
+            letter-spacing: 0.05em !important;
+            text-shadow: 0 2px 10px rgba(255, 107, 26, 0.35) !important;
+        }
+
+        .block-subtitle {
+            color: @color-cinza-neblina !important;
+            font-size: 1.5rem !important;
+        }
+    }
+
+    .product-card {
+        background: darken(@color-roxo-card, 3%) !important;
+        border: 1px solid @color-roxo-borda !important;
+        border-radius: 12px !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+
+        &:hover {
+            border-color: @color-dourado !important;
+            box-shadow: 0 8px 25px rgba(255, 107, 26, 0.3) !important;
+            transform: translateY(-4px) !important;
+        }
+
+        .card-media {
+            background: darken(@color-roxo-card, 6%) !important;
+            height: 240px !important;
+            padding: 16px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+
+            .product-image {
+                width: 85% !important;
+                height: 85% !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+                object-fit: contain !important;
+            }
+        }
+
+        .card-content {
+            .product-sku {
+                color: @color-cinza-neblina !important;
+            }
+
+            .product-name a {
+                color: @color-texto-claro !important;
+
+                &:hover {
+                    color: @color-dourado !important;
+                }
+            }
+
+            .product-price .price {
+                color: @color-dourado !important;
+                font-weight: 700 !important;
+                font-size: 2rem !important;
+            }
+
+            .stock-meter {
+                background: rgba(255, 255, 255, 0.1) !important;
+
+                .stock-bar {
+                    background: linear-gradient(90deg, @color-abobora 0%, @color-dourado 100%) !important;
+                }
+            }
+
+            .card-actions .btn-view-product {
+                background: @color-dourado !important;
+                border-color: @color-dourado !important;
+                color: @color-roxo-dark !important;
+                border-radius: 25px !important;
+                font-weight: 700 !important;
+                text-transform: uppercase !important;
+                letter-spacing: 0.05em !important;
+                box-shadow: 0 3px 12px rgba(255, 107, 26, 0.3) !important;
+
+                &:hover {
+                    background: @color-abobora !important;
+                    border-color: @color-abobora !important;
+                    color: #FFFFFF !important;
+                    box-shadow: 0 5px 18px rgba(124, 255, 107, 0.35) !important;
+                }
+            }
+        }
+    }
+
+    .carousel-btn {
+        background: @color-roxo-card !important;
+        border: 1px solid @color-roxo-borda !important;
+        color: @color-dourado !important;
+
+        &:hover {
+            background: @color-abobora !important;
+            border-color: @color-abobora !important;
+            color: #FFFFFF !important;
+        }
+    }
+}
+
+//
+//  11.1. Componentes do Catálogo: Filtros, Toolbar, Mensagens e Carrinho
+//  --------------------------------------------------------------------------
+// Filtros da Barra Lateral (Layered Navigation)
+.block.filter {
+    background-color: @color-roxo-card;
+    border: 1px solid @color-roxo-borda;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+
+    .filter-title strong {
+        font-family: 'Creepster', cursive, sans-serif;
+        color: @color-dourado;
+        font-size: 2.2rem;
+        letter-spacing: 0.05em;
+    }
+
+    .filter-subtitle {
+        color: @color-dourado;
+        font-weight: 600;
+    }
+
+    .filter-options-title {
+        color: @color-texto-claro;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        border-bottom: 1px solid @color-roxo-borda;
+        cursor: pointer;
+
+        &:after {
+            color: @color-dourado;
+        }
+
+        &:hover {
+            color: @color-dourado;
+        }
+    }
+
+    .filter-options-content {
+        a {
+            color: @color-cinza-neblina;
+
+            &:hover {
+                color: @color-dourado;
+                text-decoration: none;
+            }
+        }
+
+        .count {
+            color: @color-abobora;
+        }
+    }
+}
+
+// Toolbar & Seletores (Ordenar Por / Itens por Página)
+select,
+.toolbar-sorter select,
+.field.limiter select {
+    background-color: @color-roxo-card;
+    color: @color-texto-claro;
+    border: 1px solid @color-roxo-borda;
+    border-radius: 6px;
+    padding: 6px 12px;
+
+    option {
+        background-color: @color-roxo-card;
+        color: @color-texto-claro;
+    }
+
+    &:focus {
+        border-color: @color-dourado;
+        box-shadow: 0 0 8px rgba(255, 211, 105, 0.3);
+    }
+}
+
+.toolbar {
+    .modes {
+        .modes-mode {
+            border: 1px solid @color-roxo-borda;
+            background: @color-roxo-card;
+            color: @color-texto-claro;
+            border-radius: 4px;
+
+            &.active {
+                background: @color-abobora;
+                border-color: @color-abobora;
+                color: #FFFFFF;
+            }
+
+            &:hover {
+                background: lighten(@color-roxo-card, 10%);
+                color: @color-dourado;
+            }
+        }
+    }
+
+    .toolbar-amount {
+        color: @color-cinza-neblina;
+    }
+
+    .sorter-action {
+        &:before {
+            color: @color-dourado;
+        }
+    }
+}
+
+// Paginação
+.pages {
+    .action {
+        background: @color-roxo-card;
+        border: 1px solid @color-roxo-borda;
+        color: @color-texto-claro;
+        border-radius: 4px;
+
+        &:hover {
+            background: @color-abobora;
+            border-color: @color-abobora;
+            color: #FFFFFF;
+        }
+    }
+
+    .item.current {
+        .page {
+            background: @color-abobora;
+            border-color: @color-abobora;
+            color: #FFFFFF;
+            border-radius: 4px;
+        }
+    }
+}
+
+// Mensagens Globais do Sistema (Feedback do Usuário)
+.message {
+    border-radius: 8px;
+    padding: 14px 20px;
+    font-weight: 600;
+
+    &.success {
+        background-color: rgba(33, 16, 58, 0.95);
+        border: 1px solid @color-verde-bruxa;
+        color: @color-verde-bruxa;
+
+        > *:first-child:before {
+            color: @color-verde-bruxa;
+        }
+    }
+
+    &.error {
+        background-color: rgba(33, 16, 58, 0.95);
+        border: 1px solid #FF4444;
+        color: #FF6666;
+
+        > *:first-child:before {
+            color: #FF4444;
+        }
+    }
+
+    &.notice,
+    &.warning {
+        background-color: rgba(33, 16, 58, 0.95);
+        border: 1px solid @color-abobora;
+        color: @color-dourado;
+
+        > *:first-child:before {
+            color: @color-abobora;
+        }
+    }
+}
+
+// Página do Carrinho de Compras
+.cart-container {
+    .cart.table {
+        background: @color-roxo-card;
+        border: 1px solid @color-roxo-borda;
+        border-radius: 10px;
+
+        thead tr th {
+            color: @color-dourado;
+            border-bottom: 1px solid @color-roxo-borda;
+        }
+
+        tbody tr td {
+            border-top: 1px solid @color-roxo-borda;
+        }
+
+        .product-item-name a {
+            color: @color-texto-claro;
+
+            &:hover {
+                color: @color-dourado;
+            }
+        }
+    }
+
+    .cart-summary {
+        background: @color-roxo-card;
+        border: 1px solid @color-roxo-borda;
+        border-radius: 12px;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+
+        .title {
+            color: @color-dourado;
+        }
+    }
+}
+
+//
+//  12. Media Queries de Desktop (@screen__m = 768px)
+//  --------------------------------------------------------------------------
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+    .navigation {
+        .level0 {
+            .submenu {
+                background-color: @color-roxo-card !important;
+                border: 1px solid @color-roxo-borda !important;
+                box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75) !important;
+
+                a {
+                    color: @color-texto-claro !important;
+                    background: transparent !important;
+
+                    span {
+                        color: @color-texto-claro !important;
+                    }
+
+                    &:hover,
+                    &.ui-state-focus,
+                    &.ui-state-active {
+                        color: @color-dourado !important;
+                        background-color: lighten(@color-roxo-card, 10%) !important;
+                        text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                        span {
+                            color: @color-dourado !important;
+                        }
+                    }
+                }
+
+                li:hover > a,
+                li.ui-state-focus > a,
+                li.active > a,
+                li.has-active > a {
+                    color: @color-dourado !important;
+                    background-color: lighten(@color-roxo-card, 10%) !important;
+                    text-shadow: 0 0 8px rgba(255, 211, 105, 0.4) !important;
+
+                    span {
+                        color: @color-dourado !important;
+                    }
+                }
+
+                // Submenus aninhados (flyouts nível 2, nível 3)
+                .submenu {
+                    background-color: @color-roxo-card !important;
+                    border: 1px solid @color-roxo-borda !important;
+                }
+            }
+        }
+    }
+}
+
