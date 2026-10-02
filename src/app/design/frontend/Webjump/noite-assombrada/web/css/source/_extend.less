@@ -117,11 +117,37 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// Minicart
+// Cabeçalho e Minicart Alinhados
+.header.content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    position: relative;
+}
+
 .minicart-wrapper {
+    margin-left: auto !important;
+    float: none !important;
+    position: relative;
+
     .action.showcart {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid fade(@color-roxo-borda, 50%);
+        transition: all 0.2s ease;
+
         &:before {
             color: @color-dourado;
+            font-size: 2.2rem;
+        }
+
+        &:hover {
+            background: rgba(255, 107, 26, 0.15);
+            border-color: @color-abobora;
         }
 
         .counter.qty {
@@ -130,6 +156,11 @@ h1, h2, h3, h4, h5, h6,
             font-weight: bold;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            min-width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            padding: 0 6px;
         }
     }
 }
@@ -558,10 +589,32 @@ button.action.secondary {
     }
 }
 
-// Avaliações / Estrelas no Grid
+// Avaliações / Estrelas no Grid e Formulário
 .rating-summary {
-    .rating-result > span:before {
-        color: @color-dourado;
+    .rating-result {
+        &:before {
+            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+            color: fade(@color-cinza-neblina, 40%) !important;
+        }
+
+        > span:before {
+            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+            color: @color-dourado !important;
+        }
+    }
+}
+
+.product-reviews-summary {
+    .rating-summary .rating-result {
+        &:before {
+            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+            color: fade(@color-cinza-neblina, 40%) !important;
+        }
+
+        > span:before {
+            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+            color: @color-dourado !important;
+        }
     }
 }
 
@@ -743,8 +796,15 @@ button.action.secondary {
             }
 
             .action.tocart {
-                height: 48px;
-                font-size: 1.6rem;
+                height: 50px !important;
+                width: auto !important;
+                min-width: 240px !important;
+                white-space: nowrap !important;
+                padding: 0 32px !important;
+                font-size: 1.6rem !important;
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
             }
         }
     }
@@ -928,10 +988,18 @@ button.action.secondary {
         .card-content {
             .product-sku {
                 color: @color-cinza-neblina !important;
+                font-family: @font-family__base !important;
+                font-size: 1.2rem !important;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
             }
 
             .product-name a {
                 color: @color-texto-claro !important;
+                font-family: @font-family__base !important;
+                font-weight: 700 !important;
+                letter-spacing: 0.02em !important;
+                font-size: 1.6rem !important;
 
                 &:hover {
                     color: @color-dourado !important;
@@ -1015,6 +1083,10 @@ button.action.secondary {
         letter-spacing: 0.04em;
         border-bottom: 1px solid @color-roxo-borda;
         cursor: pointer;
+        word-break: normal !important;
+        overflow-wrap: break-word !important;
+        word-wrap: normal !important;
+        hyphens: manual !important;
 
         &:after {
             color: @color-dourado;
@@ -1415,5 +1487,145 @@ select,
         }
     }
 }
+
+//
+//  14. Refinamento de Avaliações, Swatches e Formulários de Feedback
+//  --------------------------------------------------------------------------
+
+// Controle de Estrelas de Avaliação (Eliminação das setas e aplicação de estrelas temáticas)
+.review-control-vote {
+    &:before {
+        font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+        color: fade(@color-cinza-neblina, 40%) !important;
+    }
+
+    label:before {
+        font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
+        color: @color-dourado !important;
+    }
+}
+
+// Formulário de Avaliação (Inputs nítidos, Legenda Temática e Botão Pílula)
+.block.review-add {
+    background-color: @color-roxo-card;
+    border: 1px solid @color-roxo-borda;
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 24px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+
+    .review-legend.legend {
+        border-bottom: 1px solid @color-roxo-borda;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+
+        span {
+            color: @color-texto-claro;
+            font-size: 1.4rem;
+        }
+
+        strong {
+            color: @color-dourado;
+            font-family: @heading__font-family__base;
+            font-size: 2.4rem;
+            letter-spacing: 0.04em;
+            display: block;
+            margin-top: 4px;
+        }
+    }
+
+    .review-field-ratings {
+        > .label {
+            color: @color-dourado;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .review-field-rating .label {
+            color: @color-texto-claro;
+            font-weight: 600;
+        }
+    }
+
+    .field {
+        margin-bottom: 18px;
+
+        > .label {
+            color: @color-texto-claro;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .control {
+            .input-text,
+            textarea {
+                background-color: #170926 !important;
+                border: 1px solid @color-roxo-borda !important;
+                border-radius: 8px !important;
+                color: @color-texto-claro !important;
+                padding: 10px 14px !important;
+                font-size: 1.4rem !important;
+                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+                transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+                &:focus {
+                    border-color: @color-abobora !important;
+                    box-shadow: 0 0 10px rgba(255, 107, 26, 0.4) !important;
+                    outline: none !important;
+                }
+            }
+        }
+    }
+
+    .actions-toolbar.review-form-actions {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid @color-roxo-borda;
+
+        .action.submit.primary {
+            border-radius: 25px !important;
+            background: linear-gradient(135deg, @color-dourado 0%, @color-abobora 100%) !important;
+            border: none !important;
+            color: #120722 !important;
+            font-weight: 700 !important;
+            padding: 12px 32px !important;
+            text-transform: uppercase !important;
+            font-size: 1.4rem !important;
+            letter-spacing: 0.05em !important;
+            box-shadow: 0 4px 12px rgba(255, 107, 26, 0.4) !important;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            span {
+                color: #120722 !important;
+            }
+
+            &:hover {
+                transform: scale(1.04);
+                box-shadow: 0 6px 18px rgba(255, 211, 105, 0.6) !important;
+            }
+        }
+    }
+}
+
+// Swatches de Opção de Produto no Catálogo (Prevenção de caixas brancas ofuscantes)
+.swatch-option.text {
+    background-color: @color-roxo-card !important;
+    color: @color-texto-claro !important;
+    border: 1px solid @color-roxo-borda !important;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+    &.selected,
+    &:hover {
+        border-color: @color-dourado !important;
+        color: @color-dourado !important;
+        background-color: lighten(@color-roxo-card, 10%) !important;
+        box-shadow: 0 0 8px rgba(255, 211, 105, 0.4);
+    }
+}
+
 
 
