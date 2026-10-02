@@ -25,6 +25,9 @@ O tema foi estruturado com base na identidade visual fornecida na referência gr
 * **Pontos de Ação e Destaque:** Dourado místico (`#FFD369`) e Laranja Abóbora vibrante (`#FF6B1A`), aplicados nos preços, botões em formato pílula e chamadas.
 * **Estados de Interação:** Verde bruxa (`#7CFF6B`) para hovers luminosos e feedback visual.
 
+* <img width="735" height="1973" alt="inspiracao-1" src="https://github.com/user-attachments/assets/9547de29-0c44-4c6d-8361-f43a1672c6bd" />
+
+
 ### 2.2. A Mecânica do Fallback e Extensibilidade Limpa
 No Magento 2, o frontend opera por **camadas de herança**. Ao declarar `<parent>Magento/luma</parent>` em `theme.xml`:
 1. Todos os templates (`.phtml`), layouts XML, JavaScripts e estilos do Luma são herdados sem duplicação de arquivos.
@@ -115,12 +118,12 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 1.1 — No Painel Admin (Tema Registrado com Preview em Content > Design > Themes)
 - **O que comprova:** Tema **Noite Assombrada** listado com sucesso, indicando o tema pai `Magento Luma`, caminho de arquivos `frontend/Webjump/noite-assombrada` e a miniatura de preview (castelo assombrado e lua cheia).
 
-> <img width="1800" height="700" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1548" height="975" alt="image" src="https://github.com/user-attachments/assets/721a5c62-cf04-43e5-9830-876ed26ffbf6" />
 
 #### Print 1.2 — No Painel Admin (Tema Ativo na Store View em Content > Design > Configuration)
 - **O que comprova:** Configuração da *Default Store View* com o campo **Applied Theme** selecionado como **Noite Assombrada** e status de configuração salvo.
 
-> <img width="1800" height="700" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1545" height="660" alt="image" src="https://github.com/user-attachments/assets/b25501de-435f-4f17-9694-1a3dbb263dec" />
 
 ---
 
@@ -129,27 +132,26 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 2.1 — No Frontend (Home Page: Paleta Noturna, Submenus e Vitrine)
 - **O que comprova:** Página inicial com fundo noturno `#1A0B2E`, topo escuro `#120722`, submenus suspensos abertos com texto em lavanda `#EDE7F6` de alto contraste e hover dourado `#FFD369`, vitrine de produtos integrada ao layout e botões em formato pílula sem caixas brancas.
 
-> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1704" height="787" alt="image" src="https://github.com/user-attachments/assets/0d75276c-d017-4e89-86a2-cd9ab4b9ba5b" />
 
 #### Print 2.2 — No Frontend (Catálogo: Cards Proporcionais e Botões Secundários Ampliados)
 - **O que comprova:** Grade de produtos da categoria com cards proporcionais (aspect ratio 1:1, sem espaços vazios sob a imagem), botão principal pílula e botões secundários de Wishlist e Compare circulares (42px) com ícones visíveis e fundo escuro contínuo.
 
-> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1697" height="740" alt="image" src="https://github.com/user-attachments/assets/dd8d2a28-9ac3-4222-a1d8-f5c265f907e3" />
 
 #### Print 2.3 — No Frontend (Página de Produto / PDP: Galeria Centralizada e Stepper de Quantidade)
 - **O que comprova:** Página do produto com galeria de imagem centralizada e ampla (sem miniaturas sobrepostas ou duplicadas), título em `Creepster` dourado e o seletor de quantidade com botões interativos de `+` e `-`.
 
-> <img width="1800" height="900" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1678" height="737" alt="image" src="https://github.com/user-attachments/assets/030e1560-10f5-4459-8c46-df5c1b56b22d" />
 
 ---
 
-### 5.3. Critério 3: Regra de Ouro — Integridade do Core (`vendor/` e Luma Intocados)
+### 5.3. Critério 3: Integridade do Core (`vendor/` e Luma Intocados)
 
 #### Print 3.1 — No Terminal (Script de Validação do Core e Git Status)
-- **Arquivo:** [`check-vendor-changes.sh`](file:///home/samuel/Sites/magento/.agents/skills/magento-engineer/scripts/check-vendor-changes.sh)
-- **O que comprova:** Execução de `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working` exibindo `OK: no changes under vendor/.` e `git status` comprovando modificações restritas exclusivamente ao diretório do tema `app/design/frontend/Webjump/noite-assombrada/` e documentação.
+- **O que comprova:** Nenhuma alteração no vendor.
 
-> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
+> <img width="1642" height="371" alt="image" src="https://github.com/user-attachments/assets/c3c4fc36-eed5-47a7-a0ac-de0473e809cb" />
 
 ---
 
@@ -158,40 +160,4 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 4.1 — No Navegador / DevTools (Aba Network: Carregamento HTTP 200 da Fonte `Creepster`)
 - **O que comprova:** Requisição HTTP com status `200 OK` para o arquivo de fonte `creepster-regular.woff2` originada a partir do caminho estático do tema (`pub/static/frontend/Webjump/noite-assombrada/...`).
 
-> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
-
-#### Print 4.2 — No Frontend (Legibilidade do Texto Corrido e Hierarquia Tipográfica)
-- **O que comprova:** Corpo do texto corrido (abas de detalhes/descrição) renderizado em `Open Sans` lavanda claro (`#EDE7F6`) sobre fundo escuro com alto conforto visual e contraste WCAG, evidenciando que a fonte decorativa `Creepster` ficou estritamente restrita a títulos.
-
-> <img width="1800" height="600" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
-
----
-
-### 5.5. Critério 5: Justificativa Técnica das Variáveis Sobrescritas
-
-#### Print 5.1 — No Código / Documentação (Matriz de Variáveis no README e `_theme.less`)
-- **Arquivos:** [`README-16-1.md`](file:///home/samuel/Sites/magento/README-16-1.md) e [`web/css/source/_theme.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_theme.less)
-- **O que comprova:** Seção 3 do `README-16-1.md` apresentando a matriz completa das variáveis nativas da biblioteca UI do Magento/Luma redefinidas no tema, detalhando o valor aplicado e a justificativa arquitetural de cada alteração.
-
-> <img width="1800" height="800" alt="image" src="https://github.com/user-attachments/assets/coloque-o-link-aqui" />
-
----
-
-## 6. Comandos para Reprodução e Validação
-
-```bash
-# 1. Registrar o tema
-bin/magento setup:upgrade
-
-# 2. Ativar o tema na store view
-bin/magento config:set design/theme/theme_id 4
-
-# 3. Compilar o LESS e publicar os estáticos
-bin/magento setup:static-content:deploy -f pt_BR en_US
-
-# 4. Limpar o cache do Magento
-bin/magento cache:flush
-
-# 5. Validar integridade do core (Regra de Ouro)
-./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working
-```
+> <img width="1697" height="833" alt="image" src="https://github.com/user-attachments/assets/7d394d61-708a-41ec-9b8c-6d96485a5b6c" />
