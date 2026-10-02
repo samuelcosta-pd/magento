@@ -1,0 +1,25 @@
+<?php
+/**
+ * Desafio 16.2 - Faixa de Campanha Noite Assombrada
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div class="halloween-top-banner" role="banner" aria-label="<?= $block->escapeHtmlAttr(__('Faixa de Campanha Noite Assombrada')) ?>">
+    <div class="halloween-top-banner__container">
+        <span class="halloween-top-banner__icon" aria-hidden="true">🎃</span>
+        <div class="halloween-top-banner__content">
+            <strong class="halloween-top-banner__highlight">
+                <?= $block->escapeHtml(__('Noite Assombrada:')) ?>
+            </strong>
+            <span class="halloween-top-banner__message">
+                <?= $block->escapeHtml(__('Ganhe 10% OFF em poções e feitiços com o cupom')) ?>
+                <span class="halloween-top-banner__coupon"><?= $block->escapeHtml(__('ASSOMBRADO10')) ?></span>
+                <span class="halloween-top-banner__deadline"><?= $block->escapeHtml(__('até 31 de Outubro!')) ?></span>
+            </span>
+        </div>
+        <a class="halloween-top-banner__cta action" href="<?= $block->escapeUrl($block->getUrl('gear/bags.html')) ?>">
+            <span><?= $block->escapeHtml(__('Ver Ofertas')) ?></span>
+        </a>
+    </div>
+</div>
