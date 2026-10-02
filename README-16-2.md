@@ -205,16 +205,6 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.7. Critério 7: Integridade do Core (`vendor/` intocado)
-
-#### Print 7.1 — No Terminal (Script de Verificação de Vendor e Git Status)
-- **Comandos:** `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working` e `git status`
-- **O que comprova:** Terminal exibindo a mensagem `"OK: no changes under vendor/."` e árvore limpa na branch `exercicio/16-2-estrutura-textos-email`.
-
-> 
-
----
-
 ## 6. Comandos para Validação e Teste Local
 
 ```bash
