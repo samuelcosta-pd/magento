@@ -64,51 +64,14 @@ h1, h2, h3, h4, h5, h6,
 
     .header.panel {
         color: @color-cinza-neblina;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 24px !important;
-        padding-top: 6px !important;
-        padding-bottom: 6px !important;
 
-        .header.links {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 12px !important;
-            margin: 0 !important;
-            padding: 0 !important;
-            list-style: none !important;
-            float: none !important;
+        a {
+            color: @color-cinza-neblina;
+            transition: color 0.2s ease-in-out;
 
-            li {
-                margin: 0 !important;
-                display: inline-flex !important;
-                align-items: center !important;
-                font-size: 1.25rem !important;
-
-                &.greet.welcome {
-                    color: @color-texto-claro !important;
-                    font-weight: 600;
-                    margin-right: 4px !important;
-                }
-            }
-
-            .authorization-link:after {
-                content: attr(data-label) !important;
-                display: inline-block !important;
-                margin: 0 8px !important;
-                color: @color-cinza-neblina !important;
-                font-weight: normal !important;
-            }
-
-            a {
-                color: @color-cinza-neblina;
-                transition: color 0.2s ease-in-out;
-
-                &:hover {
-                    color: @color-dourado;
-                    text-decoration: none;
-                }
+            &:hover {
+                color: @color-dourado;
+                text-decoration: none;
             }
         }
     }
@@ -154,56 +117,11 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
-// Cabeçalho e Minicart Alinhados
-.header.content {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    position: relative;
-
-    .logo-wrapper {
-        display: inline-flex !important;
-        align-items: center !important;
-        gap: 14px !important;
-        margin: 0 !important;
-
-        .logo {
-            float: none !important;
-            margin: 0 !important;
-            display: inline-block !important;
-            vertical-align: middle !important;
-        }
-
-        .halloween-logo-badge {
-            margin: 0 !important;
-            vertical-align: middle !important;
-        }
-    }
-}
-
+// Minicart
 .minicart-wrapper {
-    margin-left: auto !important;
-    float: none !important;
-    position: relative;
-
     .action.showcart {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 12px;
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid fade(@color-roxo-borda, 50%);
-        transition: all 0.2s ease;
-
         &:before {
             color: @color-dourado;
-            font-size: 2.2rem;
-        }
-
-        &:hover {
-            background: rgba(255, 107, 26, 0.15);
-            border-color: @color-abobora;
         }
 
         .counter.qty {
@@ -212,11 +130,6 @@ h1, h2, h3, h4, h5, h6,
             font-weight: bold;
             border-radius: 12px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-            min-width: 20px;
-            height: 20px;
-            line-height: 20px;
-            text-align: center;
-            padding: 0 6px;
         }
     }
 }
@@ -429,11 +342,6 @@ button.action.secondary {
                 box-shadow: 0 12px 32px rgba(255, 107, 26, 0.35) !important;
                 transform: translateY(-4px);
                 background-color: @color-roxo-card !important;
-
-                .product-item-inner {
-                    border-color: @color-dourado !important;
-                    box-shadow: 0 16px 32px rgba(255, 107, 26, 0.35) !important;
-                }
             }
 
             .product-item-inner {
@@ -442,7 +350,6 @@ button.action.secondary {
                 border-top: none;
                 border-radius: 0 0 12px 12px;
                 box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
-                transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
                 &:before {
                     background-color: @color-roxo-card !important;
@@ -522,60 +429,36 @@ button.action.secondary {
             .product-item-actions {
                 margin-top: 14px;
                 display: flex !important;
-                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: space-between !important;
                 gap: 10px !important;
 
                 .actions-primary {
-                    width: 100% !important;
+                    flex: 1 1 auto !important;
 
                     .action.tocart {
                         width: 100% !important;
                         height: 42px !important;
                         border-radius: 25px !important;
-                        background-color: @color-dourado !important;
-                        border: 1px solid @color-dourado !important;
-                        color: @color-roxo-dark !important;
                         font-size: 1.3rem !important;
                         font-weight: 700 !important;
-                        letter-spacing: 0.04em !important;
-                        white-space: nowrap !important;
-                        display: inline-flex !important;
+                        display: flex !important;
                         align-items: center !important;
                         justify-content: center !important;
-                        padding: 0 20px !important;
-                        box-shadow: 0 4px 12px rgba(255, 211, 105, 0.3) !important;
-                        transition: all 0.25s ease-in-out !important;
-
-                        span {
-                            color: @color-roxo-dark !important;
-                            font-weight: 700 !important;
-                        }
-
-                        &:hover {
-                            background-color: @color-abobora !important;
-                            border-color: @color-abobora !important;
-                            transform: translateY(-2px);
-                            box-shadow: 0 6px 18px rgba(255, 107, 26, 0.5) !important;
-
-                            span {
-                                color: #FFFFFF !important;
-                            }
-                        }
                     }
                 }
 
-                // Botões Secundários de Ação (Wishlist e Compare) centralizados e simétricos
+                // Botões Secundários de Ação (Wishlist e Compare) com alta visibilidade
                 .actions-secondary {
                     display: flex !important;
                     align-items: center !important;
-                    justify-content: center !important;
-                    gap: 16px !important;
-                    width: 100% !important;
+                    gap: 8px !important;
+                    flex-shrink: 0 !important;
 
                     > .action {
-                        width: 38px !important;
-                        height: 38px !important;
-                        line-height: 36px !important;
+                        width: 42px !important;
+                        height: 42px !important;
+                        line-height: 40px !important;
                         border-radius: 50% !important;
                         background-color: lighten(@color-roxo-card, 8%) !important;
                         border: 1px solid @color-roxo-borda !important;
@@ -583,24 +466,23 @@ button.action.secondary {
                         display: inline-flex !important;
                         align-items: center !important;
                         justify-content: center !important;
-                        font-size: 16px !important;
-                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+                        font-size: 18px !important;
+                        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
                         transition: all 0.25s ease !important;
                         padding: 0 !important;
 
                         &:before {
-                            font-size: 16px !important;
+                            font-size: 18px !important;
                             color: @color-dourado !important;
                             line-height: 1 !important;
                             margin: 0 !important;
-                            transition: color 0.2s ease;
                         }
 
                         &:hover {
                             background-color: @color-abobora !important;
                             border-color: @color-abobora !important;
-                            transform: scale(1.1) !important;
-                            box-shadow: 0 0 12px rgba(255, 107, 26, 0.5) !important;
+                            transform: scale(1.12) !important;
+                            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
 
                             &:before {
                                 color: #FFFFFF !important;
@@ -624,9 +506,42 @@ button.action.secondary {
 .products-grid .product-item-actions .actions-secondary {
     display: inline-flex !important;
     align-items: center !important;
-    justify-content: center !important;
-    gap: 16px !important;
-    width: 100% !important;
+    gap: 8px !important;
+
+    > .action {
+        width: 42px !important;
+        height: 42px !important;
+        line-height: 40px !important;
+        border-radius: 50% !important;
+        background-color: lighten(@color-roxo-card, 8%) !important;
+        border: 1px solid @color-roxo-borda !important;
+        color: @color-dourado !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 18px !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.25s ease !important;
+        padding: 0 !important;
+
+        &:before {
+            font-size: 18px !important;
+            color: @color-dourado !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+        }
+
+        &:hover {
+            background-color: @color-abobora !important;
+            border-color: @color-abobora !important;
+            transform: scale(1.12) !important;
+            box-shadow: 0 0 14px rgba(255, 107, 26, 0.5) !important;
+
+            &:before {
+                color: #FFFFFF !important;
+            }
+        }
+    }
 }
 
 .products-grid .product-item-inner,
@@ -643,32 +558,10 @@ button.action.secondary {
     }
 }
 
-// Avaliações / Estrelas no Grid e Formulário
+// Avaliações / Estrelas no Grid
 .rating-summary {
-    .rating-result {
-        &:before {
-            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-            color: fade(@color-cinza-neblina, 40%) !important;
-        }
-
-        > span:before {
-            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-            color: @color-dourado !important;
-        }
-    }
-}
-
-.product-reviews-summary {
-    .rating-summary .rating-result {
-        &:before {
-            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-            color: fade(@color-cinza-neblina, 40%) !important;
-        }
-
-        > span:before {
-            font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-            color: @color-dourado !important;
-        }
+    .rating-result > span:before {
+        color: @color-dourado;
     }
 }
 
@@ -850,15 +743,8 @@ button.action.secondary {
             }
 
             .action.tocart {
-                height: 50px !important;
-                width: auto !important;
-                min-width: 240px !important;
-                white-space: nowrap !important;
-                padding: 0 32px !important;
-                font-size: 1.6rem !important;
-                display: inline-flex !important;
-                align-items: center !important;
-                justify-content: center !important;
+                height: 48px;
+                font-size: 1.6rem;
             }
         }
     }
@@ -1042,18 +928,10 @@ button.action.secondary {
         .card-content {
             .product-sku {
                 color: @color-cinza-neblina !important;
-                font-family: @font-family__base !important;
-                font-size: 1.2rem !important;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
             }
 
             .product-name a {
                 color: @color-texto-claro !important;
-                font-family: @font-family__base !important;
-                font-weight: 700 !important;
-                letter-spacing: 0.02em !important;
-                font-size: 1.6rem !important;
 
                 &:hover {
                     color: @color-dourado !important;
@@ -1137,10 +1015,6 @@ button.action.secondary {
         letter-spacing: 0.04em;
         border-bottom: 1px solid @color-roxo-borda;
         cursor: pointer;
-        word-break: normal !important;
-        overflow-wrap: break-word !important;
-        word-wrap: normal !important;
-        hyphens: manual !important;
 
         &:after {
             color: @color-dourado;
@@ -1374,331 +1248,4 @@ select,
         }
     }
 }
-
-//
-//  13. Desafio 16.2: Faixa de Campanha no Topo, Badge Temático e Layout XML
-//  --------------------------------------------------------------------------
-
-.halloween-top-banner {
-    background: linear-gradient(90deg, #0e0518 0%, #21103a 25%, #2a0845 50%, #21103a 75%, #0e0518 100%);
-    border-bottom: 2px solid @color-abobora;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
-    padding: 8px 16px;
-    position: relative;
-    z-index: 100;
-    text-align: center;
-
-    &__container {
-        align-items: center;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        margin: 0 auto;
-        max-width: 1280px;
-    }
-
-    &__icon {
-        font-size: 1.8rem;
-        line-height: 1;
-        animation: pulseSpooky 2s infinite ease-in-out;
-    }
-
-    &__content {
-        align-items: center;
-        display: inline-flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        font-size: 1.35rem;
-    }
-
-    &__highlight {
-        color: @color-dourado;
-        font-family: @heading__font-family__base;
-        font-size: 1.7rem;
-        letter-spacing: 0.05em;
-        text-shadow: 0 0 8px rgba(255, 211, 105, 0.5);
-    }
-
-    &__message {
-        color: @color-texto-claro;
-        font-weight: 500;
-    }
-
-    &__coupon {
-        background-color: @color-abobora;
-        border-radius: 4px;
-        color: #ffffff;
-        font-family: monospace;
-        font-size: 1.3rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        padding: 2px 8px;
-        box-shadow: 0 0 6px rgba(255, 107, 26, 0.6);
-    }
-
-    &__deadline {
-        color: @color-verde-bruxa;
-        font-weight: 600;
-    }
-
-    &__cta {
-        background: linear-gradient(135deg, @color-dourado 0%, @color-abobora 100%) !important;
-        border: none !important;
-        border-radius: 20px !important;
-        color: #120722 !important;
-        display: inline-block !important;
-        font-size: 1.2rem !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.05em !important;
-        padding: 5px 16px !important;
-        text-transform: uppercase !important;
-        transition: all 0.2s ease !important;
-        box-shadow: 0 2px 8px rgba(255, 107, 26, 0.4) !important;
-
-        span {
-            color: #120722 !important;
-        }
-
-        &:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 14px rgba(255, 211, 105, 0.6) !important;
-            color: #120722 !important;
-        }
-    }
-}
-
-@keyframes pulseSpooky {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15) rotate(-5deg);
-    }
-}
-
-// Logo Wrapper e Badge Temático (Sobrescrita do Template Logo)
-.logo-wrapper {
-    align-items: center !important;
-    display: inline-flex !important;
-    gap: 14px !important;
-    margin: 0 !important;
-    vertical-align: middle !important;
-
-    .logo {
-        float: none !important;
-        margin: 0 !important;
-        display: inline-block !important;
-        vertical-align: middle !important;
-    }
-
-    .halloween-logo-badge {
-        background-color: fade(@color-roxo-card, 85%);
-        border: 1px solid @color-abobora;
-        border-radius: 12px;
-        color: @color-dourado;
-        font-size: 1.1rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        padding: 4px 12px;
-        text-transform: uppercase;
-        box-shadow: 0 0 8px rgba(255, 107, 26, 0.35);
-        white-space: nowrap !important;
-        display: inline-block !important;
-        vertical-align: middle !important;
-        margin: 0 !important;
-    }
-}
-
-// Estilização da Busca Global Movida para header.panel
-.panel.header {
-    .block-search {
-        margin: 0 !important;
-        min-width: 280px !important;
-        max-width: 320px !important;
-
-        .control {
-            border: 1px solid @color-roxo-borda;
-            border-radius: 20px;
-            background-color: @color-roxo-card;
-            overflow: hidden;
-
-            input {
-                background: transparent;
-                border: none;
-                color: @color-texto-claro;
-                font-size: 1.3rem;
-                height: 34px;
-                padding: 0 40px 0 16px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-
-                &::placeholder {
-                    color: lighten(@color-cinza-neblina, 12%) !important;
-                    font-style: italic;
-                }
-
-                &:focus {
-                    box-shadow: 0 0 10px rgba(255, 211, 105, 0.4);
-                }
-            }
-        }
-
-        .action.search {
-            height: 34px;
-            width: 34px;
-            line-height: 34px;
-
-            &:before {
-                color: @color-dourado;
-                font-size: 1.6rem;
-            }
-
-            &:hover:before {
-                color: @color-abobora;
-            }
-        }
-    }
-}
-
-//
-//  14. Refinamento de Avaliações, Swatches e Formulários de Feedback
-//  --------------------------------------------------------------------------
-
-// Controle de Estrelas de Avaliação (Eliminação das setas e aplicação de estrelas temáticas)
-.review-control-vote {
-    &:before {
-        font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-        color: fade(@color-cinza-neblina, 40%) !important;
-    }
-
-    label:before {
-        font-family: 'luma-icons', 'icons-blank-theme', sans-serif !important;
-        color: @color-dourado !important;
-    }
-}
-
-// Formulário de Avaliação (Inputs nítidos, Legenda Temática e Botão Pílula)
-.block.review-add {
-    background-color: @color-roxo-card;
-    border: 1px solid @color-roxo-borda;
-    border-radius: 12px;
-    padding: 24px;
-    margin-top: 24px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
-
-    .review-legend.legend {
-        border-bottom: 1px solid @color-roxo-borda;
-        padding-bottom: 12px;
-        margin-bottom: 20px;
-
-        span {
-            color: @color-texto-claro;
-            font-size: 1.4rem;
-        }
-
-        strong {
-            color: @color-dourado;
-            font-family: @heading__font-family__base;
-            font-size: 2.4rem;
-            letter-spacing: 0.04em;
-            display: block;
-            margin-top: 4px;
-        }
-    }
-
-    .review-field-ratings {
-        > .label {
-            color: @color-dourado;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .review-field-rating .label {
-            color: @color-texto-claro;
-            font-weight: 600;
-        }
-    }
-
-    .field {
-        margin-bottom: 18px;
-
-        > .label {
-            color: @color-texto-claro;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .control {
-            .input-text,
-            textarea {
-                background-color: #170926 !important;
-                border: 1px solid @color-roxo-borda !important;
-                border-radius: 8px !important;
-                color: @color-texto-claro !important;
-                padding: 10px 14px !important;
-                font-size: 1.4rem !important;
-                box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-                transition: border-color 0.2s ease, box-shadow 0.2s ease;
-
-                &:focus {
-                    border-color: @color-abobora !important;
-                    box-shadow: 0 0 10px rgba(255, 107, 26, 0.4) !important;
-                    outline: none !important;
-                }
-            }
-        }
-    }
-
-    .actions-toolbar.review-form-actions {
-        margin-top: 24px;
-        padding-top: 16px;
-        border-top: 1px solid @color-roxo-borda;
-
-        .action.submit.primary {
-            border-radius: 25px !important;
-            background: linear-gradient(135deg, @color-dourado 0%, @color-abobora 100%) !important;
-            border: none !important;
-            color: #120722 !important;
-            font-weight: 700 !important;
-            padding: 12px 32px !important;
-            text-transform: uppercase !important;
-            font-size: 1.4rem !important;
-            letter-spacing: 0.05em !important;
-            box-shadow: 0 4px 12px rgba(255, 107, 26, 0.4) !important;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            span {
-                color: #120722 !important;
-            }
-
-            &:hover {
-                transform: scale(1.04);
-                box-shadow: 0 6px 18px rgba(255, 211, 105, 0.6) !important;
-            }
-        }
-    }
-}
-
-// Swatches de Opção de Produto no Catálogo (Prevenção de caixas brancas ofuscantes)
-.swatch-option.text {
-    background-color: @color-roxo-card !important;
-    color: @color-texto-claro !important;
-    border: 1px solid @color-roxo-borda !important;
-    border-radius: 4px;
-    font-weight: 600;
-    transition: all 0.2s ease;
-
-    &.selected,
-    &:hover {
-        border-color: @color-dourado !important;
-        color: @color-dourado !important;
-        background-color: lighten(@color-roxo-card, 10%) !important;
-        box-shadow: 0 0 8px rgba(255, 211, 105, 0.4);
-    }
-}
-
-
 
