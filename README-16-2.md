@@ -144,7 +144,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 2.1 — Na Loja / Storefront (Busca no Painel Superior e Ausência da Barra de Comparação)
 - **O que comprova:** Barra de busca global reposicionada dentro da barra superior (`header.panel`), liberando espaço no cabeçalho, e ausência da barra lateral de comparação de produtos na listagem de catálogo.
 
-> 
+> <img width="1713" height="273" alt="image" src="https://github.com/user-attachments/assets/339541b5-6016-49bd-ad0e-306fca75c826" />
 
 #### Print 2.2 — No Código / IDE (Instruções `<move>` e `<referenceBlock remove="true"/>`)
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/layout/default.xml)
@@ -169,7 +169,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 4.1 — Na Loja / Storefront (Vocabulário da Campanha na Interface)
 - **O que comprova:** Elementos da interface exibindo as traduções ativas do vocabulário assombrado: botões de compra com *"Colocar no caldeirão"*, input de busca com *"Procure algo assombroso..."* e cabeçalho com *"Entrar no covil"*.
 
-> 
+> <img width="1890" height="907" alt="image" src="https://github.com/user-attachments/assets/e1e45d43-175c-4f3d-ac12-e7bd1025e304" />
 
 #### Print 4.2 — No Código / IDE (Dicionário de Tradução `pt_BR.csv`)
 - **Arquivo:** [`src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv)
