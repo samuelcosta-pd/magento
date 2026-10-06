@@ -1425,3 +1425,229 @@ select,
     }
 }
 
+//
+//  12. Desafio 17.2: Modo Assombrado & Minicart Reativo
+//  --------------------------------------------------------------------------
+
+// 12.1. Interruptor do Modo Assombrado (Header)
+.haunted-mode-toggle-wrapper {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin: 0 10px;
+}
+
+.haunted-mode-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(42, 27, 61, 0.7);
+    border: 1px solid rgba(255, 107, 26, 0.5);
+    border-radius: 20px;
+    padding: 3px 12px;
+    cursor: pointer;
+    color: @color-texto-claro;
+    font-size: 1.2rem;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+
+    &:hover {
+        background: rgba(42, 27, 61, 0.95);
+        border-color: @color-abobora;
+        box-shadow: 0 0 10px rgba(255, 107, 26, 0.4);
+    }
+
+    .haunted-toggle-icon {
+        font-size: 1.4rem;
+        line-height: 1;
+        transition: transform 0.3s ease;
+    }
+
+    .haunted-toggle-text {
+        font-family: 'Creepster', cursive, sans-serif;
+        letter-spacing: 0.05em;
+        font-size: 1.4rem;
+        color: @color-dourado;
+    }
+
+    .haunted-toggle-switch {
+        display: inline-block;
+        width: 32px;
+        height: 16px;
+        background-color: #4a3b5c;
+        border-radius: 10px;
+        position: relative;
+        transition: background-color 0.3s ease;
+
+        .haunted-toggle-slider {
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: #EDE7F6;
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+    }
+
+    &.is-active,
+    &[aria-pressed="true"] {
+        border-color: @color-verde-bruxa;
+        background: rgba(18, 7, 34, 0.95);
+        box-shadow: 0 0 12px rgba(124, 255, 107, 0.5);
+
+        .haunted-toggle-icon {
+            transform: scale(1.15) rotate(10deg);
+        }
+
+        .haunted-toggle-text {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 8px rgba(124, 255, 107, 0.6);
+        }
+
+        .haunted-toggle-switch {
+            background-color: rgba(124, 255, 107, 0.3);
+
+            .haunted-toggle-slider {
+                transform: translateX(16px);
+                background-color: @color-verde-bruxa;
+                box-shadow: 0 0 8px @color-verde-bruxa;
+            }
+        }
+    }
+}
+
+// 12.2. Banner do Caldeirão no Minicart
+.haunted-minicart-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(42, 27, 61, 0.95) 0%, rgba(18, 7, 34, 0.98) 100%);
+    border: 1px solid @color-abobora;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 8px 0 14px 0;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(255, 107, 26, 0.15);
+    animation: cauldronGlow 3s ease-in-out infinite alternate;
+
+    .haunted-minicart-icon {
+        font-size: 2rem;
+        line-height: 1;
+        flex-shrink: 0;
+        animation: pulseIcon 2s ease-in-out infinite alternate;
+    }
+
+    .haunted-minicart-text {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #EDE7F6;
+        line-height: 1.4;
+    }
+}
+
+@keyframes cauldronGlow {
+    0% {
+        border-color: @color-abobora;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(255, 107, 26, 0.15);
+    }
+    100% {
+        border-color: @color-verde-bruxa;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6), inset 0 0 10px rgba(124, 255, 107, 0.2);
+    }
+}
+
+@keyframes pulseIcon {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+// 12.3. Transições Globais Suaves
+body,
+.page-wrapper,
+.panel.wrapper,
+.header.content,
+.nav-sections,
+.product-item-info,
+.page-footer,
+.block-minicart {
+    transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+// 12.4. Modo Assombrado (Visual Ultra Escuro / Sobrenatural)
+html.haunted-mode {
+    body,
+    .page-wrapper {
+        background-color: #07030e;
+        color: #d8cfe8;
+    }
+
+    .panel.wrapper {
+        background-color: #040108;
+        border-bottom-color: rgba(124, 255, 107, 0.25);
+    }
+
+    .header.content {
+        background-color: #05020b;
+        border-bottom: 2px solid @color-verde-bruxa;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.9), 0 0 18px rgba(124, 255, 107, 0.25);
+    }
+
+    .nav-sections {
+        background-color: #05020b;
+        border-bottom: 1px solid rgba(124, 255, 107, 0.3);
+    }
+
+    .product-item-info {
+        background: linear-gradient(180deg, #0e0517 0%, #06020c 100%);
+        border-color: rgba(124, 255, 107, 0.25);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.85);
+
+        &:hover {
+            border-color: @color-verde-bruxa;
+            box-shadow: 0 8px 26px rgba(0, 0, 0, 0.95), 0 0 18px rgba(124, 255, 107, 0.4);
+        }
+    }
+
+    .block-minicart {
+        background-color: #07030e;
+        border: 2px solid @color-verde-bruxa;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.95), 0 0 22px rgba(124, 255, 107, 0.35);
+
+        .block-title strong {
+            color: @color-verde-bruxa;
+        }
+
+        .items-total {
+            color: #EDE7F6;
+        }
+
+        .price {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 8px rgba(124, 255, 107, 0.4);
+        }
+    }
+
+    .haunted-minicart-banner {
+        background: linear-gradient(135deg, rgba(20, 6, 36, 0.98) 0%, rgba(7, 2, 14, 0.98) 100%);
+        border-color: @color-verde-bruxa;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.7), inset 0 0 10px rgba(124, 255, 107, 0.25);
+
+        .haunted-minicart-text {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 6px rgba(124, 255, 107, 0.3);
+        }
+    }
+
+    .page-footer {
+        background-color: #040108;
+        border-top: 2px solid @color-verde-bruxa;
+    }
+}
+

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Desafio 17.2: Injeção do interruptor de Modo Assombrado no cabeçalho
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="haunted.mode.toggle"
+                   before="-"
+                   template="Magento_Theme::html/header/haunted-mode-toggle.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

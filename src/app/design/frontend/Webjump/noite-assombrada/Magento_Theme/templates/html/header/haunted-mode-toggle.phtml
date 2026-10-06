@@ -1,0 +1,23 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Desafio 17.2: Interruptor do Modo Assombrado (Header)
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div class="haunted-mode-toggle-wrapper" data-role="haunted-mode-wrapper">
+    <button type="button"
+            id="haunted-mode-toggle"
+            class="action haunted-mode-toggle-btn"
+            data-role="haunted-mode-toggle"
+            aria-pressed="false"
+            aria-label="<?= $block->escapeHtmlAttr(__('Alternar Modo Assombrado')) ?>"
+            title="<?= $block->escapeHtmlAttr(__('Alternar Modo Assombrado')) ?>">
+        <span class="haunted-toggle-icon" aria-hidden="true">🎃</span>
+        <span class="haunted-toggle-text"><?= $block->escapeHtml(__('Modo Assombrado')) ?></span>
+        <span class="haunted-toggle-switch" aria-hidden="true">
+            <span class="haunted-toggle-slider"></span>
+        </span>
+    </button>
+</div>
