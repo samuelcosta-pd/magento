@@ -14,24 +14,13 @@ if (!$badgeViewModel instanceof \Webjump\ProductBadge\ViewModel\Badge || !$badge
     return;
 }
 
-$badgeLabel = $badgeViewModel->getBadgeLabel($_product);
-$badgeClass = $badgeViewModel->getBadgeCssClass($_product);
+$badgeLabel = (string) $badgeViewModel->getBadgeLabel($_product);
+$badgeClass = (string) $badgeViewModel->getBadgeCssClass($_product);
 ?>
-<div class="product-badge-wrapper" data-role="product-badge">
+<div class="product-badge-wrapper product-badge-wrapper--pdp" data-role="product-badge">
     <span class="product-badge <?= $escaper->escapeHtmlAttr($badgeClass) ?>"
           title="<?= $escaper->escapeHtmlAttr(__($badgeLabel)) ?>">
-        <span class="product-badge-icon" aria-hidden="true">
-            <svg width="14"
-                 height="14"
-                 viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2.5"
-                 stroke-linecap="round"
-                 stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            </svg>
-        </span>
+        <span class="product-badge-icon" aria-hidden="true">🎃</span>
         <span class="product-badge-text">
             <?= $escaper->escapeHtml(__($badgeLabel)) ?>
         </span>

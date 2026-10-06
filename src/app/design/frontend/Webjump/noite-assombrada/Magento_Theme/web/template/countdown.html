@@ -1,0 +1,36 @@
+<div class="halloween-countdown-container" data-bind="css: {'is-expired': isExpired()}">
+    <!-- ko ifnot: isExpired() -->
+    <div class="halloween-countdown-header">
+        <span class="halloween-countdown-icon" aria-hidden="true">🎃</span>
+        <span class="halloween-countdown-title" data-bind="text: formattedMessage"></span>
+    </div>
+    <div class="halloween-countdown-clock">
+        <div class="countdown-unit">
+            <span class="countdown-value" data-bind="text: days">00</span>
+            <span class="countdown-label" data-bind="i18n: 'Dias'">Dias</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+            <span class="countdown-value" data-bind="text: hours">00</span>
+            <span class="countdown-label" data-bind="i18n: 'Horas'">Horas</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+            <span class="countdown-value" data-bind="text: minutes">00</span>
+            <span class="countdown-label" data-bind="i18n: 'Minutos'">Minutos</span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit">
+            <span class="countdown-value" data-bind="text: seconds">00</span>
+            <span class="countdown-label" data-bind="i18n: 'Segundos'">Segundos</span>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: isExpired() -->
+    <div class="halloween-countdown-expired-box">
+        <span class="halloween-countdown-icon" aria-hidden="true">🦇</span>
+        <span class="halloween-countdown-expired-text" data-bind="text: formattedMessage"></span>
+    </div>
+    <!-- /ko -->
+</div>

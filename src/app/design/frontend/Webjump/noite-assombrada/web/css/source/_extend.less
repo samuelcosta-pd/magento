@@ -1249,3 +1249,179 @@ select,
     }
 }
 
+//
+//  12. Desafio 17.1: Contagem Regressiva e Selo Assombrado
+//  --------------------------------------------------------------------------
+
+// Contagem Regressiva (Knockout.js Component)
+.halloween-countdown-block {
+    background: linear-gradient(135deg, rgba(33, 16, 58, 0.95) 0%, rgba(18, 7, 34, 0.98) 100%);
+    border: 1px solid @color-roxo-borda;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 107, 26, 0.2);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+
+    &.halloween-countdown--home {
+        max-width: 850px;
+        margin: 20px auto 30px auto;
+        text-align: center;
+        border-color: @color-abobora;
+    }
+
+    &.halloween-countdown--pdp {
+        margin: 16px 0 20px 0;
+        padding: 14px 16px;
+    }
+
+    .halloween-countdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .halloween-countdown-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        .halloween-countdown-icon {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .halloween-countdown-title {
+            font-family: 'Creepster', cursive, sans-serif;
+            color: @color-dourado;
+            font-size: 2.2rem;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 10px rgba(255, 107, 26, 0.4);
+        }
+    }
+
+    .halloween-countdown-clock {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+
+        .countdown-unit {
+            background: #120722;
+            border: 1px solid @color-abobora;
+            border-radius: 8px;
+            padding: 8px 12px;
+            min-width: 62px;
+            text-align: center;
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+
+            .countdown-value {
+                display: block;
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: @color-dourado;
+                line-height: 1.1;
+                font-family: monospace, sans-serif;
+            }
+
+            .countdown-label {
+                display: block;
+                font-size: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: @color-cinza-neblina;
+                margin-top: 2px;
+            }
+        }
+
+        .countdown-separator {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: @color-abobora;
+            user-select: none;
+            line-height: 1;
+        }
+    }
+
+    .halloween-countdown-expired-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: rgba(255, 107, 26, 0.15);
+        border: 1px dashed @color-abobora;
+        border-radius: 8px;
+        padding: 12px 20px;
+        width: 100%;
+
+        .halloween-countdown-icon {
+            font-size: 2.2rem;
+        }
+
+        .halloween-countdown-expired-text {
+            color: @color-dourado;
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+    }
+}
+
+// Selo Assombrado (Product Badge)
+.product-item-photo {
+    position: relative;
+}
+
+.product-badge-wrapper {
+    &.product-badge-wrapper--listing {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    &.product-badge-wrapper--pdp {
+        margin-bottom: 12px;
+    }
+}
+
+.product-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, rgba(42, 27, 61, 0.95) 0%, rgba(18, 7, 34, 0.95) 100%);
+    border: 1.5px solid @color-abobora;
+    border-radius: 20px;
+    padding: 4px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6), 0 0 10px rgba(255, 107, 26, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    .product-badge-icon {
+        font-size: 1.4rem;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+
+        svg {
+            stroke: @color-abobora;
+        }
+    }
+
+    .product-badge-text {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: @color-dourado;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.7), 0 0 14px rgba(255, 107, 26, 0.6);
+    }
+}
+

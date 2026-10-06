@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.main">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="halloween.countdown.pdp"
+                   template="Magento_Theme::html/countdown.phtml"
+                   after="product.info.price"
+                   before="product.info.addtocart">
+                <arguments>
+                    <argument name="target_date" xsi:type="string">2026-10-31T23:59:59</argument>
+                    <argument name="custom_css_class" xsi:type="string">halloween-countdown--pdp</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

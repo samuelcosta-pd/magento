@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="search_result_list">
+            <arguments>
+                <argument name="badge_view_model" xsi:type="object">Webjump\ProductBadge\ViewModel\Badge</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
