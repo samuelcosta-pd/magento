@@ -23,5 +23,9 @@ composer.lock
 !/update
 !/update/.htaccess
 !/README.md
+!/README-17-4.md
+!/docs
+!/docs/**
+!/src/pub/media/wysiwyg/**
 !/op-exclude.txt
 auth.json

@@ -1249,3 +1249,143 @@ select,
     }
 }
 
+//
+//  13. Desafio 17.4: Caixão de Ofertas no Page Builder
+//  --------------------------------------------------------------------------
+.spooky-coffin-block {
+    margin: 30px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    .spooky-coffin-card {
+        background: linear-gradient(135deg, @color-roxo-card 0%, @color-roxo-dark 100%);
+        border: 2px solid @color-abobora;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(255, 107, 26, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        padding: 32px 28px;
+        text-align: center;
+        color: @color-texto-claro;
+        max-width: 580px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+
+        &:hover {
+            transform: translateY(-6px);
+            border-color: @color-verde-bruxa;
+            box-shadow: 0 16px 40px rgba(255, 107, 26, 0.4), 0 0 25px rgba(124, 255, 107, 0.25);
+
+            .coffin-head-icon {
+                transform: scale(1.15) rotate(-5deg);
+            }
+
+            .spooky-coffin-image {
+                transform: scale(1.04);
+            }
+        }
+
+        .spooky-coffin-ornament-top {
+            font-size: 26px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            align-items: center;
+
+            .coffin-head-icon {
+                font-size: 36px;
+                display: inline-block;
+                transition: transform 0.3s ease;
+            }
+
+            .coffin-bat {
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+            }
+        }
+
+        .spooky-coffin-badge-container {
+            margin-bottom: 18px;
+
+            .spooky-coffin-badge {
+                background: @color-abobora;
+                color: #120B1C;
+                font-size: 1.3rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                padding: 6px 18px;
+                border-radius: 20px;
+                display: inline-block;
+                letter-spacing: .08em;
+                box-shadow: 0 4px 12px rgba(255, 107, 26, 0.45);
+            }
+        }
+
+        .spooky-coffin-image-container {
+            margin-bottom: 22px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 107, 26, 0.3);
+            background: rgba(18, 7, 34, 0.7);
+            max-height: 280px;
+
+            .spooky-coffin-image {
+                width: 100%;
+                height: 100%;
+                max-height: 280px;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+        }
+
+        .spooky-coffin-content {
+            .spooky-coffin-title {
+                font-family: @heading__font-family__base;
+                color: @color-dourado;
+                font-size: 3.2rem;
+                font-weight: normal;
+                letter-spacing: .05em;
+                margin-bottom: 12px;
+                text-shadow: 0 2px 8px rgba(255, 107, 26, 0.5);
+                line-height: 1.2;
+            }
+
+            .spooky-coffin-description {
+                color: @color-cinza-neblina;
+                font-size: 1.5rem;
+                line-height: 1.6;
+                margin-bottom: 24px;
+            }
+
+            .spooky-coffin-action {
+                .spooky-coffin-btn {
+                    background: @color-dourado !important;
+                    color: @color-roxo-dark !important;
+                    font-weight: 800 !important;
+                    font-size: 1.6rem !important;
+                    padding: 14px 36px !important;
+                    border-radius: 30px !important;
+                    display: inline-block !important;
+                    border: none !important;
+                    text-transform: uppercase !important;
+                    letter-spacing: .08em !important;
+                    box-shadow: 0 4px 16px rgba(255, 211, 105, 0.4) !important;
+                    text-decoration: none !important;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: @color-verde-bruxa !important;
+                        color: @color-roxo-dark !important;
+                        box-shadow: 0 6px 20px rgba(124, 255, 107, 0.5) !important;
+                        transform: scale(1.05);
+                    }
+                }
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,54 @@
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<div class="pagebuilder-content-type pagebuilder-spooky-coffin type-nested"
+     event="{ mouseover: onMouseOver, mouseout: onMouseOut }, mouseoverBubble: false">
+    <render args="getOptions().template"></render>
+    <div class="spooky-coffin-wrapper" attr="data.main.attributes" ko-style="data.main.style" css="data.main.css">
+        <div class="spooky-coffin-card">
+            <div class="spooky-coffin-ornament-top">
+                <span class="coffin-bat">🦇</span>
+                <span class="coffin-head-icon">⚰️</span>
+                <span class="coffin-bat">🦇</span>
+            </div>
+
+            <!-- ko if: data.badge.html() -->
+            <div class="spooky-coffin-badge-container">
+                <span class="spooky-coffin-badge" attr="data.badge.attributes" html="data.badge.html"></span>
+            </div>
+            <!-- /ko -->
+
+            <div class="spooky-coffin-image-container">
+                <!-- ko if: data.image.attributes().src -->
+                <img class="spooky-coffin-image"
+                     attr="data.image.attributes"
+                     ko-style="data.image.style" />
+                <!-- /ko -->
+                <!-- ko ifnot: data.image.attributes().src -->
+                <div class="spooky-coffin-placeholder-image">
+                    <span class="placeholder-icon">🎃</span>
+                    <span class="placeholder-text" translate="'Imagem do Caixão de Ofertas'"></span>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div class="spooky-coffin-content">
+                <h3 class="spooky-coffin-title"
+                    attr="data.title.attributes"
+                    html="data.title.html() || 'Caixão de Ofertas Assombrado'"></h3>
+
+                <p class="spooky-coffin-description"
+                   attr="data.description.attributes"
+                   html="data.description.html() || 'Abra este caixão sob a lua cheia e descubra as promoções mais assombrosas do Halloween!'"></p>
+
+                <div class="spooky-coffin-action">
+                    <a class="action primary spooky-coffin-btn" attr="data.link.attributes">
+                        <span attr="data.button.attributes" html="data.button.html() || 'Abrir o Caixão ⚰️'"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
