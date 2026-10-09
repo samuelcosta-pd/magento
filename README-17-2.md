@@ -57,35 +57,13 @@ No ecossistema frontend do Magento 2, customizar componentes JavaScript existent
 
 ---
 
-## 4. Guia Técnico para Reprodução dos Prints
-
-Para atestar o cumprimento de cada critério de aceite no ambiente de desenvolvimento, siga este roteiro de verificação:
-
-1. **Critério 1 (Modo liga/desliga e persistência entre páginas):**
-   - Acesse `https://magento.test/`. Clique no interruptor no topo esquerdo do cabeçalho.
-   - Verifique que o tema escurece para o tom abissal e o botão acende em verde com ícone de caveira.
-   - Navegue para `https://magento.test/gear.html`. Abra o DevTools (F12) > Application > Local Storage e verifique `haunted_mode_enabled = "true"`.
-2. **Critério 2 (Troca por classe no HTML sem recarregar):**
-   - Abra o DevTools > Elements no console. Observe o elemento `<html class="...">`.
-   - Ao clicar no botão, a classe `haunted-mode` é adicionada e removida sem disparo de requisições de recarregamento (`network` vazia de reloads).
-3. **Critério 3 (Minicart alterado por mixin com `this._super()`):**
-   - Inspecione [`requirejs-config.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/requirejs-config.js) e [`minicart-mixin.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Checkout/web/js/view/minicart-mixin.js).
-4. **Critério 4 (Mensagem reativa por quantidade de itens):**
-   - Abra o minicart sem itens: veja a mensagem de caldeirão vazio.
-   - Adicione 1 produto simples (ex: Joust Duffle Bag): abra o minicart e veja a mensagem de primeiro feitiço.
-   - Altere a quantidade para 2 e clique em atualizar: veja a mensagem de caldeirão fervendo com 2 poções.
-5. **Critério 5 (Carrinho funcionando normalmente):**
-   - Teste a alteração de quantidade no minicart, o botão de remover item e o botão de checkout.
-
----
-
-## 5. Evidências de Sucesso
+## 4. Evidências de Sucesso
 
 Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **17.2 - Modo assombrado e minicart**.
 
 ---
 
-### 5.1. Critério 1: O modo liga e desliga, e a escolha continua valendo ao navegar para outra página
+### 4.1. Critério 1: O modo liga e desliga, e a escolha continua valendo ao navegar para outra página
 
 #### Print 1.1 — No Frontend (Modo Normal vs Modo Assombrado com Interruptor no Cabeçalho)
 - **O que comprova:** O interruptor do Modo Assombrado posicionado no painel superior do cabeçalho (`header.panel`), com visual temático acessível e o Modo Assombrado Ultra Dark ativado em toda a página inicial.
@@ -105,7 +83,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.2. Critério 2: A troca é por classe no HTML, não por recarregar a página
+### 4.2. Critério 2: A troca é por classe no HTML, não por recarregar a página
 
 #### Print 2.1 — No Frontend / DevTools (Inspeção da Tag `<html>` com a Classe `haunted-mode`)
 - **O que comprova:** DevTools Elements evidenciando a classe `haunted-mode` injetada dinamicamente no elemento raiz `<html>` sem refresh da página.
@@ -120,7 +98,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.3. Critério 3: O minicart foi alterado por mixin, com `this._super()` preservado
+### 4.3. Critério 3: O minicart foi alterado por mixin, com `this._super()` preservado
 
 #### Print 3.1 — No Código / IDE (Declaração do Mixin e Chamada de `this._super()`)
 - **Arquivos:** [`requirejs-config.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/requirejs-config.js) e [`Magento_Checkout/web/js/view/minicart-mixin.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Checkout/web/js/view/minicart-mixin.js)
@@ -130,7 +108,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.4. Critério 4: A mensagem do minicart muda conforme a quantidade de itens
+### 4.4. Critério 4: A mensagem do minicart muda conforme a quantidade de itens
 
 #### Print 4.1 — No Frontend (Minicart com 0 Itens / Caldeirão Vazio)
 - **O que comprova:** Minicart aberto exibindo a mensagem temática inicial: *"🧙‍♀️ Seu caldeirão está vazio e frio... Adicione feitiços antes que a meia-noite chegue!"*.
@@ -155,7 +133,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.5. Critério 5: O carrinho continua funcionando normalmente: adicionar, remover e atualizar quantidade
+### 4.5. Critério 5: O carrinho continua funcionando normalmente: adicionar, remover e atualizar quantidade
 
 #### Print 5.1 — No Frontend (Minicart Interativo: Atualização de Quantidade e Operações Nativas)
 - **O que comprova:** Minicart exibindo produto real com subtotal recalculado, input numérico de quantidade, ações de edição e checkout preservadas sem quebra de comportamento.
