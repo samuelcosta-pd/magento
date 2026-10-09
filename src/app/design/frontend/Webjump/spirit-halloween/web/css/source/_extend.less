@@ -1,0 +1,1005 @@
+// /**
+//  * Copyright © Webjump. All rights reserved.
+//  * Master Spirit Halloween Theme Extension Styles
+//  */
+
+//
+//  1. Reset & Configurações Globais
+//  --------------------------------------------------------------------------
+body {
+    background-color: #ffffff;
+    color: #212121;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+.page-wrapper {
+    background-color: #ffffff;
+}
+
+.page-main {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.cms-index-index .page-main {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+//
+//  2. Barra Superior Utilitária (Top Utility Bar)
+//  --------------------------------------------------------------------------
+.panel.wrapper {
+    background-color: #111111;
+    border-bottom: 1px solid #222222;
+
+    .header.panel {
+        padding: 6px 20px;
+        color: #ffffff;
+        font-size: 13px;
+
+        a {
+            color: #ffffff;
+            text-decoration: none;
+
+            &:hover {
+                color: #ea6a1b;
+            }
+        }
+    }
+}
+
+.spirit-top-utility-bar {
+    width: 100%;
+
+    .spirit-top-utility-inner {
+        max-width: 1440px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .spirit-top-badge {
+        background-color: #ea6a1b;
+        color: #ffffff;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        margin-right: 8px;
+    }
+
+    .spirit-top-text {
+        color: #eaeaea;
+        font-size: 12px;
+    }
+
+    .spirit-top-utility-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .spirit-top-link {
+        color: #ffffff;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s ease;
+
+        svg {
+            stroke: currentColor;
+        }
+
+        &:hover {
+            color: #ea6a1b;
+        }
+    }
+
+    .spirit-top-separator {
+        color: #444444;
+    }
+
+    .spirit-top-region {
+        color: #cccccc;
+        font-weight: 500;
+    }
+}
+
+//
+//  3. Cabeçalho Principal (Header Content, Logo & Busca)
+//  --------------------------------------------------------------------------
+.page-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 100;
+
+    .header.content {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+    }
+
+    .logo {
+        margin: 0;
+        display: flex;
+        align-items: center;
+
+        img {
+            max-height: 54px;
+            width: auto;
+            object-fit: contain;
+        }
+    }
+
+    // Caixa de busca Spirit Halloween
+    .block-search {
+        margin: 0 auto;
+        max-width: 600px;
+        flex: 1 1 500px;
+
+        .minisearch {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-text {
+            background-color: #f5f5f5;
+            color: #212121;
+            border: 1px solid #d5d5d5;
+            border-radius: 25px;
+            height: 44px;
+            padding: 0 45px 0 20px;
+            font-size: 14px;
+            width: 100%;
+            transition: all 0.2s ease;
+
+            &:focus {
+                background-color: #ffffff;
+                border-color: #ea6a1b;
+                box-shadow: 0 0 0 3px rgba(234, 106, 27, 0.2);
+                outline: none;
+            }
+
+            &::placeholder {
+                color: #777777;
+            }
+        }
+
+        .action.search {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: #ea6a1b;
+            padding: 6px;
+            cursor: pointer;
+
+            &:before {
+                color: #ea6a1b;
+                font-size: 18px;
+            }
+        }
+    }
+
+    // Minicart com contador
+    .minicart-wrapper {
+        margin-left: 0;
+
+        .action.showcart {
+            &:before {
+                color: #111111;
+                font-size: 26px;
+            }
+
+            .counter.qty {
+                background: #2a508f;
+                color: #ffffff;
+                border-radius: 50%;
+                font-size: 11px;
+                font-weight: 700;
+                height: 18px;
+                line-height: 18px;
+                min-width: 18px;
+                padding: 0 4px;
+            }
+        }
+    }
+}
+
+//
+//  4. Barra de Navegação / Menu de Categorias do Banco
+//  --------------------------------------------------------------------------
+.nav-sections {
+    background-color: #ffffff;
+    border-bottom: 2px solid #f0f0f0;
+
+    .navigation {
+        max-width: 1440px;
+        margin: 0 auto;
+        background: transparent;
+
+        ul {
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            list-style: none;
+            margin: 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .level0 {
+            margin: 0;
+
+            > .level-top {
+                font-size: 14px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                color: #111111;
+                padding: 12px 18px;
+                display: block;
+                text-decoration: none;
+                position: relative;
+                transition: color 0.2s ease;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 18px;
+                    right: 18px;
+                    height: 3px;
+                    background-color: transparent;
+                    transition: background-color 0.2s ease;
+                }
+
+                &:hover,
+                &.ui-state-focus {
+                    color: #ea6a1b;
+
+                    &:after {
+                        background-color: #ea6a1b;
+                    }
+                }
+            }
+
+            &.active > .level-top {
+                color: #ea6a1b;
+
+                &:after {
+                    background-color: #ea6a1b;
+                }
+            }
+
+            // Dropdown submenu
+            .submenu {
+                background: #ffffff;
+                border: 1px solid #e0e0e0;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+                border-radius: 4px;
+                padding: 12px 0;
+
+                a {
+                    color: #333333;
+                    font-size: 13px;
+                    font-weight: 500;
+                    padding: 8px 20px;
+
+                    &:hover {
+                        color: #ea6a1b;
+                        background-color: #f9f9f9;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
+//  5. Top Coupon Strip (Banner 20% OFF)
+//  --------------------------------------------------------------------------
+.spirit-coupon-banner {
+    width: 100%;
+    background-color: #ea6a1b;
+    line-height: 0;
+
+    .spirit-coupon-banner-link {
+        display: block;
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .spirit-coupon-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+}
+
+//
+//  6. Commercial Video Hero
+//  --------------------------------------------------------------------------
+.spt-commercial-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #000000;
+    line-height: 0;
+
+    .spt-commercial-hero__video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    .spt-commercial-hero__video--desktop {
+        display: block;
+    }
+
+    .spt-commercial-hero__video--mobile {
+        display: none;
+    }
+
+    .spt-commercial-hero__content {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+    }
+
+    .spt-commercial-hero__links {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .spt-hero-btn {
+        background-color: #ea6a1b;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 14px 34px;
+        border-radius: 30px;
+        text-decoration: none;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        transition: all 0.25s ease;
+        border: 2px solid transparent;
+
+        &:hover {
+            background-color: #ffffff;
+            color: #ea6a1b;
+            border-color: #ea6a1b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(234, 106, 27, 0.4);
+            text-decoration: none;
+        }
+    }
+}
+
+//
+//  7. Seções Padrão (spn-ui-block)
+//  --------------------------------------------------------------------------
+.spn-ui-block {
+    max-width: 1440px;
+    margin: 40px auto;
+    padding: 0 20px;
+
+    .spn-ui-block__header {
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .spn-ui-block__title {
+        font-size: 28px;
+        font-weight: 800;
+        color: #ea6a1b;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 6px 0;
+    }
+
+    .spn-ui-block__subtitle {
+        font-size: 16px;
+        color: #111111;
+        font-weight: 500;
+        margin: 0;
+    }
+}
+
+//
+//  8. Categorias em Destaque (Círculos)
+//  --------------------------------------------------------------------------
+.spirit-category-circles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 16px;
+    justify-content: center;
+    text-align: center;
+
+    .spirit-circle-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        group: true;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            text-decoration: none;
+            transform: translateY(-4px);
+
+            .spirit-circle-thumb {
+                border-color: #ea6a1b;
+                box-shadow: 0 6px 18px rgba(234, 106, 27, 0.25);
+            }
+
+            .spirit-circle-label {
+                color: #ea6a1b;
+            }
+        }
+    }
+
+    .spirit-circle-thumb {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #e5e5e5;
+        background-color: #f9f9f9;
+        margin-bottom: 8px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .spirit-circle-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #212121;
+        line-height: 1.2;
+        transition: color 0.2s ease;
+    }
+}
+
+//
+//  9. Grids Promocionais (Spot Grids: 5 e 6 colunas)
+//  --------------------------------------------------------------------------
+.spirit-spot-grid {
+    display: grid;
+    gap: 16px;
+
+    &.spirit-spot-grid-5 {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    &.spirit-spot-grid-6 {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .spirit-spot-card {
+        display: flex;
+        flex-direction: column;
+        text-decoration: none;
+        background: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            text-decoration: none;
+
+            .spirit-spot-image-box img {
+                transform: scale(1.04);
+            }
+
+            .spirit-spot-name {
+                color: #ea6a1b;
+            }
+        }
+    }
+
+    .spirit-spot-image-box {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+        overflow: hidden;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+    }
+
+    .spirit-spot-name {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 700;
+        color: #111111;
+        text-align: center;
+        transition: color 0.2s ease;
+    }
+}
+
+//
+//  10. Seção Marcas Licenciadas (Officially Licensed)
+//  --------------------------------------------------------------------------
+.spirit-brands-section {
+    background-color: #fcfcfc;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 30px 20px;
+}
+
+.spirit-brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+    gap: 12px;
+
+    .spirit-brand-item {
+        background: #ffffff;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 16 / 10;
+        transition: all 0.2s ease;
+
+        img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+
+        &:hover {
+            border-color: #ea6a1b;
+            box-shadow: 0 4px 14px rgba(234, 106, 27, 0.2);
+            transform: translateY(-2px);
+        }
+    }
+}
+
+//
+//  11. Vitrine Dinâmica do Catálogo (Produtos Reais)
+//  --------------------------------------------------------------------------
+.spirit-catalog-showcase {
+    background: #ffffff;
+}
+
+.spirit-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    .spirit-product-card {
+        background: #ffffff;
+        border: 1px solid #e5e5e5;
+        border-radius: 8px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.25s ease;
+
+        &:hover {
+            border-color: #ea6a1b;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+
+            .spirit-product-title a {
+                color: #ea6a1b;
+            }
+        }
+    }
+
+    .spirit-product-thumb {
+        position: relative;
+        padding: 16px;
+        background: #fdfdfd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 220px;
+
+        img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .spirit-product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ea6a1b;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+    }
+
+    .spirit-product-details {
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .spirit-product-sku {
+            font-size: 11px;
+            color: #777777;
+            margin-bottom: 4px;
+        }
+
+        .spirit-product-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            line-height: 1.3;
+
+            a {
+                color: #111111;
+                text-decoration: none;
+                transition: color 0.2s ease;
+            }
+        }
+
+        .spirit-product-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ea6a1b;
+            margin-top: auto;
+            margin-bottom: 12px;
+        }
+
+        .spirit-product-btn {
+            background-color: #ea6a1b;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: #cf550c;
+                box-shadow: 0 4px 12px rgba(207, 85, 12, 0.35);
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+//
+//  12. Tríade Promocional Inferior (Butterfinger, SOC, Blog)
+//  --------------------------------------------------------------------------
+.spirit-triad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    .spirit-triad-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s ease;
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        &:hover {
+            transform: translateY(-4px);
+        }
+    }
+}
+
+//
+//  13. Rodapé Spirit Halloween (Newsletter & Multi-colunas)
+//  --------------------------------------------------------------------------
+.spirit-newsletter-strip {
+    background: #ea6a1b;
+    color: #ffffff;
+    padding: 36px 20px;
+    margin-top: 40px;
+
+    .spirit-newsletter-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .spirit-newsletter-info {
+        flex: 1 1 450px;
+
+        .spirit-newsletter-tag {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            opacity: 0.9;
+        }
+
+        .spirit-newsletter-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin: 4px 0 8px 0;
+            color: #ffffff;
+        }
+
+        .spirit-newsletter-desc {
+            font-size: 14px;
+            margin: 0;
+            opacity: 0.95;
+            line-height: 1.4;
+        }
+    }
+
+    .spirit-newsletter-form {
+        flex: 1 1 450px;
+    }
+
+    .spirit-newsletter-input-group {
+        display: flex;
+        gap: 8px;
+
+        input[type="email"] {
+            background-color: #ffffff;
+            color: #212121;
+            border: none;
+            border-radius: 25px;
+            padding: 14px 22px;
+            font-size: 14px;
+            flex: 1;
+
+            &::placeholder {
+                color: #888888;
+            }
+        }
+
+        .spirit-newsletter-btn {
+            background-color: #111111;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+
+            &:hover {
+                background-color: #222222;
+            }
+        }
+    }
+}
+
+.spirit-footer-main {
+    background-color: #111111;
+    color: #eaeaea;
+    padding: 50px 20px 20px 20px;
+
+    .spirit-footer-container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .spirit-footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .spirit-footer-heading {
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin: 0 0 16px 0;
+        border-bottom: 2px solid #ea6a1b;
+        display: inline-block;
+        padding-bottom: 4px;
+    }
+
+    .spirit-footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            margin-bottom: 10px;
+
+            a {
+                color: #bbbbbb;
+                font-size: 13px;
+                text-decoration: none;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    color: #ea6a1b;
+                }
+            }
+        }
+    }
+
+    .spirit-footer-social {
+        margin-top: 20px;
+
+        .spirit-social-label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .spirit-social-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .spirit-social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: #222222;
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background: #ea6a1b;
+                color: #ffffff;
+            }
+        }
+    }
+
+    .spirit-footer-bottom {
+        border-top: 1px solid #222222;
+        padding-top: 24px;
+        text-align: center;
+    }
+
+    .spirit-footer-badges {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+
+        .spirit-badge-item {
+            font-size: 12px;
+            color: #888888;
+        }
+    }
+
+    .spirit-footer-copyright {
+        font-size: 12px;
+        color: #777777;
+        margin: 0;
+    }
+}
+
+//
+//  14. Responsividade
+//  --------------------------------------------------------------------------
+@media (max-width: 1024px) {
+    .spirit-spot-grid.spirit-spot-grid-5,
+    .spirit-spot-grid.spirit-spot-grid-6 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .spirit-products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .spirit-footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .spt-commercial-hero__video--desktop {
+        display: none !important;
+    }
+
+    .spt-commercial-hero__video--mobile {
+        display: block !important;
+    }
+
+    .spt-commercial-hero__content {
+        bottom: 15px;
+    }
+
+    .spt-hero-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+
+    .spirit-spot-grid.spirit-spot-grid-5,
+    .spirit-spot-grid.spirit-spot-grid-6 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .spirit-triad-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spirit-products-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spirit-footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spirit-newsletter-input-group {
+        flex-direction: column;
+    }
+}

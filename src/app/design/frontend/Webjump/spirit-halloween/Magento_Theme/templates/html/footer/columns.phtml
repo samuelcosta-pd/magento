@@ -1,0 +1,78 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Multi-column footer for Spirit Halloween
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="spirit-footer-main">
+    <div class="spirit-footer-container">
+        <div class="spirit-footer-grid">
+            <div class="spirit-footer-col">
+                <h4 class="spirit-footer-heading"><?= $escaper->escapeHtml(__('Informações de Pedidos')) ?></h4>
+                <ul class="spirit-footer-links">
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer/account')) ?>"><?= $escaper->escapeHtml(__('Minha Conta')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('sales/order/history')) ?>"><?= $escaper->escapeHtml(__('Status do Pedido')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('privacy-policy-cookie-restriction-mode')) ?>"><?= $escaper->escapeHtml(__('Política de Devolução')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer-service')) ?>"><?= $escaper->escapeHtml(__('Prazos e Entregas')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer-service')) ?>"><?= $escaper->escapeHtml(__('Guia de Tamanhos')) ?></a></li>
+                </ul>
+            </div>
+
+            <div class="spirit-footer-col">
+                <h4 class="spirit-footer-heading"><?= $escaper->escapeHtml(__('Sobre a Spirit')) ?></h4>
+                <ul class="spirit-footer-links">
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('about-us')) ?>"><?= $escaper->escapeHtml(__('Quem Somos')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>"><?= $escaper->escapeHtml(__('Encontre Nossas Lojas')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('about-us')) ?>"><?= $escaper->escapeHtml(__('Vantagens Spirit Halloween')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('about-us')) ?>"><?= $escaper->escapeHtml(__('Trabalhe Conosco')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('about-us')) ?>"><?= $escaper->escapeHtml(__('Imprensa & Notícias')) ?></a></li>
+                </ul>
+            </div>
+
+            <div class="spirit-footer-col">
+                <h4 class="spirit-footer-heading"><?= $escaper->escapeHtml(__('Recursos & Ajuda')) ?></h4>
+                <ul class="spirit-footer-links">
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer-service')) ?>"><?= $escaper->escapeHtml(__('Central de Ajuda (FAQ)')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>"><?= $escaper->escapeHtml(__('Fale Conosco')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('about-us')) ?>"><?= $escaper->escapeHtml(__('Ações Sociais Spirit')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('catalogsearch/advanced')) ?>"><?= $escaper->escapeHtml(__('Busca Avançada')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('what-is-new.html')) ?>"><?= $escaper->escapeHtml(__('Lançamentos 2026')) ?></a></li>
+                </ul>
+            </div>
+
+            <div class="spirit-footer-col">
+                <h4 class="spirit-footer-heading"><?= $escaper->escapeHtml(__('Políticas & Segurança')) ?></h4>
+                <ul class="spirit-footer-links">
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('privacy-policy-cookie-restriction-mode')) ?>"><?= $escaper->escapeHtml(__('Política de Privacidade')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('enable-cookies')) ?>"><?= $escaper->escapeHtml(__('Política de Cookies')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer-service')) ?>"><?= $escaper->escapeHtml(__('Termos e Condições')) ?></a></li>
+                    <li><a href="<?= $escaper->escapeUrl($block->getUrl('customer-service')) ?>"><?= $escaper->escapeHtml(__('Acessibilidade')) ?></a></li>
+                </ul>
+
+                <div class="spirit-footer-social">
+                    <span class="spirit-social-label"><?= $escaper->escapeHtml(__('Siga a Spirit Halloween:')) ?></span>
+                    <div class="spirit-social-icons">
+                        <span class="spirit-social-btn" title="Facebook">FB</span>
+                        <span class="spirit-social-btn" title="Instagram">IG</span>
+                        <span class="spirit-social-btn" title="YouTube">YT</span>
+                        <span class="spirit-social-btn" title="TikTok">TK</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="spirit-footer-bottom">
+            <div class="spirit-footer-badges">
+                <span class="spirit-badge-item">&#128274; Compra 100% Segura</span>
+                <span class="spirit-badge-item">&#128666; Envio para Todo o Brasil</span>
+                <span class="spirit-badge-item">&#9733; Loja Oficial Nº 1 de Halloween</span>
+            </div>
+            <p class="spirit-footer-copyright">
+                <?= $escaper->escapeHtml(__('© 2026 Spirit Halloween Store. Todos os direitos reservados. Projeto Acadêmico Webjump.')) ?>
+            </p>
+        </div>
+    </div>
+</div>

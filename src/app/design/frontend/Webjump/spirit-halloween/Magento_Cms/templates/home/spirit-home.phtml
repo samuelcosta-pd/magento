@@ -1,0 +1,392 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Master Spirit Halloween Homepage Template
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+
+/** @var \Webjump\Samuel\ViewModel\Home|null $viewModel */
+$viewModel = $block->getData('view_model');
+$catalogProducts = [];
+if ($viewModel instanceof \Webjump\Samuel\ViewModel\Home) {
+    $catalogProducts = $viewModel->getLowStockProducts(100, 8);
+}
+?>
+
+<div class="spirit-home-page-container">
+
+    <!-- 1. Top Coupon Banner -->
+    <div class="spirit-coupon-banner">
+        <a href="<?= $escaper->escapeUrl($block->getUrl('sale.html')) ?>" class="spirit-coupon-banner-link" title="20% de Desconto em Qualquer Item">
+            <picture>
+                <source media="(max-width: 768px)" srcset="<?= $block->getViewFileUrl('images/10_09_26_20off_1Item_instore_online_10527_894x165.jpg') ?>" />
+                <img src="<?= $block->getViewFileUrl('images/10_09_26_20off_1Item_instore_online_10527_1400x100.jpg') ?>"
+                     alt="20% OFF em Qualquer Item - Na Loja ou Online"
+                     class="spirit-coupon-img" />
+            </picture>
+        </a>
+    </div>
+
+    <!-- 2. Commercial Video Hero -->
+    <section class="spt-commercial-hero" aria-label="Apresentação Comercial Spirit Halloween">
+        <video autoplay loop muted playsinline class="spt-commercial-hero__video spt-commercial-hero__video--desktop">
+            <source src="<?= $block->getViewFileUrl('images/ed00e8cc-43d5-4ec9-914c-8f1af304767b.mp4') ?>" type="video/mp4" />
+        </video>
+        <video autoplay loop muted playsinline class="spt-commercial-hero__video spt-commercial-hero__video--mobile">
+            <source src="<?= $block->getViewFileUrl('images/f64564c2-9eea-49fb-a401-66e36db02681.mp4') ?>" type="video/mp4" />
+        </video>
+        <div class="spt-commercial-hero__content">
+            <div class="spt-commercial-hero__links">
+                <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spt-hero-btn">
+                    <span><?= $escaper->escapeHtml(__('Fantasias Adulto')) ?></span>
+                </a>
+                <a href="<?= $escaper->escapeUrl($block->getUrl('women.html')) ?>" class="spt-hero-btn">
+                    <span><?= $escaper->escapeHtml(__('Fantasias Infantis')) ?></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Featured Categories (Círculos em Destaque) -->
+    <section class="spn-ui-block spirit-circles-block" aria-labelledby="featured-categories-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="featured-categories-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Categorias em Destaque')) ?></h2>
+        </header>
+        <div class="spirit-category-circles-grid">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/animatronic_images.jpg') ?>" alt="Animatrônicos" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Animatrônicos')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Indoor_Décor_Circle_10545.jpg') ?>" alt="Decoração Interna" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Decoração Interna')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Outdoor_Décor_Circle_10545.jpg') ?>" alt="Decoração Externa" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Decoração Externa')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear/watches.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Collectibles_Décor_Circle_10545.jpg') ?>" alt="Colecionáveis" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Colecionáveis')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Womens_Décor_Circle_10545.jpg') ?>" alt="Fantasias Femininas" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Feminino')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Mesns_Décor_Circle_10545.jpg') ?>" alt="Fantasias Masculinas" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Masculino')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women/tops-women.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Girls_Décor_Circle_10545.jpg') ?>" alt="Fantasias Meninas" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Meninas')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men/tops-men.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Boys_Décor_Circle_10545.jpg') ?>" alt="Fantasias Meninos" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Meninos')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women/bottoms-women.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Toddler_Décor_Circle_10545.jpg') ?>" alt="Infantil" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Infantil')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear/bags.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Baby_Décor_Circle_10545.jpg') ?>" alt="Bebês" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Bebês')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/Accessories_Décor_Circle_10545.jpg') ?>" alt="Acessórios" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Acessórios')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('sale.html')) ?>" class="spirit-circle-item">
+                <div class="spirit-circle-thumb">
+                    <img src="<?= $block->getViewFileUrl('images/CatCircle_Christmas_082726 2.jpg') ?>" alt="Especial Natal" loading="lazy" />
+                </div>
+                <span class="spirit-circle-label"><?= $escaper->escapeHtml(__('Especiais')) ?></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 4. Section: Costumes (Fantasias) -->
+    <section class="spn-ui-block" aria-labelledby="costumes-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="costumes-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Fantasias')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Repletas de ação e prontas para a diversão!')) ?></p>
+        </header>
+        <div class="spirit-spot-grid spirit-spot-grid-5">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/07_21_26_Spiderman_9815_PaidSocial_1080x1080.jpg') ?>" alt="Homem-Aranha" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Homem-Aranha')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/08_17_26_ToyStory_Send3_9863_SquareSpot_810x874.jpg') ?>" alt="Toy Story" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Toy Story')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/DCVillians_10083_1080x1080.jpg') ?>" alt="Vilões DC" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Vilões DC')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/09_13_26_StarWars_10174_ASpot_M.jpg') ?>" alt="Star Wars" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Star Wars')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('what-is-new.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/09_25_26_Spongebob_9860_ASpot_M.jpg') ?>" alt="Bob Esponja" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Bob Esponja')) ?></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 5. Section: Horror Costumes (Fantasias de Terror) -->
+    <section class="spn-ui-block" aria-labelledby="horror-costumes-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="horror-costumes-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Fantasias de Terror')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Faça do Halloween um verdadeiro grito de terror!')) ?></p>
+        </header>
+        <div class="spirit-spot-grid spirit-spot-grid-6">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/gf duo(810 x 810 px).jpg') ?>" alt="Fantasias em Dupla" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Fantasias em Dupla')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/082826_A-BspotRequests_10453_JasonUniverse_810x810.jpg') ?>" alt="Jason Universe" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Jason Universe')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/pinkhorror(810 x 810 px).jpg') ?>" alt="Beetlejuice" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Beetlejuice')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/ghostface(810-x-874-px)-(810-x-880-px) (1).jpg') ?>" alt="Ghost Face" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Pânico (Ghost Face)')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/081126_HomePageAssets_10372_Terrifier-810x810.jpg') ?>" alt="Terrifier" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Terrifier')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/08626251-a.jpg') ?>" alt="Chucky" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Chucky')) ?></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 6. Section: Officially Licensed Brands (Licenciados Oficiais) -->
+    <section class="spn-ui-block spirit-brands-section" aria-labelledby="officially-licensed-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="officially-licensed-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Licenciados Oficiais')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Entre nos seus filmes, séries e jogos favoritos!')) ?></p>
+        </header>
+        <div class="spirit-brands-grid">
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Disney_Logo_400x250.jpg') ?>" alt="Disney" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Marvel_Logo_400x250.jpg') ?>" alt="Marvel" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/HarryPotter_Logo_400x250.jpg') ?>" alt="Harry Potter" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/ToyStory_Logo_400x250.jpg') ?>" alt="Toy Story" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Beetlejuice_Logo_400x250.jpg') ?>" alt="Beetlejuice" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Descendants_Wicked_Logo.jpg') ?>" alt="Wicked" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Bluey_Logo_400x250.jpg') ?>" alt="Bluey" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Chucky_Logo_400x250.jpg') ?>" alt="Chucky" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/CorpseBride_Logo_400x250.jpg') ?>" alt="Corpse Bride" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/DrSeuss_Logo_400x250.jpg') ?>" alt="Dr. Seuss" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Fortnite_Logo_400x250.jpg') ?>" alt="Fortnite" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Ghostbusters_Logo_400x250.jpg') ?>" alt="Ghostbusters" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/GhostFace_Logo_400x250.jpg') ?>" alt="Ghost Face" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Halloween2_Logo_400x250.jpg') ?>" alt="Halloween II" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/HauntedMansion_Logo_400x250.jpg') ?>" alt="Haunted Mansion" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/IT_Derry__Logo_400x250.jpg') ?>" alt="IT Derry" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/JasonUniverse_Logo_400x250.jpg') ?>" alt="Jason Universe" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/MickeyFriends_Logo_400x250.jpg') ?>" alt="Mickey and Friends" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/ScoobyDoo_Logo_400x250.jpg') ?>" alt="Scooby-Doo" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Shrek_Logo_400x250.jpg') ?>" alt="Shrek" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Spiderman_Logo_400x250.jpg') ?>" alt="Spider-Man" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Spongebob_Logo_400x250.jpg') ?>" alt="SpongeBob" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/Terrifier_Logo_400x250.jpg') ?>" alt="Terrifier" loading="lazy" /></div>
+            <div class="spirit-brand-item"><img src="<?= $block->getViewFileUrl('images/PowerRangers_Logo.jpg') ?>" alt="Power Rangers" loading="lazy" /></div>
+        </div>
+    </section>
+
+    <!-- 7. Section: Shop by Theme (Compre por Tema) -->
+    <section class="spn-ui-block" aria-labelledby="shop-by-theme-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="shop-by-theme-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Compre por Tema')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Explore estilos para cada aventura assustadora!')) ?></p>
+        </header>
+        <div class="spirit-spot-grid spirit-spot-grid-5">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/081126_HomePageAssets_10372_ClownFam-810x874.jpg') ?>" alt="Palhaços Assustadores" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Palhaços')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('women.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/081126_HomePageAssets_10372_Witch-810x810.jpg') ?>" alt="Bruxas" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Bruxas')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/081126_HomePageAssets_10372_Vampire_ASpot_M.jpg') ?>" alt="Vampiros" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Vampiros')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('men.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/PirateCostumes_BSpot_400x400.jpg') ?>" alt="Piratas" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Piratas')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('what-is-new.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/occupation_fire(810 x 810 px).jpg') ?>" alt="Profissões" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Profissões')) ?></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 8. Section: Outdoor & More Décor (Decoração Externa) -->
+    <section class="spn-ui-block" aria-labelledby="decor-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="decor-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Decoração Externa & Coleções')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Crie um cenário inesquecível... não importa o quanto tentem esquecer.')) ?></p>
+        </header>
+        <div class="spirit-spot-grid spirit-spot-grid-6">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/8-11-26-Decor-LPTombstones_SquareSpot_810x874.jpg') ?>" alt="Lápides & Cemitério" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Lápides de Cemitério')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/halloween lights(810 x 810 px).jpg') ?>" alt="Luzes de Halloween" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Iluminação')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/inflatabless(816 x 816 px) (1).jpg') ?>" alt="Infláveis" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Infláveis Gigantes')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/fog(816 x 816 px).jpg') ?>" alt="Máquinas de Fumaça" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Máquinas de Fumaça')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/09_22_26_Gothic_IndoorDecor_10180_ASpot_M.jpg') ?>" alt="Coleção Gótica" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Coleção Gótica')) ?></span>
+            </a>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('gear.html')) ?>" class="spirit-spot-card">
+                <div class="spirit-spot-image-box">
+                    <img src="<?= $block->getViewFileUrl('images/animated propsv2(810 x 810 px).jpg') ?>" alt="Props Animados" loading="lazy" />
+                </div>
+                <span class="spirit-spot-name"><?= $escaper->escapeHtml(__('Props Animatrônicos')) ?></span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 9. Dynamic Catalog Products Showcase (Produtos Reais do Banco de Dados) -->
+    <?php if (!empty($catalogProducts)): ?>
+    <section class="spn-ui-block spirit-catalog-showcase" aria-labelledby="catalog-showcase-heading">
+        <header class="spn-ui-block__header">
+            <h2 id="catalog-showcase-heading" class="spn-ui-block__title"><?= $escaper->escapeHtml(__('Destaques do Catálogo Spirit Halloween')) ?></h2>
+            <p class="spn-ui-block__subtitle"><?= $escaper->escapeHtml(__('Produtos em estoque limitado prontos para envio imediato!')) ?></p>
+        </header>
+        <div class="spirit-products-grid">
+            <?php foreach ($catalogProducts as $prod): ?>
+                <article class="spirit-product-card">
+                    <div class="spirit-product-thumb">
+                        <span class="spirit-product-badge"><?= $escaper->escapeHtml($prod['badge_text']) ?></span>
+                        <a href="<?= $escaper->escapeUrl($prod['url']) ?>">
+                            <img src="<?= $escaper->escapeUrl($prod['image_url']) ?>"
+                                 alt="<?= $escaper->escapeHtmlAttr($prod['name']) ?>"
+                                 loading="lazy" />
+                        </a>
+                    </div>
+                    <div class="spirit-product-details">
+                        <span class="spirit-product-sku">SKU: <?= $escaper->escapeHtml($prod['sku']) ?></span>
+                        <h3 class="spirit-product-title">
+                            <a href="<?= $escaper->escapeUrl($prod['url']) ?>">
+                                <?= $escaper->escapeHtml($prod['name']) ?>
+                            </a>
+                        </h3>
+                        <div class="spirit-product-price">
+                            <?= $escaper->escapeHtml($prod['price']) ?>
+                        </div>
+                        <a href="<?= $escaper->escapeUrl($prod['url']) ?>" class="spirit-product-btn">
+                            <span><?= $escaper->escapeHtml(__('Ver Detalhes')) ?></span>
+                        </a>
+                    </div>
+                </article>
+            <?php endforeach; ?>
+        </div>
+    </section>
+    <?php endif; ?>
+
+    <!-- 10. Bottom Promotional Triad (Campanhas & Blog) -->
+    <section class="spn-ui-block spirit-bottom-promos" aria-label="Campanhas Especiais Spirit Halloween">
+        <div class="spirit-triad-grid">
+            <div class="spirit-triad-card">
+                <img src="<?= $block->getViewFileUrl('images/2026HP_ButterfingerSweeps_Spot_750x356.jpg') ?>" alt="Sorteio Butterfinger Spirit" loading="lazy" />
+            </div>
+            <div class="spirit-triad-card">
+                <img src="<?= $block->getViewFileUrl('images/2026HP_SOC_Spot_750x356.jpg') ?>" alt="Ação Solidária Spirit of Children" loading="lazy" />
+            </div>
+            <div class="spirit-triad-card">
+                <img src="<?= $block->getViewFileUrl('images/2026HP_BlogImages_Costumes_Spot_750x356.jpg') ?>" alt="Blog de Ideias e Fantasias" loading="lazy" />
+            </div>
+        </div>
+    </section>
+
+</div>

@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Newsletter strip for Spirit Halloween
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="spirit-newsletter-strip">
+    <div class="spirit-newsletter-container">
+        <div class="spirit-newsletter-info">
+            <span class="spirit-newsletter-tag">&#127875; FIQUE POR DENTRO DE TUDO</span>
+            <h3 class="spirit-newsletter-title"><?= $escaper->escapeHtml(__('SEJA O PRIMEIRO A SABER!')) ?></h3>
+            <p class="spirit-newsletter-desc"><?= $escaper->escapeHtml(__('Cadastre seu e-mail para cupons exclusivos de até 20% OFF, lançamentos e ofertas assustadoras.')) ?></p>
+        </div>
+        <form class="spirit-newsletter-form" action="<?= $escaper->escapeUrl($block->getUrl('newsletter/subscriber/new')) ?>" method="post">
+            <div class="spirit-newsletter-input-group">
+                <input type="email"
+                       name="email"
+                       id="spirit-newsletter-email"
+                       placeholder="<?= $escaper->escapeHtmlAttr(__('Digite seu melhor e-mail...')) ?>"
+                       required />
+                <button type="submit" class="spirit-newsletter-btn">
+                    <span><?= $escaper->escapeHtml(__('INSCREVER-SE')) ?></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

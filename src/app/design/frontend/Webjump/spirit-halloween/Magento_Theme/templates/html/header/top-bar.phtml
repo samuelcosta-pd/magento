@@ -1,0 +1,30 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Top bar announcement & utilities for Spirit Halloween
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+?>
+<div class="spirit-top-utility-bar">
+    <div class="spirit-top-utility-inner">
+        <div class="spirit-top-utility-left">
+            <span class="spirit-top-badge">&#9889; ENTREGA RÁPIDA DISPONÍVEL</span>
+            <span class="spirit-top-text">Compre Online e Retire na Loja</span>
+        </div>
+        <div class="spirit-top-utility-right">
+            <a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>" class="spirit-top-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <?= $escaper->escapeHtml(__('Encontrar Loja')) ?>
+            </a>
+            <span class="spirit-top-separator">|</span>
+            <a href="<?= $escaper->escapeUrl($block->getUrl('sales/order/history')) ?>" class="spirit-top-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                <?= $escaper->escapeHtml(__('Rastrear Pedido')) ?>
+            </a>
+            <span class="spirit-top-separator">|</span>
+            <span class="spirit-top-region">&#127463;&#127479; Brasil (R$)</span>
+        </div>
+    </div>
+</div>

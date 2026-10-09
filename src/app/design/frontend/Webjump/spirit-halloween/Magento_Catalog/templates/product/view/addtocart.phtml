@@ -1,0 +1,94 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Sobrescrita de template no tema Noite Assombrada para incluir botões funcionais de +/- no Qty.
+ *
+ * @var $block \Magento\Catalog\Block\Product\View
+ */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+<div class="box-tocart">
+    <div class="fieldset">
+        <?php if ($block->shouldRenderQuantity()): ?>
+        <div class="field qty">
+            <label class="label" for="qty"><span><?= $escaper->escapeHtml(__('Qty')) ?></span></label>
+            <div class="control qty-stepper-control">
+                <button type="button"
+                        class="action-qty qty-minus"
+                        id="qty-btn-minus"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Diminuir quantidade')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Diminuir')) ?>">-</button>
+                <input type="number"
+                       name="qty"
+                       id="qty"
+                       min="0"
+                       value="<?= (int)$block->getProductDefaultQty() ?>"
+                       title="<?= $escaper->escapeHtmlAttr(__('Qty')) ?>"
+                       class="input-text qty"
+                       data-validate="<?= $escaper->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       />
+                <button type="button"
+                        class="action-qty qty-plus"
+                        id="qty-btn-plus"
+                        aria-label="<?= $escaper->escapeHtmlAttr(__('Aumentar quantidade')) ?>"
+                        title="<?= $escaper->escapeHtmlAttr(__('Aumentar')) ?>">+</button>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div class="actions">
+            <button type="submit"
+                    title="<?= $escaper->escapeHtmlAttr($buttonTitle) ?>"
+                    class="action primary tocart"
+                    id="product-addtocart-button" disabled>
+                <span><?= $escaper->escapeHtml($buttonTitle) ?></span>
+            </button>
+            <?= $block->getChildHtml('', true) ?>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/js/validate-product": {}
+        }
+    }
+</script>
+<script>
+require(['jquery'], function ($) {
+    'use strict';
+    $(document).ready(function () {
+        var $qtyInput = $('#qty');
+        var $btnPlus = $('#qty-btn-plus');
+        var $btnMinus = $('#qty-btn-minus');
+
+        $btnPlus.on('click', function (e) {
+            e.preventDefault();
+            var currentVal = parseInt($qtyInput.val(), 10);
+            if (isNaN(currentVal) || currentVal < 0) {
+                currentVal = 0;
+            }
+            $qtyInput.val(currentVal + 1).trigger('change');
+        });
+
+        $btnMinus.on('click', function (e) {
+            e.preventDefault();
+            var currentVal = parseInt($qtyInput.val(), 10);
+            if (isNaN(currentVal) || currentVal <= 0) {
+                $qtyInput.val(0).trigger('change');
+            } else {
+                $qtyInput.val(currentVal - 1).trigger('change');
+            }
+        });
+
+        $qtyInput.on('input blur', function () {
+            var val = parseInt($qtyInput.val(), 10);
+            if (isNaN(val) || val < 0) {
+                $qtyInput.val(0);
+            }
+        });
+    });
+});
+</script>

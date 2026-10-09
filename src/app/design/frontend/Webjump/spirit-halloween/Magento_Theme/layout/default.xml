@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Theme: Spirit Halloween - default layout
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="css/styles-m.css"/>
+        <css src="css/styles-l.css" media="screen and (min-width: 768px)"/>
+        <css src="css/print.css" media="print"/>
+        <css src="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" src_type="url"/>
+    </head>
+    <body>
+        <!-- Spirit Halloween Official Logo -->
+        <referenceBlock name="logo">
+            <arguments>
+                <argument name="logo_file" xsi:type="string">images/Spirit_Logo.png</argument>
+                <argument name="logo_img_width" xsi:type="number">220</argument>
+                <argument name="logo_img_height" xsi:type="number">87</argument>
+            </arguments>
+        </referenceBlock>
+
+        <!-- Top Announcement Bar / Coupon Strip -->
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="spirit.header.topbar"
+                   template="Magento_Theme::html/header/top-bar.phtml"
+                   before="-"/>
+        </referenceContainer>
+
+        <!-- Spirit Halloween Newsletter & Columns in Footer -->
+        <referenceContainer name="footer">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="spirit.footer.newsletter"
+                   template="Magento_Theme::html/footer/newsletter.phtml"
+                   before="-"/>
+            <block class="Magento\Framework\View\Element\Template"
+                   name="spirit.footer.links"
+                   template="Magento_Theme::html/footer/columns.phtml"
+                   after="spirit.footer.newsletter"/>
+        </referenceContainer>
+
+        <referenceBlock name="footer_links" remove="true"/>
+        <referenceBlock name="report.bugs" remove="true"/>
+        <referenceBlock name="form.subscribe" remove="true"/>
+        <referenceBlock name="copyright" remove="true"/>
+    </body>
+</page>

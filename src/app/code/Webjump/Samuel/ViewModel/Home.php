@@ -86,6 +86,12 @@ class Home implements ArgumentInterface
         $items = [];
         foreach ($collection as $product) {
             $qty = (int) $product->getQty();
+            try {
+                $imageUrl = $this->imageHelper->init($product, 'category_page_grid')->getUrl();
+            } catch (\Throwable) {
+                $imageUrl = $this->imageHelper->getDefaultPlaceholderUrl('small_image');
+            }
+
             $items[] = [
                 'id'         => (int) $product->getId(),
                 'name'       => (string) $product->getName(),
@@ -93,7 +99,7 @@ class Home implements ArgumentInterface
                 'url'        => (string) $product->getProductUrl(),
                 'price'      => $this->priceCurrency->format((float) $product->getFinalPrice(), false),
                 'qty'        => $qty,
-                'image_url'  => $this->imageHelper->init($product, 'category_page_grid')->getUrl(),
+                'image_url'  => $imageUrl,
                 'badge_text' => $qty === 1
                     ? 'Apenas 1 unidade restante!'
                     : sprintf('Restam %d unidades!', $qty)
