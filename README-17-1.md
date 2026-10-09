@@ -121,7 +121,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 2.1 — No Frontend (Simulação de Data Expirada na UI)
 - **O que comprova:** O componente exibe a mensagem temática de encerramento da campanha (*"A Noite Assombrada chegou ao fim!"* / *"Campanha de Halloween Encerrada!"*) de forma elegante, sem exibir valores negativos como `-1 dias` ou `NaN`.
 
-> <img width="1800" height="900" alt="Mensagem de encerramento amigável sem números negativos" src="docs/prints/17-1/print_2_1_contador_expirado.png" />
+> <img width="1800" height="900" alt="Mensagem de encerramento amigável sem números negativos" src="docs/prints/17-1/print_2_1_contador_expirado_v2.png" />
 
 #### Print 2.2 — No Código / IDE (Lógica de Bloqueio de Negativos em `ko.computed`)
 - **Arquivo:** [`web/js/countdown.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/js/countdown.js)
@@ -151,7 +151,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 #### Print 4.1 — No Painel Admin (Produto com Atributo `product_badge` = "Assombrado")
 - **O que comprova:** Campo **Selo do Produto** (`product_badge`) preenchido com a opção **Assombrado** salva com sucesso.
 
-![alt text](image-1.png)
+> <img width="1800" height="900" alt="Admin do produto com atributo product_badge marcado como Assombrado" src="docs/prints/17-1/print_4_1_admin_produto_selo.png" />
 
 #### Print 4.2 — No Frontend (Catálogo / Listagem PLP: Selo Visível nos Cards Marcados)
 - **O que comprova:** Selo temático **Assombrado** visível e destacado no card dos produtos marcados, harmonizado com o layout noturno de Halloween.
