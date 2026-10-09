@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$uniqueId = 'halloween-countdown-' . uniqid();
+$componentScope = 'halloweenCountdown_' . $uniqueId;
+$targetDate = (string) ($block->getData('target_date') ?: '2026-10-31T23:59:59');
+$extraClass = (string) ($block->getData('extra_class') ?: '');
+?>
+<div id="<?= $escaper->escapeHtmlAttr($uniqueId) ?>"
+     class="halloween-countdown-container <?= $escaper->escapeHtmlAttr($extraClass) ?>"
+     data-bind="scope: '<?= $escaper->escapeHtmlAttr($componentScope) ?>'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+{
+    "#<?= /* @noEscape */ $uniqueId ?>": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "<?= /* @noEscape */ $componentScope ?>": {
+                    "component": "Magento_Theme/js/countdown",
+                    "template": "Magento_Theme/countdown",
+                    "targetDate": <?= json_encode($targetDate) ?>
+                }
+            }
+        }
+    }
+}
+</script>
