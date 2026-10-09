@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="order_additional_info">
+            <block class="Webjump\CheckoutComment\Block\Adminhtml\Order\View\Comment"
+                   name="webjump_spooky_order_comment"
+                   template="Webjump_CheckoutComment::order/view/comment.phtml" />
+        </referenceContainer>
+    </body>
+</page>

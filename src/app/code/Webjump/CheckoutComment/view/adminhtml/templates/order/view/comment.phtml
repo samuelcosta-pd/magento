@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ *
+ * @var \Webjump\CheckoutComment\Block\Adminhtml\Order\View\Comment $block
+ * @var \Magento\Framework\Escaper $escaper
+ */
+$comment = $block->getSpookyOrderComment();
+?>
+<section class="admin__page-section spooky-order-comment-section">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $escaper->escapeHtml(__('Mensagem Assombrada')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-content">
+                <?php if ($comment !== null && $comment !== ''): ?>
+                    <div style="background: #2a1b3d; border: 2px solid #ff6b1a; border-radius: 6px; padding: 16px;
+                                margin: 8px 0; color: #ede7f6; font-size: 14px; line-height: 1.5;
+                                box-shadow: 0 4px 12px rgba(42, 27, 61, 0.25);">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px; color: #ff6b1a;
+                                    font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">
+                            <span style="font-size: 20px; margin-right: 8px;">🎃</span>
+                            <span><?= $escaper->escapeHtml(__('Mensagem Assombrada do Cliente:')) ?></span>
+                        </div>
+                        <p style="margin: 0; padding-left: 28px; color: #7cff6b; font-family: monospace;
+                                  font-size: 14px; word-break: break-word;">
+                            &ldquo;<?= $escaper->escapeHtml($comment) ?>&rdquo;
+                        </p>
+                    </div>
+                <?php else: ?>
+                    <p style="font-style: italic; color: #666; margin: 8px 0; padding: 12px;
+                              background: #f8f8f8; border-radius: 4px; border: 1px dashed #d1d1d1;">
+                        <?= $escaper->escapeHtml(
+                            __('Nenhuma mensagem assombrada foi informada para este pedido.')
+                        ) ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+</section>

@@ -134,6 +134,101 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
+// Dropdown do Minicart Temático
+.block-minicart {
+    background-color: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75) !important;
+    color: @color-texto-claro !important;
+
+    .block-title strong {
+        color: @color-dourado;
+    }
+
+    .items-total {
+        color: @color-texto-claro;
+        .count {
+            color: @color-dourado;
+            font-weight: 700;
+        }
+    }
+
+    .subtitle.empty {
+        color: @color-cinza-neblina !important;
+    }
+
+    .subtotal {
+        .label {
+            color: @color-texto-claro;
+        }
+        .price-container .price {
+            color: @color-dourado;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+
+    .action.close {
+        &:before {
+            color: @color-dourado !important;
+        }
+        &:hover:before {
+            color: @color-abobora !important;
+        }
+    }
+
+    .product-item {
+        border-bottom: 1px solid @color-roxo-borda;
+        padding: 12px 0;
+
+        .product-item-name a {
+            color: @color-texto-claro !important;
+            &:hover {
+                color: @color-dourado !important;
+            }
+        }
+
+        .product-item-pricing .price {
+            color: @color-dourado;
+            font-weight: 700;
+        }
+
+        .details-qty {
+            .label {
+                color: @color-cinza-neblina;
+            }
+            .cart-item-qty {
+                background: darken(@color-roxo-card, 5%);
+                border: 1px solid @color-roxo-borda;
+                color: @color-texto-claro;
+                border-radius: 6px;
+                text-align: center;
+            }
+            .update-cart-item {
+                background: @color-abobora;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 6px;
+                padding: 4px 8px;
+                font-weight: 700;
+            }
+        }
+
+        .product.actions {
+            .action.delete,
+            .action.edit {
+                &:before {
+                    color: @color-dourado;
+                }
+                &:hover:before {
+                    color: @color-abobora;
+                }
+            }
+        }
+    }
+}
+
 //
 //  4.1. Breadcrumbs (Migalhas de Pão com Alto Contraste)
 //  --------------------------------------------------------------------------
@@ -1339,6 +1434,7 @@ select,
                 transition: transform 0.4s ease;
             }
         }
+    }
 
         .spooky-coffin-content {
             .spooky-coffin-title {
@@ -1385,7 +1481,64 @@ select,
                 }
             }
         }
+
+        .haunted-switch-label {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 8px rgba(124, 255, 107, 0.5);
+        }
     }
 }
 
+// 13.3. Banner de Campanha no Minicart (Adicionado via Mixin + Template)
+.haunted-minicart-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(33, 16, 58, 0.95) 0%, rgba(14, 5, 24, 0.95) 100%);
+    border: 1px solid @color-abobora;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 10px 0 16px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 107, 26, 0.15);
+    transition: all 0.3s ease;
 
+    .haunted-minicart-icon {
+        font-size: 2.4rem;
+        line-height: 1;
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 6px rgba(255, 107, 26, 0.6));
+        animation: cauldron-glow 2.5s infinite alternate ease-in-out;
+    }
+
+    .haunted-minicart-text {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: @color-dourado;
+        line-height: 1.45;
+        letter-spacing: 0.02em;
+    }
+}
+
+@keyframes cauldron-glow {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 107, 26, 0.5));
+    }
+    100% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 10px rgba(124, 255, 107, 0.7));
+    }
+}
+
+html.haunted-mode {
+    .haunted-minicart-banner {
+        background: linear-gradient(135deg, rgba(13, 5, 28, 0.98) 0%, rgba(5, 2, 10, 0.98) 100%);
+        border-color: @color-verde-bruxa;
+        box-shadow: 0 0 18px rgba(124, 255, 107, 0.3), inset 0 0 14px rgba(124, 255, 107, 0.1);
+
+        .haunted-minicart-text {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 6px rgba(124, 255, 107, 0.4);
+        }
+    }
+}

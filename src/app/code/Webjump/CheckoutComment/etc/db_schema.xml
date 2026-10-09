@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="default" engine="innodb" comment="Sales Flat Quote">
+        <column xsi:type="varchar" name="spooky_order_comment" length="255" nullable="true"
+                comment="Haunted Order Comment"/>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb" comment="Sales Flat Order">
+        <column xsi:type="varchar" name="spooky_order_comment" length="255" nullable="true"
+                comment="Haunted Order Comment"/>
+    </table>
+</schema>
