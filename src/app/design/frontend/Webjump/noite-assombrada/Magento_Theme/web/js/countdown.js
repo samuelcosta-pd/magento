@@ -13,6 +13,7 @@ define([
             template: 'Magento_Theme/countdown',
             targetDate: '2026-10-31T23:59:59',
             title: $t('Ofertas de Halloween terminam em:'),
+            expiredTitle: $t('Campanha de Halloween Encerrada!'),
             expiredMessage: $t('A Noite Assombrada chegou ao fim! As ofertas foram encerradas.')
         },
 
@@ -23,6 +24,11 @@ define([
             this._super();
 
             var self = this;
+
+            // Permite simulação e testes de encerramento via query parameter (?expired=1)
+            if (window.location.search.indexOf('expired=1') !== -1) {
+                this.targetDate = '2020-10-31T23:59:59';
+            }
 
             // Observable reativo com o timestamp presente (milissegundos)
             this.now = ko.observable(Date.now());

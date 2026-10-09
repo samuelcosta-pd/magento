@@ -99,13 +99,11 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 ### 4.1. Critério 1: Contador Atualizando Sozinho sem Recarregar a Página
 
 #### Print 1.1 — No Frontend (Home Page: Contador Regressivo em Tempo Real)
-- **Onde acessar:** Home Page da loja (`/`)
 - **O que comprova:** Bloco do contador regressivo renderizado na página inicial com estilo temático de Halloween, exibindo os dias, horas, minutos e segundos decrescendo dinamicamente a cada segundo sem necessidade de refresh do navegador.
 
 > <img width="1800" height="900" alt="Contador na Home Page em tempo real" src="docs/prints/17-1/print_1_1_home_contador.png" />
 
 #### Print 1.2 — No Frontend (PDP: Contador Regressivo na Página de Produto)
-- **Onde acessar:** Página de Detalhe de Produto (ex: `/camisa-basica-de-algodao.html` ou `/strive-shoulder-pack.html`)
 - **O que comprova:** Contador regressivo em funcionamento dentro da página de produto, posicionado na coluna de informações de compra, decrementando o tempo de forma assíncrona.
 
 > <img width="1800" height="900" alt="Contador na Página de Produto" src="docs/prints/17-1/print_1_2_pdp_contador.png" />
@@ -121,7 +119,6 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 ### 4.2. Critério 2: Mensagem de Encerramento Amigável após a Data Final
 
 #### Print 2.1 — No Frontend (Simulação de Data Expirada na UI)
-- **Onde acessar:** Home Page ou PDP com data alvo retroativa configurada (ex: `2026-10-01T00:00:00`)
 - **O que comprova:** O componente exibe a mensagem temática de encerramento da campanha (*"A Noite Assombrada chegou ao fim!"* / *"Campanha de Halloween Encerrada!"*) de forma elegante, sem exibir valores negativos como `-1 dias` ou `NaN`.
 
 > <img width="1800" height="900" alt="Mensagem de encerramento amigável sem números negativos" src="docs/prints/17-1/print_2_1_contador_expirado.png" />
@@ -143,7 +140,6 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 > <img width="1800" height="900" alt="Declaração de x-magento-init no template PHTML" src="docs/prints/17-1/print_3_1_codigo_x_magento_init.png" />
 
 #### Print 3.2 — No Navegador / DevTools (Estrutura DOM e Binding do Knockout)
-- **Onde acessar:** Inspecionar Elemento (F12) no bloco do contador
 - **O que comprova:** Atributos `data-bind="scope: 'halloweenCountdown'"` renderizados no DOM e o script `text/x-magento-init` processado pelo RequireJS sem disparar erros no console.
 
 > <img width="1800" height="900" alt="Inspeção do DOM com x-magento-init e scope Knockout" src="docs/prints/17-1/print_3_2_devtools_dom_init.png" />
@@ -153,19 +149,16 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 ### 4.4. Critério 4: Selo Assombrado nos Produtos Marcados (Listagem e Detalhe)
 
 #### Print 4.1 — No Painel Admin (Produto com Atributo `product_badge` = "Assombrado")
-- **Onde acessar:** **Catalog > Products** > Editar produto (ex: `Camisa Básica de Algodão` ou `Strive Shoulder Pack`)
 - **O que comprova:** Campo **Selo do Produto** (`product_badge`) preenchido com a opção **Assombrado** salva com sucesso.
 
 ![alt text](image-1.png)
 
 #### Print 4.2 — No Frontend (Catálogo / Listagem PLP: Selo Visível nos Cards Marcados)
-- **Onde acessar:** Página de Categoria (ex: `/men/tops-men/tees-men.html` ou `/gear/bags.html`)
 - **O que comprova:** Selo temático **Assombrado** visível e destacado no card dos produtos marcados, harmonizado com o layout noturno de Halloween.
 
 > <img width="1800" height="900" alt="Selo visível nos produtos marcados na listagem" src="docs/prints/17-1/print_4_2_catalogo_plp_selo.png" />
 
 #### Print 4.3 — No Frontend (Página de Detalhe PDP: Selo em Destaque)
-- **Onde acessar:** Página do produto marcado (ex: `/camisa-basica-de-algodao.html`)
 - **O que comprova:** Selo temático **Assombrado** posicionado junto ao título do produto na PDP.
 
 > <img width="1800" height="900" alt="Selo visível na página de detalhes do produto" src="docs/prints/17-1/print_4_3_pdp_selo.png" />
@@ -181,13 +174,11 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 ### 4.5. Critério 5: Produto sem Atributo Não Gera Erro Nem Espaço Vazio
 
 #### Print 5.1 — No Frontend (Comparativo Lado a Lado no Grid de Catálogo)
-- **Onde acessar:** Página de Categoria com múltiplos produtos
 - **O que comprova:** Produtos que não possuem o atributo marcado são renderizados perfeitamente alinhados, sem espaços em branco deslocados, sem placeholders quebrados e sem elementos vazios no DOM.
 
 > <img width="1800" height="900" alt="Produtos com e sem selo alinhados perfeitamente no catálogo" src="docs/prints/17-1/print_5_1_catalogo_comparativo.png" />
 
 #### Print 5.2 — No Navegador / DevTools (Inspeção do DOM de Produto sem Selo)
-- **Onde acessar:** Inspecionar Elemento (F12) sobre o card de um produto sem o atributo
 - **O que comprova:** Ausência de tags `<div class="product-badge-wrapper">` vazias ou nós órfãos no container do card.
 
 > <img width="1800" height="900" alt="Inspeção DOM comprovando ausência de espaço vazio ou tag residual" src="docs/prints/17-1/print_5_2_devtools_produto_sem_selo.png" />
@@ -203,7 +194,6 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 ### 4.6. Critério 6: Textos do Contador e do Selo Traduzidos via CSV
 
 #### Print 6.1 — No Frontend (Textos do Contador e Selo em Português)
-- **Onde acessar:** Home Page e Catálogo
 - **O que comprova:** Rótulos como *"Dias"*, *"Horas"*, *"Minutos"*, *"Segundos"*, *"Ofertas de Halloween terminam em:"* e *"Assombrado"* exibidos em português correto na interface.
 
 > <img width="1800" height="900" alt="Interface renderizando textos traduzidos em pt_BR" src="docs/prints/17-1/print_6_1_frontend_textos_traduzidos.png" />
