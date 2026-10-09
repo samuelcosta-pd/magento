@@ -156,7 +156,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** **Catalog > Products** > Editar produto (ex: `Camisa Básica de Algodão` ou `Strive Shoulder Pack`)
 - **O que comprova:** Campo **Selo do Produto** (`product_badge`) preenchido com a opção **Assombrado** salva com sucesso.
 
-> <img width="1800" height="900" alt="Admin do produto com atributo product_badge marcado como Assombrado" src="docs/prints/17-1/print_4_1_admin_produto_selo.png" />
+![alt text](image-1.png)
 
 #### Print 4.2 — No Frontend (Catálogo / Listagem PLP: Selo Visível nos Cards Marcados)
 - **Onde acessar:** Página de Categoria (ex: `/men/tops-men/tees-men.html` ou `/gear/bags.html`)
