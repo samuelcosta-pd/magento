@@ -102,19 +102,19 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** Home Page da loja (`/`)
 - **O que comprova:** Bloco do contador regressivo renderizado na página inicial com estilo temático de Halloween, exibindo os dias, horas, minutos e segundos decrescendo dinamicamente a cada segundo sem necessidade de refresh do navegador.
 
-> <img width="1800" height="900" alt="Contador na Home Page em tempo real" src="" />
+> <img width="1800" height="900" alt="Contador na Home Page em tempo real" src="docs/prints/17-1/print_1_1_home_contador.png" />
 
 #### Print 1.2 — No Frontend (PDP: Contador Regressivo na Página de Produto)
 - **Onde acessar:** Página de Detalhe de Produto (ex: `/camisa-basica-de-algodao.html` ou `/strive-shoulder-pack.html`)
 - **O que comprova:** Contador regressivo em funcionamento dentro da página de produto, posicionado na coluna de informações de compra, decrementando o tempo de forma assíncrona.
 
-> <img width="1800" height="900" alt="Contador na Página de Produto" src="" />
+> <img width="1800" height="900" alt="Contador na Página de Produto" src="docs/prints/17-1/print_1_2_pdp_contador.png" />
 
 #### Print 1.3 — No Código / IDE (Componente Knockout `countdown.js`)
 - **Arquivo:** [`web/js/countdown.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/js/countdown.js)
 - **O que comprova:** Declaração de `ko.observable(new Date().getTime())` para o tempo presente e `setInterval` disparando a atualização do observable a cada 1000 milissegundos.
 
-> <img width="1800" height="900" alt="Código Knockout com observable e setInterval" src="" />
+> <img width="1800" height="900" alt="Código Knockout com observable e setInterval" src="docs/prints/17-1/print_1_3_codigo_countdown_js.png" />
 
 ---
 
@@ -124,13 +124,13 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** Home Page ou PDP com data alvo retroativa configurada (ex: `2026-10-01T00:00:00`)
 - **O que comprova:** O componente exibe a mensagem temática de encerramento da campanha (*"A Noite Assombrada chegou ao fim!"* / *"Campanha de Halloween Encerrada!"*) de forma elegante, sem exibir valores negativos como `-1 dias` ou `NaN`.
 
-> <img width="1800" height="900" alt="Mensagem de encerramento amigável sem números negativos" src="" />
+> <img width="1800" height="900" alt="Mensagem de encerramento amigável sem números negativos" src="docs/prints/17-1/print_2_1_contador_expirado.png" />
 
 #### Print 2.2 — No Código / IDE (Lógica de Bloqueio de Negativos em `ko.computed`)
 - **Arquivo:** [`web/js/countdown.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/js/countdown.js)
 - **O que comprova:** Condicional `if (distance <= 0)` no `ko.computed`, alternando `isExpired(true)` e retornando o texto traduzido de encerramento.
 
-> <img width="1800" height="900" alt="Lógica de bloqueio de números negativos no código" src="" />
+> <img width="1800" height="900" alt="Lógica de bloqueio de números negativos no código" src="docs/prints/17-1/print_2_2_codigo_bloqueio_negativos.png" />
 
 ---
 
@@ -140,13 +140,13 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Arquivo:** [`Magento_Theme/templates/html/countdown.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/templates/html/countdown.phtml)
 - **O que comprova:** Bloco HTML contendo a tag `<script type="text/x-magento-init">` vinculando o container DOM ao componente `Magento_Ui/js/core/app` e carregando `js/countdown`.
 
-> <img width="1800" height="900" alt="Declaração de x-magento-init no template PHTML" src="" />
+> <img width="1800" height="900" alt="Declaração de x-magento-init no template PHTML" src="docs/prints/17-1/print_3_1_codigo_x_magento_init.png" />
 
 #### Print 3.2 — No Navegador / DevTools (Estrutura DOM e Binding do Knockout)
 - **Onde acessar:** Inspecionar Elemento (F12) no bloco do contador
 - **O que comprova:** Atributos `data-bind="scope: 'halloweenCountdown'"` renderizados no DOM e o script `text/x-magento-init` processado pelo RequireJS sem disparar erros no console.
 
-> <img width="1800" height="900" alt="Inspeção do DOM com x-magento-init e scope Knockout" src="" />
+> <img width="1800" height="900" alt="Inspeção do DOM com x-magento-init e scope Knockout" src="docs/prints/17-1/print_3_2_devtools_dom_init.png" />
 
 ---
 
@@ -156,25 +156,25 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** **Catalog > Products** > Editar produto (ex: `Camisa Básica de Algodão` ou `Strive Shoulder Pack`)
 - **O que comprova:** Campo **Selo do Produto** (`product_badge`) preenchido com a opção **Assombrado** salva com sucesso.
 
-> <img width="1800" height="900" alt="Admin do produto com atributo product_badge marcado como Assombrado" src="" />
+> <img width="1800" height="900" alt="Admin do produto com atributo product_badge marcado como Assombrado" src="docs/prints/17-1/print_4_1_admin_produto_selo.png" />
 
 #### Print 4.2 — No Frontend (Catálogo / Listagem PLP: Selo Visível nos Cards Marcados)
 - **Onde acessar:** Página de Categoria (ex: `/men/tops-men/tees-men.html` ou `/gear/bags.html`)
 - **O que comprova:** Selo temático **Assombrado** visível e destacado no card dos produtos marcados, harmonizado com o layout noturno de Halloween.
 
-> <img width="1800" height="900" alt="Selo visível nos produtos marcados na listagem" src="" />
+> <img width="1800" height="900" alt="Selo visível nos produtos marcados na listagem" src="docs/prints/17-1/print_4_2_catalogo_plp_selo.png" />
 
 #### Print 4.3 — No Frontend (Página de Detalhe PDP: Selo em Destaque)
 - **Onde acessar:** Página do produto marcado (ex: `/camisa-basica-de-algodao.html`)
 - **O que comprova:** Selo temático **Assombrado** posicionado junto ao título do produto na PDP.
 
-> <img width="1800" height="900" alt="Selo visível na página de detalhes do produto" src="" />
+> <img width="1800" height="900" alt="Selo visível na página de detalhes do produto" src="docs/prints/17-1/print_4_3_pdp_selo.png" />
 
 #### Print 4.4 — No Código / IDE (Integração na Listagem `product/list.phtml` e PDP)
 - **Arquivos:** [`Magento_Catalog/templates/product/list.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Catalog/templates/product/list.phtml) e [`catalog_product_view.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/view/frontend/layout/catalog_product_view.xml)
 - **O que comprova:** Chamada de `$badgeViewModel->hasBadge($_product)` e renderização do badge no loop de produtos da listagem.
 
-> <img width="1800" height="900" alt="Código da integração do selo no template list.phtml" src="" />
+> <img width="1800" height="900" alt="Código da integração do selo no template list.phtml" src="docs/prints/17-1/print_4_4_codigo_list_phtml.png" />
 
 ---
 
@@ -184,19 +184,19 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** Página de Categoria com múltiplos produtos
 - **O que comprova:** Produtos que não possuem o atributo marcado são renderizados perfeitamente alinhados, sem espaços em branco deslocados, sem placeholders quebrados e sem elementos vazios no DOM.
 
-> <img width="1800" height="900" alt="Produtos com e sem selo alinhados perfeitamente no catálogo" src="" />
+> <img width="1800" height="900" alt="Produtos com e sem selo alinhados perfeitamente no catálogo" src="docs/prints/17-1/print_5_1_catalogo_comparativo.png" />
 
 #### Print 5.2 — No Navegador / DevTools (Inspeção do DOM de Produto sem Selo)
 - **Onde acessar:** Inspecionar Elemento (F12) sobre o card de um produto sem o atributo
 - **O que comprova:** Ausência de tags `<div class="product-badge-wrapper">` vazias ou nós órfãos no container do card.
 
-> <img width="1800" height="900" alt="Inspeção DOM comprovando ausência de espaço vazio ou tag residual" src="" />
+> <img width="1800" height="900" alt="Inspeção DOM comprovando ausência de espaço vazio ou tag residual" src="docs/prints/17-1/print_5_2_devtools_produto_sem_selo.png" />
 
 #### Print 5.3 — No Código / IDE (Guarda de Proteção no Template e ViewModel)
 - **Arquivos:** [`templates/product/list.phtml`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Catalog/templates/product/list.phtml) e [`ViewModel/Badge.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/ProductBadge/ViewModel/Badge.php)
 - **O que comprova:** Retorno precoce (`return` / `if ($badgeViewModel->hasBadge($_product))`) que previne a renderização de qualquer markup quando o atributo não estiver definido.
 
-> <img width="1800" height="900" alt="Código com checagem estrita impedindo marcação vazia" src="" />
+> <img width="1800" height="900" alt="Código com checagem estrita impedindo marcação vazia" src="docs/prints/17-1/print_5_3_codigo_condicional_guarda.png" />
 
 ---
 
@@ -206,10 +206,10 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 - **Onde acessar:** Home Page e Catálogo
 - **O que comprova:** Rótulos como *"Dias"*, *"Horas"*, *"Minutos"*, *"Segundos"*, *"Ofertas de Halloween terminam em:"* e *"Assombrado"* exibidos em português correto na interface.
 
-> <img width="1800" height="900" alt="Interface renderizando textos traduzidos em pt_BR" src="" />
+> <img width="1800" height="900" alt="Interface renderizando textos traduzidos em pt_BR" src="docs/prints/17-1/print_6_1_frontend_textos_traduzidos.png" />
 
 #### Print 6.2 — No Código / IDE (Dicionário de Tradução `i18n/pt_BR.csv`)
 - **Arquivo:** [`i18n/pt_BR.csv`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/i18n/pt_BR.csv)
 - **O que comprova:** Mapeamento de todas as chaves do contador e do selo no arquivo CSV do tema.
 
-> <img width="1800" height="900" alt="Chaves de tradução cadastradas no CSV pt_BR" src="" />
+> <img width="1800" height="900" alt="Chaves de tradução cadastradas no CSV pt_BR" src="docs/prints/17-1/print_6_2_codigo_i18n_csv.png" />
