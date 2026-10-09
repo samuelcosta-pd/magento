@@ -23,7 +23,7 @@ composer.lock
 !/update
 !/update/.htaccess
 !/README.md
-!/README-17-2.md
+!/README-17-3.md
 !/docs
 !/docs/**
 !/op-exclude.txt
