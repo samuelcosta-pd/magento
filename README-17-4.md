@@ -7,7 +7,7 @@ Documentação técnica, decisões arquiteturais, ciclo de vida do componente no
 ## 1. Visão Geral do Desafio e Critérios de Aceite Atendidos
 
 ### Objetivo
-Construir um componente próprio (*Custom Content Type*) no **Page Builder** do Magento 2 — intitulado **"Caixão de Ofertas"** — garantindo autonomia total ao time de marketing para diagramar, configurar e publicar blocos promocionais interativos de Halloween sem intervenção técnica. O componente disponibiliza 6 campos configuráveis (título, selo promocional, descrição, imagem com upload, link de destino e texto do botão CTA), suporta drag-and-drop para linhas e colunas, renderiza prévias reativas em tempo real no editor administrativo, preserva rigorosamente as classes estruturais da plataforma e entrega no storefront um card gótico responsivo com a identidade visual completa da campanha **Noite Assombrada**.
+Construir um componente próprio (*Custom Content Type*) no **Page Builder** intitulado **"Caixão de Ofertas"**, garantindo autonomia total ao time de marketing para diagramar, configurar e publicar blocos promocionais interativos de Halloween sem intervenção técnica. O componente disponibiliza 6 campos configuráveis (título, selo promocional, descrição, imagem com upload, link de destino e texto do botão CTA), suporta drag-and-drop para linhas e colunas, renderiza prévias reativas em tempo real no editor administrativo, preserva rigorosamente as classes estruturais da plataforma e entrega no storefront um card gótico responsivo com a identidade visual completa da campanha **Noite Assombrada**.
 
 ### Matriz de Rastreabilidade dos Critérios de Aceite
 
@@ -49,7 +49,7 @@ No [`spooky_coffin.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/
 * **`children default_policy="deny"`**: Impede que outros elementos sejam soltos inadvertidamente dentro do card, mantendo o encapsulamento do componente.
 * **`allowed_parents`**: Herda a permissão natural dos contêineres padrão do Magento (`row`, `column`, `tab-item`), possibilitando que o marketing arraste o Caixão de Ofertas para dentro de qualquer grid de layout.
 
-### 2.3. Mapeamento de Elementos e Leitura no Formato Master
+### 2.3. Mapeamento de Elementos
 Cada campo configurável possui mapeamento bidirecional entre o formulário do modal e o DOM (HTML gerado):
 * **`main`**: Gerencia classes CSS, alinhamento de texto e margens/paddings.
 * **`badge`**: Texto do selo (`offer_badge`), escapado via `Magento_PageBuilder/js/converter/html/tag-escaper`.
@@ -114,74 +114,13 @@ O modal de edição é disparado pelo componente de preview ao clicar na engrena
 
 ---
 
-## 4. Guia de Prints: Onde Comprovar Cada Critério de Aceite
-
-O guia abaixo instrui passo a passo os pontos exatos de verificação no Magento Admin e no código-fonte para auditoria de cada critério:
-
-### 4.1. Critério 1: Componente no Painel do Page Builder
-* **No Painel Admin:**
-  1. Acesse o painel administrativo (`https://magento.test/admin/`) e faça login como `john.smith`.
-  2. Vá em **Content > Elements > Pages**.
-  3. Clique em **Edit** na página `Ofertas Assombradas de Halloween`.
-  4. Expanda a aba **Content** e abra o palco do Page Builder.
-  5. Na barra lateral esquerda do Page Builder, localize e expanda a seção **Add Content**.
-  6. **Local do Print:** Enquadrar a barra lateral destacando o item **"Caixão de Ofertas"** com o ícone temático `⚰️`.
-* **No Código / IDE:**
-  1. Abra [`view/adminhtml/pagebuilder/content_type/spooky_coffin.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/PageBuilderCoffin/view/adminhtml/pagebuilder/content_type/spooky_coffin.xml).
-  2. Destaque `<type name="spooky_coffin" label="Caixão de Ofertas" menu_section="add_content" icon="icon-pagebuilder-spooky-coffin">`.
-
-### 4.2. Critério 2: Arrastar, Configurar e Ver Resultado no Editor
-* **No Painel Admin:**
-  1. No palco do Page Builder, passe o cursor sobre o bloco do Caixão de Ofertas e clique no ícone de **engrenagem (Editar)**.
-  2. **Local do Print (Modal):** Enquadrar a janela modal aberta com o título *Caixão de Ofertas* e os campos configurados: Título da Oferta, Selo Promocional, Descrição da Oferta, Imagem da Oferta, Link da Oferta e Texto do Botão (CTA).
-  3. Feche o modal e observe o palco do editor.
-  4. **Local do Print (Canvas):** Enquadrar o card do Caixão de Ofertas renderizado com imagem, título e botão dentro da linha do Page Builder.
-* **No Código / IDE:**
-  1. Abra [`view/adminhtml/ui_component/pagebuilder_spooky_coffin_form.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/PageBuilderCoffin/view/adminhtml/ui_component/pagebuilder_spooky_coffin_form.xml) e [`view/adminhtml/web/js/content-type/spooky-coffin/preview.js`](file:///home/samuel/Sites/magento/src/app/code/Webjump/PageBuilderCoffin/view/adminhtml/web/js/content-type/spooky-coffin/preview.js).
-  2. Destaque os 6 campos no formulário e a extensão de `PreviewBase`.
-
-### 4.3. Critério 3: O Configurado no Editor é o que Aparece na Loja
-* **Na Loja / Storefront:**
-  1. Acesse `https://magento.test/ofertas-assombradas`.
-  2. Role até a seção central do conteúdo.
-  3. **Local do Print:** Enquadrar o card completo contendo exatamente os dados configurados: o selo `🎃 -50% OFF NOITE ASSOMBRADA`, a imagem da poção/caixão mágico, o título *Caixão de Ofertas: Poção Misteriosa*, a descrição e o botão *Abrir o Caixão ⚰️* apontando para `/joust-duffle-bag.html`.
-* **No Código / IDE:**
-  1. Abra [`view/adminhtml/web/template/content-type/spooky-coffin/default/master.html`](file:///home/samuel/Sites/magento/src/app/code/Webjump/PageBuilderCoffin/view/adminhtml/web/template/content-type/spooky-coffin/default/master.html).
-  2. Destaque a estrutura que gera o HTML persistido com `data-element`, links e botões.
-
-### 4.4. Critério 4: Classe `pagebuilder-content-type` no Elemento Externo do Preview
-* **No Painel Admin / DevTools:**
-  1. No palco do editor do Page Builder, abra o Inspecionar Elemento (F12) sobre o componente.
-  2. **Local do Print:** Enquadrar o painel Elements do DevTools mostrando a tag externa com `class="pagebuilder-content-type pagebuilder-spooky-coffin type-nested"`.
-* **No Código / IDE:**
-  1. Abra [`view/adminhtml/web/template/content-type/spooky-coffin/default/preview.html`](file:///home/samuel/Sites/magento/src/app/code/Webjump/PageBuilderCoffin/view/adminhtml/web/template/content-type/spooky-coffin/default/preview.html).
-  2. Destaque a primeira linha com `<div class="pagebuilder-content-type pagebuilder-spooky-coffin type-nested" ...>`.
-
-### 4.5. Critério 5: Estilo do Componente Segue a Identidade do Tema
-* **Na Loja / Storefront:**
-  1. Acesse `https://magento.test/ofertas-assombradas` e aproxime a visualização do card do Caixão de Ofertas.
-  2. **Local do Print:** Enquadrar o card exibindo o fundo roxo card (`#21103a`), borda laranja abóbora (`#ff6b1a`), tipografia temática *Creepster* no título dourado (`#ffd369`), morcegos ornamentais e botão CTA.
-* **No Código / IDE:**
-  1. Abra [`src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less).
-  2. Destaque as regras `.spooky-coffin-block`, `.spooky-coffin-card`, as variáveis de cores temáticas e a família tipográfica `@heading__font-family__base`.
-
-### 4.6. Critério 6: Página de Campanha Publicada
-* **No Painel Admin:**
-  1. Acesse **Content > Elements > Pages**.
-  2. **Local do Print:** Enquadrar a linha da página `Ofertas Assombradas de Halloween` com URL Key `ofertas-assombradas`, layout `1 Column` e coluna Status exibindo **Enabled**.
-* **No Terminal / Git:**
-  1. Execute `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working && git status`.
-  2. **Local do Print:** Enquadrar a confirmação de que `vendor/` não foi alterado.
-
----
-
-## 5. Evidências de Sucesso
+## 4. Evidências de Sucesso
 
 Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **17.4 - Caixão de Ofertas no Page Builder**, capturados no ambiente de desenvolvimento local.
 
 ---
 
-### 5.1. Critério 1: O componente aparece no painel do Page Builder, na seção escolhida
+### 4.1. Critério 1: O componente aparece no painel do Page Builder, na seção escolhida
 
 #### Print 1.1 — No Painel Admin (Seção "Add Content" com "Caixão de Ofertas" e Ícone)
 - **Onde acessar:** **Content > Pages > Edit Ofertas Assombradas > Content > Edit with Page Builder**
@@ -197,7 +136,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.2. Critério 2: Dá para arrastar para a página, configurar e ver o resultado no editor
+### 4.2. Critério 2: Dá para arrastar para a página, configurar e ver o resultado no editor
 
 #### Print 2.1 — No Painel Admin (Modal de Configuração com Campos Preenchidos)
 - **Onde acessar:** Palco do Page Builder > Hover no Caixão de Ofertas > Clique na Engrenagem
@@ -219,7 +158,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.3. Critério 3: O que é configurado no editor é o que aparece na loja
+### 4.3. Critério 3: O que é configurado no editor é o que aparece na loja
 
 #### Print 3.1 — Na Loja / Storefront (Renderização da Página de Campanha)
 - **Onde acessar:** `https://magento.test/ofertas-assombradas`
@@ -235,7 +174,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.4. Critério 4: A classe `pagebuilder-content-type` está no elemento externo do preview
+### 4.4. Critério 4: A classe `pagebuilder-content-type` está no elemento externo do preview
 
 #### Print 4.1 — No Painel Admin (Inspeção de Elementos DevTools no Palco)
 - **Onde acessar:** Palco do Page Builder > Inspecionar Elemento (F12)
@@ -251,7 +190,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.5. Critério 5: O estilo do componente segue a identidade do tema
+### 4.5. Critério 5: O estilo do componente segue a identidade do tema
 
 #### Print 5.1 — Na Loja / Storefront (Card Temático com Cores e Tipografia de Halloween)
 - **Onde acessar:** `https://magento.test/ofertas-assombradas` (Foco no card)
@@ -267,7 +206,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.6. Critério 6: Montei uma página de campanha usando o componente, e ela está publicada
+### 4.6. Critério 6: Montei uma página de campanha usando o componente, e ela está publicada
 
 #### Print 6.1 — No Painel Admin (Grade de Páginas CMS com a Página Publicada / Status Enabled)
 - **Onde acessar:** **Content > Elements > Pages**
