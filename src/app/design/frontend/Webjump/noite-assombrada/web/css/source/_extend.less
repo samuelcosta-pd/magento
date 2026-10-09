@@ -134,6 +134,101 @@ h1, h2, h3, h4, h5, h6,
     }
 }
 
+// Dropdown do Minicart Temático
+.block-minicart {
+    background-color: @color-roxo-card !important;
+    border: 1px solid @color-roxo-borda !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.75) !important;
+    color: @color-texto-claro !important;
+
+    .block-title strong {
+        color: @color-dourado;
+    }
+
+    .items-total {
+        color: @color-texto-claro;
+        .count {
+            color: @color-dourado;
+            font-weight: 700;
+        }
+    }
+
+    .subtitle.empty {
+        color: @color-cinza-neblina !important;
+    }
+
+    .subtotal {
+        .label {
+            color: @color-texto-claro;
+        }
+        .price-container .price {
+            color: @color-dourado;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+    }
+
+    .action.close {
+        &:before {
+            color: @color-dourado !important;
+        }
+        &:hover:before {
+            color: @color-abobora !important;
+        }
+    }
+
+    .product-item {
+        border-bottom: 1px solid @color-roxo-borda;
+        padding: 12px 0;
+
+        .product-item-name a {
+            color: @color-texto-claro !important;
+            &:hover {
+                color: @color-dourado !important;
+            }
+        }
+
+        .product-item-pricing .price {
+            color: @color-dourado;
+            font-weight: 700;
+        }
+
+        .details-qty {
+            .label {
+                color: @color-cinza-neblina;
+            }
+            .cart-item-qty {
+                background: darken(@color-roxo-card, 5%);
+                border: 1px solid @color-roxo-borda;
+                color: @color-texto-claro;
+                border-radius: 6px;
+                text-align: center;
+            }
+            .update-cart-item {
+                background: @color-abobora;
+                color: #FFFFFF;
+                border: none;
+                border-radius: 6px;
+                padding: 4px 8px;
+                font-weight: 700;
+            }
+        }
+
+        .product.actions {
+            .action.delete,
+            .action.edit {
+                &:before {
+                    color: @color-dourado;
+                }
+                &:hover:before {
+                    color: @color-abobora;
+                }
+            }
+        }
+    }
+}
+
 //
 //  4.1. Breadcrumbs (Migalhas de Pão com Alto Contraste)
 //  --------------------------------------------------------------------------
@@ -1249,3 +1344,288 @@ select,
     }
 }
 
+//
+//  13. Desafio 17.2: Modo Assombrado (Ultra Dark) & Minicart da Campanha
+//  --------------------------------------------------------------------------
+
+// 13.1. Interruptor do Modo Assombrado no Cabeçalho
+.haunted-mode-switcher-container {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+    margin-right: 18px;
+
+    .haunted-mode-switch-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(33, 16, 58, 0.85);
+        border: 1px solid @color-roxo-borda;
+        border-radius: 20px;
+        padding: 4px 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        color: @color-texto-claro;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+
+        &:hover {
+            border-color: @color-abobora;
+            box-shadow: 0 0 12px rgba(255, 107, 26, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .haunted-switch-icon {
+            font-size: 1.4rem;
+            line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .haunted-switch-track {
+            position: relative;
+            display: inline-block;
+            width: 38px;
+            height: 20px;
+            background-color: @color-roxo-dark;
+            border: 1px solid @color-roxo-borda;
+            border-radius: 12px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+
+            .haunted-switch-handle {
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                width: 14px;
+                height: 14px;
+                background-color: @color-abobora;
+                border-radius: 50%;
+                box-shadow: 0 0 6px rgba(255, 107, 26, 0.7);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+            }
+        }
+
+        .haunted-switch-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: @color-dourado;
+        }
+    }
+}
+
+// 13.2. Estilos do Modo Assombrado Ativo (html.haunted-mode)
+html.haunted-mode {
+    // Transições suaves entre modos
+    body,
+    .page-wrapper,
+    .page-header,
+    .panel.wrapper,
+    .nav-sections,
+    .page-footer,
+    .copyright,
+    .products-grid .product-item-info,
+    .block-search .input-text {
+        transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    // Fundo Abissal
+    body,
+    .page-wrapper {
+        background-color: #080312 !important;
+    }
+
+    .panel.wrapper {
+        background-color: #040108 !important;
+        border-bottom-color: #2b0b47 !important;
+    }
+
+    .page-header {
+        background-color: #06020c !important;
+        border-bottom-color: #2b0b47 !important;
+    }
+
+    .nav-sections {
+        background-color: #0b0416 !important;
+        border-bottom-color: @color-verde-bruxa !important;
+    }
+
+    .navigation {
+        ul li.level0 > .level-top {
+            &:hover,
+            &.ui-state-focus {
+                color: @color-verde-bruxa !important;
+                text-shadow: 0 0 10px rgba(124, 255, 107, 0.5) !important;
+            }
+        }
+
+        ul li.level0.active > .level-top {
+            color: @color-verde-bruxa !important;
+            border-bottom-color: @color-verde-bruxa !important;
+        }
+
+        .submenu,
+        ul.submenu,
+        ul ul {
+            background-color: #0b0416 !important;
+            border-color: #3d0f66 !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9) !important;
+        }
+    }
+
+    // Títulos com brilho espectral de Halloween
+    h1, h2, h3, h4,
+    .page-title,
+    .block-title strong {
+        text-shadow: 0 0 14px rgba(124, 255, 107, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    // Cards de produto em modo ultrassombrio
+    .products-grid .product-item .product-item-info {
+        background-color: #0d051c !important;
+        border-color: #38125a !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+
+        &:hover,
+        &.active {
+            border-color: @color-verde-bruxa !important;
+            box-shadow: 0 0 22px rgba(124, 255, 107, 0.35) !important;
+            background-color: #0d051c !important;
+        }
+
+        .product-item-inner {
+            background-color: #0d051c !important;
+            border-color: #38125a !important;
+
+            &:before {
+                background-color: #0d051c !important;
+            }
+        }
+
+        .product-image-container {
+            background-color: #07020e !important;
+        }
+    }
+
+    .webjump-samuel-home-block {
+        background: #0d051c !important;
+        border-color: #3d0f66 !important;
+        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.85) !important;
+
+        .product-card {
+            background: #080312 !important;
+            border-color: #2b0b47 !important;
+
+            &:hover {
+                border-color: @color-verde-bruxa !important;
+                box-shadow: 0 0 20px rgba(124, 255, 107, 0.3) !important;
+            }
+        }
+    }
+
+    // Filtros e Tabelas
+    .block.filter,
+    .cart-container .cart.table,
+    .cart-container .cart-summary {
+        background-color: #0d051c !important;
+        border-color: #38125a !important;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+    }
+
+    // Busca e Inputs
+    .block-search .input-text {
+        background-color: #0a0314 !important;
+        border-color: #38125a !important;
+
+        &:focus {
+            border-color: @color-verde-bruxa !important;
+            box-shadow: 0 0 12px rgba(124, 255, 107, 0.35) !important;
+        }
+    }
+
+    // Rodapé
+    .page-footer {
+        background-color: #05020a !important;
+        border-top-color: @color-verde-bruxa !important;
+    }
+
+    .copyright {
+        background-color: #030106 !important;
+    }
+
+    // Estado ativo do botão de interruptor
+    .haunted-mode-switch-btn {
+        background: rgba(14, 5, 24, 0.95);
+        border-color: @color-verde-bruxa;
+        box-shadow: 0 0 14px rgba(124, 255, 107, 0.45);
+
+        .haunted-switch-track {
+            background-color: #040108;
+            border-color: @color-verde-bruxa;
+
+            .haunted-switch-handle {
+                transform: translateX(18px);
+                background-color: @color-verde-bruxa;
+                box-shadow: 0 0 10px rgba(124, 255, 107, 0.9);
+            }
+        }
+
+        .haunted-switch-label {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 8px rgba(124, 255, 107, 0.5);
+        }
+    }
+}
+
+// 13.3. Banner de Campanha no Minicart (Adicionado via Mixin + Template)
+.haunted-minicart-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, rgba(33, 16, 58, 0.95) 0%, rgba(14, 5, 24, 0.95) 100%);
+    border: 1px solid @color-abobora;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin: 10px 0 16px 0;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 107, 26, 0.15);
+    transition: all 0.3s ease;
+
+    .haunted-minicart-icon {
+        font-size: 2.4rem;
+        line-height: 1;
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 6px rgba(255, 107, 26, 0.6));
+        animation: cauldron-glow 2.5s infinite alternate ease-in-out;
+    }
+
+    .haunted-minicart-text {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: @color-dourado;
+        line-height: 1.45;
+        letter-spacing: 0.02em;
+    }
+}
+
+@keyframes cauldron-glow {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 4px rgba(255, 107, 26, 0.5));
+    }
+    100% {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 10px rgba(124, 255, 107, 0.7));
+    }
+}
+
+html.haunted-mode {
+    .haunted-minicart-banner {
+        background: linear-gradient(135deg, rgba(13, 5, 28, 0.98) 0%, rgba(5, 2, 10, 0.98) 100%);
+        border-color: @color-verde-bruxa;
+        box-shadow: 0 0 18px rgba(124, 255, 107, 0.3), inset 0 0 14px rgba(124, 255, 107, 0.1);
+
+        .haunted-minicart-text {
+            color: @color-verde-bruxa;
+            text-shadow: 0 0 6px rgba(124, 255, 107, 0.4);
+        }
+    }
+}

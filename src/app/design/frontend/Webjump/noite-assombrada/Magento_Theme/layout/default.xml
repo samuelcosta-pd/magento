@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Layout configuration for Noite Assombrada theme.
+ * Adds Haunted Mode switcher to header.panel.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="header.panel">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="theme.haunted.mode.toggle"
+                   before="-"
+                   template="Magento_Theme::html/haunted-mode-toggle.phtml"/>
+        </referenceContainer>
+    </body>
+</page>
