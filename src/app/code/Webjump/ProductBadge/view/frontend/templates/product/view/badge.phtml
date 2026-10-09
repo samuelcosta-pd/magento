@@ -19,7 +19,7 @@ $badgeClass = $badgeViewModel->getBadgeCssClass($_product);
 ?>
 <div class="product-badge-wrapper" data-role="product-badge">
     <span class="product-badge <?= $escaper->escapeHtmlAttr($badgeClass) ?>"
-          title="<?= $escaper->escapeHtmlAttr($badgeLabel) ?>">
+          title="<?= $escaper->escapeHtmlAttr(__($badgeLabel)) ?>">
         <span class="product-badge-icon" aria-hidden="true">
             <svg width="14"
                  height="14"
@@ -33,7 +33,7 @@ $badgeClass = $badgeViewModel->getBadgeCssClass($_product);
             </svg>
         </span>
         <span class="product-badge-text">
-            <?= $escaper->escapeHtml($badgeLabel) ?>
+            <?= $escaper->escapeHtml(__($badgeLabel)) ?>
         </span>
     </span>
 </div>
