@@ -156,11 +156,11 @@ Em cumprimento às regras arquiteturais de governança de código, a lista a seg
 | `Magento_Theme/templates/html/header/logo.phtml` | `vendor/magento/module-theme/view/frontend/templates/html/header/logo.phtml` | **Exibição de Logotipo Temático e Emblema de Campanha:** Sobrescrita integral para renderizar o logotipo de alta fidelidade da Horror-Shop (`hs_newlogo.png`) e incluir a tag de campanha "Edição Noite Assombrada". Preserva integralmente a resolução dinâmica de tamanho via `LogoSizeResolverInterface`, suporte a atributos `title`, `alt`, URLs seguras e o botão responsivo `nav-toggle`. |
 | `Magento_Catalog/templates/product/list.phtml` | `vendor/magento/module-catalog/view/frontend/templates/product/list.phtml` | **Selo de Produto Assombrado (Desafio 17.1):** Sobrescrita integral do template de listagem de catálogo para injetar o selo visual do produto com base no atributo `product_badge` (Sprint 7). Mantém 100% da lógica de paginação, modos lista/grid, comparador, wishlist, AJAX add-to-cart e renderizadores de preço. |
 | `Magento_Catalog/templates/product/view/addtocart.phtml` | `vendor/magento/module-catalog/view/frontend/templates/product/view/addtocart.phtml` | **Botões de Incremento e Decremento no Qty da PDP:** Adição de seletores interativos `+` e `-` com acessibilidade e validação de quantidade mínima, preservando a lógica de validação nativa de estoque e o script `Magento_Catalog/js/validate-product`. |
-| `Magento_Checkout/web/template/minicart/content.html` | `vendor/magento/module-checkout/view/frontend/web/template/minicart/content.html` | **Banner do Caldeirão e Binding de Tremor (Desafios 17.2 e 17.5):** Sobrescrita do template Knockout do carrinho lateral para exibir a mensagem computada reativa (`halloweenMessage`) e aplicar o binding customizado `spookyShake` no ícone da bruxa. Todas as regiões nativas (`subtotalContainer`, `extraInfo`, `promotion`, etc.) foram rigorosamente preservadas. |
+| `Magento_Checkout/web/template/minicart/content.html` | `vendor/magento/module-checkout/view/frontend/web/template/minicart/content.html` | **Banner do Caldeirão (Desafio 17.2):** Sobrescrita do template Knockout do carrinho lateral para exibir a mensagem computada reativa (`halloweenMessage`). Todas as regiões nativas (`subtotalContainer`, `extraInfo`, `promotion`, etc.) foram rigorosamente preservadas. |
 | `Magento_Sales/email/order_new.html` | `vendor/magento/module-sales/view/frontend/email/order_new.html` | **E-mail Transacional de Novo Pedido (Desafio 16.2):** Cópia integral do template de e-mail de pedido para clientes cadastrados, adicionando banner comemorativo da Noite Assombrada ("Covil da Noite Assombrada") e estilização condizente com a paleta de sangue e carvão. |
 | `Magento_Sales/email/order_new_guest.html` | `vendor/magento/module-sales/view/frontend/email/order_new_guest.html` | **E-mail Transacional de Novo Pedido para Convidados (Desafio 16.2):** Cópia integral equivalente para assegurar uniformidade visual no fluxo de compra como visitante. |
 
-> **Observação sobre Novos Componentes:** Arquivos como `announcement-bar.phtml`, `countdown.phtml`, `haunted-mode-toggle.phtml`, `countdown.js`, `spooky-shake.js` e `haunted-mode.js` são **novos arquivos criados para a campanha**, não constituindo cópias ou substituições de templates existentes do core.
+> **Observação sobre Novos Componentes:** Arquivos como `announcement-bar.phtml`, `countdown.phtml`, `haunted-mode-toggle.phtml`, `countdown.js` e `haunted-mode.js` são **novos arquivos criados para a campanha**, não constituindo cópias ou substituições de templates existentes do core.
 
 ---
 
@@ -196,12 +196,6 @@ Em cumprimento às regras arquiteturais de governança de código, a lista a seg
   - Visualização destacada da mensagem no Admin de Pedidos.
 - **17.4 — Caixão de Ofertas no Page Builder:**
   - Módulo `Webjump_PageBuilderCoffin` adicionando o content type "Caixão de Ofertas" ao Page Builder com formulário com 6 campos configuráveis (selo, título, descrição, imagem, link, botão), templates de preview e master, e estilização com cantos vintage e cores da campanha.
-- **Diferencial 17.5 — Custom Knockout Binding (Spooky Shake):**
-  - Binding customizado `spookyShake` registrado em `Magento_Theme/js/bindings/spooky-shake.js` com suporte a parâmetros (`intensity`, `onHover`, `trigger`).
-  - Aplicado no ícone do contador regressivo e no ícone do caldeirão no minicart.
-- **Diferencial 17.6 — Custom Customer-Data Section (Sessão Assombrada):**
-  - Implementação de `Webjump\Samuel\CustomerData\SpookySession` implementando `SectionSourceInterface`.
-  - Registrado no pool de seções via `etc/frontend/di.xml` sob a chave `spooky-session` e com regras de invalidação em `etc/frontend/sections.xml`.
 
 ---
 
@@ -218,6 +212,5 @@ bin/magento setup:di:compile
 bin/magento setup:static-content:deploy -f pt_BR en_US
 
 # Verificação de padrões de código (PHPCS Magento 2)
-bin/phpcs app/code/Webjump/Samuel/CustomerData/SpookySession.php
 bin/phpcs app/code/Webjump/CheckoutComment/
 ```
