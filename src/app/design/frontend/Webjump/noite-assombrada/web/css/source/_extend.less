@@ -1345,227 +1345,140 @@ select,
 }
 
 //
-//  13. Desafio 17.2: Modo Assombrado (Ultra Dark) & Minicart da Campanha
+//  13. Desafio 17.4: Caixão de Ofertas no Page Builder
 //  --------------------------------------------------------------------------
+.spooky-coffin-block {
+    margin: 30px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 
-// 13.1. Interruptor do Modo Assombrado no Cabeçalho
-.haunted-mode-switcher-container {
-    display: inline-flex;
-    align-items: center;
-    vertical-align: middle;
-    margin-right: 18px;
-
-    .haunted-mode-switch-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(33, 16, 58, 0.85);
-        border: 1px solid @color-roxo-borda;
-        border-radius: 20px;
-        padding: 4px 12px;
-        cursor: pointer;
-        transition: all 0.3s ease;
+    .spooky-coffin-card {
+        background: linear-gradient(135deg, @color-roxo-card 0%, @color-roxo-dark 100%);
+        border: 2px solid @color-abobora;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(255, 107, 26, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        padding: 32px 28px;
+        text-align: center;
         color: @color-texto-claro;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        max-width: 580px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
         &:hover {
-            border-color: @color-abobora;
-            box-shadow: 0 0 12px rgba(255, 107, 26, 0.4);
-            transform: translateY(-1px);
-        }
-
-        .haunted-switch-icon {
-            font-size: 1.4rem;
-            line-height: 1;
-            transition: transform 0.3s ease;
-        }
-
-        .haunted-switch-track {
-            position: relative;
-            display: inline-block;
-            width: 38px;
-            height: 20px;
-            background-color: @color-roxo-dark;
-            border: 1px solid @color-roxo-borda;
-            border-radius: 12px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-
-            .haunted-switch-handle {
-                position: absolute;
-                top: 2px;
-                left: 2px;
-                width: 14px;
-                height: 14px;
-                background-color: @color-abobora;
-                border-radius: 50%;
-                box-shadow: 0 0 6px rgba(255, 107, 26, 0.7);
-                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
-            }
-        }
-
-        .haunted-switch-label {
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: @color-dourado;
-        }
-    }
-}
-
-// 13.2. Estilos do Modo Assombrado Ativo (html.haunted-mode)
-html.haunted-mode {
-    // Transições suaves entre modos
-    body,
-    .page-wrapper,
-    .page-header,
-    .panel.wrapper,
-    .nav-sections,
-    .page-footer,
-    .copyright,
-    .products-grid .product-item-info,
-    .block-search .input-text {
-        transition: background-color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    }
-
-    // Fundo Abissal
-    body,
-    .page-wrapper {
-        background-color: #080312 !important;
-    }
-
-    .panel.wrapper {
-        background-color: #040108 !important;
-        border-bottom-color: #2b0b47 !important;
-    }
-
-    .page-header {
-        background-color: #06020c !important;
-        border-bottom-color: #2b0b47 !important;
-    }
-
-    .nav-sections {
-        background-color: #0b0416 !important;
-        border-bottom-color: @color-verde-bruxa !important;
-    }
-
-    .navigation {
-        ul li.level0 > .level-top {
-            &:hover,
-            &.ui-state-focus {
-                color: @color-verde-bruxa !important;
-                text-shadow: 0 0 10px rgba(124, 255, 107, 0.5) !important;
-            }
-        }
-
-        ul li.level0.active > .level-top {
-            color: @color-verde-bruxa !important;
-            border-bottom-color: @color-verde-bruxa !important;
-        }
-
-        .submenu,
-        ul.submenu,
-        ul ul {
-            background-color: #0b0416 !important;
-            border-color: #3d0f66 !important;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9) !important;
-        }
-    }
-
-    // Títulos com brilho espectral de Halloween
-    h1, h2, h3, h4,
-    .page-title,
-    .block-title strong {
-        text-shadow: 0 0 14px rgba(124, 255, 107, 0.4), 0 2px 8px rgba(0, 0, 0, 0.8) !important;
-    }
-
-    // Cards de produto em modo ultrassombrio
-    .products-grid .product-item .product-item-info {
-        background-color: #0d051c !important;
-        border-color: #38125a !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
-
-        &:hover,
-        &.active {
-            border-color: @color-verde-bruxa !important;
-            box-shadow: 0 0 22px rgba(124, 255, 107, 0.35) !important;
-            background-color: #0d051c !important;
-        }
-
-        .product-item-inner {
-            background-color: #0d051c !important;
-            border-color: #38125a !important;
-
-            &:before {
-                background-color: #0d051c !important;
-            }
-        }
-
-        .product-image-container {
-            background-color: #07020e !important;
-        }
-    }
-
-    .webjump-samuel-home-block {
-        background: #0d051c !important;
-        border-color: #3d0f66 !important;
-        box-shadow: 0 10px 36px rgba(0, 0, 0, 0.85) !important;
-
-        .product-card {
-            background: #080312 !important;
-            border-color: #2b0b47 !important;
-
-            &:hover {
-                border-color: @color-verde-bruxa !important;
-                box-shadow: 0 0 20px rgba(124, 255, 107, 0.3) !important;
-            }
-        }
-    }
-
-    // Filtros e Tabelas
-    .block.filter,
-    .cart-container .cart.table,
-    .cart-container .cart-summary {
-        background-color: #0d051c !important;
-        border-color: #38125a !important;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7) !important;
-    }
-
-    // Busca e Inputs
-    .block-search .input-text {
-        background-color: #0a0314 !important;
-        border-color: #38125a !important;
-
-        &:focus {
-            border-color: @color-verde-bruxa !important;
-            box-shadow: 0 0 12px rgba(124, 255, 107, 0.35) !important;
-        }
-    }
-
-    // Rodapé
-    .page-footer {
-        background-color: #05020a !important;
-        border-top-color: @color-verde-bruxa !important;
-    }
-
-    .copyright {
-        background-color: #030106 !important;
-    }
-
-    // Estado ativo do botão de interruptor
-    .haunted-mode-switch-btn {
-        background: rgba(14, 5, 24, 0.95);
-        border-color: @color-verde-bruxa;
-        box-shadow: 0 0 14px rgba(124, 255, 107, 0.45);
-
-        .haunted-switch-track {
-            background-color: #040108;
+            transform: translateY(-6px);
             border-color: @color-verde-bruxa;
+            box-shadow: 0 16px 40px rgba(255, 107, 26, 0.4), 0 0 25px rgba(124, 255, 107, 0.25);
 
-            .haunted-switch-handle {
-                transform: translateX(18px);
-                background-color: @color-verde-bruxa;
-                box-shadow: 0 0 10px rgba(124, 255, 107, 0.9);
+            .coffin-head-icon {
+                transform: scale(1.15) rotate(-5deg);
+            }
+
+            .spooky-coffin-image {
+                transform: scale(1.04);
+            }
+        }
+
+        .spooky-coffin-ornament-top {
+            font-size: 26px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            align-items: center;
+
+            .coffin-head-icon {
+                font-size: 36px;
+                display: inline-block;
+                transition: transform 0.3s ease;
+            }
+
+            .coffin-bat {
+                filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+            }
+        }
+
+        .spooky-coffin-badge-container {
+            margin-bottom: 18px;
+
+            .spooky-coffin-badge {
+                background: @color-abobora;
+                color: #120B1C;
+                font-size: 1.3rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                padding: 6px 18px;
+                border-radius: 20px;
+                display: inline-block;
+                letter-spacing: .08em;
+                box-shadow: 0 4px 12px rgba(255, 107, 26, 0.45);
+            }
+        }
+
+        .spooky-coffin-image-container {
+            margin-bottom: 22px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 107, 26, 0.3);
+            background: rgba(18, 7, 34, 0.7);
+            max-height: 280px;
+
+            .spooky-coffin-image {
+                width: 100%;
+                height: 100%;
+                max-height: 280px;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.4s ease;
+            }
+        }
+    }
+
+        .spooky-coffin-content {
+            .spooky-coffin-title {
+                font-family: @heading__font-family__base;
+                color: @color-dourado;
+                font-size: 3.2rem;
+                font-weight: normal;
+                letter-spacing: .05em;
+                margin-bottom: 12px;
+                text-shadow: 0 2px 8px rgba(255, 107, 26, 0.5);
+                line-height: 1.2;
+            }
+
+            .spooky-coffin-description {
+                color: @color-cinza-neblina;
+                font-size: 1.5rem;
+                line-height: 1.6;
+                margin-bottom: 24px;
+            }
+
+            .spooky-coffin-action {
+                .spooky-coffin-btn {
+                    background: @color-dourado !important;
+                    color: @color-roxo-dark !important;
+                    font-weight: 800 !important;
+                    font-size: 1.6rem !important;
+                    padding: 14px 36px !important;
+                    border-radius: 30px !important;
+                    display: inline-block !important;
+                    border: none !important;
+                    text-transform: uppercase !important;
+                    letter-spacing: .08em !important;
+                    box-shadow: 0 4px 16px rgba(255, 211, 105, 0.4) !important;
+                    text-decoration: none !important;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        background: @color-verde-bruxa !important;
+                        color: @color-roxo-dark !important;
+                        box-shadow: 0 6px 20px rgba(124, 255, 107, 0.5) !important;
+                        transform: scale(1.05);
+                    }
+                }
             }
         }
 

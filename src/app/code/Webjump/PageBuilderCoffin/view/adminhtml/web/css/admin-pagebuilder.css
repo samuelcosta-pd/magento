@@ -1,0 +1,123 @@
+/**
+ * Admin styles for Caixao de Ofertas Page Builder component
+ */
+
+/* Menu icon */
+.pagebuilder-content-type-menu .icon-pagebuilder-spooky-coffin::before {
+    content: "⚰️";
+    font-size: 20px;
+    display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+/* Stage Preview */
+.pagebuilder-spooky-coffin {
+    min-height: 120px;
+    position: relative;
+    padding: 12px;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-wrapper {
+    width: 100%;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-card {
+    background: linear-gradient(135deg, #2a1b3d 0%, #150a22 100%);
+    border: 2px solid #ff6b1a;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(255, 107, 26, 0.25);
+    padding: 24px;
+    text-align: center;
+    color: #ede7f6;
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-ornament-top {
+    font-size: 22px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    align-items: center;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-badge-container {
+    margin-bottom: 14px;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-badge {
+    background: #ff6b1a;
+    color: #120b1c;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    letter-spacing: 0.08em;
+    box-shadow: 0 2px 8px rgba(255, 107, 26, 0.4);
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-image-container {
+    margin-bottom: 16px;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-image {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 107, 26, 0.3);
+    object-fit: cover;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-placeholder-image {
+    background: rgba(42, 27, 61, 0.6);
+    border: 2px dashed rgba(255, 107, 26, 0.5);
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: #b8b8c4;
+}
+
+.pagebuilder-spooky-coffin .placeholder-icon {
+    font-size: 32px;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-title {
+    color: #ff6b1a;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-description {
+    color: #b8b8c4;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.pagebuilder-spooky-coffin .spooky-coffin-btn {
+    background: #ff6b1a !important;
+    color: #120b1c !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    padding: 10px 24px !important;
+    border-radius: 24px !important;
+    display: inline-block !important;
+    border: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    box-shadow: 0 4px 12px rgba(255, 107, 26, 0.35) !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
