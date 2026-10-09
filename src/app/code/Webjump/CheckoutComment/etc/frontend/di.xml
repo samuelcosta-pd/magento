@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Inject field into checkout layout -->
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="webjump_checkoutcomment_layout_processor"
+                type="Webjump\CheckoutComment\Plugin\Checkout\LayoutProcessorPlugin"
+                sortOrder="10"/>
+    </type>
+
+    <!-- Save extension attribute to quote on shipping step save -->
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="webjump_checkoutcomment_shipping_information_management"
+                type="Webjump\CheckoutComment\Plugin\Checkout\ShippingInformationManagementPlugin"
+                sortOrder="10"/>
+    </type>
+</config>
