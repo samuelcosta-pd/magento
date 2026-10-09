@@ -166,83 +166,13 @@ src/app/code/Webjump/CheckoutComment/
 
 ---
 
-## 5. Guia Exato de Onde Tirar Cada Print Comprobatório
-
-Este guia fornece o passo a passo exato para que qualquer desenvolvedor ou avaliador localize e capture as evidências de sucesso no ambiente Magento:
-
-### 5.1. Critério 1: Campo no Checkout (Passo de Entrega)
-* **No Frontend:**
-  1. Acesse qualquer produto da loja (ex: `https://magento.test/joust-duffle-bag.html`) e clique em *Adicionar ao Carrinho*.
-  2. Vá para o Checkout em `https://magento.test/checkout/`.
-  3. Preencha os campos obrigatórios de endereço (E-mail, Nome, Sobrenome, Rua, Cidade, CEP, Telefone) e selecione o método de entrega (*Flat Rate*).
-  4. Role a página ligeiramente para baixo até a seção **Mensagem Assombrada**, logo abaixo dos métodos de entrega.
-  5. **Tirar Print:** Enquadrar a área de métodos de entrega, o campo textarea com o rótulo *Mensagem Assombrada*, o aviso de 250 caracteres e o botão *Next*.
-* **No Código / IDE:**
-  1. Abra [`LayoutProcessorPlugin.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/Plugin/Checkout/LayoutProcessorPlugin.php).
-  2. Destaque o método `afterProcess()` onde o campo é registrado na chave `spooky-order-comment-fieldset` com `'displayArea' => 'shippingAdditional'` e `'provider' => 'checkoutProvider'`.
-
----
-
-### 5.2. Critério 2: Validação de Tamanho Máximo (250 Caracteres)
-* **No Frontend:**
-  1. No mesmo checkout (Passo de Entrega), digite um texto contendo mais de 250 caracteres (ex: 260 caracteres) no campo *Mensagem Assombrada*.
-  2. Clique no botão de avançar (*Next*).
-  3. A validação nativa do formulário impedirá o avanço e destacará a borda do campo em vermelho com a mensagem: *"Please enter less or equal than 250 symbols."*.
-  4. **Tirar Print:** Enquadrar a mensagem de erro vermelha visível logo abaixo do campo e o formulário retido no primeiro passo.
-* **No Código / IDE:**
-  1. Abra [`LayoutProcessorPlugin.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/Plugin/Checkout/LayoutProcessorPlugin.php) destacando `'validation' => ['max_text_length' => 250]`.
-  2. Abra [`payload-extender-mixin.js`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/view/frontend/web/js/model/shipping-save-processor/payload-extender-mixin.js) destacando a leitura reativa do componente via `uiRegistry`.
-
----
-
-### 5.3. Critério 3: Mensagem Salva e Visível no Pedido no Admin
-* **No Painel Admin:**
-  1. Acesse o painel administrativo em `https://magento.test/admin/`.
-  2. Faça login com credenciais administrativas (`john.smith`).
-  3. Navegue no menu lateral: **Sales > Orders**.
-  4. Localize e clique no pedido com mensagem preenchida (ex: Pedido `#000000003`).
-  5. Na página de detalhes do pedido, role até o bloco **Mensagem Assombrada** (posicionado entre *Payment & Shipping Method* e *Items Ordered*).
-  6. **Tirar Print:** Enquadrar o topo do pedido `#000000003`, o bloco com o ícone 🎃 e o texto real do comprador: *"Entregar o caldeirão lacrado sob a lua cheia antes da meia-noite! Cuidado com os morcegos."*.
-* **No Código / IDE:**
-  1. Abra [`ShippingInformationManagementPlugin.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/Plugin/Checkout/ShippingInformationManagementPlugin.php) e [`fieldset.xml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/etc/fieldset.xml).
-  2. Destaque a interceptação do extension attribute e o mapeamento declarativo `sales_convert_quote -> to_order`.
-
----
-
-### 5.4. Critério 4: Pedido sem Mensagem Concluído Normalmente (Estado Vazio)
-* **No Painel Admin:**
-  1. No painel administrativo em **Sales > Orders**, clique no pedido concluído sem mensagem (ex: Pedido `#000000004`).
-  2. Na visualização dos detalhes do pedido, role até a seção **Mensagem Assombrada**.
-  3. **Tirar Print:** Enquadrar o pedido `#000000004` exibindo o fallback informativo: *"Nenhuma mensagem assombrada foi informada para este pedido."*.
-* **No Código / IDE:**
-  1. Abra [`Comment.php`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/Block/Adminhtml/Order/View/Comment.php) e [`comment.phtml`](file:///home/samuel/Sites/magento/src/app/code/Webjump/CheckoutComment/view/adminhtml/templates/order/view/comment.phtml).
-  2. Destaque o método `getSpookyOrderComment()` retornando `?string` seguro e a condicional `<?php if ($comment !== null && $comment !== ''): ?>`.
-
----
-
-### 5.5. Critério 5: Zero Modificações no Módulo Core / Vendor
-* **No Terminal / Git:**
-  1. No terminal do projeto, execute o script de integridade oficial:
-     `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh --working`
-  2. Execute `git status`.
-  3. **Tirar Print:** Janela do terminal comprovando a saída `OK: no changes under vendor/.` e os arquivos isolados sob `src/app/code/Webjump/CheckoutComment/`.
-
----
-
-### 5.6. Critério 6: Caminho Completo do Dado (Diagrama)
-* **No Diagrama Arquitetural:**
-  1. Visualização estruturada do pipeline de dados de ponta a ponta (UI -> Mixin -> REST -> Quote -> Order -> Admin).
-  2. **Tirar Print:** O diagrama do ciclo de vida renderizado com clareza visual.
-
----
-
-## 6. Evidências de Sucesso
+## 5. Evidências de Sucesso
 
 Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **17.3 - Mensagem assombrada no checkout**, capturados automaticamente no ambiente de homologação local.
 
 ---
 
-### 6.1. Critério 1: O campo aparece no checkout, no passo de entrega
+### 5.1. Critério 1: O campo aparece no checkout, no passo de entrega
 
 #### Print 1.1 — No Frontend (Campo "Mensagem Assombrada" no Passo de Entrega do Checkout)
 - **Onde acessar:** `https://magento.test/checkout/` (Etapa 1: Shipping)
@@ -258,7 +188,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 6.2. Critério 2: A validação de tamanho máximo funciona e mostra mensagem ao usuário
+### 5.2. Critério 2: A validação de tamanho máximo funciona e mostra mensagem ao usuário
 
 #### Print 2.1 — No Frontend (Validação de Tamanho Máximo em Tempo Real / Bloqueio no Checkout)
 - **Onde acessar:** `https://magento.test/checkout/` (Etapa 1: Shipping)
@@ -274,7 +204,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 6.3. Critério 3: O valor é salvo e aparece na visualização do pedido no admin
+### 5.3. Critério 3: O valor é salvo e aparece na visualização do pedido no admin
 
 #### Print 3.1 — No Painel Admin (Visualização do Pedido com a Mensagem Assombrada)
 - **Onde acessar:** **Sales > Orders > View** (Pedido `#000000003`)
@@ -290,7 +220,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 6.4. Critério 4: Pedido sem mensagem preenchida é concluído normalmente
+### 5.4. Critério 4: Pedido sem mensagem preenchida é concluído normalmente
 
 #### Print 4.1 — No Painel Admin (Visualização de Pedido sem Mensagem / Estado Vazio Elegante)
 - **Onde acessar:** **Sales > Orders > View** (Pedido `#000000004`)
@@ -306,21 +236,12 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 6.5. Critério 5: Nenhum arquivo do módulo `Magento_Checkout` foi alterado
+### 5.5. Critério 5: Nenhum arquivo do módulo `Magento_Checkout` foi alterado
 
 #### Print 5.1 — No Terminal / Git (Verificação Estrita de Integridade do `vendor/` e Git Status)
 - **O que comprova:** Execução do script oficial `check-vendor-changes.sh --working` retornando `OK: no changes under vendor/.` e `git status` comprovando que todo o desenvolvimento reside isolado dentro de `src/app/code/Webjump/CheckoutComment/`.
 
 > <img width="1800" height="1000" alt="Integridade de Vendor e Git Status" src="docs/prints/17-3/print_5_1_integridade_vendor_e_git_status.png" />
-
----
-
-### 6.6. Critério 6: Caminho completo do dado, da tela até o admin
-
-#### Print 6.1 — No Diagrama Arquitetural (Ciclo de Vida do Dado Ponta a Ponta)
-- **O que comprova:** Fluxo detalhado em 6 etapas: Injeção na UI (LayoutProcessor) ➔ Interceptação Client-Side (Mixin) ➔ Transmissão REST API (Extension Attributes) ➔ Persistência na Cotação (Plugin) ➔ Conversão Quote ➔ Order (Fieldset & Observer) ➔ Visualização no Painel Admin.
-
-> <img width="1800" height="1050" alt="Diagrama Arquitetural do Ciclo de Vida do Dado" src="docs/prints/17-3/print_6_1_caminho_completo_do_dado_diagrama.png" />
 
 ---
 
