@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<script>
+    try {
+        if (localStorage.getItem('haunted_mode_enabled') === 'true') {
+            document.documentElement.classList.add('haunted-mode');
+        }
+    } catch (e) {}
+</script>
+<div class="haunted-mode-switcher-container" data-role="haunted-mode-switcher">
+    <button type="button"
+            class="haunted-mode-switch-btn"
+            data-action="toggle-haunted-mode"
+            role="switch"
+            aria-checked="false"
+            title="<?= $block->escapeHtmlAttr(__('Alternar Modo Assombrado (Ultra Dark)')) ?>"
+            aria-label="<?= $block->escapeHtmlAttr(__('Ativar ou desativar Modo Assombrado Ultra Dark')) ?>">
+        <span class="haunted-switch-icon haunted-icon-moon" aria-hidden="true" title="<?= $block->escapeHtmlAttr(__('Tema Noturno Padrão')) ?>">🌕</span>
+        <span class="haunted-switch-track" aria-hidden="true">
+            <span class="haunted-switch-handle"></span>
+        </span>
+        <span class="haunted-switch-icon haunted-icon-skull" aria-hidden="true" title="<?= $block->escapeHtmlAttr(__('Modo Assombrado Abissal')) ?>">💀</span>
+        <span class="haunted-switch-label"><?= $block->escapeHtml(__('Modo Assombrado')) ?></span>
+    </button>
+</div>
