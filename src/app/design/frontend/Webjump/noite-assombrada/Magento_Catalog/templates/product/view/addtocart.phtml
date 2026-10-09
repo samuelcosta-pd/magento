@@ -13,36 +13,36 @@
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()): ?>
         <div class="field qty">
-            <label class="label" for="qty"><span><?= $escaper->escapeHtml(__('Qty')) ?></span></label>
+            <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
             <div class="control qty-stepper-control">
                 <button type="button"
                         class="action-qty qty-minus"
                         id="qty-btn-minus"
-                        aria-label="<?= $escaper->escapeHtmlAttr(__('Diminuir quantidade')) ?>"
-                        title="<?= $escaper->escapeHtmlAttr(__('Diminuir')) ?>">-</button>
+                        aria-label="<?= $block->escapeHtmlAttr(__('Diminuir quantidade')) ?>"
+                        title="<?= $block->escapeHtmlAttr(__('Diminuir')) ?>">-</button>
                 <input type="number"
                        name="qty"
                        id="qty"
                        min="0"
                        value="<?= (int)$block->getProductDefaultQty() ?>"
-                       title="<?= $escaper->escapeHtmlAttr(__('Qty')) ?>"
+                       title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
                        class="input-text qty"
-                       data-validate="<?= $escaper->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                        />
                 <button type="button"
                         class="action-qty qty-plus"
                         id="qty-btn-plus"
-                        aria-label="<?= $escaper->escapeHtmlAttr(__('Aumentar quantidade')) ?>"
-                        title="<?= $escaper->escapeHtmlAttr(__('Aumentar')) ?>">+</button>
+                        aria-label="<?= $block->escapeHtmlAttr(__('Aumentar quantidade')) ?>"
+                        title="<?= $block->escapeHtmlAttr(__('Aumentar')) ?>">+</button>
             </div>
         </div>
         <?php endif; ?>
         <div class="actions">
             <button type="submit"
-                    title="<?= $escaper->escapeHtmlAttr($buttonTitle) ?>"
+                    title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
                     class="action primary tocart"
                     id="product-addtocart-button" disabled>
-                <span><?= $escaper->escapeHtml($buttonTitle) ?></span>
+                <span><?= $block->escapeHtml($buttonTitle) ?></span>
             </button>
             <?= $block->getChildHtml('', true) ?>
         </div>

@@ -1,0 +1,43 @@
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Template Knockout para contagem regressiva (Desafio 17.1)
+ */
+-->
+<div class="halloween-countdown-wrapper" data-role="halloween-countdown">
+    <div class="halloween-countdown-header">
+        <span class="halloween-countdown-icon" aria-hidden="true" data-bind="text: isExpired() ? '👻' : '🎃', spookyShake: { onHover: true, intensity: 'medium' }"></span>
+        <h3 class="halloween-countdown-title" data-bind="text: isExpired() ? expiredTitle : title"></h3>
+    </div>
+
+    <!-- ko ifnot: isExpired -->
+    <div class="halloween-countdown-digits">
+        <div class="countdown-unit-box">
+            <span class="countdown-unit-number" data-bind="text: days"></span>
+            <span class="countdown-unit-label" data-bind="i18n: 'Dias'"></span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit-box">
+            <span class="countdown-unit-number" data-bind="text: hours"></span>
+            <span class="countdown-unit-label" data-bind="i18n: 'Horas'"></span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit-box">
+            <span class="countdown-unit-number" data-bind="text: minutes"></span>
+            <span class="countdown-unit-label" data-bind="i18n: 'Minutos'"></span>
+        </div>
+        <span class="countdown-separator" aria-hidden="true">:</span>
+        <div class="countdown-unit-box">
+            <span class="countdown-unit-number" data-bind="text: seconds"></span>
+            <span class="countdown-unit-label" data-bind="i18n: 'Segundos'"></span>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: isExpired -->
+    <div class="halloween-countdown-expired">
+        <span class="expired-icon" aria-hidden="true">👻</span>
+        <p class="expired-message" data-bind="text: expiredMessage"></p>
+    </div>
+    <!-- /ko -->
+</div>

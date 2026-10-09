@@ -1,0 +1,27 @@
+<?php
+/**
+ * Desafio 16.2 - Announcement Bar (Horror-Shop.com Model)
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div class="hs-announcement-bar" role="region" aria-label="<?= $block->escapeHtmlAttr(__('Faixa Superior de Anúncios')) ?>">
+    <div class="hs-announcement-bar__inner page-width">
+        <div class="hs-announcement-bar__item hs-announcement-bar__left">
+            <span class="hs-announcement-bar__icon" aria-hidden="true">🦇</span>
+            <span class="hs-announcement-bar__text"><?= $block->escapeHtml(__('SAME-DAY SHIPPING: 1–3 days for delivery')) ?></span>
+        </div>
+        <div class="hs-announcement-bar__item hs-announcement-bar__center">
+            <span class="hs-announcement-bar__icon" aria-hidden="true">🎃</span>
+            <span class="hs-announcement-bar__text">
+                <strong class="hs-announcement-bar__highlight"><?= $block->escapeHtml(__('SAVE AT THE CLUB')) ?>:</strong>
+                <?= $block->escapeHtml(__('10% OFF com cupom')) ?>
+                <span class="hs-announcement-bar__coupon"><?= $block->escapeHtml(__('ASSOMBRADO10')) ?></span>
+            </span>
+        </div>
+        <div class="hs-announcement-bar__item hs-announcement-bar__right">
+            <span class="hs-announcement-bar__icon" aria-hidden="true">💀</span>
+            <span class="hs-announcement-bar__text"><?= $block->escapeHtml(__('NOITE ASSOMBRADA')) ?></span>
+        </div>
+    </div>
+</div>

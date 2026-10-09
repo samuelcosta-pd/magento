@@ -1,131 +1,132 @@
 // /**
 //  * Copyright © Webjump. All rights reserved.
+//  * Theme variables override for Noite Assombrada (Horror-Shop.com Reference)
 //  */
 
 //
-//  Paleta da Campanha Noite Assombrada (Inspirada em inspiracao-1.jpeg)
+//  Paleta da Campanha Horror-Shop / Noite Assombrada
 //  --------------------------------------------------------------------------
-@color-abobora:         #FF6B1A;
-@color-abobora-vivid:   #FF7A00;
-@color-roxo-noite:      #1A0B2E;
-@color-roxo-card:       #21103A;
-@color-roxo-dark:       #120722;
-@color-roxo-panel:      #0E0518;
-@color-roxo-borda:      #3D1C68;
-@color-dourado:         #FFD369;
-@color-dourado-alt:     #FFC107;
-@color-verde-bruxa:     #7CFF6B;
-@color-cinza-neblina:   #B8B8C4;
-@color-texto-claro:     #EDE7F6;
-@color-branco-gelo:     #F3E5F5;
+@color-blood-red:          #aa0707;
+@color-blood-dark:         #880000;
+@color-pumpkin-orange:     #ff6500;
+@color-haunted-gold:       #d69849;
+@color-charcoal-dark:      #262728;
+@color-header-midnight:    #1a1a1a;
+@color-parchment-bg:       #eae3db;
+@color-parchment-card:     #ffffff;
+@color-parchment-footer:   #ede9e2;
+@color-border-vintage:     #d3d3d3;
+@color-text-primary:       #121212;
+@color-text-muted:         #555555;
+@color-text-light:         #ffffff;
 
 //
 //  Tipografia & Fontes
 //  --------------------------------------------------------------------------
-@font-family__base:                 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-@heading__font-family__base:        'Creepster', cursive, 'Helvetica Neue', Arial, sans-serif;
-@heading__color__base:              @color-dourado;
-@heading__font-weight__base:        normal;
+@font-family__base:                 'Oswald', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@heading__font-family__base:        'Oswald', sans-serif;
+@heading__color__base:              @color-text-primary;
+@heading__font-weight__base:        700;
 
 // Títulos individuais herdando a tipografia temática
 @h1__font-family:                   @heading__font-family__base;
-@h1__font-color:                    @color-dourado;
+@h1__font-color:                    @color-blood-red;
 @h2__font-family:                   @heading__font-family__base;
-@h2__font-color:                    @color-dourado;
+@h2__font-color:                    @color-blood-red;
 @h3__font-family:                   @heading__font-family__base;
-@h3__font-color:                    @color-dourado;
+@h3__font-color:                    @color-text-primary;
 @h4__font-family:                   @heading__font-family__base;
-@h4__font-color:                    @color-dourado;
+@h4__font-color:                    @color-text-primary;
 
 //
 //  Cores Globais & Layout
 //  --------------------------------------------------------------------------
-@primary__color:                    @color-abobora;
-@page__background-color:            @color-roxo-noite;
-@text__color:                       @color-texto-claro;
-@text__color__muted:                @color-cinza-neblina;
+@primary__color:                    @color-blood-red;
+@page__background-color:            @color-parchment-bg;
+@text__color:                       @color-text-primary;
+@text__color__muted:                @color-text-muted;
 
-@link__color:                       @color-abobora-vivid;
-@link__visited__color:              @color-abobora-vivid;
-@link__hover__color:                @color-verde-bruxa;
-@link__active__color:               @color-dourado;
+@link__color:                       @color-blood-red;
+@link__visited__color:              @color-blood-red;
+@link__hover__color:                @color-pumpkin-orange;
+@link__active__color:               @color-blood-dark;
 
-@border-color__base:                @color-roxo-borda;
+@border-color__base:                @color-border-vintage;
 
 //
-//  Botões Primários (Dourado de Ação como nos botões da inspiração)
+//  Botões Primários (Vermelho Sangue / Laranja Assombrado)
 //  --------------------------------------------------------------------------
-@button-primary__background:        @color-dourado;
-@button-primary__color:             @color-roxo-dark;
-@button-primary__border:            1px solid @color-dourado;
-@button-primary__hover__background: @color-abobora;
+@button-primary__background:        @color-blood-red;
+@button-primary__color:             @color-text-light;
+@button-primary__border:            1px solid @color-blood-dark;
+@button-primary__hover__background: @color-pumpkin-orange;
 @button-primary__hover__color:      #FFFFFF;
-@button-primary__hover__border:     1px solid @color-abobora;
-@button-primary__active__background:@color-abobora-vivid;
+@button-primary__hover__border:     1px solid darken(@color-pumpkin-orange, 5%);
+@button-primary__active__background:@color-blood-dark;
 @button-primary__active__color:     #FFFFFF;
-@button-primary__active__border:    1px solid @color-abobora-vivid;
+@button-primary__active__border:    1px solid darken(@color-blood-dark, 5%);
 
 //
 //  Botões Secundários / Padrão
 //  --------------------------------------------------------------------------
-@button__background:                @color-roxo-card;
-@button__color:                     @color-texto-claro;
-@button__border:                    1px solid @color-roxo-borda;
-@button__hover__background:         lighten(@color-roxo-card, 8%);
-@button__hover__color:              @color-dourado;
-@button__hover__border:             1px solid @color-abobora;
+@button__background:                @color-charcoal-dark;
+@button__color:                     @color-text-light;
+@button__border:                    1px solid @color-header-midnight;
+@button__hover__background:         @color-pumpkin-orange;
+@button__hover__color:              #FFFFFF;
+@button__hover__border:             1px solid @color-pumpkin-orange;
 
 //
 //  Cabeçalho & Painel Superior
 //  --------------------------------------------------------------------------
-@header__background-color:          @color-roxo-dark;
-@header-panel__background-color:    @color-roxo-panel;
-@header-panel__text-color:          @color-cinza-neblina;
+@header__background-color:          @color-charcoal-dark;
+@header-panel__background-color:    @color-header-midnight;
+@header-panel__text-color:          @color-text-light;
 
 //
 //  Navegação / Menu Horizontal & Submenus
 //  --------------------------------------------------------------------------
-@navigation__background:            @color-roxo-card;
-@navigation-level0-item__color:      @color-texto-claro;
-@navigation-level0-item__hover__color: @color-dourado;
-@navigation-level0-item__active__color: @color-abobora;
-@submenu__background:                       @color-roxo-card;
-@submenu-item__color:                       @color-texto-claro;
-@submenu-desktop__background:               @color-roxo-card;
-@submenu-desktop__border-color:             @color-roxo-borda;
-@submenu-desktop-item__color:               @color-texto-claro;
-@submenu-desktop-item__hover__background:   lighten(@color-roxo-card, 10%);
-@submenu-desktop-item__hover__color:        @color-dourado;
-@submenu-desktop-item__active__color:       @color-abobora;
+@navigation__background:            @color-charcoal-dark;
+@navigation-level0-item__color:      @color-text-light;
+@navigation-level0-item__hover__color: @color-pumpkin-orange;
+@navigation-level0-item__active__color: @color-blood-red;
+@submenu__background:                       @color-charcoal-dark;
+@submenu-item__color:                       @color-text-light;
+@submenu-desktop__background:               @color-charcoal-dark;
+@submenu-desktop__border-color:             #444444;
+@submenu-desktop-item__color:               @color-text-light;
+@submenu-desktop-item__hover__background:   lighten(@color-charcoal-dark, 8%);
+@submenu-desktop-item__hover__color:        @color-pumpkin-orange;
+@submenu-desktop-item__active__color:       @color-blood-red;
 
 //
 //  Preço & Produtos
 //  --------------------------------------------------------------------------
-@price-color:                       @color-dourado;
-@price-old-color:                   @color-cinza-neblina;
-@product-item__hover__background-color: @color-roxo-card;
-@product-name-link__color:          @color-texto-claro;
-@product-name-link__color__hover:   @color-dourado;
-@product-name-link__color__active:  @color-abobora;
+@price-color:                       @color-blood-red;
+@price-old-color:                   @color-text-muted;
+@product-item__hover__background-color: #ffffff;
+@product-name-link__color:          @color-text-primary;
+@product-name-link__color__hover:   @color-blood-red;
+@product-name-link__color__active:  @color-pumpkin-orange;
 
 //
 //  Rodapé & Copyright
 //  --------------------------------------------------------------------------
-@footer__background-color:          @color-roxo-dark;
-@copyright__background-color:       @color-roxo-panel;
+@footer__background-color:          @color-parchment-footer;
+@copyright__background-color:       @color-charcoal-dark;
 
 //
 //  Formulários & Inputs
 //  --------------------------------------------------------------------------
-@form-element-input__background:    darken(@color-roxo-card, 4%);
-@form-element-input__color:         @color-texto-claro;
-@form-element-input__border-color:  @color-roxo-borda;
-@form-element-input-placeholder__color: @color-cinza-neblina;
+@form-element-input__background:    #ffffff;
+@form-element-input__color:         @color-text-primary;
+@form-element-input__border-color:  @color-border-vintage;
+@form-element-input-placeholder__color: @color-text-muted;
 
 //
 //  Sidebar & Breadcrumbs
 //  --------------------------------------------------------------------------
-@sidebar__background-color:         @color-roxo-card;
-@breadcrumbs-current__color:        @color-dourado;
-@breadcrumbs-link__color:           @color-cinza-neblina;
-@breadcrumbs-link__hover__color:    @color-verde-bruxa;
+@sidebar__background-color:         #ffffff;
+@breadcrumbs-current__color:        @color-blood-red;
+@breadcrumbs-link__color:           #333333;
+@breadcrumbs-link__hover__color:    @color-pumpkin-orange;
