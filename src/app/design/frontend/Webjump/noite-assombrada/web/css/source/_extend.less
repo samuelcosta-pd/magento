@@ -1492,3 +1492,66 @@ html.haunted-mode {
     }
 }
 
+// ==========================================================================
+// DESAFIO 17.5: CUSTOM KNOCKOUT BINDING (spookyShake)
+// Animações paramétricas de tremor/shake para elementos assombrados
+// ==========================================================================
+
+.spooky-shakeable {
+    display: inline-block;
+    transition: transform 0.15s ease;
+    will-change: transform;
+
+    &.spooky-shaking {
+        &.spooky-shake-low {
+            animation-name: spooky-shake-low;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        &.spooky-shake-medium {
+            animation-name: spooky-shake-medium;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        &.spooky-shake-high {
+            animation-name: spooky-shake-high;
+            animation-iteration-count: infinite;
+            animation-timing-function: cubic-bezier(.36,.07,.19,.97);
+        }
+    }
+}
+
+@keyframes spooky-shake-low {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    20% { transform: translate3d(-1.5px, 1px, 0) rotate(-0.5deg); }
+    40% { transform: translate3d(1.5px, -1px, 0) rotate(0.5deg); }
+    60% { transform: translate3d(-1px, 0, 0) rotate(-0.5deg); }
+    80% { transform: translate3d(1px, 1px, 0) rotate(0.5deg); }
+}
+
+@keyframes spooky-shake-medium {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    15% { transform: translate3d(-3px, 2px, 0) rotate(-2.5deg); }
+    30% { transform: translate3d(3px, -2px, 0) rotate(2.5deg); }
+    45% { transform: translate3d(-2.5px, -2px, 0) rotate(-1.5deg); }
+    60% { transform: translate3d(2.5px, 2px, 0) rotate(1.5deg); }
+    75% { transform: translate3d(-3px, 1px, 0) rotate(-2deg); }
+    90% { transform: translate3d(3px, -1px, 0) rotate(2deg); }
+}
+
+@keyframes spooky-shake-high {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+    10% { transform: translate3d(-6px, 4px, 0) rotate(-5deg) scale(1.05); }
+    20% { transform: translate3d(6px, -4px, 0) rotate(5deg) scale(1.05); }
+    30% { transform: translate3d(-5px, -3px, 0) rotate(-4deg) scale(1.08); }
+    40% { transform: translate3d(5px, 3px, 0) rotate(4deg) scale(1.08); }
+    50% { transform: translate3d(-6px, 2px, 0) rotate(-5deg) scale(1.1); filter: drop-shadow(0 0 6px #ff6b1a); }
+    60% { transform: translate3d(6px, -2px, 0) rotate(5deg) scale(1.1); filter: drop-shadow(0 0 8px #7cff6b); }
+    70% { transform: translate3d(-4px, 3px, 0) rotate(-3deg) scale(1.05); }
+    80% { transform: translate3d(4px, -3px, 0) rotate(3deg) scale(1.05); }
+    90% { transform: translate3d(-2px, 1px, 0) rotate(-1deg) scale(1.02); }
+}
+
+

@@ -23,7 +23,7 @@
         <span class="haunted-switch-track" aria-hidden="true">
             <span class="haunted-switch-handle"></span>
         </span>
-        <span class="haunted-switch-icon haunted-icon-skull" aria-hidden="true" title="<?= $block->escapeHtmlAttr(__('Modo Assombrado Abissal')) ?>">💀</span>
+        <span class="haunted-switch-icon haunted-icon-skull" aria-hidden="true" title="<?= $block->escapeHtmlAttr(__('Modo Assombrado Abissal')) ?>" data-bind="spookyShake: { onHover: true, intensity: 'high', duration: 1200 }">💀</span>
         <span class="haunted-switch-label"><?= $block->escapeHtml(__('Modo Assombrado')) ?></span>
     </button>
 </div>

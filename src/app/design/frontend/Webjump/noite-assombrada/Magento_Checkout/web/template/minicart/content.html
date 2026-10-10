@@ -32,9 +32,9 @@
         <span translate="'Close'"></span>
     </button>
 
-    <!-- Mensagem Temática Assombrada do Caldeirão (Desafio 17.2) -->
+    <!-- Mensagem Temática Assombrada do Caldeirão (Desafio 17.2 e 17.5) -->
     <div class="haunted-minicart-banner" data-bind="visible: halloweenMessage">
-        <span class="haunted-minicart-icon" aria-hidden="true">🧙‍♀️</span>
+        <span class="haunted-minicart-icon" aria-hidden="true" data-bind="spookyShake: { onHover: true, intensity: 'medium', duration: 800 }">🧙‍♀️</span>
         <span class="haunted-minicart-text" data-bind="text: halloweenMessage"></span>
     </div>
 
