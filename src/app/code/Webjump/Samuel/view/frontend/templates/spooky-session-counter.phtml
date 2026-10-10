@@ -1,0 +1,32 @@
+<?php
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Template for Spooky Session Scare Counter component initialization (Desafio 17.6)
+ *
+ * CRITICAL ARCHITECTURAL RULE:
+ * Absolutely NO customer-specific or session data is printed in this PHP template.
+ * All dynamic data is loaded exclusively on the client side via customerData.get('spooky-session')
+ * ensuring Full Page Cache (FPC / Varnish) integrity across all visitors.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ */
+?>
+<div id="spooky-session-counter-widget"
+     class="spooky-session-container"
+     data-bind="scope: 'spookySession'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+<script type="text/x-magento-init">
+{
+    "#spooky-session-counter-widget": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "spookySession": {
+                    "component": "Webjump_Samuel/js/view/spooky-session"
+                }
+            }
+        }
+    }
+}
+</script>

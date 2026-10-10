@@ -1492,3 +1492,128 @@ html.haunted-mode {
     }
 }
 
+//
+//  21. Desafio 17.6: Seção Própria de customer-data (Contador de Sustos da Sessão)
+//  -------------------------------------------------------------------------------
+@keyframes scare-pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 107, 26, 0.4);
+    }
+    50% {
+        transform: scale(1.06);
+        box-shadow: 0 0 18px rgba(124, 255, 107, 0.8), 0 0 25px rgba(255, 107, 26, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 5px rgba(255, 107, 26, 0.4);
+    }
+}
+
+.spooky-session-container {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 8px;
+    vertical-align: middle;
+}
+
+.spooky-scare-counter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(26, 15, 38, 0.92);
+    border: 1px solid rgba(255, 107, 26, 0.6);
+    border-radius: 20px;
+    padding: 3px 12px;
+    color: #EDE7F6;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+
+    &:hover {
+        border-color: @color-abobora;
+        box-shadow: 0 0 12px rgba(255, 107, 26, 0.5);
+    }
+
+    &.just-scared {
+        animation: scare-pulse 0.9s ease-in-out;
+        border-color: #7CFF6B !important;
+        background: rgba(35, 12, 55, 0.96);
+    }
+
+    .spooky-scare-info {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .spooky-scare-icon {
+        font-size: 1.5rem;
+        display: inline-block;
+        filter: drop-shadow(0 0 4px rgba(255, 107, 26, 0.6));
+    }
+
+    .spooky-scare-label {
+        font-weight: 500;
+        color: #C3B8D8;
+        font-size: 1.15rem;
+    }
+
+    .spooky-scare-count {
+        color: #FF6B1A;
+        font-size: 1.35rem;
+        font-weight: 800;
+        min-width: 14px;
+        text-align: center;
+        text-shadow: 0 0 6px rgba(255, 107, 26, 0.7);
+    }
+
+    .spooky-scare-badge-level {
+        background: #2A1B3D;
+        color: #7CFF6B;
+        font-size: 1.05rem;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 10px;
+        border: 1px solid rgba(124, 255, 107, 0.3);
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+    }
+
+    .spooky-scare-actions {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .spooky-scare-btn {
+        background: linear-gradient(135deg, #FF6B1A 0%, #D85600 100%) !important;
+        color: #120B1C !important;
+        border: none !important;
+        border-radius: 14px !important;
+        padding: 3px 10px !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        cursor: pointer;
+        line-height: 1.4 !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 2px 6px rgba(255, 107, 26, 0.4);
+
+        &:hover:not([disabled]) {
+            background: linear-gradient(135deg, #7CFF6B 0%, #58D847 100%) !important;
+            color: #120B1C !important;
+            transform: translateY(-1px);
+            box-shadow: 0 0 10px rgba(124, 255, 107, 0.6);
+        }
+
+        &:active:not([disabled]) {
+            transform: translateY(1px);
+        }
+
+        &[disabled] {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+    }
+}
+
+

@@ -1,0 +1,27 @@
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Knockout template for Spooky Session Scare Counter (Desafio 17.6)
+ */
+-->
+<div class="spooky-scare-counter-badge" data-bind="css: { 'just-scared': justScared }">
+    <div class="spooky-scare-info">
+        <span class="spooky-scare-icon" aria-hidden="true" title="Contador de Sustos da Sessão">👻</span>
+        <span class="spooky-scare-label"><!-- ko i18n: 'Sustos na Sessão:' --><!-- /ko --></span>
+        <strong class="spooky-scare-count" data-bind="text: scaresCount()">0</strong>
+        <span class="spooky-scare-badge-level" data-bind="text: scareLevel(), attr: { title: halloweenGreeting() }">Inocente Desavisado</span>
+    </div>
+    <div class="spooky-scare-actions">
+        <button type="button"
+                class="action primary spooky-scare-btn"
+                data-bind="click: triggerScare, disable: isScaring"
+                title="Tomar um susto arrepiante nesta sessão!">
+            <!-- ko ifnot: isScaring -->
+            <span>⚡ Tomar Susto</span>
+            <!-- /ko -->
+            <!-- ko if: isScaring -->
+            <span>🎃 Assustando...</span>
+            <!-- /ko -->
+        </button>
+    </div>
+</div>

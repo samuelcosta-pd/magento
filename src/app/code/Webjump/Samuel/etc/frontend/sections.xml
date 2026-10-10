@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Webjump. All rights reserved.
+ * Invalidation rules for spooky-session customer-data section (Desafio 17.6)
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Customer:etc/sections.xsd">
+    <action name="spooky/scare/trigger">
+        <section name="spooky-session"/>
+    </action>
+    <action name="checkout/cart/add">
+        <section name="spooky-session"/>
+    </action>
+    <action name="checkout/cart/delete">
+        <section name="spooky-session"/>
+    </action>
+</config>
