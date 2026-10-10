@@ -1,0 +1,42 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * Desafio 16.2 - Sobrescrita de Template (Cópia Integral do Core com Adição Temática)
+ *
+ * @var \Magento\Theme\Block\Html\Header\Logo $block
+ */
+$storeName = $block->getThemeName() ? $block->getThemeName() : $block->getLogoAlt();
+/**
+ * @var \Magento\Theme\ViewModel\Block\Html\Header\LogoSizeResolverInterface|null $logoSizeResolver
+ */
+$logoSizeResolver = $block->getLogoSizeResolver();
+$logoWidth = $logoSizeResolver !== null && $logoSizeResolver->getWidth()
+    ? $logoSizeResolver->getWidth()
+    : $block->getLogoWidth();
+$logoHeight = $logoSizeResolver !== null && $logoSizeResolver->getHeight()
+    ? $logoSizeResolver->getHeight()
+    : $block->getLogoHeight();
+
+$customLogo = $block->getViewFileUrl('images/hs_newlogo.png');
+$logoSrc = $customLogo ?: $block->getLogoSrc();
+?>
+<span data-action="toggle-nav" class="action nav-toggle"><span><?= $block->escapeHtml(__('Toggle Nav')) ?></span></span>
+<div class="logo-wrapper">
+    <a
+        class="logo"
+        href="<?= $block->escapeUrl($block->getUrl('')) ?>"
+        title="<?= $block->escapeHtmlAttr($storeName) ?>"
+        aria-label="store logo">
+        <img src="<?= $block->escapeUrl($logoSrc) ?>"
+             title="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+             alt="<?= $block->escapeHtmlAttr($block->getLogoAlt()) ?>"
+                <?= $logoWidth ? 'width="' . $block->escapeHtmlAttr($logoWidth) . '"' : '' ?>
+                <?= $logoHeight ? 'height="' . $block->escapeHtmlAttr($logoHeight) . '"' : '' ?>
+        />
+    </a>
+    <span class="halloween-logo-badge"><?= $block->escapeHtml(__('Edição Noite Assombrada')) ?></span>
+</div>

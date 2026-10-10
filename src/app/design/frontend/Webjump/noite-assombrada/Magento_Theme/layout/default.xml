@@ -3,17 +3,31 @@
 /**
  * Copyright © Webjump. All rights reserved.
  * Layout configuration for Noite Assombrada theme.
- * Adds Haunted Mode switcher to header.panel.
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+        <!-- 16.2: Inserção da faixa superior de campanha (Announcement Bar) idêntica ao Horror-Shop -->
+        <referenceContainer name="header.container">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="theme.announcement.bar"
+                   before="-"
+                   template="Magento_Theme::html/announcement-bar.phtml"/>
+        </referenceContainer>
+
+        <!-- 17.2: Modo Assombrado - Switch no painel superior do cabeçalho -->
         <referenceContainer name="header.panel">
             <block class="Magento\Framework\View\Element\Template"
                    name="theme.haunted.mode.toggle"
                    before="-"
                    template="Magento_Theme::html/haunted-mode-toggle.phtml"/>
         </referenceContainer>
+
+        <!-- 16.2: Remoção de bloco irrelevante para a campanha -->
+        <referenceBlock name="report.bugs" remove="true"/>
+
+        <!-- 16.2: Movimentação de bloco estrutural no cabeçalho -->
+        <move element="top.search" destination="header-wrapper" after="logo"/>
     </body>
 </page>
