@@ -801,23 +801,73 @@ h1, h2, h3, h4, h5, h6,
         }
     }
 
-    &.halloween-countdown--pdp {
-        margin: 18px 0;
-        padding: 16px 20px;
+    &.halloween-countdown--pdp,
+    .halloween-countdown--pdp & {
+        margin: 14px 0 18px 0;
+        padding: 12px 14px;
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
 
-        .halloween-countdown-title {
-            font-size: 2rem;
+        .halloween-countdown-header {
+            gap: 6px;
+            margin-bottom: 10px;
+
+            .halloween-countdown-icon {
+                font-size: 1.8rem;
+            }
+
+            .halloween-countdown-title {
+                font-size: 1.5rem;
+                letter-spacing: 0.02em;
+                line-height: 1.2;
+            }
         }
 
-        .countdown-unit-box {
-            padding: 8px 14px;
-            min-width: 60px;
+        .halloween-countdown-digits {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 100%;
+            gap: 4px;
+            box-sizing: border-box;
 
-            .countdown-unit-number {
-                font-size: 2.6rem;
+            .countdown-unit-box {
+                flex: 1 1 0;
+                min-width: 0;
+                padding: 6px 2px;
+                border-radius: 6px;
+                box-sizing: border-box;
+                text-align: center;
+
+                .countdown-unit-number {
+                    font-size: 2rem;
+                    line-height: 1.1;
+                }
+
+                .countdown-unit-label {
+                    font-size: 0.95rem;
+                    letter-spacing: 0.02em;
+                    margin-top: 2px;
+                }
+            }
+
+            .countdown-separator {
+                font-size: 1.8rem;
+                flex: 0 0 auto;
+                line-height: 1;
+                margin: 0;
+                padding: 0;
             }
         }
     }
+}
+
+.halloween-countdown-container.halloween-countdown--pdp {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 //
@@ -1350,3 +1400,95 @@ html.haunted-mode .haunted-minicart-banner {
         justify-content: space-between;
     }
 }
+
+//
+//  19. Correção e Estilização das Estrelas de Avaliação (Review Stars)
+//  --------------------------------------------------------------------------
+.review-control-vote {
+    &:before {
+        content: '\e605\e605\e605\e605\e605' !important;
+        font-family: @icons__font-name, 'luma-icons', 'icons-blank-theme' !important;
+        color: #cccccc !important;
+        letter-spacing: 2px !important;
+    }
+
+    label {
+        &:before {
+            font-family: @icons__font-name, 'luma-icons', 'icons-blank-theme' !important;
+            color: @color-pumpkin-orange !important;
+            letter-spacing: 2px !important;
+        }
+
+        &:hover {
+            &:before {
+                opacity: 1 !important;
+                color: @color-pumpkin-orange !important;
+            }
+        }
+    }
+
+    input[type="radio"]:checked + label:before {
+        opacity: 1 !important;
+        color: @color-pumpkin-orange !important;
+    }
+}
+
+.rating-summary .rating-result {
+    &:before {
+        content: '\e605\e605\e605\e605\e605' !important;
+        font-family: @icons__font-name, 'luma-icons', 'icons-blank-theme' !important;
+        color: #cccccc !important;
+        letter-spacing: 2px !important;
+    }
+
+    > span:before {
+        content: '\e605\e605\e605\e605\e605' !important;
+        font-family: @icons__font-name, 'luma-icons', 'icons-blank-theme' !important;
+        color: @color-pumpkin-orange !important;
+        letter-spacing: 2px !important;
+    }
+}
+
+html.haunted-mode {
+    .review-control-vote {
+        &:before {
+            color: #555555 !important;
+        }
+    }
+    .rating-summary .rating-result:before {
+        color: #555555 !important;
+    }
+}
+
+//
+//  20. Ajuste de Layout do Checkout (Prevenção de Oversize / Scroll Horizontal)
+//  --------------------------------------------------------------------------
+.checkout-index-index {
+    .page-wrapper {
+        overflow-x: hidden;
+    }
+
+    .opc-wrapper {
+        width: 66.666% !important;
+        max-width: 66.666% !important;
+        box-sizing: border-box !important;
+    }
+
+    .opc-sidebar {
+        width: 33.333% !important;
+        max-width: 33.333% !important;
+        box-sizing: border-box !important;
+    }
+}
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+    .checkout-index-index {
+        .opc-wrapper,
+        .opc-sidebar {
+            width: 100% !important;
+            max-width: 100% !important;
+            float: none !important;
+        }
+    }
+}
+
