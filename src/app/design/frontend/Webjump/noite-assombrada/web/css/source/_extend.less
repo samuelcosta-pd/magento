@@ -1492,3 +1492,96 @@ html.haunted-mode {
     }
 }
 
+//
+//  18. Animação de Tremor Paranormal (Spooky Shake - Desafio 17.5)
+//  --------------------------------------------------------------------------
+@keyframes spooky-shake-low {
+    0%, 100% {
+        transform: translateX(0) rotate(0);
+    }
+    20% {
+        transform: translateX(-2px) rotate(-1.5deg);
+    }
+    40% {
+        transform: translateX(2px) rotate(1.5deg);
+    }
+    60% {
+        transform: translateX(-1px) rotate(-1deg);
+    }
+    80% {
+        transform: translateX(1px) rotate(1deg);
+    }
+}
+
+@keyframes spooky-shake-medium {
+    0%, 100% {
+        transform: translateX(0) rotate(0);
+    }
+    15% {
+        transform: translateX(-4px) rotate(-3deg);
+    }
+    30% {
+        transform: translateX(4px) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-3px) rotate(-2deg);
+    }
+    60% {
+        transform: translateX(3px) rotate(2deg);
+    }
+    75% {
+        transform: translateX(-1px) rotate(-1deg);
+    }
+}
+
+@keyframes spooky-shake-high {
+    0%, 100% {
+        transform: translateX(0) rotate(0);
+    }
+    10% {
+        transform: translateX(-8px) rotate(-6deg) scale(1.05);
+    }
+    25% {
+        transform: translateX(8px) rotate(6deg) scale(1.05);
+    }
+    40% {
+        transform: translateX(-6px) rotate(-5deg) scale(1.03);
+    }
+    55% {
+        transform: translateX(6px) rotate(5deg) scale(1.03);
+    }
+    70% {
+        transform: translateX(-3px) rotate(-3deg) scale(1.01);
+    }
+    85% {
+        transform: translateX(3px) rotate(3deg) scale(1.01);
+    }
+}
+
+.spooky-shakeable {
+    display: inline-block;
+    transition: transform 0.2s ease;
+    will-change: transform;
+}
+
+.spooky-shake-low.spooky-shaking {
+    animation-name: spooky-shake-low !important;
+    animation-duration: var(--spooky-shake-duration, 0.7s) !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+}
+
+.spooky-shake-medium.spooky-shaking {
+    animation-name: spooky-shake-medium !important;
+    animation-duration: var(--spooky-shake-duration, 0.7s) !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+}
+
+.spooky-shake-high.spooky-shaking {
+    animation-name: spooky-shake-high !important;
+    animation-duration: var(--spooky-shake-duration, 0.7s) !important;
+    animation-timing-function: ease-in-out !important;
+    animation-iteration-count: infinite !important;
+}
+
