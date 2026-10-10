@@ -5,7 +5,8 @@
  */
 var config = {
     deps: [
-        'Magento_Theme/js/haunted-mode'
+        'Magento_Theme/js/haunted-mode',
+        'Magento_Theme/js/bindings/spooky-shake'
     ],
     config: {
         mixins: {

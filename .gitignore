@@ -24,6 +24,7 @@ composer.lock
 !/update/.htaccess
 !/README.md
 !/README-17-4.md
+!/README-17-5.md
 !/docs
 !/docs/**
 !/src/pub/media/wysiwyg/**
