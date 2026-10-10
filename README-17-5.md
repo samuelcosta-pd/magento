@@ -121,35 +121,13 @@ Uma das decisões mais críticas para o engenheiro de frontend no ecossistema Ma
 
 ---
 
-## 4. Guia Técnico para Reprodução dos Prints
-
-Para auditar o cumprimento de cada critério de aceite no ambiente de desenvolvimento, siga este roteiro de verificação:
-
-1. **Critério 1 (Registro do binding e funcionamento no template):**
-   - Inspecione [`spooky-shake.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/web/js/bindings/spooky-shake.js) e [`requirejs-config.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/requirejs-config.js).
-   - Acesse `https://magento.test/` e abra o DevTools (F12) > Elements. Inspecione o elemento `.halloween-countdown-icon`.
-   - Comprove que as classes `.spooky-shakeable` e `.spooky-shake-high` foram inseridas pelo binding, junto com as variáveis `--spooky-shake-duration: 600ms`.
-2. **Critério 2 (Aceitação de parâmetros de intensidade e duração):**
-   - Inspecione [`_extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less) para atestar a existência dos keyframes `spooky-shake-low`, `spooky-shake-medium` e `spooky-shake-high`.
-   - Compare a contagem regressiva (configurada com intensidade `high` e duração `600ms`) com o minicart (configurado com intensidade `medium` e duração `900ms`), constatando a amplitude e velocidade de animação distintas.
-3. **Critério 3 (Uso em dois lugares distintos sem duplicar código):**
-   - Na Home (`/`), passe o mouse sobre o ícone de abóbora `🎃` do contador de Halloween: constate o tremor com efeito visual no hover.
-   - Abra o minicart no cabeçalho: passe o mouse sobre o ícone da bruxa `🧙‍♀️` no banner temático do caldeirão: constate o tremor compassado no hover.
-   - Inspecione os arquivos [`countdown.html`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/web/template/countdown.html) e [`content.html`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Checkout/web/template/minicart/content.html) comprovando o consumo do binding sem nenhuma duplicação de lógica JS.
-4. **Critério 4 (Justificativa técnica no README):**
-   - Leia a Seção 3 deste documento para compreender a justificativa arquitetural.
-5. **Critério 5 (Integridade do Core):**
-   - Execute `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh` e `git status` para atestar zero modificações em `vendor/`.
-
----
-
-## 5. Evidências de Sucesso
+## 4. Evidências de Sucesso
 
 Esta seção reúne os prints comprobatórios de cada critério de aceite do desafio **17.5 - Binding próprio do Knockout**.
 
 ---
 
-### 5.1. Critério 1: O binding está registrado e funciona ao ser declarado no template
+### 4.1. Critério 1: O binding está registrado e funciona ao ser declarado no template
 
 #### Print 1.1 — No Código / IDE (Registro do Binding Handler e RequireJS Config)
 - **Arquivos:** [`Magento_Theme/web/js/bindings/spooky-shake.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/Magento_Theme/web/js/bindings/spooky-shake.js) e [`requirejs-config.js`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/requirejs-config.js)
@@ -164,7 +142,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.2. Critério 2: Aceita parâmetros e o comportamento muda conforme eles
+### 4.2. Critério 2: Aceita parâmetros e o comportamento muda conforme eles
 
 #### Print 2.1 — No Código / IDE (Estilização Parametrizada e Keyframes no LESS)
 - **Arquivo:** [`web/css/source/_extend.less`](file:///home/samuel/Sites/magento/src/app/design/frontend/Webjump/noite-assombrada/web/css/source/_extend.less)
@@ -179,7 +157,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.3. Critério 3: Foi usado em dois lugares distintos, sem duplicar código
+### 4.3. Critério 3: Foi usado em dois lugares distintos, sem duplicar código
 
 #### Print 3.1 — No Frontend (Lugar 1: Contador Regressivo de Halloween)
 - **O que comprova:** Ícone temático da abóbora `🎃` no cabeçalho da contagem regressiva tremendo com intensidade alta (`high`) e duração de `600ms` ao interagir no storefront.
@@ -199,7 +177,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.4. Critério 4: Justificativa Técnica no README (Binding vs Componente)
+### 4.4. Critério 4: Justificativa Técnica no README (Binding vs Componente)
 
 #### Print 4.1 — No Código / Documentação (Justificativa Arquitetural no `README-17-5.md`)
 - **Arquivo:** [`README-17-5.md`](file:///home/samuel/Sites/magento/README-17-5.md)
@@ -209,7 +187,7 @@ Esta seção reúne os prints comprobatórios de cada critério de aceite do des
 
 ---
 
-### 5.5. Critério 5: Integridade do Core e Conformidade Magento Engineer
+### 4.5. Critério 5: Integridade do Core e Conformidade Magento Engineer
 
 #### Print 5.1 — No Terminal / Git (Verificação de Integridade de Vendor e Git Status)
 - **O que comprova:** Execução de `./.agents/skills/magento-engineer/scripts/check-vendor-changes.sh` com status `OK: no changes under vendor/.` e `git status` exibindo apenas os arquivos necessários na branch `exercicio/17-5-binding-proprio-knockout`.
