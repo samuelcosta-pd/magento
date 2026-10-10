@@ -198,8 +198,20 @@ Em cumprimento às regras arquiteturais de governança de código, a lista a seg
   - Módulo `Webjump_PageBuilderCoffin` adicionando o content type "Caixão de Ofertas" ao Page Builder com formulário com 6 campos configuráveis (selo, título, descrição, imagem, link, botão), templates de preview e master, e estilização com cantos vintage e cores da campanha.
 
 ---
+## 7. Evidências de sucesso
+> <img width="1391" height="245" alt="image" src="https://github.com/user-attachments/assets/cec9b662-731f-4126-9bd0-a57b55649324" />
+> <img width="1388" height="675" alt="image" src="https://github.com/user-attachments/assets/f0b54be5-26df-42c8-9da8-97ba033bd112" />
+> <img width="1390" height="307" alt="image" src="https://github.com/user-attachments/assets/6c0ccec5-4c75-4578-b115-59d770fca8e8" />
+> <img width="1392" height="575" alt="image" src="https://github.com/user-attachments/assets/059ec1b8-245d-46bb-abf4-6d471c4ab763" />
+> <img width="1389" height="595" alt="image" src="https://github.com/user-attachments/assets/191be5a8-3f5e-4f87-ac33-64d9e8a6e523" />
+> <img width="1388" height="663" alt="image" src="https://github.com/user-attachments/assets/27ba5b7b-bfaa-4920-9c21-057675515ff7" />
+> <img width="1384" height="534" alt="image" src="https://github.com/user-attachments/assets/b55b9439-2737-449a-a0d5-76489daafe14" />
+> <img width="1384" height="460" alt="image" src="https://github.com/user-attachments/assets/cb160521-80df-4980-902e-3daba473a1a1" />
+> <img width="1382" height="665" alt="image" src="https://github.com/user-attachments/assets/c4e16c6c-5311-497f-a308-88bc22cb01b5" />
 
-## 7. Instruções de Verificação e Comandos Úteis
+---
+
+## 8. Instruções de Verificação e Comandos Úteis
 
 ```bash
 # Limpeza de cache
